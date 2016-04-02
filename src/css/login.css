@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+}
+
+.title-bar {
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 100px;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: table;
+    height: 65px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #999999;
+    width: 100%;
+}
+
+.code-container {
+    display: table;
+    height: 65px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #999999;
+}
+
+.tip-icon {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 6px;
+    text-align: center;
+    width: 40px;
+}
+
+.input-text {
+    border: none;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.input-text input[type=text] {
+    margin-left: 14px;
+    border: none;
+}
+
+.code {
+    border: none;
+    margin-bottom: 100px;
+}
+
+.get-code {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.get-code button {
+    color: #ffffff;
+    background: url("../../assets/images/wjmm_03@2x.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
+    padding: 15px;
+    border: none;
+    font-size: 15px;
+}
+
+.button-group button {
+    border: none;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.confirm-login {
+    color: #ffffff;
+    width: 100%;
+    padding: 10px;
+    background: url("../../assets/images/denglu_03@2x.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.to-login {
+    color: #2ec4b6;
+    width: 100%;
+    padding: 10px;
+    background: url("../../assets/images/denglu_06@2x.png") no-repeat;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.login-choise-tips {
+    display: table;
+    margin-bottom: 20px;
+}
+
+.login-choise-tips div {
+    display: table-cell;
+    width: 30%;
+    vertical-align: middle;
+}
+.login-choise-tips div hr {
+    border-top: 1px solid #999999;
+}
+
+.login-choise-container {
+    margin-bottom: 30px;
+}
+
+.login-choise-container span{
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    border: none;
+}
+
+.login-choise-container span img {
+    width: 80px;
+    height: 80px;
+}
