@@ -1,0 +1,37 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>设置</title>
+	<meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/setting.css">
+</head>
+<body ng-app="setting" ng-controller="settingCtrl">
+	<div class="title-bar">
+		<span class="back"><img src="../../assets/images/back@2x.png"></span>
+		<span class="title">设置</span>
+	</div>
+	<div class="container">
+		<div class="item need-to-know" ng-click="toNeedKnow()">
+			<span class="note">使用须知</span>
+			<span class="arrow">></span>
+		</div> 
+		<div class="item aboutUs" ng-click="AboutUs()">
+			<span class="note">关于我们</span>
+			<span class="arrow">></span>
+		</div> 
+		<div class="item">
+		</div>
+		<div class="item">
+		</div>
+
+	</div>
+</body>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/angular.min.js"></script>
+<script src="../js/setting.js"></script>
+</html>
