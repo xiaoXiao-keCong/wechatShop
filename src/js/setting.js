@@ -32,6 +32,6 @@ function versionInfo() {
 function quitClick() {
     console.log('quit click');
 }
-
+// test
 getCacheValue();
 versionInfo();
