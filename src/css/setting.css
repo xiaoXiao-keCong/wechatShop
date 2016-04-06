@@ -7,6 +7,7 @@
 	position: relative;
 	height: 1.333333rem;
 	text-align: center;
+	border-bottom: 0.026667rem solid #e8e5e7;
 }
 
 .title {
@@ -20,11 +21,13 @@
 
 .container {
 	padding: 0 0.266667rem;
+	/*color: #ffffff;*/
 }
 .item {
 	height: 1.333333rem;
-	border-bottom: 0.013333rem solid #000;
-	background: #eeeeee;
+	border-bottom: 0.026667rem solid #e8e5e7;
+	background: #ffffff;
+	/*background: #eeeeee;*/
 }
 
 .back {
@@ -51,4 +54,32 @@
 	float: right;
 	display: inline-block;
 	line-height: 1.333333rem;
+}
+#cacheValue {
+	float: right;
+	display: inline-block;
+	line-height: 1.333333rem;
+	margin-right: 0.426667rem;
+	font-size: 0.293333rem;
+	color: #121212;
+}
+#version {
+	float: right;
+	display: inline-block;
+	line-height: 1.333333rem;
+	margin-right: 0.32rem;
+	font-size: 0.293333rem;
+	color: #121212;
+}
+.user-opr {
+	/*align-content: center;*/
+}
+#user-quit {
+	width: 8.64rem;
+	height: 1.146667rem;
+	background: #3dc0d5;
+	font-size: 0.48rem;
+	color: #ffffff;
+	margin-top: 2.533333rem;
+	border-radius: 0.2rem;
 }

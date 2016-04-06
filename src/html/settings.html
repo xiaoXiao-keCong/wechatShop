@@ -20,9 +20,10 @@
 			<span class="note">使用须知</span>
 			<span class="arrow">></span>
 		</div> 
-		<div class="item aboutUs" ng-click="AboutUs()">
+		<div class="item about-us" ng-click="AboutUs()">
 			<span class="note">关于我们</span>
 			<span class="arrow">></span>
+			<span id="version"></span>
 		</div> 
 		<div class="item mark" ng-click="Mark()">
 			<span class="note">为应用评分</span>
@@ -32,10 +33,14 @@
 			<span class="note">意见反馈</span>
 			<span class="arrow">></span>
 		</div>
-		<div class="item suggest" ng-click="Suggest()">
+		<div class="item clear-cache" ng-click="ClearCache()">
 			<span class="note">清除缓存</span>
-			<span class="arrow">></span>
+			<span id="cacheValue"></span>
 		</div>
+	</div>
+	<div class="user-opr" align="center">
+		<button id="user-quit" onclick="quitClick()">退出登录</button>
+		<!-- <input type="button" id="user-quit" value="退出登录"></input> -->
 	</div>
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
