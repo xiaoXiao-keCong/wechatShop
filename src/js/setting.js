@@ -5,16 +5,16 @@ angular.module('setting', []).controller('settingCtrl', function ($scope) {
     $scope.toNeedKnow = function () {
     	console.log('need-to-know is clicking');
     };
-    $scope.AboutUs = function () {
+    $scope.aboutUs = function () {
     	console.log('AboutUs is clicking');
     };
-    $scope.Mark = function () {
+    $scope.setMark = function () {
     	console.log('Mark is clicking');
     };
-    $scope.Suggest = function () {
+    $scope.suggest = function () {
     	console.log('Suggest is clicking');
     };
-    $scope.ClearCache = function () {
+    $scope.clearCache = function () {
         console.log('ClearCache is clicking');
     };
 });
