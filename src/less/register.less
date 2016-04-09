@@ -1,4 +1,7 @@
-#register-container {
+#register-container,
+#fast-login-container,
+#forget-pwd-container,
+#login-container {
 	.background-size (@size1: 100%, @size2: 100%) {
 	    -webkit-background-size: @size1 @size2;
 	    -moz-background-size: @size1 @size2;
@@ -12,6 +15,7 @@
 		height: 0.826667rem;
 		border-bottom: 0.013333rem solid #999999;
 		display: table;
+		margin-bottom: 0 !important;
 		span {
 			display: table-cell;
 			vertical-align: middle;
@@ -65,11 +69,27 @@
 			top: 0;
 		}
 	}
+	.other-operations {
+		font-size: 0.4rem;
+		color: #3dbfd5;
+		margin-top: 0.466667rem;
+		#to-forget-pwd {
+			float: right;
+		}
+	}
 	.code-container {
 		display: block;
 		position: relative;
 	}
-	#register-btn {
+	.btn-common {
+		height: 0.88rem;
+		width: 8.666667rem;
+		text-align: center;
+		line-height: 0.88rem;
+	}
+	#register-btn,
+	#confirm-login-btn,
+	#modify-btn {
 		margin-top: 1.306667rem;
 		height: 0.88rem;
 		width: 8.666667rem;
@@ -78,6 +98,14 @@
 		font-size: 0.48rem;
 		color: #ffffff;
 		background: url("../../assets/images/login_bg1.png") no-repeat;
+		.background-size;
+	}
+	#to-login-btn,
+	#to-register-btn {
+		margin-top: 0.506667rem;
+		color: #2ec4b6;
+		font-size: 0.373333rem;
+		background: url("../../assets/images/login_bg2.png") no-repeat;
 		.background-size;
 	}
 	.agreement {
@@ -97,6 +125,52 @@
 			a {
 				color: #3dbfd5;
 			}
+		}
+	}
+	.more-choice-tips {
+		margin-top: 1.733333rem;
+		height: 0.4rem;
+		display: table;
+		span {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.tips {
+			font-size: 0.32rem;
+			width: 3.2rem;
+			text-align: center;
+			color: #999999;
+		}
+		.line {
+			width: 2.733333rem;
+			hr {
+				border-top: 1px solid #999999;
+			}
+		}
+	}
+	.login-choices {
+		width: 7.333333rem;
+		margin: 1.4rem auto 0 auto;
+		span {
+			display: inline-block;
+			width: 1.466667rem;
+			img {
+				height: 1.466667rem;
+				width: 1.466667rem;
+			}
+			.tips {
+				margin-top: 0.266667rem;
+				display: block;
+				text-align: center;
+				color: #121212;
+				font-size: 0.32rem;
+			}
+		}
+		#qq-login {
+			margin-left: 1.333333rem
+		}
+		#weixin-login {
+			float: right;
 		}
 	}
 }

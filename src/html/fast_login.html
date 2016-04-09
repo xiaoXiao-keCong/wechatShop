@@ -15,62 +15,59 @@
 <div class="title-bar">
     快速登录
 </div>
-<div class="fast-login-container">
-    <div class="phone">
+<div id="fast-login-container">
+<div class="form-group">
         <span class="icon">
             <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
         </span>
-        <span>
-            <input type="text" placeholder="请输入您的手机号" class="input-text phone-text" name="phone-num">
+        <span class="text-container">
+            <input type="text" placeholder="请输入您的手机号" class="input-text" name="phone-num">
         </span>
 
     </div>
-    <div class="code-container margin-top-28">
+    <div class="form-group margin-top-28 border-bottom-none code-container">
         <div class="code">
             <span class="icon">
                 <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
             </span>
-            <span>
-                <input type="text" placeholder="请输验证码" class="input-text code-text">
+            <span class="text-container">
+                <input type="text" placeholder="请输验证码" class="input-text">
             </span>
         </div>
         <div class="get-code-btn">
             获取验证码
         </div>
     </div>
-    <div id="confirm-login-btn" class="login-btn">
+    <div id="confirm-login-btn" class="btn-common">
         确认登录
     </div>
-    <div id="to-login-btn" class="login-btn">
+    <div id="to-login-btn" class="btn-common">
         已有账号点击登录
     </div>
     <div class="more-choice-tips">
-        <div class="line">
+        <span class="line">
             <hr>
-        </div>
-        <div class="tips">
-            您还有更多登录选择
-        </div>
-        <div class="line">
+        </span>
+        <span class="tips">您还有更多登录选择</span>
+        <span class="line">
             <hr>
-        </div>
+        </span>
     </div>
-    <div class="login-choice-container">
-        <div class="login-choice-item weibo-login">
+    <div class="login-choices">
+        <span id="weibo-login">
             <img src="../../assets/images/denglu_weibo.png" alt="微博登录">
-            <span class="login-type-name">微博</span>
-        </div>
-        <div class="login-choice-item qq-login">
+            <span class="tips">微博</span>
+        </span>
+        <span id="qq-login">
             <img src="../../assets/images/denglu_qq.png" alt="qq登录">
-            <span class="login-type-name">QQ</span>
-        </div>
-        <div class="login-choice-item wechat-login">
+            <span class="tips">QQ</span>
+        </span>
+        <span id="weixin-login">
             <img src="../../assets/images/denglu_wechat.png" alt="微信登录">
-            <span class="login-type-name">微信</span>
-        </div>
+            <span class="tips">微信</span>
+        </span>
     </div>
 </div>
-
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>

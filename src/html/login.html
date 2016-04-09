@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="register">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>注册</title>
+    <title>登录</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../build/css/app.min.css">
-
 </head>
-<body ng-controller="registerCtrl">
+<body ng-app="login" ng-controller="loginCtrl">
 <div class="title-bar">
     <span id="back"><img src="../../assets/images/back.png"></span>
-    注册
+    登录
 </div>
-<div id="register-container">
+<div id="login-container">
     <div class="form-group">
         <span class="icon">
             <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
@@ -26,19 +26,6 @@
         </span>
 
     </div>
-    <div class="form-group margin-top-28 border-bottom-none code-container">
-        <div class="code">
-            <span class="icon">
-                <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
-            </span>
-            <span class="text-container">
-                <input type="text" placeholder="请输验证码" class="input-text">
-            </span>
-        </div>
-        <div class="get-code-btn">
-            获取验证码
-        </div>
-    </div>
     <div class="form-group margin-top-28">
         <span class="icon">
             <img src="../../assets/images/lock.png" alt="密码" class="pwd-icon">
@@ -47,27 +34,42 @@
             <input type="password" placeholder="请输6-20位字母、数字或符号" class="input-text">
         </span>
     </div>
-    <div class="form-group margin-top-28">
-        <span class="icon">
-            <img src="../../assets/images/lock.png" class="pwd-icon">
+    <div class="other-operations">
+        <a href="javascript:void(0)" id="to-fast-login">无密码快速登录</a>
+        <a href="javascript:void(0)" id="to-forget-pwd">忘记密码？</a>
+    </div>
+    <div id="confirm-login-btn" class="btn-common">
+        登录
+    </div>
+    <div id="to-register-btn" class="btn-common">
+        注册
+    </div>
+    <div class="more-choice-tips">
+        <span class="line">
+            <hr>
         </span>
-        <span class="text-container">
-            <input type="password" placeholder="请确认密码" class="input-text">
+        <span class="tips">您还有更多登录选择</span>
+        <span class="line">
+            <hr>
         </span>
     </div>
-    <div id="register-btn" class="btn-common">
-        注&nbsp;&nbsp;&nbsp;&nbsp;册
-    </div>
-    <div class="agreement">
-        <span class="agree-check">
-            <img src="../../assets/images/checkbox.png" alt="checkbox">
+    <div class="login-choices">
+        <span id="weibo-login">
+            <img src="../../assets/images/denglu_weibo.png" alt="微博登录">
+            <span class="tips">微博</span>
         </span>
-        <span class="text">我已阅读并同意<a href="javascript:void(0)">“个人信息保护政策”</a></span>
+        <span id="qq-login">
+            <img src="../../assets/images/denglu_qq.png" alt="qq登录">
+            <span class="tips">QQ</span>
+        </span>
+        <span id="weixin-login">
+            <img src="../../assets/images/denglu_wechat.png" alt="微信登录">
+            <span class="tips">微信</span>
+        </span>
     </div>
 </div>
-
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
-<script src="../js/register.js"></script>
+<script src="../js/login.js"></script>
 </html>
