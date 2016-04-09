@@ -1,0 +1,102 @@
+#register-container {
+	.background-size (@size1: 100%, @size2: 100%) {
+	    -webkit-background-size: @size1 @size2;
+	    -moz-background-size: @size1 @size2;
+	    background-size: @size1 @size2;
+	}
+	margin: 3.2rem 0.666667rem 0 0.666667rem;
+	.margin-top-28 {
+		margin-top: 0.373333rem;
+	}
+	.form-group {
+		height: 0.826667rem;
+		border-bottom: 0.013333rem solid #999999;
+		display: table;
+		span {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.icon {
+			padding-left: 0.133333rem;
+			width: 0.4rem;
+			.phone-icon {
+				width: 0.32rem;
+				height: 0.506667rem;
+			}
+			.code-icon {
+				width: 0.373333rem;
+				height: 0.346667rem;
+			}
+			.pwd-icon {
+				width: 0.32rem;
+				height: 0.373333rem;
+			}
+		}
+		input[type=text],
+		input[type=password] {
+			width: 100%;
+			font-size: 0.4rem;
+			padding-left: 0.2rem;
+		}
+		.code {
+			display: table;
+			height: 0.826667rem;
+			width: 6.026667rem;
+			border-bottom: 0.013333rem solid #999999;
+			span {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+		.text-container {
+			width: 100%;
+		}
+		.get-code-btn {
+			width: 2.16rem;
+			height: 0.826667rem;
+			background: url("../../assets/images/code_bg.png") no-repeat;
+			.background-size;
+			color: #ffffff;
+			font-size: 0.32rem;
+			line-height: 0.826667rem;
+			text-align: center;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+	.code-container {
+		display: block;
+		position: relative;
+	}
+	#register-btn {
+		margin-top: 1.306667rem;
+		height: 0.88rem;
+		width: 8.666667rem;
+		text-align: center;
+		line-height: 0.88rem;
+		font-size: 0.48rem;
+		color: #ffffff;
+		background: url("../../assets/images/login_bg1.png") no-repeat;
+		.background-size;
+	}
+	.agreement {
+		margin: 0.4rem auto 0 auto;
+		display: table;
+		span {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.agree-check {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.text {
+			font-size: 0.4rem;
+			color: #666666;
+			a {
+				color: #3dbfd5;
+			}
+		}
+	}
+}
