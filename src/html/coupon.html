@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="address">
+<html ng-app="coupon">
 <head>
     <meta charset="UTF-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>地址管理</title>
+    <title>优惠券</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../build/css/app.min.css">
 </head>
-<body ng-controller="addressCtrl">
+<body ng-controller="couponCtrl">
 <div class="title-bar">
     <span id="back"><img src="../../assets/images/back.png"></span>
-    收货地址
+    优惠券
 </div>
 <div id="address-container">
     <div class="addr-item" ng-repeat="addr in addrList">
@@ -30,7 +30,7 @@
         </span>
         
     </div>
-    <div id="add-addr" ng-href="add_receiver.html">
+    <div id="add-addr" ng-click="toAddAddr()">
         <img src="../../assets/images/add_addr.png" alt="新建地址">
         新建地址
     </div>
@@ -38,5 +38,5 @@
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
-<script src="../js/address.js"></script>
+<script src="../js/coupon.js"></script>
 </html>

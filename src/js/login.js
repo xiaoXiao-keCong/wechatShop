@@ -2,7 +2,6 @@
  * Created by hugotan on 2016/4/10.
  */
 angular.module('login', []).controller('loginCtrl', function ($scope, $http) {
-    var baseUrl = 'http://api.yueyishujia.com:8888';
     $scope.login = function () {
     	// 用账号密码都为123进行测试
     	var data = {account: '123', password: '123'},

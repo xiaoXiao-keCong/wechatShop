@@ -9,6 +9,8 @@
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../build/css/app.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+
 </head>
 <body ng-controller="addrManageCtrl" class="body-bg-1">
 <div class="title-bar">
@@ -40,7 +42,8 @@
             
         </div>
     </div>
-    <div id="add-addr" ng-click="addAddr()">
+    <div id="add-addr" ng-href="add_receiver.html">
+        <img src="../../assets/images/add_addr.png" alt="新建地址">
         新建地址
     </div>
 </div>
