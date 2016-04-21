@@ -20,4 +20,4 @@ angular.module('login', []).controller('loginCtrl', ['$scope', '$http', function
             console.log(resp);
         });
     };
-}])
+}]);

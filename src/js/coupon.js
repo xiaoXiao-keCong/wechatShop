@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-angular.module('coupon', []).controller('couponCtrl', function ($scope, $http) {
+angular.module('coupon', []).controller('couponCtrl', ['$scope', '$http', function ($scope, $http) {
     var transFn = function(data) {
                 return $.param(data);
         },
@@ -9,6 +9,4 @@ angular.module('coupon', []).controller('couponCtrl', function ($scope, $http) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transFn
         };
-    
-
-});
+}]);

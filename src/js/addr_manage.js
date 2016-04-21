@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/12.
  */
-angular.module('addrManage', []).controller('addrManageCtrl', function ($scope, $http) {
+angular.module('addrManage', []).controller('addrManageCtrl', ['$scope', '$http', function ($scope, $http) {
     var transFn = function(data) {
                 return $.param(data);
         },
@@ -28,4 +28,4 @@ angular.module('addrManage', []).controller('addrManageCtrl', function ($scope, 
         }
         return false;
     };
-});
+}]);

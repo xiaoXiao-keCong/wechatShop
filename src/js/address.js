@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/12.
  */
-angular.module('address', []).controller('addressCtrl', function ($scope, $http) {
+angular.module('address', []).controller('addressCtrl', ['$scope', '$http', function ($scope, $http) {
     var transFn = function(data) {
                 return $.param(data);
         },
@@ -24,4 +24,4 @@ angular.module('address', []).controller('addressCtrl', function ($scope, $http)
         return 1 == addr.defaultflag ? true : false;
     };
 
-});
+}]);
