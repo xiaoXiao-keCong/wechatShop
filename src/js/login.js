@@ -1,11 +1,12 @@
 /**
  * Created by hugotan on 2016/4/10.
  */
-angular.module('login', []).controller('loginCtrl', function ($scope, $http) {
+angular.module('login', []).controller('loginCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.login = function () {
-    	// 用账号密码都为123进行测试
-    	var data = {account: '123', password: '123'},
-	    	transFn = function(data) {
+        var test = '123456';
+        // 用账号密码都为123进行测试
+        var data = {account: '123', password: '123'},
+            transFn = function(data) {
                 return $.param(data);
             },
             postCfg = {
@@ -19,4 +20,4 @@ angular.module('login', []).controller('loginCtrl', function ($scope, $http) {
             console.log(resp);
         });
     };
-});
+}])

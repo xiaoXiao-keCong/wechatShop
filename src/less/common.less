@@ -8,8 +8,9 @@
   	-o-box-sizing: border-box;
 }
 
-.body-bg-1 {
-	background-color: #f1f1f1;
+html,
+body {
+    height: 100%;
 }
 
 input {
@@ -22,7 +23,7 @@ img {
 
 .title-bar {
   	text-align: center;
-  	border-bottom: 2px solid #d2d2d2;
+  	border-bottom: 1px solid #cccccc;
   	height: 1.2rem;
   	line-height: 1.2rem;
   	font-size: 0.48rem;
@@ -46,12 +47,16 @@ img {
   	}
 }
 .title-bar-right {
-	position: absolute;
-	right: 0.133333rem;
-	#search {
-		width: 0.586667rem;
-		height: 0.586667rem;
-	}
+  	position: absolute;
+  	right: 0.133333rem;
+  	#search {
+  		width: 0.586667rem;
+  		height: 0.586667rem;
+  	}
+    .delete {
+      color: #666666;
+      font-size: 0.373333rem;
+    }
 }
 
 .border-bottom-none {
