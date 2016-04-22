@@ -24,7 +24,8 @@ gulp.task('buildJs', function () {
 	return gulp.src('src/js/*.js')
 	    .pipe(jshint())
 	    .pipe(jshint.reporter('default'))
-	    .pipe(uglify())
+        .pipe(plumber())
+	    // .pipe(uglify())
 	    .pipe(concat('app.min.js'))
         .pipe(rev())
 	    .pipe(gulp.dest('build/js'))
@@ -56,6 +57,7 @@ gulp.task('watchLess', function () {
     gulp.watch('src/less/*.less', ['buildLess']);
 });
 
+// 开发运行监听
 gulp.task('watch', function () {
     gulp.watch('src/less/*.less', function () {
         runSequence('buildLess', 'rev');
