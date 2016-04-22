@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 
 </head>
-<body ng-controller="addrManageCtrl" class="body-bg-1">
+<body ng-controller="addrManageCtrl" id="addr-manage-container">
 <div class="title-bar">
     <span id="back"><img src="../../assets/images/back.png"></span>
     地址管理
 </div>
-<div id="addr-manage-container">
+<div class="addr-manage">
     <div class="addr-item" ng-repeat="addr in addrList">
         <div class="info-panel">
             <span class="name">{{addr.name}}</span>
@@ -42,7 +42,7 @@
             
         </div>
     </div>
-    <div id="add-addr" ng-href="add_receiver.html">
+    <div id="add-addr" ng-click="toAddAddr()">
         <img src="../../assets/images/add_addr.png" alt="新建地址">
         新建地址
     </div>
@@ -51,5 +51,5 @@
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
-<script src="../js/addr_manage.js"></script>
+<script src="../js/app.min.js"></script>
 </html>

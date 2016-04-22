@@ -1,7 +1,8 @@
 /**
  * Created by hugotan on 2016/4/12.
  */
-angular.module('addrManage', []).controller('addrManageCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('addrManage', []).controller('addrManageCtrl', ['$scope', '$http', '$window',
+    function ($scope, $http, $window) {
     var transFn = function(data) {
                 return $.param(data);
         },
@@ -28,4 +29,9 @@ angular.module('addrManage', []).controller('addrManageCtrl', ['$scope', '$http'
         }
         return false;
     };
+
+    // 跳转到新建地址页面
+    $scope.toAddAddr = function () {
+        $window.location.href = 'add_receiver.html';
+    }
 }]);
