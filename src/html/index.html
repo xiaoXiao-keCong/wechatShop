@@ -11,20 +11,23 @@
     <link rel="stylesheet" href="../../build/css/app.min.css">
 
 </head>
-<body ng-controller="indexCtrl">
+<body>
 <div class="title-bar">
-    <span id="back"><img src="../../assets/images/back.png"></span>
+    <span class="title-bar-left">
+        <span class="text">北京</span>
+    </span>
     ARTISAN HOUSE
     <span class="title-bar-right">
         <img src="../../assets/images/search.png" alt="搜索" id="search">
     </span>
 </div>
-<div id="index-container">
+<div ng-view>
 
 </div>
 
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
-<script src="../js/index.js"></script>
+<script src="../../assets/js/angular-route.min.js"></script>
+<script src="../js/app.min.js"></script>
 </html>

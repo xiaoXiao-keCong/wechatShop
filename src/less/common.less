@@ -30,24 +30,27 @@ img {
   	line-height: 1.2rem;
   	font-size: 0.48rem;
   	color: #121212;
-  	font-weight: bold;
   	background-color: #fbf7fd;
+    position: relative;
+    .title-bar-left {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        .text {
+          font-size: 0.4rem;
+          color: #121212;
+          margin-left: 0.266667rem;
+        }
+        img {
+          height: 0.586667rem;
+          width: 0.586667rem;
+        }
+    }
 }
 
-#back,
-.title-bar-left {
-  	display: inline-block;
-    position: absolute;
-  	height: 1.2rem;
-  	width: 0.853333rem;
-  	left: 0;
-  	line-height: 0;
-  	padding-top: 0.306667rem;
-  	img {
-  	  height: 0.586667rem;
-  	  width: 0.586667rem;
-  	}
-}
 .title-bar-right {
   	position: absolute;
   	right: 0.133333rem;

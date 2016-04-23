@@ -29,9 +29,8 @@ angular.module('addrManage', []).controller('addrManageCtrl', ['$scope', '$http'
         }
         return false;
     };
-
     // 跳转到新建地址页面
     $scope.toAddAddr = function () {
         $window.location.href = 'add_receiver.html';
-    }
+    };
 }]);
