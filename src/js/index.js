@@ -3,3 +3,6 @@
  */
 var index = angular.module('index', ['ngRoute']);
 // 首页路由
+index.config(['$routeProvider', function ($routeProvider) {
+	
+}]);
