@@ -15,7 +15,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 		});
 }]);
 
-
+// 图片轮播directive
 index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
 	return {
 		restrict: 'EA',
@@ -31,10 +31,10 @@ index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
 					for (var i = 0; i < lisLength; i++) {
 						lis[i].style.left = i * 100 + '%';
 					}
-					$interval(function () {
+					// $interval(function () {
 						
-						slider.style.transform = 'translate3d(-100%,0px,0px)';
-					}, 3000);
+					// 	slider.style.transform = 'translate3d(-100%,0px,0px)';
+					// }, 3000);
 					$swipe.bind(slider, {
 						end: function (touch) {
 							switch(touch.direction) {

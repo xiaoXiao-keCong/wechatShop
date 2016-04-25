@@ -1,4 +1,36 @@
 .home {
+	background-color: #f1f1f1;
 	width: 100%;
 	overflow: hidden;
+	margin-bottom: 1.306667rem;
+	.display-flex {
+		display: flex;
+		display: -webkit-flex;
+	}
+	.display-flex-column {
+		display: flex;
+		display: -webkit-flex;
+		flex-direction: column;
+	}
+	.top-nav {
+		height: 2.133333rem;
+		width: 100%;
+		.display-flex;
+		align-items: center;
+		justify-content: space-around;
+		
+		.item {
+			.display-flex-column;
+			align-items: center;
+			img {
+				height: 0.853333rem;
+				width: 0.853333rem;
+			}
+			.text {
+				margin-top: 0.16rem;
+				font-size: 0.32rem;
+				color: #121212;
+			}
+		}
+	}
 }
