@@ -1,0 +1,103 @@
+#order {
+	margin-bottom: 1.306667rem;
+	.display-flex {
+		display: flex;
+		display: -webkit-flex;
+	}
+	.top-nav {
+		height: 0.933333rem;
+		background-color: #fbf7fd;
+		color: #121212;
+		font-size: 0.346667rem;
+		.display-flex;
+		justify-content: space-around;
+		align-items: center;
+		.item {
+			height: 100%;
+			line-height: 0.933333rem;
+			padding: 0 0.066667rem;
+		}
+		.selected {
+			border-bottom: 0.026667rem solid #3dbfd5;
+			color: #3dbfd5;
+		}
+	}
+	.order-item-container {
+		padding: 0.266667rem 0;
+		.order-item {
+			background-color: #ffffff;
+			padding: 0 0.266667rem 0.4rem 0.266667rem;
+			margin-bottom: 0.266667rem;
+			.item-top {
+				height: 0.826667rem;
+				border-bottom: 1px solid #cccccc;
+				.display-flex;
+				justify-content: space-between;
+				align-items: center;
+				color: #121212;
+				.order-num {
+					font-size: 0.346667rem;
+				}
+				.order-state {
+					font-size: 0.32rem;
+				}
+			}
+			.order-detail {
+				.display-flex;
+				align-items: center;
+				.left {
+					img {
+						height: 2.666667rem;
+						width: 2.666667rem;
+					}
+				}
+				.right {
+					margin-left: 0.666667rem;
+					color: #666666;
+					font-size: 0.346667rem;
+					.right-row {
+						.display-flex;
+						margin-top: 0.32rem;
+						.right-cell-left {
+							width: 1.6rem;
+							text-align: right;
+						}
+						.right-cell-right {
+							padding-left: 0.2rem;
+						}
+						.name {
+							font-size: 0.4rem;
+							color: #121212;
+						}
+						.phone {
+							color: #121212;
+						}
+					}
+				}
+			}
+			.operation {
+				.display-flex;
+				justify-content: space-between;
+				height: 0.693333rem;
+				align-items: flex-end;
+				font-size: 0.32rem;
+				color: #121212;
+				img {
+					width: 0.426667rem;
+					height: 0.426667rem;
+				}
+				.btn-cancel {
+					display: inline-block;
+					height: 0.693333rem;
+					width: 1.733333rem;
+					background-color: #3dbfd5;
+					border-radius: 0.133333rem;
+					color: #ffffff;
+					font-size: 0.32rem;
+					line-height: 0.693333rem;
+					text-align: center;
+				}
+			}
+		}
+	}
+}

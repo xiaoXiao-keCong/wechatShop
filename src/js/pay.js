@@ -27,5 +27,5 @@ pay.controller('payRechargeCtrl', ['$scope', '$http', function ($scope, $http) {
 }]);
 // 商品支付控制器
 pay.controller('payGoodsCtrl', ['$scope', '$http', function ($scope, $http) {
-
+	
 }]);
