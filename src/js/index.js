@@ -93,8 +93,47 @@ index.controller('orderCtrl', ['$scope', '$http', function ($scope, $http) {
 	};
 }]);
 // 我的controller
-index.controller('myCtrl', ['$scope', '$http', function ($scope, $http) {
-
+index.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+	$scope.navTo = function (index) {
+		switch (index) {
+			case 1:
+				// 我的余额
+				$window.location.href = 'balance.html';
+				break;
+			case 2:
+				// 充值
+				$window.location.href = 'recharge.html';
+				break;
+			case 3:
+				// 优惠券
+				$window.location.href = 'coupon.html';
+				break;
+			case 4:
+				// 我的收藏
+				$window.location.href = 'collection.html';
+				break;
+			case 5:
+				// 最新活动
+				// $window.location.href = '';
+				break;
+			case 6:
+				// 购物车
+				$window.location.href = 'cart.html';
+				break;
+			case 7:
+				// 地址管理
+				$window.location.href = 'addr_manage.html';
+				break;
+			case 8:
+				// 积分商城
+				// $window.location.href = '';
+				break;
+			case 9:
+				// 设置
+				$window.location.href = 'setting.html';
+				break;
+		}
+	};
 }]);
 
 // 底部导航controller
