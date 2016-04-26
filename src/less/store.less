@@ -1,0 +1,107 @@
+#store-container {
+	background-color: #f1f1f1;
+	.display-flex {
+		display: flex;
+		display: -webkit-flex;
+	}
+	.display-flex-column {
+		display: flex;
+		display: -webkit-flex;
+		flex-direction: column;
+	}
+	.top-nav {
+		height: 0.866667rem;
+		background-color: #fbf7fd;
+		color: #121212;
+		font-size: 0.346667rem;
+		.display-flex;
+		justify-content: space-around;
+		align-items: center;
+		.selected {
+			color: #3dbfd5;
+			border-bottom: 2px solid #3dbfd5;
+		}
+		.nav-item {
+			height: 100%;
+			line-height: 0.866667rem;
+		}
+		.icon {
+			width: 0.4rem;
+			height: 0.4rem;
+			margin-left: 0.106667rem;
+		}
+	}
+	.grid-container {
+		background-color: #ffffff;
+		padding: 0.266667rem;
+		.display-flex-column;
+		justify-content: center;
+		align-items: center;
+		.grid-item:not(:last-child) {
+			margin-bottom: 0.266667rem;
+		}
+		.grid-item {
+			img {
+				height: 5.36rem;
+				width: 9.466667rem;
+				border-radius: 0.133333rem;
+			}
+		}
+	}
+	.list-container {
+		.list-item {
+			.display-flex;
+			align-items: center;
+			padding: 0.266667rem;
+			margin-bottom: 0.266667rem;
+			background-color: #ffffff;
+			.store-img {
+				height: 3.493333rem;
+				width: 3.493333rem;
+				border-radius: 0.133333rem;
+			}
+			.info {
+				.display-flex-column;
+				justify-content: center;
+				margin-left: 0.266667rem;
+				.name {
+					color: #121212;
+					font-size: 0.48rem;
+				}
+				.intro {
+					color: #555353;
+					font-size: 0.32rem;
+					margin-top: 0.2rem;
+				}
+				.price {
+					.display-flex;
+					align-items: center;
+					justify-content: space-between;
+					color: #3dbfd5;
+					font-size: 0.4rem;
+					margin-top: 0.2rem;
+					.star {
+						.display-flex;
+						img {
+							width: 0.346667rem;
+							height: 0.346667rem;
+						}
+						
+					}
+				}
+				.location {
+					.display-flex;
+					align-items: center;
+					margin-top: 0.2rem;
+					color: #121212;
+					font-size: 0.32rem;
+					font-weight: bold;
+					img {
+						width: 0.4rem;
+						height: 0.4rem;
+					}
+				}
+			}
+		}
+	}
+}

@@ -51,10 +51,18 @@ img {
     }
     .title-bar-right {
         position: absolute;
+        top: 0;
+        height: 100%;
         right: 0.133333rem;
-        #search {
+        display: flex;
+        display: -webkit-flex;
+        align-items: center;
+        img {
           width: 0.586667rem;
           height: 0.586667rem;
+        }
+        .switch {
+          margin-left: 0.133333rem;
         }
         a {
           color: #666666;

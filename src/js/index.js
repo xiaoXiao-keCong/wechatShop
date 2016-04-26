@@ -69,12 +69,39 @@ index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
 	};
 }]);
 // 首页controller
-index.controller('homeCtrl', ['$scope', '$http', function ($scope, $http) {
-	
+index.controller('homeCtrl',
+	['$scope', '$http', '$window', function ($scope, $http, $window) {
+	console.log('home');
+	$scope.toMore = function (index) {
+		console.log('test');
+		switch (index) {
+			case 1:
+				// 发型师
+				$window.location.href = '#/stylist';
+				break;
+			case 2:
+				// 门店
+				$window.location.href = 'store.html';
+				break;
+			case 3:
+				// 时尚资讯
+				break;
+			case 4:
+				// 悦尚城
+				break;
+			case 5:
+				// 时尚发型
+
+				break;
+		}
+	};
 }]);
 // 发型师controller
 index.controller('stylistCtrl', ['$scope', '$http', function ($scope, $http) {
-
+	$scope.isList = false;
+	$scope.switch = function () {
+		$scope.isList = !$scope.isList;
+	};
 }]);
 // 预约controller
 index.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
@@ -85,7 +112,6 @@ index.controller('orderCtrl', ['$scope', '$http', function ($scope, $http) {
 	$scope.isAppointOrder = true;
 	$scope.isServiceOrder = false;
 	$scope.isMallOrder = false;
-
 	$scope.orderNav = function (index) {
 		$scope.isAppointOrder = (1 === index ? true : false);
 		$scope.isServiceOrder = (2 === index ? true : false);

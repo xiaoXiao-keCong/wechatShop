@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="store">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>悦艺术家</title>
+    <script src="../../assets/js/flexible_css.debug.js"></script>
+    <script src="../../assets/js/flexible.debug.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../build/css/app.min.css">
+</head>
+<body id="store-container" ng-controller="storeCtrl">
+	<div class="title-bar">
+	    <span class="title-bar-left">
+	        <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
+	    </span>
+	    <span>门店列表</span>
+	    <span class="title-bar-right">
+	        <img src="../../assets/images/search.png" alt="搜索" id="search">
+	        <img src="../../assets/images/list.png" alt="列表显示" class="switch" ng-click="switch()" ng-if="!isList">
+	        <img src="../../assets/images/grid.png" alt="网格显示" class="switch" ng-if="isList" ng-click="switch()">
+	    </span>
+	</div>
+	<div class="top-nav">
+		<span class="nav-item selected">全部区域<img src="../../assets/images/down_h.png" class="icon"></span>
+		<span class="nav-item">综合排序<img src="../../assets/images/down.png" class="icon"></span>
+		<span class="nav-item">价格排序<img src="../../assets/images/updown.png" class="icon"></span>
+	</div>
+	<div class="grid-container" ng-if="!isList">
+		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
+	</div>
+	<div class="list-container" ng-if="isList">
+		<div class="list-item">
+			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
+			<span class="info">
+				<span class="name">悦艺术家</span>
+				<span class="intro">这里有充满激情的工作氛围，有积极进取的工作人员，而新颖的互联网创举...</span>
+				<span class="price">
+					<span class="star">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star.png">
+						<img src="../../assets/images/star.png">
+					</span>
+					<span>￥988元</span>
+				</span>
+				<span class="location">
+					<span><img src="../../assets/images/location.png"></span>
+					<span>北京市朝阳区三里屯</span>
+				</span>
+			</span>
+		</div>
+		<div class="list-item">
+			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
+			<span class="info">
+				<span class="name">悦艺术家</span>
+				<span class="intro">这里有充满激情的工作氛围，有积极进取的工作人员，而新颖的互联网创举...</span>
+				<span class="price">
+					<span class="star">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star.png">
+						<img src="../../assets/images/star.png">
+					</span>
+					<span>￥988元</span>
+				</span>
+				<span class="location">
+					<span><img src="../../assets/images/location.png"></span>
+					<span>北京市朝阳区三里屯</span>
+				</span>
+			</span>
+		</div>
+		<div class="list-item">
+			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
+			<span class="info">
+				<span class="name">悦艺术家</span>
+				<span class="intro">这里有充满激情的工作氛围，有积极进取的工作人员，而新颖的互联网创举...</span>
+				<span class="price">
+					<span class="star">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star.png">
+						<img src="../../assets/images/star.png">
+					</span>
+					<span>￥988元</span>
+				</span>
+				<span class="location">
+					<span><img src="../../assets/images/location.png"></span>
+					<span>北京市朝阳区三里屯</span>
+				</span>
+			</span>
+		</div>
+		<div class="list-item">
+			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
+			<span class="info">
+				<span class="name">悦艺术家</span>
+				<span class="intro">这里有充满激情的工作氛围，有积极进取的工作人员，而新颖的互联网创举...</span>
+				<span class="price">
+					<span class="star">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star_h.png">
+						<img src="../../assets/images/star.png">
+						<img src="../../assets/images/star.png">
+					</span>
+					<span>￥988元</span>
+				</span>
+				<span class="location">
+					<span><img src="../../assets/images/location.png"></span>
+					<span>北京市朝阳区三里屯</span>
+				</span>
+			</span>
+		</div>
+	</div>
+</body>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/angular.min.js"></script>
+<script src="../../assets/js/angular-route.min.js"></script>
+<script src="../js/app.min.js"></script>
+</html>
