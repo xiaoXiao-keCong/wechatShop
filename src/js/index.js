@@ -72,7 +72,6 @@ index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
 index.controller('homeCtrl',
 	['$scope', '$http', '$window', function ($scope, $http, $window) {
 	$scope.toMore = function (index) {
-		console.log('test');
 		switch (index) {
 			case 1:
 				// 发型师
@@ -95,16 +94,53 @@ index.controller('homeCtrl',
 				break;
 		}
 	};
+	$scope.navigate = function (index) {
+		switch (index) {
+			case 1:
+				$window.location.href = '#/';
+				break;
+			case 2:
+				$window.location.href = '#/stylist';
+				break;
+			case 3:
+				$window.location.href = '#/appointment';
+				break;
+			case 4:
+				$window.location.href = '#/order';
+				break;
+			case 5:
+				$window.location.href = '#/my';
+				break;
+		}
+	};
 }]);
 // 发型师controller
-index.controller('stylistCtrl', ['$scope', '$http', function ($scope, $http) {
-	$scope.isList = false;
+index.controller('stylistCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 	$scope.switch = function () {
 		$scope.isList = !$scope.isList;
 	};
+	$scope.navigate = function (index) {
+		switch (index) {
+			case 1:
+				$window.location.href = '#/';
+				break;
+			case 2:
+				$window.location.href = '#/stylist';
+				break;
+			case 3:
+				$window.location.href = '#/appointment';
+				break;
+			case 4:
+				$window.location.href = '#/order';
+				break;
+			case 5:
+				$window.location.href = '#/my';
+				break;
+		}
+	};
 }]);
 // 预约controller
-index.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('appointmentCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 	$scope.itemSelect = function () {
 
 	};
@@ -114,9 +150,28 @@ index.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http)
 	$scope.jump = function () {
 		$scope.showMask = true;
 	};
+	$scope.navigate = function (index) {
+		switch (index) {
+			case 1:
+				$window.location.href = '#/';
+				break;
+			case 2:
+				$window.location.href = '#/stylist';
+				break;
+			case 3:
+				$window.location.href = '#/appointment';
+				break;
+			case 4:
+				$window.location.href = '#/order';
+				break;
+			case 5:
+				$window.location.href = '#/my';
+				break;
+		}
+	};
 }]);
 // 订单controller
-index.controller('orderCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('orderCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 	$scope.isAppointOrder = true;
 	$scope.isServiceOrder = false;
 	$scope.isMallOrder = false;
@@ -124,6 +179,25 @@ index.controller('orderCtrl', ['$scope', '$http', function ($scope, $http) {
 		$scope.isAppointOrder = (1 === index ? true : false);
 		$scope.isServiceOrder = (2 === index ? true : false);
 		$scope.isMallOrder = (3 === index ? true: false);
+	};
+	$scope.navigate = function (index) {
+		switch (index) {
+			case 1:
+				$window.location.href = '#/';
+				break;
+			case 2:
+				$window.location.href = '#/stylist';
+				break;
+			case 3:
+				$window.location.href = '#/appointment';
+				break;
+			case 4:
+				$window.location.href = '#/order';
+				break;
+			case 5:
+				$window.location.href = '#/my';
+				break;
+		}
 	};
 }]);
 // 我的controller
@@ -148,7 +222,7 @@ index.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $htt
 				break;
 			case 5:
 				// 最新活动
-				// $window.location.href = '';
+				$window.location.href = 'activity.html';
 				break;
 			case 6:
 				// 购物车
@@ -168,22 +242,7 @@ index.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $htt
 				break;
 		}
 	};
-}]);
-
-// 底部导航controller
-index.controller('bottomNavCtrl', ['$scope', '$window', function ($scope, $window) {
-	$scope.isHome = true;
-	$scope.isStylist = false;
-	$scope.isAppointment = false;
-	$scope.isOrder = false;
-	$scope.isMy = false;
 	$scope.navigate = function (index) {
-		console.log(index);
-		$scope.isHome = (1 === index ? true : false);
-		$scope.isStylist = (2 === index ? true :false);
-		$scope.isAppointment = (3 === index ? true : false);
-		$scope.isOrder = (4 === index ? true : false);
-		$scope.isMy = (5 === index ? true : false);
 		switch (index) {
 			case 1:
 				$window.location.href = '#/';
@@ -201,6 +260,27 @@ index.controller('bottomNavCtrl', ['$scope', '$window', function ($scope, $windo
 				$window.location.href = '#/my';
 				break;
 		}
-
 	};
 }]);
+
+
+// 底部导航栏事件
+function navigate(index) {
+	switch (index) {
+		case 1:
+			$window.location.href = '#/';
+			break;
+		case 2:
+			$window.location.href = '#/stylist';
+			break;
+		case 3:
+			$window.location.href = '#/appointment';
+			break;
+		case 4:
+			$window.location.href = '#/order';
+			break;
+		case 5:
+			$window.location.href = '#/my';
+			break;
+	}
+}
