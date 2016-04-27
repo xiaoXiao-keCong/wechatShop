@@ -71,7 +71,6 @@ index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
 // 首页controller
 index.controller('homeCtrl',
 	['$scope', '$http', '$window', function ($scope, $http, $window) {
-	console.log('home');
 	$scope.toMore = function (index) {
 		console.log('test');
 		switch (index) {
@@ -88,6 +87,7 @@ index.controller('homeCtrl',
 				break;
 			case 4:
 				// 悦尚城
+				$window.location.href = 'mall.html';
 				break;
 			case 5:
 				// 时尚发型
@@ -105,7 +105,15 @@ index.controller('stylistCtrl', ['$scope', '$http', function ($scope, $http) {
 }]);
 // 预约controller
 index.controller('appointmentCtrl', ['$scope', '$http', function ($scope, $http) {
+	$scope.itemSelect = function () {
 
+	};
+	$scope.recommend = function () {
+		$scope.showMask = true;
+	};
+	$scope.jump = function () {
+		$scope.showMask = true;
+	};
 }]);
 // 订单controller
 index.controller('orderCtrl', ['$scope', '$http', function ($scope, $http) {
