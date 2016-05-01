@@ -36,7 +36,7 @@ gulp.task('buildJs', function () {
 // 编译less文件并压缩
 gulp.task('buildLess', function () {
     return gulp.src('src/less/*.less')
-        .pipe(plumber())
+        .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
         .pipe(less())
         .pipe(minifycss())
         .pipe(concat('app.min.css'))

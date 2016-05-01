@@ -1,0 +1,121 @@
+@import 'display';
+#stylist-detail {
+	background-color: #f1f1f1;
+	color: #121212;
+	.head {
+		.flex-column-center;
+		height: 5.946667rem;
+		width: 100%;
+		background: url("../../assets/images/stylist_bg.png") no-repeat;
+		background-size: 100% 100%;
+		.head-pic {
+			height: 3.333333rem;
+			width: 3.333333rem;
+		}
+		.name {		
+			margin-top: 0.2rem;
+			font-size: 0.453333rem;
+			color: #ffffff;
+		}
+		.intro {
+			font-size: 0.32rem;
+			font-weight: bold;
+			color: #ffffff;
+		}
+		.operation {
+			color: #3dbfd5;
+			margin-top: 0.2rem;
+			.flex;
+			.btn-operation {
+				border: 0.013333rem solid #3dbfd5;
+				padding: 0.066667rem 0.266667rem;
+				.flex-center;
+				font-size: 0.32rem;
+				border-radius: 0.133333rem;
+				&:last-child {
+					margin-left: 0.373333rem;
+				}
+			}
+		}
+	}
+	.stylist-info {
+		background-color: #ffffff;
+		padding: 0 0.266667rem;
+		.top-panel {
+			padding: 0 1.466667rem;
+			height: 0.826667rem;
+			.flex-center;
+			justify-content: space-between;
+			border-bottom: 0.013333rem solid #c1c1c1;
+			.item {
+				height: 100%;
+				.flex-center;
+				font-size: 0.32rem;
+			}
+		}
+		.bottom-panel {
+			.flex-column-center;
+			padding: 0.266667rem 0;
+			.discount {
+				font-size: 0.32rem;
+				color: #fc0303;
+				.discount-item {
+					border: 0.013333rem solid #fc0303;
+					padding: 0.066667rem 0.266667rem;
+					border-radius: 0.133333rem;
+					&:last-child {
+						margin-left: 0.4rem;
+					}
+				}
+			}
+			.site {
+				font-size: 0.346667rem;
+				font-weight: bold;
+			}
+			.location {
+				font-size: 0.293333rem;
+			}
+		}
+	}
+	.nav-bar {
+		height: 1.173333rem;
+		background-color: #fbf7fd;
+		font-size: 0.373333rem;
+		margin-top: 0.133333rem;
+		.flex-center;
+		justify-content: space-around;
+		.selected {
+			padding: 0 0.133333rem;
+			height: 100%;
+			.flex-center;
+			border-bottom: 0.026667rem solid #3dbfd5;
+			color: #3dbfd5;
+		}
+	}
+	.bottom-operation {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 1.2rem;
+		color: #3dbfd5;
+		font-size: 0.4rem;
+		.flex;
+		.left {
+			width: 3.066667rem;
+			height: 100%;
+			background-color: #ffffff;
+			.flex-center;
+		}
+		.middle {
+			background-color: #d0f2f8;
+			.flex-center;
+			flex: 1;
+		}
+		.right {
+			flex: 1;
+			background-color: #3dbfd5;
+			color: #ffffff;
+			.flex-center;
+		}
+	}
+}
