@@ -69,5 +69,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', function () {
-    runSequence('buildLess', 'buildJs', 'rev');
+    runSequence('cleanCss', 'cleanJs', 'buildLess', 'buildJs', 'rev');
 });
