@@ -1,0 +1,77 @@
+<!-- 积分商品确认下单 -->
+<html ng-app="pointOrderConfirm">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>悦艺术家</title>
+    <script src="../../assets/js/flexible_css.debug.js"></script>
+    <script src="../../assets/js/flexible.debug.js"></script>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../build/css/app.min.css">
+</head>
+<body ng-controller="pointOrderConfirmCtrl" id="point-order-confirm-container">
+<div class="title-bar">
+    <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
+    <span>确认订单</span>
+</div>
+<div class="point-order-confirm">
+	<div class="deliver-type">
+		<div class="item">
+			<span class="left">
+				<img src="../../assets/images/pay_selected.png" class="common-icon">
+				<span class="tips">请填写收货人信息</span>
+			</span>
+			<img src="../../assets/images/arrow_r_big.png" class="common-icon">
+		</div>
+		<div class="item">
+			<span class="left">
+				<img src="../../assets/images/pay_unselected.png" class="common-icon">
+				<span class="tips">门店信息</span>
+			</span>
+		</div>
+	</div>
+	<div class="order-info">
+		<div class="goods-info">
+			<span class="left">
+				<img src="../../assets/images/test/goods_pic1.png" class="goods-icon">
+			</span>
+			<span class="right">
+				<span class="name">爱丽小屋旋转自动双头眉笔</span>
+				<span class="price">
+					<span class="highlight">￥ 60 + 60积分</span>
+					<span>X 1</span>
+				</span>
+			</span>
+		</div>
+		<div class="freight">
+			<span>运费:</span>
+			<span class="freight-num">￥0.00</span>
+		</div>
+		<div class="message-container">
+			<span class="title">买家留言：</span>
+			<span class="message">
+				<textarea placeholder="选填，填写您和卖家达成一致的信息..."></textarea>
+			</span>
+			<span class="count-info">
+				<span>共1件商品 合计:</span>
+				<span class="highlight">￥60 + 60积分</span>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="operation">
+	<span class="left">
+		<span>实付：</span>
+		<span class="highlight">￥60 + 60积分</span>
+	</span>
+	<span class="right">确定</span>
+</div>
+</body>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/angular.min.js"></script>
+<script src="../../assets/js/angular-route.min.js"></script>
+<script src="../js/app.min.js"></script>
+</html>
