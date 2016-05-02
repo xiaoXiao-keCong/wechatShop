@@ -1,7 +1,7 @@
 /**
- * Created by hugotan on 2016/5/1.
+ * Created by hugotan on 2016/5/2.
  */
-angular.module('orderDetail', []).controller('orderDetailCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('pointGoodsDetail', []).controller('pointGoodsDetailCtrl', ['$scope', '$http', function ($scope, $http) {
 	var transFn = function(data) {
                 return $.param(data);
         },
@@ -9,4 +9,5 @@ angular.module('orderDetail', []).controller('orderDetailCtrl', ['$scope', '$htt
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transFn
         };
+	
 }]);
