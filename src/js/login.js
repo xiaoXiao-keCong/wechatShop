@@ -11,7 +11,7 @@ angular.module('login', []).controller('loginCtrl',
             transformRequest: transFn
         };
     $scope.validate = function () {
-        
+
     };
     // 登录事件
     $scope.login = function () {
@@ -23,6 +23,11 @@ angular.module('login', []).controller('loginCtrl',
         var loginPromise = $http.post('/user/login.json', data, postCfg);
         loginPromise.then(function (resp) {
             console.log(resp);
+            if (1 === resp.data.code) {
+                // 登录成功，返回首页
+                alert('登录成功，即将返回首页！');
+                $window.location.href = 'index.html';
+            }
         }, function (resp) {
             console.log(resp);
         });

@@ -5,7 +5,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>地址管理</title>
+    <title>悦艺术家</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../build/css/app.min.css">
@@ -20,34 +20,30 @@
 <div class="addr-manage">
     <div class="addr-item" ng-repeat="addr in addrList">
         <div class="info-panel">
-            <span class="name">{{addr.name}}</span>
-            <span class="phone">{{addr.telephone}}</span>
-            <span class="address">{{addr.address}}</span>
+            <span class="name" ng-bind="addr.name"></span>
+            <span class="phone" ng-bind="addr.telephone"></span>
+            <span class="address" ng-bind="addr.address"></span>
         </div>
         <div class="operation-panel">
-
-            <div class="operation" id="default-addr">
+            <div class="left">
                 <img src="../../assets/images/selected.png" alt="默认地址" ng-if="checkDefault(addr)">
                 <img src="../../assets/images/unselected.png" alt="非默认地址" ng-if="!checkDefault(addr)">
-                <span>默认地址</span>
+                <span class="tips">默认地址</span>
             </div>
-            <div class="operation" id="edit">
-                <img src="../../assets/images/edit.png" alt="编辑地址" ng-click="edit(addr)">
-                <span>编辑</span>
-            </div>
-            <div class="operation" id="delete">
-                <img src="../../assets/images/delete.png" alt="删除地址" ng-click="delete(addr)">
+            <div class="right">
+                <img src="../../assets/images/edit.png" alt="编辑" class="edit-icon" ng-click="edit(addr)">
+                <span class="tips">编辑</span>
+                <img src="../../assets/images/delete.png" alt="删除" class="delete-icon" ng-click="delete(addr)">
                 <span>删除</span>
             </div>
-            
         </div>
     </div>
-    <div id="add-addr" ng-click="toAddAddr()">
-        <img src="../../assets/images/add_addr.png" alt="新建地址">
-        新建地址
-    </div>
+    
 </div>
-
+<div id="add-addr" ng-click="toAddAddr()">
+    <img src="../../assets/images/add_addr.png" alt="新建地址">
+    <span>新建地址</span>
+</div>
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>

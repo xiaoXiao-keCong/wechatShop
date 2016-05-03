@@ -2,7 +2,7 @@
 <html ng-app="setting" >
 <head>
 	<meta charset="utf-8">
-	<title>设置</title>
+	<title>悦艺术家</title>
 	<meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../../build/css/app.min.css">
 </head>
-<body ng-controller="settingCtrl">
+<body ng-controller="settingCtrl" class="bg-white">
 	<div class="title-bar">
 	    <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
 	    <span>设置</span>
@@ -36,7 +36,7 @@
 		<div class="item">
 			<span>清除缓存</span>
 		</div>
-		<div id="logout-container">
+		<div id="logout-container" ng-if="isLogin">
 			<button id="logout-btn">退出登录</button>
 		</div>
 		
