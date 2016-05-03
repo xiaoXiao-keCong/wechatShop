@@ -5,37 +5,39 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>完善信息</title>
+    <title>悦艺术家</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../build/css/app.min.css">
 
 </head>
-<body ng-controller="completeInfoCtrl">
+<body ng-controller="completeInfoCtrl" class="bg-white">
 <div class="title-bar">
     <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
     <span>完善信息</span>
 </div>
 <div id="complete-info-container">
-    <div class="success-tips">
+<form>
+    <div class="success-tips" >
         <img src="../../assets/images/dui.png" alt="正确图标">
         恭喜您！注册成功
     </div>
-    <img src="../../assets/images/zhaoxiang.png" id="upload-headpic">
+    <img ngf-thumbnail="avatar || '../../assets/images/zhaoxiang.png'" id="upload-headpic" ngf-select ng-model="avatar" name="avatar" ngf-pattern="'image/*'"
+     ngf-accept="'image/*'" ngf-max-size="5MB" ngf-resize="{width: 170, height: 170 }">
     <div class="upload-tips">“点击上传真实的头像”</div>
     <div class="use-tips">填写完整信息赠送10积分，可直接用于积分商城哦~</div>
     <div class="form-group margin-top-88">
         <span>
             <img src="../../assets/images/nickname.png" id="nickname-icon">
         </span>
-        <input type="text" placeholder="请输入您的昵称（必填）"/>
+        <input type="text" placeholder="请输入您的昵称（必填）" ng-model="nickname"/>
     </div>
     <div class="form-group margin-top-55">
         <span>
             <img src="../../assets/images/shengri.png" id="shengri-icon">
         </span>
         <span>
-            <input type="text" placeholder="请输入您的生日（选填）"/>
+            <input type="text" placeholder="请输入您的生日（选填）" ng-model="birthday"/>
         </span>
     </div>
     <div class="sex-select">
@@ -50,13 +52,16 @@
             <span class="sex-text">我是女神</span>
         </span>
     </div>
-    <div id="done-btn">
+    <div id="done-btn" ng-click="complete()">
         完&nbsp;&nbsp;&nbsp;&nbsp;成
     </div>
+</form>
 </div>
 
 </body>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
+<!-- <script src="../../assets/js/ng-file-upload-shim.min.js"></script> -->
+<script src="../../assets/js/ng-file-upload.min.js"></script>
 <script src="../js/app.min.js"></script>
 </html>

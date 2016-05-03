@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html  ng-app="login">
 <head>
     <meta charset="UTF-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>登录</title>
+    <title>悦艺术家</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../build/css/app.min.css">
 </head>
-<body ng-app="login" ng-controller="loginCtrl">
+<body ng-controller="loginCtrl" class="bg-white">
 <div class="title-bar">
     <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
     <span>登录</span>
@@ -22,26 +22,25 @@
             <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
         </span>
         <span class="text-container">
-            <input type="text" placeholder="请输入您的手机号" class="input-text" name="account" ng-model="account">
+            <input type="text" placeholder="请输入您的手机号" class="input-text" name="account" ng-model="account" maxlength="11">
         </span>
-
     </div>
     <div class="form-group margin-top-28">
         <span class="icon">
             <img src="../../assets/images/lock.png" alt="密码" class="pwd-icon">
         </span>
         <span class="text-container">
-            <input type="password" placeholder="请输6-20位字母、数字或符号" class="input-text" ng-model="password">
+            <input type="password" placeholder="请输6-20位字母、数字或符号" class="input-text" ng-model="password" maxlength="20" minlength="6">
         </span>
     </div>
     <div class="other-operations">
-        <a href="javascript:void(0)" id="to-fast-login">无密码快速登录</a>
-        <a href="javascript:void(0)" id="to-forget-pwd">忘记密码？</a>
+        <a id="to-fast-login" ng-href="fast_login.html">无密码快速登录</a>
+        <a id="to-forget-pwd" ng-href="forget_pwd.html">忘记密码？</a>
     </div>
     <div id="confirm-login-btn" class="btn-common" ng-click="login()">
         登录
     </div>
-    <div id="to-register-btn" class="btn-common">
+    <div id="to-register-btn" class="btn-common" ng-click="toRegister()">
         注册
     </div>
     <div class="more-choice-tips">

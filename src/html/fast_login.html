@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="fastLogin" >
 <head>
     <meta charset="UTF-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>快速登录</title>
+    <title>悦艺术家</title>
     <script src="../../assets/js/flexible_css.debug.js"></script>
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../build/css/app.min.css">
 </head>
-<body ng-app="fastLogin" ng-controller="fastLoginCtrl">
+<body ng-controller="fastLoginCtrl" class="bg-white">
 <div class="title-bar">
     <span>快速登录</span>
 </div>
@@ -21,7 +21,7 @@
             <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
         </span>
         <span class="text-container">
-            <input type="text" placeholder="请输入您的手机号" class="input-text" name="phone-num">
+            <input type="text" placeholder="请输入您的手机号" class="input-text" name="phone-num" maxlength="11" ng-model="phone">
         </span>
 
     </div>
@@ -31,17 +31,17 @@
                 <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
             </span>
             <span class="text-container">
-                <input type="text" placeholder="请输验证码" class="input-text">
+                <input type="text" placeholder="请输验证码" class="input-text" ng-model="code">
             </span>
         </div>
-        <div class="get-code-btn">
+        <div class="get-code-btn" ng-click="getCode()">
             获取验证码
         </div>
     </div>
-    <div id="confirm-login-btn" class="btn-common">
+    <div id="confirm-login-btn" class="btn-common" ng-click="confirmLogin()">
         确认登录
     </div>
-    <div id="to-login-btn" class="btn-common">
+    <div id="to-login-btn" class="btn-common" ng-click="toLogin()">
         已有账号点击登录
     </div>
     <div class="more-choice-tips">

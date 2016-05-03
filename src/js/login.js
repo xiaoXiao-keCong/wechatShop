@@ -1,23 +1,34 @@
 /**
  * Created by hugotan on 2016/4/10.
  */
-angular.module('login', []).controller('loginCtrl', ['$scope', '$http', function ($scope, $http) {
+angular.module('login', []).controller('loginCtrl',
+    ['$scope', '$http', '$window', function ($scope, $http, $window) {
+    var transFn = function(data) {
+            return $.param(data);
+        },
+        postCfg = {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            transformRequest: transFn
+        };
+    $scope.validate = function () {
+        
+    };
+    // 登录事件
     $scope.login = function () {
-        var test = '123456';
-        // 用账号密码都为123进行测试
-        var data = {account: '123', password: '123'},
-            transFn = function(data) {
-                return $.param(data);
-            },
-            postCfg = {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                transformRequest: transFn
-            };
+        console.log('login');
+        var data = {
+            account: $scope.account,
+            password: $scope.password
+        };
         var loginPromise = $http.post('/user/login.json', data, postCfg);
         loginPromise.then(function (resp) {
             console.log(resp);
         }, function (resp) {
             console.log(resp);
         });
+    };
+    // 跳转到注册页面
+    $scope.toRegister = function () {
+        $window.location.href = 'register.html';
     };
 }]);
