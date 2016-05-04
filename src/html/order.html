@@ -1,9 +1,13 @@
 <!-- 订单 -->
+<div class="parent-container">
 <div class="title-bar">
-    <span>订单</span>
+    <span>我的预约</span>
+    <span class="down-icon">
+	    <img src="../../assets/images/down_2.png" class="common-icon">
+	</span>
 </div>
 <div id="order">
-	<div class="top-nav">
+	<!-- <div class="top-nav">
 		<span ng-class="{'item': true, 'selected': isAppointOrder}" ng-click="orderNav(1)">
 			<span>我的预约</span>
 		</span>
@@ -13,134 +17,329 @@
 		<span ng-class="{'item': true, 'selected': isMallOrder}" ng-click="orderNav(3)">
 			<span>商城订单</span>
 		</span>
+	</div> -->
+	<div ng-if="appointment">
+		<div class="top-nav">
+			<span class="item selected">
+				未完成
+			</span>
+			<span class="item">
+				已完成
+			</span>
+		</div>
+		<div class="order-item-container">
+			<!-- 待接单 -->
+			<div class="order-item">
+				<div class="item-top">
+					<span class="order-num">订单号：0123456789</span>
+					<span class="order-state">待接单</span>
+				</div>
+				<div class="order-detail">
+					<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
+					<span class="right">
+						<div class="right-row">
+							<span class="right-cell-left name">Marcus</span>
+							<span class="right-cell-right phone">13838383838</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">项目:</span>
+							<span class="right-cell-right">染发</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务时间:</span>
+							<span class="right-cell-right">2016-01-22 16:00:00</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务门店:</span>
+							<span class="right-cell-right">朝阳区东方门店</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">预约时间:</span>
+							<span class="right-cell-right">60min</span>
+						</div>
+					</span>
+				</div>
+				<div class="operation">
+					<span class="location">
+						<img src="../../assets/images/location.png">
+						北京市朝阳区三里屯
+					</span>
+					<span>
+						<span class="btn-cancel">取消订单</span>
+					</span>
+				</div>
+			</div>
+			<!-- 待接单 -->
+			<div class="order-item">
+				<div class="item-top">
+					<span class="order-num">订单号：0123456789</span>
+					<span class="order-state">待接单</span>
+				</div>
+				<div class="order-detail">
+					<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
+					<span class="right">
+						<div class="right-row">
+							<span class="right-cell-left name">Marcus</span>
+							<span class="right-cell-right phone">13838383838</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">项目:</span>
+							<span class="right-cell-right">染发</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务时间:</span>
+							<span class="right-cell-right">2016-01-22 16:00:00</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务门店:</span>
+							<span class="right-cell-right">朝阳区东方门店</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">预约时间:</span>
+							<span class="right-cell-right">60min</span>
+						</div>
+					</span>
+				</div>
+				<div class="operation">
+					<span class="location">
+						<img src="../../assets/images/location.png">
+						北京市朝阳区三里屯
+					</span>
+					<span>
+						<span class="btn-cancel">取消订单</span>
+					</span>
+				</div>
+			</div>
+			<!-- 已完成 -->
+			<div class="order-item">
+				<div class="item-top">
+					<span class="order-num">订单号：0123456789</span>
+					<span class="order-state">已完成</span>
+				</div>
+				<div class="order-detail">
+					<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
+					<span class="right">
+						<div class="right-row">
+							<span class="right-cell-left name">Marcus</span>
+							<span class="right-cell-right phone">13838383838</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">项目:</span>
+							<span class="right-cell-right">染发</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务时间:</span>
+							<span class="right-cell-right">2016-01-22 16:00:00</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">服务门店:</span>
+							<span class="right-cell-right">朝阳区东方门店</span>
+						</div>
+						<div class="right-row">
+							<span class="right-cell-left">预约时间:</span>
+							<span class="right-cell-right">60min</span>
+						</div>
+					</span>
+				</div>
+				<div class="operation">
+					<span class="location">
+						<img src="../../assets/images/location.png">
+						北京市朝阳区三里屯
+					</span>
+				</div>
+			</div>
+			
+		</div>
 	</div>
-	<div class="order-item-container">
-		<!-- 待接单 -->
-		<div class="order-item">
-			<div class="item-top">
-				<span class="order-num">订单号：0123456789</span>
-				<span class="order-state">待接单</span>
+	<div ng-if="serviceRecord">
+		<div class="top-nav">
+			<span class="item selected">
+				全部
+			</span>
+			<span class="item">
+				未完成
+			</span>
+			<span class="item">
+				已完成
+			</span>
+		</div>
+		<div class="record-item-container">
+			<div class="record-item">
+				<div class="top-panel">
+					<span class="order-num">订单号：0123456789</span>
+					<span>待支付</span>
+				</div>
+				<div class="order-info">
+					<img src="../../assets/images/test/record.png" class="record-icon">
+					<span class="text-info">
+						<span class="user-info">
+							<span class="name">Marcus</span>
+							<span class="phone">12838384738</span>
+						</span>
+						<span>下单时间：2016-01-22 15:14:06</span>
+						<span>服务店面：朝阳区东方门店</span>
+						<span class="location">
+							<img src="../../assets/images/location_3.png" class="location-icon">
+							<span>北京市朝阳区三里屯</span>
+						</span>
+					</span>
+				</div>
+				<div class="items-text">
+					<span>项目：</span>
+					<span class="items">
+						<span class="item-info">
+							<span>奢华烫</span>
+							<span class="price">
+								<del>￥381.00</del>
+								<span class="highlight">￥280</span>
+							</span>
+						</span>
+						<span class="item-info">
+							<span>染发</span>
+							<span class="price">
+								<del>￥381.00</del>
+								<span class="highlight">￥280</span>
+							</span>
+						</span>
+					</span>
+				</div>
+				<div class="price-info">
+					<span>费用合计：￥888</span>
+					<span>优惠：九折</span>
+					<span>实付：<span class="highlight">￥666</span></span>
+				</div>
+				<div class="operation">
+					<button>取消订单</button>
+					<button class="btn-pay">立即支付</button>
+				</div>
 			</div>
-			<div class="order-detail">
-				<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
-				<span class="right">
-					<div class="right-row">
-						<span class="right-cell-left name">Marcus</span>
-						<span class="right-cell-right phone">13838383838</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">项目:</span>
-						<span class="right-cell-right">染发</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务时间:</span>
-						<span class="right-cell-right">2016-01-22 16:00:00</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务门店:</span>
-						<span class="right-cell-right">朝阳区东方门店</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">预约时间:</span>
-						<span class="right-cell-right">60min</span>
-					</div>
-				</span>
-			</div>
-			<div class="operation">
-				<span class="location">
-					<img src="../../assets/images/location.png">
-					北京市朝阳区三里屯
-				</span>
-				<span>
-					<span class="btn-cancel">取消订单</span>
-				</span>
+			<div class="record-item">
+				<div class="top-panel">
+					<span class="order-num">订单号：0123456789</span>
+					<span>待支付</span>
+				</div>
+				<div class="order-info">
+					<img src="../../assets/images/test/record.png" class="record-icon">
+					<span class="text-info">
+						<span class="user-info">
+							<span class="name">Marcus</span>
+							<span class="phone">12838384738</span>
+						</span>
+						<span>下单时间：2016-01-22 15:14:06</span>
+						<span>服务店面：朝阳区东方门店</span>
+						<span class="location">
+							<img src="../../assets/images/location_3.png" class="location-icon">
+							<span>北京市朝阳区三里屯</span>
+						</span>
+					</span>
+				</div>
+				<div class="items-text">
+					<span>项目：</span>
+					<span class="items">
+						<span class="item-info">
+							<span>奢华烫</span>
+							<span class="price">
+								<del>￥381.00</del>
+								<span class="highlight">￥280</span>
+							</span>
+						</span>
+						<span class="item-info">
+							<span>染发</span>
+							<span class="price">
+								<del>￥381.00</del>
+								<span class="highlight">￥280</span>
+							</span>
+						</span>
+					</span>
+				</div>
+				<div class="price-info">
+					<span>费用合计：￥888</span>
+					<span>优惠：九折</span>
+					<span>实付：<span class="highlight">￥666</span></span>
+				</div>
+				<div class="operation">
+					<!-- <button>取消订单</button> -->
+					<button class="btn-pay">立即支付</button>
+				</div>
 			</div>
 		</div>
-		<!-- 待接单 -->
-		<div class="order-item">
-			<div class="item-top">
-				<span class="order-num">订单号：0123456789</span>
-				<span class="order-state">待接单</span>
-			</div>
-			<div class="order-detail">
-				<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
-				<span class="right">
-					<div class="right-row">
-						<span class="right-cell-left name">Marcus</span>
-						<span class="right-cell-right phone">13838383838</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">项目:</span>
-						<span class="right-cell-right">染发</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务时间:</span>
-						<span class="right-cell-right">2016-01-22 16:00:00</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务门店:</span>
-						<span class="right-cell-right">朝阳区东方门店</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">预约时间:</span>
-						<span class="right-cell-right">60min</span>
-					</div>
-				</span>
-			</div>
-			<div class="operation">
-				<span class="location">
-					<img src="../../assets/images/location.png">
-					北京市朝阳区三里屯
-				</span>
-				<span>
-					<span class="btn-cancel">取消订单</span>
-				</span>
-			</div>
-		</div>
-		<!-- 已完成 -->
-		<div class="order-item">
-			<div class="item-top">
-				<span class="order-num">订单号：0123456789</span>
-				<span class="order-state">已完成</span>
-			</div>
-			<div class="order-detail">
-				<span class="left"><img src="../../assets/images/test/yuyue_user_pic.png"></span>
-				<span class="right">
-					<div class="right-row">
-						<span class="right-cell-left name">Marcus</span>
-						<span class="right-cell-right phone">13838383838</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">项目:</span>
-						<span class="right-cell-right">染发</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务时间:</span>
-						<span class="right-cell-right">2016-01-22 16:00:00</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">服务门店:</span>
-						<span class="right-cell-right">朝阳区东方门店</span>
-					</div>
-					<div class="right-row">
-						<span class="right-cell-left">预约时间:</span>
-						<span class="right-cell-right">60min</span>
-					</div>
-				</span>
-			</div>
-			<div class="operation">
-				<span class="location">
-					<img src="../../assets/images/location.png">
-					北京市朝阳区三里屯
-				</span>
-				<!-- <span>
-					<span class="btn-cancel hide">取消订单</span>
-				</span> -->
-			</div>
-		</div>
-		
 	</div>
-	
+	<div ng-if="!mallOrder">
+		<div class="top-nav">
+			<span class="item selected">
+				全部
+			</span>
+			<span class="item">
+				未完成
+			</span>
+			<span class="item">
+				已完成
+			</span>
+		</div>
+		<div class="mall-order-container">
+			<div class="mall-order-item">
+				<div class="top-panel">
+					<span>订单号：0123456789</span>
+					<span class="right">
+						<span>已完成</span>
+						<img src="../../assets/images/rubbish.png" class="common-icon">
+					</span>
+				</div>
+				<div class="pic-panel">
+					<img src="../../assets/images/test/mall_order.png">
+					<img src="../../assets/images/test/mall_order2.png">
+					<img src="../../assets/images/test/mall_order.png">
+				</div>
+				<div class="operation">
+					<span>实付：<span class="highlight">￥20</span></span>
+					<span class="right">
+						<button>取消订单</button>
+					</span>
+				</div>
+			</div>
+			<div class="mall-order-item">
+				<div class="top-panel">
+					<span>订单号：0123456789</span>
+					<span class="right">
+						<span>待支付</span>
+					</span>
+				</div>
+				<div class="pic-panel">
+					<img src="../../assets/images/test/mall_order.png">
+					<img src="../../assets/images/test/mall_order2.png">
+					<img src="../../assets/images/test/mall_order.png">
+				</div>
+				<div class="operation">
+					<span>实付：<span class="highlight">￥20</span></span>
+					<span class="right">
+						<button>立即支付</button>
+						<button>取消订单</button>
+					</span>
+				</div>
+			</div>
+			<div class="mall-order-item">
+				<div class="top-panel">
+					<span>订单号：0123456789</span>
+					<span class="right">
+						<span>已完成</span>
+						<img src="../../assets/images/rubbish.png" class="common-icon">
+					</span>
+				</div>
+				<div class="pic-panel">
+					<img src="../../assets/images/test/mall_order.png">
+					<span class="goods-intro">永久 26寸铝合金 27速 双碟刹 可锁死铝肩前叉永久</span>
+				</div>
+				<div class="operation">
+					<span>实付：<span class="highlight">￥20</span></span>
+					<span class="right">
+						<button>立即评价</button>
+					</span>
+				</div>
+			</div>
+						
+
+		</div>
+	</div>
 </div>
 <div class="bottom-nav">
     <span class="item" ng-click="navigate(1)">
@@ -173,4 +372,5 @@
         </span>
         <span class="text">我的</span>
     </span>
+</div>
 </div>

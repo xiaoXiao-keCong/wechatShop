@@ -1,5 +1,7 @@
+@import "display";
 #order {
 	margin-bottom: 1.306667rem;
+	background-color: #f1f1f1;
 	.display-flex {
 		display: flex;
 		display: -webkit-flex;
@@ -15,7 +17,8 @@
 		.item {
 			height: 100%;
 			line-height: 0.933333rem;
-			padding: 0 0.066667rem;
+			width: 1.6rem;
+			text-align: center;
 		}
 		.selected {
 			border-bottom: 0.026667rem solid #3dbfd5;
@@ -96,6 +99,185 @@
 					font-size: 0.32rem;
 					line-height: 0.693333rem;
 					text-align: center;
+				}
+			}
+		}
+	}
+	.record-item-container {
+		padding: 0.133333rem 0;
+		font-size: 0.32rem;
+		color: #121212;
+		.record-item {
+			background-color: #ffffff;
+			margin-bottom: 0.133333rem;
+			padding: 0 0.266667rem 0.266667rem 0.266667rem;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			// .flex;
+			.top-panel {
+				width: 100%;
+				.flex-center;
+				justify-content: space-between;
+				height: 0.866667rem;
+				border-bottom: 0.013333rem solid #c1c1c1;
+				margin-bottom: 0.266667rem;
+				.order-num {
+					font-size: 0.346667rem;
+				}
+			}
+			.order-info {
+				height: 2.56rem;
+				width: 100%;
+				.flex;
+				align-items: center;
+				margin-bottom: 0.4rem;
+				.record-icon {
+					width: 2.56rem;
+					height: 2.56rem;
+					border-radius: 0.133333rem;
+				}
+				.text-info {
+					margin-left: 0.266667rem;
+					height: 100%;
+					.flex-column;
+					justify-content: space-between;
+					color: #666666;
+					.user-info {
+						color: #121212;
+						.flex;
+						align-items: baseline;
+						.name {
+							font-size: 0.346667rem;
+							margin-right: 0.666667rem;
+						}
+					}
+					.location {
+						.flex;
+						align-items: center;
+						font-size: 0.293333rem;
+						.location-icon {
+							width: 0.4rem;
+							height: 0.48rem;
+						}
+					}
+					
+				}
+			}
+			.items-text {
+				color: #666666;
+				.flex;
+				.items {
+					flex: 1;
+					.flex-column;
+					.item-info {
+						margin-bottom: 0.4rem;
+						margin-left: 0.266667rem;
+						.flex;
+						justify-content: space-between;
+						.price {
+							del {
+								margin-right: 0.88rem;
+							}
+						}
+					}
+				}
+			}
+			.price-info {
+				color: #666666;
+				margin-bottom: 0.48rem;
+				.flex;
+				justify-content: space-between;
+				width: 100%;
+			}
+			.operation {
+				height: 0.693333rem;
+				width: 100%;
+				.flex-center;
+				justify-content: flex-end;
+				button {
+					background-color: #3dbfd5;
+					border-radius: 0.133333rem;
+					color: #ffffff;
+					width: 1.626667rem;
+					height: 0.693333rem;
+					text-align: center;
+					line-height: 0.693333rem;
+					border: none;
+				}
+				.btn-pay {
+					margin-left: 0.266667rem;
+				}
+			}
+		}
+	}
+	.mall-order-container {
+		padding: 0.133333rem 0;
+		.mall-order-item {
+			margin-bottom: 0.133333rem;
+			background-color: #ffffff;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			.top-panel {
+				height: 0.8rem;
+				.flex-center;
+				justify-content: space-between;
+				color: #121212;
+				font-size: 0.346667rem;
+				padding: 0 0.213333rem;
+				border-bottom: 0.013333rem solid #c1c1c1;
+				.right {
+					.flex;
+					align-items: center;
+					img {
+						margin-left: 0.2rem;
+					}
+				}
+			}
+			.pic-panel {
+				padding: 0.4rem;
+				border-bottom: 0.013333rem solid #c1c1c1;
+				.flex;
+				align-items: center;
+				flex-wrap: wrap;
+				font-size: 0.4rem;
+				img {
+					height: 1.626667rem;
+					width: 1.626667rem;
+					border-radius: 0.133333rem;
+					margin-right: 0.266667rem;
+					// margin-bottom: 0.266667rem;
+				}
+				.goods-intro {
+					flex: 1;
+				}
+			}
+			.operation {
+				height: 1.173333rem;
+				width: 100%;
+				.flex-center;
+				justify-content: space-between;
+				font-size: 0.4rem;
+				padding: 0 0.266667rem 0 0.4rem;
+				.right {
+					.flex;
+					align-items: center;
+					button {
+						font-size: 0.32rem;
+						border: none;
+						height: 0.693333rem;
+						width: 1.626667rem;
+						line-height: 0.693333rem;
+						color: #ffffff;
+						background-color: #3dbfd5;
+						text-align: center;
+						border-radius: 0.133333rem;
+						margin-right: 0.4rem;
+						&:last-child {
+							margin-right: 0;
+						}
+					}
 				}
 			}
 		}

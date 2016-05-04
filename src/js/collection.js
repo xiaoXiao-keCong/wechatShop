@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/11.
  */
-angular.module('collection', []).controller('collectionCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('collectionCtrl', ['$scope', '$http', function ($scope, $http) {
 
 	var picBaseUrl = 'http://photo.yueyishujia.com:8112';
 	var transFn = function(data) {

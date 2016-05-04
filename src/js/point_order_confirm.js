@@ -1,7 +1,8 @@
 /**
  * Created by hugotan on 2016/5/2.
  */
-angular.module('pointOrderConfirm', []).controller('pointOrderConfirmCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('pointOrderConfirmCtrl',
+	['$scope', '$http', '$location', function ($scope, $http, $location) {
 	var transFn = function(data) {
                 return $.param(data);
         },
@@ -9,5 +10,7 @@ angular.module('pointOrderConfirm', []).controller('pointOrderConfirmCtrl', ['$s
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transFn
         };
-	
+	$scope.orderConfirm = function () {
+		$location.path('change_tip');
+	};
 }]);

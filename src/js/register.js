@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-angular.module('register', []).controller('registerCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('registerCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     
     var transFn = function(data) {
             return $.param(data);

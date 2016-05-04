@@ -1,8 +1,7 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-angular.module('fastLogin', []).controller('fastLoginCtrl',
-	['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 
 	var transFn = function(data) {
             return $.param(data);
@@ -22,7 +21,6 @@ angular.module('fastLogin', []).controller('fastLoginCtrl',
     	}, function (resp) {
     		console.log(resp);
     	});
-
     };
     // 确认登录
     $scope.confirmLogin = function () {
@@ -39,7 +37,7 @@ angular.module('fastLogin', []).controller('fastLoginCtrl',
     };
     // 已有账号，跳转到登录页面
     $scope.toLogin = function () {
-    	$window.location.href = 'login.html';
+    	$location.path('login');
     };
 
 }]);

@@ -2,8 +2,7 @@
  * Created by hugotan on 2016/4/11.
  */
 var index = angular.module('index',
-	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures', 'commonModule']);
-// 首页路由
+	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures', 'ngFileUpload']);
 index.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 		.when('/', {
@@ -25,6 +24,82 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.when('/my', {
 			templateUrl: '../html/my.html',
 			controller: 'myCtrl'
+		})
+		.when('/login', {
+			templateUrl: '../html/login.html',
+			controller: 'loginCtrl'
+		})
+		.when('/register', {
+			templateUrl: '../html/register.html',
+			controller: 'registerCtrl'
+		})
+		.when('/fast_login', {
+			templateUrl: '../html/fast_login.html',
+			controller: 'fastLoginCtrl'
+		})
+		.when('/forget_pwd', {
+			templateUrl: '../html/forget_pwd.html',
+			controller: 'forgetPwdCtrl'
+		})
+		.when('/addr_manage', {
+			templateUrl: '../html/addr_manage.html',
+			controller: 'addrManageCtrl'
+		})
+		.when('/add_receiver', {
+			templateUrl: '../html/add_receiver.html',
+			controller: 'addReceiverCtrl'
+		})
+		.when('/setting', {
+			templateUrl: '../html/setting.html',
+			controller: 'settingCtrl'
+		})
+		.when('/address', {
+			templateUrl: '../html/address.html',
+			controller: 'addressCtrl'
+		})
+		.when('/cart', {
+			templateUrl: '../html/cart.html',
+			controller: 'cartCtrl'
+		})
+		.when('/balance', {
+			templateUrl: '../html/balance.html',
+			controller: 'balanceCtrl'
+		})
+		.when('/collection', {
+			templateUrl: '../html/collection.html',
+			controller: 'collectionCtrl'
+		})
+		.when('/complete_info', {
+			templateUrl: '../html/complete_info.html',
+			controller: 'completeInfoCtrl'
+		})
+		.when('/recharge', {
+			templateUrl: '../html/recharge.html',
+			controller: 'rechargeCtrl'
+		})
+		.when('/coupon', {
+			templateUrl: '../html/coupon.html',
+			controller: 'couponCtrl'
+		})
+		.when('/activity', {
+			templateUrl: '../html/activity.html',
+			controller: 'activityCtrl'
+		})
+		.when('/point_mall', {
+			templateUrl: '../html/point_mall.html',
+			controller: 'pointMallCtrl'
+		})
+		.when('/point_goods_detail', {
+			templateUrl: '../html/point_goods_detail.html',
+			controller: 'pointGoodsDetailCtrl'
+		})
+		.when('/point_order_confirm', {
+			templateUrl: '../html/point_order_confirm.html',
+			controller: 'pointOrderConfirmCtrl'
+		})
+		.when('/change_tip', {
+			templateUrl: '../html/change_tip.html',
+			controller: 'changeTipCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
@@ -224,74 +299,7 @@ index.controller('orderCtrl',
 		}
 	};
 }]);
-// 我的controller
-index.controller('myCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-	$scope.navTo = function (index) {
-		switch (index) {
-			case 1:
-				// 我的余额
-				$window.location.href = 'balance.html';
-				break;
-			case 2:
-				// 充值
-				$window.location.href = 'recharge.html';
-				break;
-			case 3:
-				// 优惠券
-				$window.location.href = 'coupon.html';
-				break;
-			case 4:
-				// 我的收藏
-				$window.location.href = 'collection.html';
-				break;
-			case 5:
-				// 最新活动
-				$window.location.href = 'activity.html';
-				break;
-			case 6:
-				// 购物车
-				$window.location.href = 'cart.html';
-				break;
-			case 7:
-				// 地址管理
-				$window.location.href = 'addr_manage.html';
-				break;
-			case 8:
-				// 积分商城
-				// $window.location.href = '';
-				break;
-			case 9:
-				// 设置
-				$window.location.href = 'setting.html';
-				break;
-		}
-	};
-	$scope.navigate = function (index) {
-		switch (index) {
-			case 1:
-				// $window.location.href = '#/';
-				$location.path('/');
-				break;
-			case 2:
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 3:
-				// $window.location.href = '#/appointment';
-				$location.path('appointment');
-				break;
-			case 4:
-				// $window.location.href = '#/order';
-				$location.path('order');
-				break;
-			case 5:
-				// $window.location.href = '#/my';
-				$location.path('my');
-				break;
-		}
-	};
-}]);
+
 
 
 // 底部导航栏事件
@@ -314,3 +322,4 @@ function navigate(index) {
 			break;
 	}
 }
+

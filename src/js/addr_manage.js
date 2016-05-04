@@ -1,8 +1,8 @@
 /**
  * Created by hugotan on 2016/4/12.
  */
-angular.module('addrManage', []).controller('addrManageCtrl',
-    ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('addrManageCtrl',
+    ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
     var transFn = function(data) {
                 return $.param(data);
         },
@@ -30,7 +30,7 @@ angular.module('addrManage', []).controller('addrManageCtrl',
     };
     // 跳转到新建地址页面
     $scope.toAddAddr = function () {
-        $window.location.href = 'add_receiver.html';
+        $location.path('add_receiver');
     };
 
     // 编辑地址
@@ -41,13 +41,12 @@ angular.module('addrManage', []).controller('addrManageCtrl',
     // 删除地址
     $scope.delete = function (address) {
         var confirm = $window.confirm('确认删除吗？');
-        if (confirm == true) {
+        if (confirm === true) {
             // 删除地址
             $http.post('/user/deleteaddress.json', {id: address.id}, postCfg)
             .then(function (resp) {
-                console.log(resp);
                 if (1 === resp.data.code) {
-                    alert('删除成功');
+                    alert('删除成功!');
                     $scope.addrList.splice($scope.addrList.indexOf(address), 1);
                 }
             }, function (resp) {

@@ -1,17 +1,5 @@
 <!-- 积分商品详情 -->
-<html ng-app="pointGoodsDetail">
-<head>
-    <meta charset="UTF-8">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="apple-touch-fullscreen">
-    <meta content="telephone=no,email=no" name="format-detection">
-    <title>悦艺术家</title>
-    <script src="../../assets/js/flexible_css.debug.js"></script>
-    <script src="../../assets/js/flexible.debug.js"></script>
-    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../build/css/app.min.css">
-</head>
-<body ng-controller="pointGoodsDetailCtrl" id="point-goods-detail">
+<div id="point-goods-detail">
 <div class="goods-pic-container">
 	<img src="../../assets/images/back.png" class="back common-icon">
 	<img src="../../assets/images/share_2.png" class="share common-icon">
@@ -63,12 +51,6 @@
 	
 </div>
 <div class="btn-exchange-container">
-	<div class="btn-exchange">立即兑换</div>
+	<div class="btn-exchange" ng-click="orderConfirm()">立即兑换</div>
 </div>
-</body>
-<script src="../../assets/js/jquery.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/angular.min.js"></script>
-<script src="../../assets/js/angular-route.min.js"></script>
-<script src="../js/app.min.js"></script>
-</html>
+</div>

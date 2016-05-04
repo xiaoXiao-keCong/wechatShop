@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-angular.module('completeInfo', ['ngFileUpload']).controller('completeInfoCtrl',
+index.controller('completeInfoCtrl',
 	['$scope', '$http', '$window', 'Upload', function ($scope, $http, $window, Upload) {
 
 	var transFn = function(data) {
@@ -12,7 +12,6 @@ angular.module('completeInfo', ['ngFileUpload']).controller('completeInfoCtrl',
             transformRequest: transFn
         };
 	$scope.complete = function () {
-		console.log('完成');
 		var data = {
 			avatar: $scope.avatar,
 			nickname: $scope.nickname,

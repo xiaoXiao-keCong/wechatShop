@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-angular.module('addReceiver', []).controller('addReceiverCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('addReceiverCtrl', ['$scope', '$http', function ($scope, $http) {
 	var transFn = function(data) {
                 return $.param(data);
         },
@@ -18,7 +18,9 @@ angular.module('addReceiver', []).controller('addReceiverCtrl', ['$scope', '$htt
 		};
 		var promise = $http.post('/user/addaddress.json', data, postCfg);
 		promise.then(function (resp) {
-			console.log(resp);
+			if (1 === resp.data.code) {
+				alert('添加地址成功！');
+			}
 		}, function (resp) {
 			console.log(resp);
 		});

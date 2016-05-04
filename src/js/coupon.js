@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-angular.module('coupon', []).controller('couponCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('couponCtrl', ['$scope', '$http', function ($scope, $http) {
     var transFn = function(data) {
                 return $.param(data);
         },

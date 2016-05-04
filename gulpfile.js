@@ -21,7 +21,7 @@ gulp.task('cleanCss', function () {
 });
 // 压缩js文件
 gulp.task('buildJs', function () {
-	return gulp.src('src/js/*.js')
+	return gulp.src(['src/js/index.js', 'src/js/*.js'])
 	    .pipe(jshint())
 	    .pipe(jshint.reporter('default'))
         .pipe(plumber())

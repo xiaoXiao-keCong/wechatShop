@@ -1,6 +1,6 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-angular.module('setting', []).controller('settingCtrl', ['$scope', function ($scope) {
+index.controller('settingCtrl', ['$scope', function ($scope) {
 
 }]);

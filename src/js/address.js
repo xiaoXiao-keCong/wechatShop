@@ -1,7 +1,7 @@
 /**
  * Created by hugotan on 2016/4/12.
  */
-angular.module('address', []).controller('addressCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('addressCtrl', ['$scope', '$http', function ($scope, $http) {
     var transFn = function(data) {
                 return $.param(data);
         },

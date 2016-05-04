@@ -12,7 +12,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color: #f1f1f1;
+    // background-color: #f1f1f1;
 }
 a {
   text-decoration: none;
@@ -38,6 +38,12 @@ img {
   	color: #121212;
   	background-color: #fbf7fd;
     position: relative;
+    .down-icon {
+      display: inline-block;
+      img {
+        margin-top: -0.16rem;
+      }
+    }
     .title-bar-left {
         position: absolute;
         height: 100%;
@@ -118,4 +124,39 @@ img {
 .common-icon {
   height: 0.586667rem;
   width: 0.586667rem;
+}
+
+// 首页底部导航
+.bottom-nav {
+    position: fixed;
+    background-color: #f7f7f7;
+    bottom: 0;
+    width: 100%;
+    height: 1.306667rem;
+    border-top: 0.013333rem solid #cccccc;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    justify-content: space-around;
+    .item {
+      display: flex;
+      display: -webkit-flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        height: 0.586667rem;
+        width: 0.586667rem;
+      }
+      .text {
+        margin-top: 0.08rem;
+        font-size: 0.32rem;
+        color: #121212;
+      }
+    }
+  }
+.parent-container {
+  background-color: #f1f1f1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }

@@ -1,8 +1,7 @@
 /**
  * Created by hugotan on 2016/4/10.
  */
-angular.module('login', []).controller('loginCtrl',
-    ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
     var transFn = function(data) {
             return $.param(data);
         },
@@ -27,7 +26,7 @@ angular.module('login', []).controller('loginCtrl',
                 // 登录成功，返回首页
                 alert('登录成功，即将返回首页！');
                 // 将用户非敏感信息存储到localstorage
-                $window.location.href = 'index.html';
+                $location.path('/').replace();
             }
         }, function (resp) {
             console.log(resp);
@@ -35,6 +34,6 @@ angular.module('login', []).controller('loginCtrl',
     };
     // 跳转到注册页面
     $scope.toRegister = function () {
-        $window.location.href = 'register.html';
+        $location.path('register');
     };
 }]);
