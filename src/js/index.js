@@ -2,7 +2,7 @@
  * Created by hugotan on 2016/4/11.
  */
 var index = angular.module('index',
-	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures']);
+	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures', 'commonModule']);
 // 首页路由
 index.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
@@ -32,50 +32,51 @@ index.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 // 图片轮播directive
-index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
-	return {
-		restrict: 'EA',
-		replace: true,
-		transclude: true,
-		templateUrl: 'slider.html',
-		compile: function (element, attrs) {
-			return {
-				post: function postLink(scope, element, attrs) {
-					var slider = element[0],
-						lis = slider.getElementsByTagName('li'),
-						lisLength = lis.length;
-					for (var i = 0; i < lisLength; i++) {
-						lis[i].style.left = i * 100 + '%';
-					}
-					// $interval(function () {
+// index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
+// 	return {
+// 		restrict: 'EA',
+// 		replace: true,
+// 		transclude: true,
+// 		templateUrl: 'slider.html',
+// 		compile: function (element, attrs) {
+// 			return {
+// 				post: function postLink(scope, element, attrs) {
+// 					var slider = element[0],
+// 						lis = slider.getElementsByTagName('li'),
+// 						lisLength = lis.length;
+// 					for (var i = 0; i < lisLength; i++) {
+// 						lis[i].style.left = i * 100 + '%';
+// 					}
+// 					// $interval(function () {
 						
-					// 	slider.style.transform = 'translate3d(-100%,0px,0px)';
-					// }, 3000);
-					$swipe.bind(slider, {
-						end: function (touch) {
-							switch(touch.direction) {
-								case 'LEFT':
+// 					// 	slider.style.transform = 'translate3d(-100%,0px,0px)';
+// 					// }, 3000);
+// 					$swipe.bind(slider, {
+// 						end: function (touch) {
+// 							switch(touch.direction) {
+// 								case 'LEFT':
 																		
-									break;
-								case 'RIGHT':
+// 									break;
+// 								case 'RIGHT':
 											
-									break;
-							}
-						}
-					});
-				}
-			};
-		}
-	};
-}]);
+// 									break;
+// 							}
+// 						}
+// 					});
+// 				}
+// 			};
+// 		}
+// 	};
+// }]);
 // 首页controller
 index.controller('homeCtrl',
-	['$scope', '$http', '$window', function ($scope, $http, $window) {
+	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 	$scope.toMore = function (index) {
 		switch (index) {
 			case 1:
 				// 发型师
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 2:
 				// 门店
@@ -97,50 +98,62 @@ index.controller('homeCtrl',
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
-				$window.location.href = '#/';
+				// $window.location.href = '#/';
+				$location.path('/');
 				break;
 			case 2:
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 3:
-				$window.location.href = '#/appointment';
+				// $window.location.href = '#/appointment';
+				$location.path('appointment');
 				break;
 			case 4:
-				$window.location.href = '#/order';
+				// $window.location.href = '#/order';
+				$location.path('order');
 				break;
 			case 5:
-				$window.location.href = '#/my';
+				// $window.location.href = '#/my';
+				$location.path('my');
 				break;
 		}
 	};
 }]);
 // 发型师controller
-index.controller('stylistCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('stylistCtrl',
+	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 	$scope.switch = function () {
 		$scope.isList = !$scope.isList;
 	};
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
-				$window.location.href = '#/';
+				// $window.location.href = '#/';
+				$location.path('/');
 				break;
 			case 2:
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 3:
-				$window.location.href = '#/appointment';
+				// $window.location.href = '#/appointment';
+				$location.path('appointment');
 				break;
 			case 4:
-				$window.location.href = '#/order';
+				// $window.location.href = '#/order';
+				$location.path('order');
 				break;
 			case 5:
-				$window.location.href = '#/my';
+				// $window.location.href = '#/my';
+				$location.path('my');
 				break;
 		}
 	};
 }]);
 // 预约controller
-index.controller('appointmentCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('appointmentCtrl',
+	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 	$scope.itemSelect = function () {
 
 	};
@@ -153,25 +166,31 @@ index.controller('appointmentCtrl', ['$scope', '$http', '$window', function ($sc
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
-				$window.location.href = '#/';
+				// $window.location.href = '#/';
+				$location.path('/');
 				break;
 			case 2:
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 3:
-				$window.location.href = '#/appointment';
+				// $window.location.href = '#/appointment';
+				$location.path('appointment');
 				break;
 			case 4:
-				$window.location.href = '#/order';
+				// $window.location.href = '#/order';
+				$location.path('order');
 				break;
 			case 5:
-				$window.location.href = '#/my';
+				// $window.location.href = '#/my';
+				$location.path('my');
 				break;
 		}
 	};
 }]);
 // 订单controller
-index.controller('orderCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('orderCtrl',
+	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 	$scope.isAppointOrder = true;
 	$scope.isServiceOrder = false;
 	$scope.isMallOrder = false;
@@ -183,25 +202,31 @@ index.controller('orderCtrl', ['$scope', '$http', '$window', function ($scope, $
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
-				$window.location.href = '#/';
+				// $window.location.href = '#/';
+				$location.path('/');
 				break;
 			case 2:
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 3:
-				$window.location.href = '#/appointment';
+				// $window.location.href = '#/appointment';
+				$location.path('appointment');
 				break;
 			case 4:
-				$window.location.href = '#/order';
+				// $window.location.href = '#/order';
+				$location.path('order');
 				break;
 			case 5:
-				$window.location.href = '#/my';
+				// $window.location.href = '#/my';
+				$location.path('my');
 				break;
 		}
 	};
 }]);
 // 我的controller
-index.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('myCtrl',
+	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 	$scope.navTo = function (index) {
 		switch (index) {
 			case 1:
@@ -245,19 +270,24 @@ index.controller('myCtrl', ['$scope', '$http', '$window', function ($scope, $htt
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
-				$window.location.href = '#/';
+				// $window.location.href = '#/';
+				$location.path('/');
 				break;
 			case 2:
-				$window.location.href = '#/stylist';
+				// $window.location.href = '#/stylist';
+				$location.path('stylist');
 				break;
 			case 3:
-				$window.location.href = '#/appointment';
+				// $window.location.href = '#/appointment';
+				$location.path('appointment');
 				break;
 			case 4:
-				$window.location.href = '#/order';
+				// $window.location.href = '#/order';
+				$location.path('order');
 				break;
 			case 5:
-				$window.location.href = '#/my';
+				// $window.location.href = '#/my';
+				$location.path('my');
 				break;
 		}
 	};

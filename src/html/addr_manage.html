@@ -10,7 +10,6 @@
     <script src="../../assets/js/flexible.debug.js"></script>
     <link rel="stylesheet" href="../../build/css/app.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-
 </head>
 <body ng-controller="addrManageCtrl" id="addr-manage-container">
 <div class="title-bar">
@@ -38,14 +37,25 @@
             </div>
         </div>
     </div>
-    
 </div>
 <div id="add-addr" ng-click="toAddAddr()">
     <img src="../../assets/images/add_addr.png" alt="新建地址">
     <span>新建地址</span>
 </div>
 </body>
+<script type="text/ng-template" id="modal.html">
+    <div class="modal-header">
+        <h3>提示</h3>
+    </div>
+    <div class="modal-body">
+        <span ng-bind="tips"></span>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary">确定</button>
+    </div>
+</script>
 <script src="../../assets/js/jquery.min.js"></script>
 <script src="../../assets/js/angular.min.js"></script>
+<!-- <script src="http://cdn.bootcss.com/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.js"></script> -->
 <script src="../js/app.min.js"></script>
 </html>

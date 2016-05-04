@@ -26,6 +26,7 @@ angular.module('login', []).controller('loginCtrl',
             if (1 === resp.data.code) {
                 // 登录成功，返回首页
                 alert('登录成功，即将返回首页！');
+                // 将用户非敏感信息存储到localstorage
                 $window.location.href = 'index.html';
             }
         }, function (resp) {
