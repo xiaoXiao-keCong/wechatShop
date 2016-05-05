@@ -1,24 +1,13 @@
 <!-- 订单 -->
 <div class="parent-container">
 <div class="title-bar">
-    <span>我的预约</span>
+    <span ng-bind="title"></span>
     <span class="down-icon">
-	    <img src="../../assets/images/down_2.png" class="common-icon">
+	    <img src="../../assets/images/down_2.png" class="common-icon" ng-click="showMask = !showMask">
 	</span>
 </div>
 <div id="order">
-	<!-- <div class="top-nav">
-		<span ng-class="{'item': true, 'selected': isAppointOrder}" ng-click="orderNav(1)">
-			<span>我的预约</span>
-		</span>
-		<span ng-class="{'item': true, 'selected': isServiceOrder}" ng-click="orderNav(2)">
-			<span>服务记录</span>
-		</span>
-		<span ng-class="{'item': true, 'selected': isMallOrder}" ng-click="orderNav(3)">
-			<span>商城订单</span>
-		</span>
-	</div> -->
-	<div ng-if="appointment">
+	<div ng-if="isAppointOrder">
 		<div class="top-nav">
 			<span class="item selected">
 				未完成
@@ -29,7 +18,7 @@
 		</div>
 		<div class="order-item-container">
 			<!-- 待接单 -->
-			<div class="order-item">
+			<div class="order-item" ng-click="toDetail()">
 				<div class="item-top">
 					<span class="order-num">订单号：0123456789</span>
 					<span class="order-state">待接单</span>
@@ -70,7 +59,7 @@
 				</div>
 			</div>
 			<!-- 待接单 -->
-			<div class="order-item">
+			<div class="order-item" ng-click="toDetail()">
 				<div class="item-top">
 					<span class="order-num">订单号：0123456789</span>
 					<span class="order-state">待接单</span>
@@ -111,7 +100,7 @@
 				</div>
 			</div>
 			<!-- 已完成 -->
-			<div class="order-item">
+			<div class="order-item" ng-click="toDetail()">
 				<div class="item-top">
 					<span class="order-num">订单号：0123456789</span>
 					<span class="order-state">已完成</span>
@@ -151,7 +140,7 @@
 			
 		</div>
 	</div>
-	<div ng-if="serviceRecord">
+	<div ng-if="isServiceOrder">
 		<div class="top-nav">
 			<span class="item selected">
 				全部
@@ -210,7 +199,7 @@
 				</div>
 				<div class="operation">
 					<button>取消订单</button>
-					<button class="btn-pay">立即支付</button>
+					<button class="btn-pay" ng-click="toPay()">立即支付</button>
 				</div>
 			</div>
 			<div class="record-item">
@@ -259,12 +248,12 @@
 				</div>
 				<div class="operation">
 					<!-- <button>取消订单</button> -->
-					<button class="btn-pay">立即支付</button>
+					<button class="btn-pay" ng-click="toPay()">立即支付</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div ng-if="!mallOrder">
+	<div ng-if="isMallOrder">
 		<div class="top-nav">
 			<span class="item selected">
 				全部
@@ -312,7 +301,7 @@
 				<div class="operation">
 					<span>实付：<span class="highlight">￥20</span></span>
 					<span class="right">
-						<button>立即支付</button>
+						<button ng-click="toPay()">立即支付</button>
 						<button>取消订单</button>
 					</span>
 				</div>
@@ -372,5 +361,14 @@
         </span>
         <span class="text">我的</span>
     </span>
+</div>
+<div class="type-select-container" ng-if="showMask">
+	<div class="type-select">
+		<span ng-class="{'item': true, 'highlight': isAppointOrder}" ng-click="orderNav(1)">
+			我的预约
+		</span>
+		<span ng-class="{'item': true, 'highlight': isServiceOrder}" ng-click="orderNav(2)">服务记录</span>
+		<span ng-class="{'item': true, 'highlight': isMallOrder}" ng-click="orderNav(3)">商城订单</span>
+	</div>
 </div>
 </div>

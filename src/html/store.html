@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html ng-app="store">
-<head>
-    <meta charset="UTF-8">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="apple-touch-fullscreen">
-    <meta content="telephone=no,email=no" name="format-detection">
-    <title>悦艺术家</title>
-    <script src="../../assets/js/flexible_css.debug.js"></script>
-    <script src="../../assets/js/flexible.debug.js"></script>
-    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../build/css/app.min.css">
-</head>
-<body id="store-container" ng-controller="storeCtrl">
+<div id="store-container">
 	<div class="title-bar">
 	    <span class="title-bar-left">
 	        <span class="title-bar-left"><img src="../../assets/images/back.png"></span>
@@ -29,13 +16,13 @@
 		<span class="nav-item">价格排序<img src="../../assets/images/updown.png" class="icon"></span>
 	</div>
 	<div class="grid-container" ng-if="!isList">
-		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
-		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
-		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
-		<span class="grid-item"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item" ng-click="toDetail()"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item" ng-click="toDetail()"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item" ng-click="toDetail()"><img src="../../assets/images/test/store_big.png"></span>
+		<span class="grid-item" ng-click="toDetail()"><img src="../../assets/images/test/store_big.png"></span>
 	</div>
 	<div class="list-container" ng-if="isList">
-		<div class="list-item">
+		<div class="list-item" ng-click="toDetail()">
 			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
 			<span class="info">
 				<span class="name">悦艺术家</span>
@@ -56,7 +43,7 @@
 				</span>
 			</span>
 		</div>
-		<div class="list-item">
+		<div class="list-item" ng-click="toDetail()">
 			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
 			<span class="info">
 				<span class="name">悦艺术家</span>
@@ -77,7 +64,7 @@
 				</span>
 			</span>
 		</div>
-		<div class="list-item">
+		<div class="list-item" ng-click="toDetail()">
 			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
 			<span class="info">
 				<span class="name">悦艺术家</span>
@@ -98,7 +85,7 @@
 				</span>
 			</span>
 		</div>
-		<div class="list-item">
+		<div class="list-item" ng-click="toDetail()">
 			<span><img src="../../assets/images/test/store_small.png" class="store-img"></span>
 			<span class="info">
 				<span class="name">悦艺术家</span>
@@ -120,10 +107,4 @@
 			</span>
 		</div>
 	</div>
-</body>
-<script src="../../assets/js/jquery.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/angular.min.js"></script>
-<script src="../../assets/js/angular-route.min.js"></script>
-<script src="../js/app.min.js"></script>
-</html>
+</div>

@@ -1,8 +1,7 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-index.controller('storeCtrl',
-    ['$scope', '$http', '$location', function ($scope, $http, $location) {
+index.controller('storeDetailCtrl', ['$scope', '$http', function ($scope, $http) {
 	var transFn = function(data) {
                 return $.param(data);
         },
@@ -11,11 +10,4 @@ index.controller('storeCtrl',
             transformRequest: transFn
         },
         picBaseUrl = 'http://photo.yueyishujia.com:8112';
-    $scope.isList = false;
-    $scope.switch = function () {
-    	$scope.isList = !$scope.isList;
-    };
-    $scope.toDetail = function () {
-        $location.path('store_detail');
-    };
 }]);

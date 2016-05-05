@@ -101,6 +101,42 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/change_tip.html',
 			controller: 'changeTipCtrl'
 		})
+		.when('/pay_recharge', {
+			templateUrl: '../html/pay_recharge.html',
+			controller: 'payRechargeCtrl'
+		})
+		.when('/pay_goods', {
+			templateUrl: '../html/pay_goods.html',
+			controller: 'payGoodsCtrl'
+		})
+		.when('/mall', {
+			templateUrl: '../html/mall.html',
+			controller: 'mallCtrl'
+		})
+		.when('/store', {
+			templateUrl: '../html/store.html',
+			controller: 'storeCtrl'
+		})
+		.when('/store_detail', {
+			templateUrl: '../html/store_detail.html',
+			controller: 'storeDetailCtrl'
+		})
+		.when('/order_detail', {
+			templateUrl: '../html/order_detail.html',
+			controller: 'orderDetailCtrl'
+		})
+		.when('/mall_goods_detail', {
+			templateUrl: '../html/mall_goods_detail.html',
+			controller: 'mallGoodsDetailCtrl'
+		})
+		.when('/fashion_hairstyle', {
+			templateUrl: '../html/fashion_hairstyle.html',
+			controller: 'fashionHairStyleCtrl'
+		})
+		.when('/fashion_information', {
+			templateUrl: '../html/fashion_information.html',
+			controller: 'fashionInformationCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -143,183 +179,3 @@ index.config(['$routeProvider', function ($routeProvider) {
 // 		}
 // 	};
 // }]);
-// 首页controller
-index.controller('homeCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-	$scope.toMore = function (index) {
-		switch (index) {
-			case 1:
-				// 发型师
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 2:
-				// 门店
-				$window.location.href = 'store.html';
-				break;
-			case 3:
-				// 时尚资讯
-				break;
-			case 4:
-				// 悦尚城
-				$window.location.href = 'mall.html';
-				break;
-			case 5:
-				// 时尚发型
-
-				break;
-		}
-	};
-	$scope.navigate = function (index) {
-		switch (index) {
-			case 1:
-				// $window.location.href = '#/';
-				$location.path('/');
-				break;
-			case 2:
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 3:
-				// $window.location.href = '#/appointment';
-				$location.path('appointment');
-				break;
-			case 4:
-				// $window.location.href = '#/order';
-				$location.path('order');
-				break;
-			case 5:
-				// $window.location.href = '#/my';
-				$location.path('my');
-				break;
-		}
-	};
-}]);
-// 发型师controller
-index.controller('stylistCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-	$scope.switch = function () {
-		$scope.isList = !$scope.isList;
-	};
-	$scope.navigate = function (index) {
-		switch (index) {
-			case 1:
-				// $window.location.href = '#/';
-				$location.path('/');
-				break;
-			case 2:
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 3:
-				// $window.location.href = '#/appointment';
-				$location.path('appointment');
-				break;
-			case 4:
-				// $window.location.href = '#/order';
-				$location.path('order');
-				break;
-			case 5:
-				// $window.location.href = '#/my';
-				$location.path('my');
-				break;
-		}
-	};
-}]);
-// 预约controller
-index.controller('appointmentCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-	$scope.itemSelect = function () {
-
-	};
-	$scope.recommend = function () {
-		$scope.showMask = true;
-	};
-	$scope.jump = function () {
-		$scope.showMask = true;
-	};
-	$scope.navigate = function (index) {
-		switch (index) {
-			case 1:
-				// $window.location.href = '#/';
-				$location.path('/');
-				break;
-			case 2:
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 3:
-				// $window.location.href = '#/appointment';
-				$location.path('appointment');
-				break;
-			case 4:
-				// $window.location.href = '#/order';
-				$location.path('order');
-				break;
-			case 5:
-				// $window.location.href = '#/my';
-				$location.path('my');
-				break;
-		}
-	};
-}]);
-// 订单controller
-index.controller('orderCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-	$scope.isAppointOrder = true;
-	$scope.isServiceOrder = false;
-	$scope.isMallOrder = false;
-	$scope.orderNav = function (index) {
-		$scope.isAppointOrder = (1 === index ? true : false);
-		$scope.isServiceOrder = (2 === index ? true : false);
-		$scope.isMallOrder = (3 === index ? true: false);
-	};
-	$scope.navigate = function (index) {
-		switch (index) {
-			case 1:
-				// $window.location.href = '#/';
-				$location.path('/');
-				break;
-			case 2:
-				// $window.location.href = '#/stylist';
-				$location.path('stylist');
-				break;
-			case 3:
-				// $window.location.href = '#/appointment';
-				$location.path('appointment');
-				break;
-			case 4:
-				// $window.location.href = '#/order';
-				$location.path('order');
-				break;
-			case 5:
-				// $window.location.href = '#/my';
-				$location.path('my');
-				break;
-		}
-	};
-}]);
-
-
-
-// 底部导航栏事件
-function navigate(index) {
-	switch (index) {
-		case 1:
-			$window.location.href = '#/';
-			break;
-		case 2:
-			$window.location.href = '#/stylist';
-			break;
-		case 3:
-			$window.location.href = '#/appointment';
-			break;
-		case 4:
-			$window.location.href = '#/order';
-			break;
-		case 5:
-			$window.location.href = '#/my';
-			break;
-	}
-}
-

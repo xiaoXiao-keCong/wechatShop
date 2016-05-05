@@ -283,3 +283,31 @@
 		}
 	}
 }
+.type-select-container {
+	background-color: rgba(0, 0, 0, 0.5);
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 1.2rem;
+	.flex;
+	justify-content: center;
+	.type-select {
+		background: url("../../assets/images/dialog_bg.png") no-repeat;
+		background-size: 100% 100%;
+		width: 4.026667rem;
+		height: 3.813333rem;
+		padding-top: 0.133333rem;
+		font-size: 0.426667rem;
+		color: #121212;
+		.flex-column;
+		padding: 0.133333rem 0.4rem 0 0.4rem;
+		.item {
+			flex: 1;
+			.flex-center;
+			border-bottom: 0.013333rem solid #c1c1c1;
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+	}
+}

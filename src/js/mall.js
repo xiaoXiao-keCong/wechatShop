@@ -1,7 +1,8 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-angular.module('mall', []).controller('mallCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+index.controller('mallCtrl',
+    ['$scope', '$http', '$location', function ($scope, $http, $location) {
 	var transFn = function(data) {
                 return $.param(data);
         },
@@ -10,6 +11,9 @@ angular.module('mall', []).controller('mallCtrl', ['$scope', '$http', '$window',
             transformRequest: transFn
         };
 	$scope.toCart = function () {
-		$window.location.href = 'cart.html';
+		$location.path('cart');
 	};
+    $scope.toDetail = function () {
+        $location.path('mall_goods_detail');
+    };
 }]);
