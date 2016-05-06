@@ -143,39 +143,68 @@ index.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 // 图片轮播directive
-// index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
-// 	return {
-// 		restrict: 'EA',
-// 		replace: true,
-// 		transclude: true,
-// 		templateUrl: 'slider.html',
-// 		compile: function (element, attrs) {
-// 			return {
-// 				post: function postLink(scope, element, attrs) {
-// 					var slider = element[0],
-// 						lis = slider.getElementsByTagName('li'),
-// 						lisLength = lis.length;
-// 					for (var i = 0; i < lisLength; i++) {
-// 						lis[i].style.left = i * 100 + '%';
-// 					}
-// 					// $interval(function () {
-						
-// 					// 	slider.style.transform = 'translate3d(-100%,0px,0px)';
-// 					// }, 3000);
-// 					$swipe.bind(slider, {
-// 						end: function (touch) {
-// 							switch(touch.direction) {
-// 								case 'LEFT':
-																		
-// 									break;
-// 								case 'RIGHT':
-											
-// 									break;
-// 							}
-// 						}
-// 					});
-// 				}
-// 			};
-// 		}
-// 	};
-// }]);
+index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		transclude: true,
+		templateUrl: 'slider.html',
+		compile: function (element, attrs) {
+			return {
+				post: function postLink(scope, element, attrs) {
+
+					var slider = element[0],
+						lis = slider.getElementsByTagName('li'),
+						lisLength = lis.length,
+						width = element.width(),
+						totalWidth = lisLength * width,
+						slideFunc = function () {
+							var left = element.offset().left,
+								offset = left - width;
+							if (Math.abs(offset) === totalWidth) {
+								offset = 0;
+							}
+							slider.style.transform = 'translateX(' + offset + 'px)';
+						};
+					for (var i = 0; i < lisLength; i++) {
+						lis[i].style.left = i * 100 + '%';
+					}
+					var timer = $interval(slideFunc, 3000);
+					$swipe.bind(slider, {
+						start: function (touch) {
+							$interval.cancel(timer);
+						},
+						end: function (touch) {
+
+							switch(touch.direction) {
+								case 'LEFT':
+									// 向左滑动
+									var left = element.offset().left,
+										offset = left - width;
+									if (Math.abs(offset) === totalWidth) {
+										break;
+									}
+									else {
+										slider.style.transform = 'translateX(' + offset + 'px)';
+									}
+									break;
+								case 'RIGHT':
+									// 向右滑动
+									var left = element.offset().left,
+										offset = left + width;
+									if (left === 0) {
+										break;
+									}
+									else {
+										slider.style.transform = 'translateX(' + offset + 'px)';
+									}
+									break;
+							}
+							timer = $interval(slideFunc, 3000);
+						}
+					});
+				}
+			};
+		}
+	};
+}]);
