@@ -9,12 +9,15 @@
     </span>
 </div>
 <div class="home">
-	<ul class="slider" slider>
-        <!-- <li><img src="../../assets/images/test/home_ad.png"></li>
-        <li><img src="../../assets/images/test/home_ad.png"></li>
-        <li><img src="../../assets/images/test/home_ad.png"></li>
-        <li><img src="../../assets/images/test/home_ad.png"></li> -->
-    </ul>
+    <div class="slider-container">
+    	<ul class="slider">
+            <li ng-repeat="ad in adList" slider>
+                <img ng-src="{{ad.imgurl}}">
+            </li>
+        </ul>
+        <div class="index">
+        </div>
+    </div>
 	<div class="top-nav">
 		<span class="item">
             <span><img src="../../assets/images/shishangfaxing.png"></span>      

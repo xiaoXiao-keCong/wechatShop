@@ -3,6 +3,12 @@
  */
 index.controller('homeCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
+
+	$scope.adList = [{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 0;'},
+	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 100%;'},
+	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 200%;'},
+	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 300%;'}];
+
 	$scope.toMore = function (index) {
 		switch (index) {
 			case 1:
@@ -46,4 +52,5 @@ index.controller('homeCtrl',
 				break;
 		}
 	};
+	
 }]);

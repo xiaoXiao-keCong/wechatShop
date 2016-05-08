@@ -143,66 +143,92 @@ index.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 // 图片轮播directive
-index.directive('slider', ['$swipe', '$interval', function ($swipe, $interval) {
+index.directive('slider', ['$swipe', '$interval','$timeout', function ($swipe, $interval, $timeout) {
 	return {
 		restrict: 'EA',
 		replace: true,
-		transclude: true,
-		templateUrl: 'slider.html',
 		compile: function (element, attrs) {
 			return {
 				post: function postLink(scope, element, attrs) {
-
-					var slider = element[0],
-						lis = slider.getElementsByTagName('li'),
-						lisLength = lis.length,
-						width = element.width(),
-						totalWidth = lisLength * width,
-						slideFunc = function () {
-							var left = element.offset().left,
-								offset = left - width;
-							if (Math.abs(offset) === totalWidth) {
-								offset = 0;
-							}
-							slider.style.transform = 'translateX(' + offset + 'px)';
-						};
-					for (var i = 0; i < lisLength; i++) {
-						lis[i].style.left = i * 100 + '%';
+					var indexContainer = element.parent().parent().find('.index');
+					element.css('left', scope.$index * 100 + '%');
+					if (0 === scope.$index) {
+						indexContainer.append('<span class="point current"></span>');
 					}
-					var timer = $interval(slideFunc, 3000);
-					$swipe.bind(slider, {
-						start: function (touch) {
-							$interval.cancel(timer);
-						},
-						end: function (touch) {
-
-							switch(touch.direction) {
-								case 'LEFT':
-									// 向左滑动
-									var left = element.offset().left,
+					else {
+						indexContainer.append('<span class="point"></span>');
+					}
+					if (scope.$last === true) {
+						$timeout(function () {
+							var parent = element.parent().parent(),
+								slider = element.parent()[0],
+								width = element.width(),
+								totalWidth = (scope.$index + 1) * width,
+								index = 0,
+								slideFunc = function () {
+									var left = element.parent().offset().left,
 										offset = left - width;
 									if (Math.abs(offset) === totalWidth) {
-										break;
+										offset = 0;
+										slider.style.transform = 'translateX(' + offset + 'px)';
+										index = 0;
 									}
 									else {
 										slider.style.transform = 'translateX(' + offset + 'px)';
+										index++;
 									}
-									break;
-								case 'RIGHT':
-									// 向右滑动
-									var left = element.offset().left,
-										offset = left + width;
-									if (left === 0) {
-										break;
+									// 延迟0.3秒执行
+									$timeout(function () {
+										indexContainer.find('.point').removeClass('current');
+										indexContainer.find('.point:eq(' + index + ')').addClass('current');
+									}, 300);
+								};
+							var timer = $interval(slideFunc, 3000);
+							$swipe.bind(slider, {
+								start: function (touch) {
+									$interval.cancel(timer);
+								},
+								end: function (touch) {
+									switch(touch.direction) {
+										case 'LEFT':
+											// 向左滑动
+											var left = element.parent().offset().left,
+												offset = left - width;
+											if (Math.abs(offset) === totalWidth) {
+												break;
+											}
+											else {
+												slider.style.transform = 'translateX(' + offset + 'px)';
+												index++;
+												$timeout(function () {
+													indexContainer.find('.point').removeClass('current');
+													indexContainer.find('.point:eq(' + index + ')').addClass('current');
+												}, 300);
+											}
+											break;
+										case 'RIGHT':
+											// 向右滑动
+											left = element.parent().offset().left;
+											offset = left + width;
+											if (left === 0) {
+												break;
+											}
+											else {
+												slider.style.transform = 'translateX(' + offset + 'px)';
+												index--;
+												$timeout(function () {
+													indexContainer.find('.point').removeClass('current');
+													indexContainer.find('.point:eq(' + index + ')').addClass('current');
+												}, 300);
+											}
+											break;
 									}
-									else {
-										slider.style.transform = 'translateX(' + offset + 'px)';
-									}
-									break;
-							}
-							timer = $interval(slideFunc, 3000);
-						}
-					});
+									timer = $interval(slideFunc, 3000);
+								}
+							});
+						}, 0);
+					}
+					
 				}
 			};
 		}
