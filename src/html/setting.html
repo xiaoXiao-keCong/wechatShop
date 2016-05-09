@@ -3,26 +3,23 @@
 	    <span>设置</span>
 </div>
 <div id="setting-container">
-	<div class="item">
+	<div class="item" ng-click="navTo(1)">
 		<span>使用须知</span>
 		<span class="arrow_r"><img src="../../assets/images/arrow_r.png"></span>
 	</div>
-	<div class="item">
+	<div class="item" ng-click="navTo(2)">
 		<span>关于我们</span>
 		<span class="arrow_r"><img src="../../assets/images/arrow_r.png"></span>
 	</div>
-	<div class="item">
+	<div class="item" ng-click="navTo(3)">
 		<span>为应用评分</span>
 		<span class="arrow_r"><img src="../../assets/images/arrow_r.png"></span>
 	</div>
-	<div class="item">
+	<div class="item" ng-click="navTo(4)">
 		<span>意见反馈</span>
 		<span class="arrow_r"><img src="../../assets/images/arrow_r.png"></span>
 	</div>
-	<!-- <div class="item">
-		<span>清除缓存</span>
-	</div> -->
 	<div id="logout-container" ng-if="isLogin">
-		<button id="logout-btn">退出登录</button>
+		<button id="logout-btn" ng-click="logout()">退出登录</button>
 	</div>
 </div>

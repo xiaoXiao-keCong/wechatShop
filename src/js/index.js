@@ -1,6 +1,14 @@
 /**
  * Created by hugotan on 2016/4/11.
  */
+var transFn = function(data) {
+            return $.param(data);
+        },
+        postCfg = {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            transformRequest: transFn
+        },
+        picBasePath = 'http://photo.yueyishujia.com:8112';
 var index = angular.module('index',
 	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures', 'ngFileUpload']);
 index.config(['$routeProvider', function ($routeProvider) {

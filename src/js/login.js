@@ -1,20 +1,14 @@
 /**
  * Created by hugotan on 2016/4/10.
  */
-index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-    var transFn = function(data) {
-            return $.param(data);
-        },
-        postCfg = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transFn
-        };
+index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$rootScope', '$timeout',
+    function ($scope, $http, $window, $location, $rootScope, $timeout) {
+    
     $scope.validate = function () {
 
     };
     // 登录事件
     $scope.login = function () {
-        console.log('login');
         var data = {
             account: $scope.account,
             password: $scope.password
@@ -23,13 +17,20 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', functi
         loginPromise.then(function (resp) {
             console.log(resp);
             if (1 === resp.data.code) {
-                // 登录成功，返回首页
-                alert('登录成功，即将返回首页！');
-                // 将用户非敏感信息存储到localstorage
-                $location.path('/').replace();
+                // 存储用户信息到sessionStorage
+                sessionStorage.setItem('user', JSON.stringify(resp.data.data));
+                $timeout(function () {
+                    // 登录成功，返回首页
+                    alert('登录成功，即将返回首页！');
+                    $location.path('/').replace();
+                });
+            }
+            else {
+                alert(resp.data.reason);
             }
         }, function (resp) {
             console.log(resp);
+            alert('数据请求失败!请稍后再试');
         });
     };
     // 跳转到注册页面

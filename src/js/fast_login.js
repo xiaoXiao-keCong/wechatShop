@@ -1,15 +1,8 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-
-	var transFn = function(data) {
-            return $.param(data);
-        },
-        postCfg = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transFn
-        };
+index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location',
+    function ($scope, $http, $window, $location) {
 
     // 获取验证码
     $scope.getCode = function () {
@@ -31,13 +24,18 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', fu
     	$http.post('/user/quicklogin.json', data, postCfg)
     	.then(function (resp) {
     		console.log(resp);
+            if (1 === resp.data.code) {
+                // 登录成功，将登录用户信息写到sessionStorage
+                sessionStorage.setItem('user', JSON.stringify(resp.data.data));
+                alert('登录成功，即将返回首页！');
+            }
     	}, function (resp) {
     		console.log(resp);
+            alert('数据请求失败!请稍后再试');
     	});
     };
     // 已有账号，跳转到登录页面
     $scope.toLogin = function () {
     	$location.path('login');
     };
-
 }]);

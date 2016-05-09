@@ -4,24 +4,31 @@
 </div>
 <div id="my-container">
     <div class="info-panel">
-        <img src="../../assets/images/head-none.png" alt="头像" id="head-pic">
-        <span class="operation">
+        <img ng-src="{{userPic}}" alt="头像" id="head-pic">
+        <span class="operation" ng-if="!isLogin">
             <a id="login-btn" ng-href="#/login">登录</a>/
             <a id="register-btn" ng-href="#/register">注册</a>
+        </span>
+        <span class="operation" ng-if="isLogin">
+            <span ng-bind="name"></span>
         </span>
         <div class="account-info-container">
             <div class="account-info">
                 <div>
                     <span>身份</span>
-                    <span class="account-val">--</span>
+                    <span class="account-val" ng-if="!isLogin">--</span>
+                    <span class="account-val" ng-if="isLogin">
+                        <span ng-bind="type"></span>
+                        <img ng-src="{{typeImg}}" class="type-img">
+                    </span>
                 </div>
                 <div>
                     <span>余额</span>
-                    <span class="account-val">--</span>
+                    <span class="account-val" ng-bind="balance"></span>
                 </div>
                 <div class="border-bottom-none">
                     <span>积分</span>
-                    <span class="account-val">--</span>
+                    <span class="account-val" ng-bind="score"></span>
                 </div>
             </div>
 
