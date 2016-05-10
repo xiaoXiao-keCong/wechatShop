@@ -12,7 +12,7 @@
     <div class="slider-container">
     	<ul class="slider">
             <li ng-repeat="ad in adList" slider>
-                <img ng-src="{{ad.imgurl}}">
+                <img ng-src="{{ad.imgurl}}" ng-click="jump(ad)">
             </li>
         </ul>
         <div class="index">
@@ -51,7 +51,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(2)"></span>
         <div class="content store-container">
             <span>
-                <img src="../../assets/images/test/store.png">
+                <img ng-src="{{starStore.imgurl}}">
             </span>
         </div>
     </div>
@@ -76,7 +76,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(4)"></span>
         <div class="content mall-container">
             <span>
-                <img src="../../assets/images/test/mall.png">
+                <img ng-src="{{mall.imgurl}}">
             </span>
         </div>
     </div>

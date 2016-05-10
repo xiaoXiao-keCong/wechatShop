@@ -4,11 +4,6 @@
 index.controller('homeCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 
-	$scope.adList = [{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 0;'},
-	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 100%;'},
-	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 200%;'},
-	{'imgurl': '../../assets/images/test/home_ad.png', 'style': 'left: 300%;'}];
-
 	$scope.toMore = function (index) {
 		switch (index) {
 			case 1:
@@ -52,5 +47,81 @@ index.controller('homeCtrl',
 				break;
 		}
 	};
+
+	// 首页轮播图
+	$http.post('/home/homead.json', {'cityid': 1}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var homeAdList = resp.data.data.homeadlist;
+			for (var i = 0; i < homeAdList.length; i++) {
+				homeAdList[i].imgurl = picBasePath + homeAdList[i].imgurl;
+			}
+			$scope.adList = homeAdList;
+		}
+	}, function (resp) {
+		// alert('数据请求失败!请稍后再试');
+	});
+
+	// 轮播图跳转
+	$scope.jump = function (ad) {
+		$window.location.href = ad.jumpurl;
+	};
+
+	// 明星门店
+	$http.post('/home/baseinfo.json', {'flag': 1}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var starStore = resp.data.data;
+			starStore.imgurl = picBasePath + starStore.imgurl;
+			$scope.starStore = starStore;
+		}
+		
+	}, function (resp) {
+		// alert('数据请求失败!请稍后再试');
+	});
+
+	// 悦尚城
+	$http.post('/home/baseinfo.json', {'flag': 2}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var mall = resp.data.data;
+			mall.imgurl = picBasePath + mall.imgurl;
+			$scope.mall = mall;
+		}
+	}, function (resp) {
+		// alert('数据请求失败!请稍后再试');
+	});
+
+	// 明星造型师
+	$http.post('/home/stardesigner.json', {'areaid': 1}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var starDesigner = resp.data.data.designerlist;
+			for (var i = 0, j = starDesigner.length; i < j; i++) {
+				starDesigner[i].imgurl = picBasePath + starDesigner[i].imgurl;
+			}
+			$scope.starDesigner = starDesigner;
+			console.log($scope.starDesigner);
+		}
+	}, function (resp) {
+		console.log(resp);
+		// alert('数据请求失败!请稍后再试');
+	});
+
+	// 时尚发型列表
+	$http.post('/home/fashionhair.json', {'page': 1}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var fashionHairList = resp.data.data.fashionhairlist;
+			for (var i = 0, j = fashionHairList.length; i < j; i++) {
+				fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
+			}
+			$scope.fashionHairList = fashionHairList;
+			console.log($scope.fashionHairList);
+		}
+	}, function (resp) {
+		console.log(resp);
+		// alert('数据请求失败!请稍后再试');
+	});
 	
 }]);
