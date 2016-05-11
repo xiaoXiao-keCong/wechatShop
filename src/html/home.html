@@ -92,23 +92,18 @@
                 <span class="text">综合</span>
             </span>
             <span class="item">
-                <span><img src="../../assets/images/zuixin.png"></span>
+                <span><img src="../../assets/images/zuixin_h.png"></span>
                 <span class="text">最新</span>
             </span>
             <span class="item">
-                <span><img src="../../assets/images/renqi.png"></span>
+                <span><img src="../../assets/images/renqi_h.png"></span>
                 <span class="text">人气</span>
             </span>
         </div>
         <div class="hairstyle-content">
-            <div class="hair-row">
-                <span><img src="../../assets/images/test/hair_1.png"></span>
-                <span><img src="../../assets/images/test/hair_2.png"></span>
-            </div>
-            <div class="hair-row">
-                <span><img src="../../assets/images/test/hair_3.png"></span>
-                <span><img src="../../assets/images/test/hair_4.png"></span>
-            </div>
+            <span ng-repeat="hair in fashionHairList" ng-click="showHairInfo(hair)">
+                <img ng-src="{{hair.imgurl}}">
+            </span>
         </div>
     </div>
 </div>

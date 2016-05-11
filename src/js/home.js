@@ -101,7 +101,6 @@ index.controller('homeCtrl',
 				starDesigner[i].imgurl = picBasePath + starDesigner[i].imgurl;
 			}
 			$scope.starDesigner = starDesigner;
-			console.log($scope.starDesigner);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -117,11 +116,29 @@ index.controller('homeCtrl',
 				fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
 			}
 			$scope.fashionHairList = fashionHairList;
-			console.log($scope.fashionHairList);
 		}
 	}, function (resp) {
 		console.log(resp);
 		// alert('数据请求失败!请稍后再试');
 	});
+
+	// 时尚资讯列表
+	$http.post('/home/fashionnews.json', {'sort': 'recommend'}, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var fashionNewsList = resp.data.data.fashionnewslist;
+			for (var i = 0, j = fashionNewsList.length; i < j; i++) {
+				fashionNewsList[i].imgurl = picBasePath + fashionNewsList[i].imgurl;
+			}
+			$scope.fashionNewsList = fashionNewsList;
+		}
+	}, function (resp) {
+		console.log(resp);
+	});
 	
+	// 跳转到时尚发型详情
+	$scope.showHairInfo = function (hair) {
+		console.log(hair.id);
+		$location.path('fashion_hair_info/' + hair.id);
+	};
 }]);

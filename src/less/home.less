@@ -1,3 +1,4 @@
+@import "display";
 .home {
 	background-color: #f1f1f1;
 	width: 100%;
@@ -108,21 +109,15 @@
 			}
 		}
 		.hairstyle-content {
-			padding: 0.266667rem 0.266667rem 0 0.266667rem;
-			.hair-row {
-				margin-bottom: 0.266667rem;
-				.display-flex;
-				span:nth-child(2) {
-					margin-left: 0.266667rem;
-				} 
-				img {
-					width: 4.6rem;
-					height: 6.813333rem;
-					border-radius: 0.133333rem;
-				}
-			}
-			.hair-row:last-child {
-				margin-bottom: 0;
+			.flex;
+			flex-wrap: wrap;
+			
+			img {
+				width: 4.6rem;
+				height: 6.813333rem;
+				border-radius: 0.133333rem;
+				margin-top: 0.266667rem;
+				margin-left: 0.266667rem;
 			}
 			
 		}

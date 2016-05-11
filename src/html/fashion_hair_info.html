@@ -1,0 +1,19 @@
+<div class="fashion-hair-info-container">
+	<div class="title-bar bg-black border-bottom-none">
+	    <span class="title-bar-left" back><img src="../../assets/images/back_white.png"></span>
+	    <span class="title-bar-right"><img src="../../assets/images/share_white.png"></span>
+	</div>
+	<div class="content">
+		<img ng-src="{{hairInfo.imgurl}}">
+	</div>
+	<div class="bottom-operation">
+		<div class="left">
+			<img src="../../assets/images/zan_white.png" class="common-icon zan-icon" ng-click="praiseOperation(hairInfo)">
+			<span ng-bind="hairInfo.praisenum"></span>
+		</div>
+		<div class="right">
+			<img src="../../assets/images/ring.png" class="common-icon ring-icon">
+			<span>预约</span>
+		</div>
+	</div>
+</div>

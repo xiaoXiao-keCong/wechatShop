@@ -145,6 +145,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/fashion_information.html',
 			controller: 'fashionInformationCtrl'
 		})
+		.when('/fashion_hair_info/:hairId', {
+			templateUrl: '../html/fashion_hair_info.html',
+			controller: 'fashionHairInfoCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -239,6 +243,18 @@ index.directive('slider', ['$swipe', '$interval','$timeout', function ($swipe, $
 					
 				}
 			};
+		}
+	};
+}]);
+
+// 返回directive
+index.directive('back', ['$window', function ($window) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			element.on('click', function () {
+				$window.history.back();
+			});
 		}
 	};
 }]);
