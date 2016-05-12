@@ -149,6 +149,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/fashion_hair_info.html',
 			controller: 'fashionHairInfoCtrl'
 		})
+		.when('/stylist_detail/:id', {
+			templateUrl: '../html/stylist_detail.html',
+			controller: 'stylistDetailCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

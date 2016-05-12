@@ -3,6 +3,24 @@
  */
 index.controller('stylistCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
+
+	// 获取发型师列表
+	var params = {
+		'page': 1
+	};
+	$http.post('/designer/list.json', params, postCfg)
+	.then(function (resp) {
+		if (1 === resp.data.code) {
+			var designerList = resp.data.data.designerlist;
+			for (var i = 0, j = designerList.length; i < j; i++) {
+				designerList[i].imgurl = picBasePath + designerList[i].imgurl;
+			}
+			$scope.designerList = designerList;
+			console.log(designerList);
+		}
+	}, function (resp) {
+		console.log(resp);
+	});
 	$scope.switch = function () {
 		$scope.isList = !$scope.isList;
 	};
@@ -25,7 +43,12 @@ index.controller('stylistCtrl',
 				break;
 		}
 	};
+
 	$scope.toStylistDetail = function () {
 		$window.location.href = 'stylist_detail.html';
+	};
+	$scope.toDetail = function (designer) {
+		console.log(designer);
+		$location.path('stylist_detail/' + designer.id);
 	};
 }]);

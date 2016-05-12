@@ -17,17 +17,17 @@
 		<span class="nav-item">综合排序<img src="../../assets/images/updown.png" class="icon"></span>
 	</div>
 	<div class="grid-container" ng-if="!isList">
-		<div class="grid-row">
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_1.png"></span>
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_2.png"></span>
-		</div>
-		<div class="grid-row">
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_3.png"></span>
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_4.png"></span>
-		</div>
-		<div class="grid-row">
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_5.png"></span>
-			<span ng-click="toStylistDetail()"><img src="../../assets/images/test/stylist_6.png"></span>
+		<div class="item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
+			<img ng-src="{{designer.imgurl}}">
+			<div class="info">
+				<span ng-bind="designer.name" class="name"></span>
+				<div class="bottom-info">
+					<span ng-bind="designer.store.name"></span>
+					<span>
+						<span ng-bind="designer.ordernum"></span> 单
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="list-container" ng-if="isList">

@@ -1,36 +1,22 @@
 <!-- 发型师详情 -->
-<html ng-app="stylistDetail">
-<head>
-    <meta charset="UTF-8">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="apple-touch-fullscreen">
-    <meta content="telephone=no,email=no" name="format-detection">
-    <title>悦艺术家</title>
-    <script src="../../assets/js/flexible_css.debug.js"></script>
-    <script src="../../assets/js/flexible.debug.js"></script>
-    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../build/css/app.min.css">
-</head>
-<body id="stylist-detail">
+<div id="stylist-detail">
 <div class="title-bar">
     <span class="title-bar-left" back>
         <img src="../../assets/images/back.png">
     </span>
-    <span>Macus Liu</span>
+    <span ng-bind="designer.name"></span>
     <span class="title-bar-right">
         <img src="../../assets/images/share.png">
     </span>
 </div>
 <div class="head">
 	<span><img ng-src="../../assets/images/test/fxs_head.png" class="head-pic"></span>
-	<span class="name">
-		Marcus Liu
-	</span>
+	<span class="name" ng-bind="designer.name"></span>
 	<span class="intro">在玩耍中完成一个作品</span>
 	<span class="operation">
 		<span class="btn-operation">
-			<span class="glyphicon glyphicon-plus"></span>
-			<span>关注</span>
+			<!-- <span class="glyphicon glyphicon-plus"></span> -->
+			<span>+关注</span>
 		</span>
 		<span class="btn-operation">
 			<span>更多介绍</span>
@@ -51,11 +37,13 @@
 		</span>
 		<span class="item">
 			<span>接单：</span>
-			<span class="highlight">4次</span>
+			<span class="highlight">
+				<span ng-bind="designer.ordernum"></span>次
+			</span>
 		</span>
 		<span class="item">
 			<span><img src="../../assets/images/zan.png" class="zan-icon"></span>
-			<span class="highlight">123</span>
+			<span class="highlight" ng-bind="designer.praisenum"></span>
 		</span>
 	</div>
 	<div class="bottom-panel">
@@ -63,20 +51,150 @@
 			<span class="discount-item">新人立减 88</span>
 			<span class="discount-item">老用户减 88</span>
 		</span>
-		<span class="margin-bottom-20 site">悦 &middot; 生活新东方广场</span>
+		<span class="margin-bottom-20 site" ng-bind="designer.store.name"></span>
 		<span class="flex-center">
 			<span><img src="../../assets/images/location.png" class="location-icon"></span>
-			<span class="location">北京市朝阳区三里屯</span>
+			<span class="location" ng-bind="designer.store.location"></span>
 		</span>
 	</div>
 </div>
-<div ng-view></div>
-</body>
-<script src="../../assets/js/jquery.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/angular.min.js"></script>
-<script src="../../assets/js/angular-route.min.js"></script>
-<script src="../../assets/js/mobile-angular-ui.min.js"></script>
-<script src="../../assets/js/mobile-angular-ui.gestures.min.js"></script>
-<script src="../js/app.min.js"></script>
-</html>
+<!-- 导航bar -->
+<div class="nav-bar">
+	<span ng-class="{'selected':project}" ng-click="show(1)">项目</span>
+	<span ng-class="{'selected':price}" ng-click="show(2)">价格</span>
+	<span ng-class="{'selected':life}" ng-click="show(3)">生活</span>
+	<span ng-class="{'selected':work}" ng-click="show(4)">作品</span>
+</div>
+<!-- 发型师项目 -->
+<div class="stylist_proj_container" ng-if="project">
+	<div class="item" ng-repeat="service in serviceList">
+		<span class="left">
+			<span class="select-icon">
+				<img src="../../assets/images/common_unselected.png" class="common-icon" ng-click="selectService(service)" ng-if="!service.selected">
+				<img src="../../assets/images/common_selected.png" class="common-icon" ng-click="selectService(service)" ng-if="service.selected">
+			</span>
+			<span ng-bind="service.name"></span>
+		</span>
+		<span class="right">
+			<span ng-bind="service.serviceTime"></span> min
+		</span>
+	</div>
+	
+	<div class="bottom-operation">
+		<span class="left">
+			<span><span ng-bind="totalServiceTime()"></span>min</span>
+		</span>
+		<span class="middle">
+			<span>立即咨询</span>
+		</span>
+		<span class="right">
+			<span>立即预约</span>
+		</span>
+	</div>
+</div>
+<!-- 发型师价格 -->
+<div class="stylist-price-container" ng-if="price">
+	<div class="common-proj">
+		<span class="title">一般项目</span>
+		<span class="common-proj-item">
+			<span>洗吹</span>
+			<span class="right">
+				<span class="highlight">￥ 280</span>
+				<del class="original-price">￥ 381.00</del>
+			</span>
+		</span>
+		<span class="common-proj-item">
+			<span>洗剪吹</span>
+			<span class="right">
+				<span class="highlight">￥ 280</span>
+				<del class="original-price">￥ 381.00</del>
+			</span>
+		</span>
+	</div>
+	<div class="item">
+		<span>染发</span>
+		<span class="right">
+			<span class="highlight">￥280</span>
+			<span>起</span>
+			<img src="../../assets/images/down_big.png" class="down-icon">
+		</span>
+	</div>
+	<div class="item">
+		<span>烫发</span>
+		<span class="right">
+			<span class="highlight">￥280</span>
+			<span>起</span>
+			<img src="../../assets/images/down_big.png" class="down-icon">
+		</span>
+	</div>
+	<div class="item">
+		<span>护理</span>
+		<span class="right">
+			<span class="highlight">￥280</span>
+			<span>起</span>
+			<img src="../../assets/images/down_big.png" class="down-icon">
+		</span>
+	</div>
+</div>
+<!-- 发型师生活 -->
+<div class="stylist-life-container" ng-if="life">
+	<div class="item">
+		<div class="time">
+			<img src="../../assets/images/time_circle.png" class="time-circle">
+			<span>2016.03.03 16:30:29</span>
+		</div>
+		<div class="content">
+			<div>今天找了个女朋友，晚上不回家~~</div>
+			<div class="pic">
+				<img src="../../assets/images/test/stylist_life.png">
+				<img src="../../assets/images/test/stylist_life.png">
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="time">
+			<img src="../../assets/images/time_circle.png" class="time-circle">
+			<span>2016.03.03 16:30:28</span>
+		</div>
+		<div class="content">
+			<div>今天找了个女朋友，晚上不回家~~</div>
+			<div class="pic">
+				<img src="../../assets/images/test/stylist_life.png">
+				<img src="../../assets/images/test/stylist_life.png">
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="time">
+			<img src="../../assets/images/time_circle.png" class="time-circle">
+			<span>2016.03.03 16:30:27</span>
+		</div>
+		<div class="content">
+			<div>今天找了个女朋友，晚上不回家~~</div>
+			<div class="pic">
+				<img src="../../assets/images/test/stylist_life.png">
+				<img src="../../assets/images/test/stylist_life.png">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 发型师作品 -->
+<div class="stylist-work-container" ng-if="work">
+	<div class="work-row">
+		<span class="item">
+			<img src="../../assets/images/test/stylist_work.png">
+		</span>
+		<span class="item">
+			<img src="../../assets/images/test/stylist_work.png">
+		</span>
+	</div>
+	<div class="work-row">
+		<span class="item">
+			<img src="../../assets/images/test/stylist_work.png">
+		</span>
+		<span class="item">
+			<img src="../../assets/images/test/stylist_work.png">
+		</span>
+	</div>
+</div>
+</div>
