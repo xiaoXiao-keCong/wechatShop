@@ -1,4 +1,5 @@
 <!-- 发型师详情 -->
+<div class="parent-container">
 <div id="stylist-detail">
 <div class="title-bar">
     <span class="title-bar-left" back>
@@ -12,10 +13,9 @@
 <div class="head">
 	<span><img ng-src="../../assets/images/test/fxs_head.png" class="head-pic"></span>
 	<span class="name" ng-bind="designer.name"></span>
-	<span class="intro">在玩耍中完成一个作品</span>
+	<span class="intro" ng-bind="designer.info"></span>
 	<span class="operation">
 		<span class="btn-operation">
-			<!-- <span class="glyphicon glyphicon-plus"></span> -->
 			<span>+关注</span>
 		</span>
 		<span class="btn-operation">
@@ -28,11 +28,11 @@
 		<span class="item">
 			<span>评价：</span>
 			<span class="flex-center">
-				<img src="../../assets/images/star_h.png" class="star-icon">
-				<img src="../../assets/images/star_h.png" class="star-icon">
+				<img ng-repeat="level in designer.commentLevel" ng-src="{{level.path}}" class="star-icon">
+				<!-- <img src="../../assets/images/star_h.png" class="star-icon">
 				<img src="../../assets/images/star_h.png" class="star-icon">
 				<img src="../../assets/images/star.png" class="star-icon">
-				<img src="../../assets/images/star.png" class="star-icon">
+				<img src="../../assets/images/star.png" class="star-icon"> -->
 			</span>
 		</span>
 		<span class="item">
@@ -196,5 +196,6 @@
 			<img src="../../assets/images/test/stylist_work.png">
 		</span>
 	</div>
+</div>
 </div>
 </div>

@@ -5,10 +5,7 @@ index.controller('stylistCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 
 	// 获取发型师列表
-	var params = {
-		'page': 1
-	};
-	$http.post('/designer/list.json', params, postCfg)
+	$http.post('/designer/list.json', {'page': 1}, postCfg)
 	.then(function (resp) {
 		if (1 === resp.data.code) {
 			var designerList = resp.data.data.designerlist;
@@ -16,7 +13,6 @@ index.controller('stylistCtrl',
 				designerList[i].imgurl = picBasePath + designerList[i].imgurl;
 			}
 			$scope.designerList = designerList;
-			console.log(designerList);
 		}
 	}, function (resp) {
 		console.log(resp);
