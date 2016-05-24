@@ -43,7 +43,7 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 				commentLevel.push({'path': '../../assets/images/star_h.png'});
 			}
 			for (i = 0; i < 5 - designer.score; i++) {
-				commentLevel.push({'path': '../../assets/images/star.png'})
+				commentLevel.push({'path': '../../assets/images/star.png'});
 			}
 			designer.commentLevel = commentLevel;
 			$scope.designer = designer;

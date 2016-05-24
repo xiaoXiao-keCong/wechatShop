@@ -6,12 +6,13 @@ index.controller('appointmentCtrl',
 	$scope.itemSelect = function () {
 
 	};
+	$scope.showMask = true;
 	$scope.recommend = function () {
-		$scope.showMask = true;
+		$scope.showMask = false;
 	};
 	
 	$scope.jump = function () {
-		$scope.showMask = true;
+		$scope.showMask = false;
 	};
 	$scope.navigate = function (index) {
 		switch (index) {
