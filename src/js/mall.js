@@ -21,6 +21,7 @@ index.controller('mallCtrl',
                     adList[i].imgurl = picBasePath + adList[i].imgurl;
                 }
                 $scope.adList = adList;
+                console.log(adList);
             }
         }, function (resp) {
             console.log(resp);
@@ -69,5 +70,10 @@ index.controller('mallCtrl',
     }
 
     init();
+
+    // 广告图片跳转事件
+    $scope.jump = function (ad) {
+        console.log(ad);
+    };
     
 }]);

@@ -9,14 +9,13 @@
     </span>
 </div>
 <div class="home">
-    <div class="slider-container">
-    	<ul class="slider">
-            <li ng-repeat="ad in adList" slider>
-                <img ng-src="{{ad.imgurl}}" ng-click="jump(ad)">
-            </li>
-        </ul>
-        <div class="index">
+    <div lunbo class="swiper-container slider-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="item in adList">
+                <img ng-src="{{item.imgurl}}" ng-click="jump(item)">
+            </div>
         </div>
+        <div class="swiper-pagination"></div>
     </div>
 	<div class="top-nav">
 		<span class="item">

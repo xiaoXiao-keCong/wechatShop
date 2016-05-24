@@ -251,6 +251,27 @@ index.directive('slider', ['$swipe', '$interval','$timeout', function ($swipe, $
 	};
 }]);
 
+// 使用swiper插件制作图片轮播directive
+index.directive('lunbo', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			$timeout(function () {
+				scope.mySwiper = new Swiper(element.get(0), {
+					direction: 'horizontal',
+					speed: 300,
+					autoplay: 4000,
+					loop: true,
+					autoplayDisableOnInteraction: false,
+					pagination: '.swiper-pagination'
+				});
+			}, 1000);
+			
+		}
+	};
+}]);
+
 // 返回directive
 index.directive('back', ['$window', function ($window) {
 	return {
