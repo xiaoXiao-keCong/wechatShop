@@ -15,14 +15,21 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$root
         };
         var loginPromise = $http.post('/user/login.json', data, postCfg);
         loginPromise.then(function (resp) {
-            console.log(resp);
+            
             if (1 === resp.data.code) {
                 // 存储用户信息到sessionStorage
                 sessionStorage.setItem('user', JSON.stringify(resp.data.data));
                 $timeout(function () {
-                    // 登录成功，返回首页
-                    alert('登录成功，即将返回首页！');
-                    $location.path('/').replace();
+                    // 登录成功，返回上一页或者首页
+                    if ($rootScope.preUrl !== undefined) {
+                        alert('登录成功，即将返回上一页！');
+                        $location.path($rootScope.preUrl).replace();
+                    }
+                    else {
+                        alert('登录成功，即将返回首页！');
+                        $location.path('/').replace();
+                    }
+                    
                 });
             }
             else {
