@@ -44,7 +44,6 @@ index.controller('stylistCtrl',
 		$window.location.href = 'stylist_detail.html';
 	};
 	$scope.toDetail = function (designer) {
-		console.log(designer);
 		$location.path('stylist_detail/' + designer.id);
 	};
 }]);

@@ -9,9 +9,9 @@
     </span>
 </div>
 <div class="home">
-    <div lunbo class="swiper-container slider-container">
+    <div advertise class="swiper-container slider-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="item in adList">
+            <div class="swiper-slide" ng-repeat="item in adList" on-finish-render-filters>
                 <img ng-src="{{item.imgurl}}" ng-click="jump(item)">
             </div>
         </div>
@@ -35,10 +35,17 @@
             <span class="text">VIP专区</span>
         </span>
 	</div>
-    <div class="home-item highlight">
+    <div class="home-item highlight padding-left-right-none">
         <span class="item-title-bar">
             <span class="title">明星造型师</span>
             <span class="en-title">FASHION STYLIST</span>
+            <div class="swiper-container" designer id="designer-list">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide item" ng-repeat="designer in starDesigners" on-designer-render-finished>
+                        <img ng-src="{{designer.imgurl}}" ng-click="toDesigner(designer)">
+                    </div>
+                </div>
+            </div>
         </span>
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(1)"></span>
     </div>

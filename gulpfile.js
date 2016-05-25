@@ -60,11 +60,11 @@ gulp.task('watchLess', function () {
 // 开发运行监听
 gulp.task('watch', function () {
     gulp.watch('src/less/*.less', function () {
-        runSequence('cleanCss', 'buildLess', 'rev');
+        runSequence('buildLess', 'rev');
     });
     gulp.watch('src/html/*.html', ['rev'])
     gulp.watch('src/js/*.js', function () {
-        runSequence('cleanJs', 'buildJs', 'rev');
+        runSequence('buildJs', 'rev');
     });
 });
 

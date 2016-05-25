@@ -33,6 +33,33 @@
 		margin-top: 0.266667rem;
 		padding: 0.4rem 0.266667rem 0.266667rem 0.266667rem;
 		background-color: #ffffff;
+		.flash-sale-content {
+			img {
+				border-radius: 0.133333rem;
+				height: 3.36rem;
+				width: 3.36rem;
+			}
+			.item {
+				width: 3.36rem;
+				margin-right: 0.4rem !important;
+				.display-flex-column;
+				font-size: 0.32rem;
+				&:last-child {
+					margin-right: 0 !important;
+				}
+				.name {
+					margin-top: 0.266667rem;
+					color: #333333;
+				}
+				.bottom-info {
+					margin-top: 0.266667rem;
+					del {
+						color: #999999;
+						float: right;
+					}
+				}
+			}
+		}
 		.title {
 			.display-flex-column;
 			justify-content: center;
@@ -100,44 +127,40 @@
 		}
 	}
 	.goods-container {
-		padding: 0.266667rem;
+		padding-bottom: 0.266667rem 0;
 		background-color: #ffffff;
-		.goods-row {
-			.display-flex;
-			justify-content: space-between;
-			&:not(:last-child) {
-				margin-bottom: 0.266667rem;
-			}
-			.item {
+		.display-flex;
+		flex-wrap: wrap;
+		.item {
+			margin: 0.266667rem 0 0 0.266667rem;
+			width: 4.6rem;
+			.display-flex-column;
+			align-items: center;
+			.goods-img {
 				width: 4.6rem;
-				.display-flex-column;
+				height: 4.6rem;
+				border-radius: 0.133333rem;
+			}
+			.goods-name {
+				margin-top: 0.266667rem;
+				color: #121212;
+				font-size: 0.32rem;
+			}
+			.goods-info {
+				margin-top: 0.266667rem;
+				width: 100%;
+				.display-flex;
+				justify-content: space-between;
 				align-items: center;
-				.goods-img {
-					width: 4.6rem;
-					height: 4.6rem;
-					border-radius: 0.133333rem;
-				}
-				.goods-name {
-					margin-top: 0.266667rem;
-					color: #121212;
-					font-size: 0.32rem;
-				}
-				.goods-info {
-					margin-top: 0.266667rem;
-					width: 100%;
+				font-size: 0.32rem;
+				color: #3dbfd5;
+				.praise {
+					color: #868686;
 					.display-flex;
-					justify-content: space-between;
 					align-items: center;
-					font-size: 0.32rem;
-					color: #3dbfd5;
-					.praise {
-						color: #868686;
-						.display-flex;
-						align-items: center;
-						img {
-							height: 0.586667rem;
-							width: 0.586667rem;
-						}
+					img {
+						height: 0.586667rem;
+						width: 0.586667rem;
 					}
 				}
 			}

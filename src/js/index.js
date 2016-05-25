@@ -133,7 +133,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/order_detail.html',
 			controller: 'orderDetailCtrl'
 		})
-		.when('/mall_goods_detail', {
+		.when('/mall_goods_detail/:id', {
 			templateUrl: '../html/mall_goods_detail.html',
 			controller: 'mallGoodsDetailCtrl'
 		})
@@ -158,107 +158,15 @@ index.config(['$routeProvider', function ($routeProvider) {
 		});
 }]);
 
-// 图片轮播directive
-index.directive('slider', ['$swipe', '$interval','$timeout', function ($swipe, $interval, $timeout) {
-	return {
-		restrict: 'EA',
-		replace: true,
-		compile: function (element, attrs) {
-			return {
-				post: function postLink(scope, element, attrs) {
-					var indexContainer = element.parent().parent().find('.index');
-					element.css('left', scope.$index * 100 + '%');
-					if (0 === scope.$index) {
-						indexContainer.append('<span class="point current"></span>');
-					}
-					else {
-						indexContainer.append('<span class="point"></span>');
-					}
-					if (scope.$last === true) {
-						$timeout(function () {
-							var parent = element.parent().parent(),
-								slider = element.parent()[0],
-								width = element.width(),
-								totalWidth = (scope.$index + 1) * width,
-								index = 0,
-								slideFunc = function () {
-									var left = element.parent().offset().left,
-										offset = left - width;
-									if (Math.abs(offset) === totalWidth) {
-										offset = 0;
-										slider.style.transform = 'translateX(' + offset + 'px)';
-										index = 0;
-									}
-									else {
-										slider.style.transform = 'translateX(' + offset + 'px)';
-										index++;
-									}
-									// 延迟0.3秒执行
-									$timeout(function () {
-										indexContainer.find('.point').removeClass('current');
-										indexContainer.find('.point:eq(' + index + ')').addClass('current');
-									}, 300);
-								};
-							var timer = $interval(slideFunc, 3000);
-							$swipe.bind(slider, {
-								start: function (touch) {
-									$interval.cancel(timer);
-								},
-								end: function (touch) {
-									switch(touch.direction) {
-										case 'LEFT':
-											// 向左滑动
-											var left = element.parent().offset().left,
-												offset = left - width;
-											if (Math.abs(offset) === totalWidth) {
-												break;
-											}
-											else {
-												slider.style.transform = 'translateX(' + offset + 'px)';
-												index++;
-												$timeout(function () {
-													indexContainer.find('.point').removeClass('current');
-													indexContainer.find('.point:eq(' + index + ')').addClass('current');
-												}, 300);
-											}
-											break;
-										case 'RIGHT':
-											// 向右滑动
-											left = element.parent().offset().left;
-											offset = left + width;
-											if (left === 0) {
-												break;
-											}
-											else {
-												slider.style.transform = 'translateX(' + offset + 'px)';
-												index--;
-												$timeout(function () {
-													indexContainer.find('.point').removeClass('current');
-													indexContainer.find('.point:eq(' + index + ')').addClass('current');
-												}, 300);
-											}
-											break;
-									}
-									timer = $interval(slideFunc, 3000);
-								}
-							});
-						}, 0);
-					}
-					
-				}
-			};
-		}
-	};
-}]);
-
-// 使用swiper插件制作图片轮播directive
-index.directive('lunbo', ['$timeout', function ($timeout) {
+// 使用swiper插件制作图片轮播directive,这是广告的directive
+index.directive('advertise', ['$timeout', function ($timeout) {
 	return {
 		restrict: 'EA',
 		replace: true,
 		link: function (scope, element, attrs) {
-			$timeout(function () {
-				scope.mySwiper = new Swiper(element.get(0), {
+			// 所有图片加载完毕后才执行swiper的初始化
+			scope.deferred.promise.then(function (msg) {
+				scope.advertiseSwiper = new Swiper(element.get(0), {
 					direction: 'horizontal',
 					speed: 300,
 					autoplay: 4000,
@@ -266,8 +174,52 @@ index.directive('lunbo', ['$timeout', function ($timeout) {
 					autoplayDisableOnInteraction: false,
 					pagination: '.swiper-pagination'
 				});
-			}, 1000);
-			
+			});
+		}
+	};
+}]);
+
+// 明星造型师directive
+index.directive('designer', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.designerDeferred.promise.then(function (msg) {
+				scope.designerSwiper = new Swiper(element.get(0), {
+					direction: 'horizontal',
+					effect: 'coverflow',
+			        grabCursor: true,
+			        centeredSlides: true,
+			        slidesPerView: 'auto',
+			        coverflow: {
+			            rotate: 50,
+			            stretch: 0,
+			            depth: 100,
+			            modifier: 1,
+			            slideShadows : true
+			        }
+				});
+			});
+		}
+	};
+}]);
+
+// 限时抢购directive
+index.directive('flashsale', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.flashSaleDeferred.promise.then(function (msg) {
+				scope.falshSaleSwiper = new Swiper(element.get(0), {
+					direction: 'horizontal',
+					slidesPerView: 'auto',
+			        paginationClickable: true,
+			        spaceBetween: 30,
+			        freeMode: true
+				});
+			});
 		}
 	};
 }]);
@@ -280,6 +232,48 @@ index.directive('back', ['$window', function ($window) {
 			element.on('click', function () {
 				$window.history.back();
 			});
+		}
+	};
+}]);
+
+// 判断广告轮播图是否加载完
+index.directive('onFinishRenderFilters', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('ngRepeatFinished');
+				});
+			}
+		}
+	};
+}]);
+
+// 判断明星发型师是否加载完
+index.directive('onDesignerRenderFinished', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('designerRepeatFinished');
+				});
+			}
+		}
+	};
+}]);
+
+// 判断限时抢购是否加载完
+index.directive('onFlashSaleRenderFinished', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('flashSaleRepeatFinished');
+				});
+			}
 		}
 	};
 }]);

@@ -2,14 +2,21 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('mallCtrl',
-    ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    ['$scope', '$http', '$location', '$q', '$window', function ($scope, $http, $location, $q, $window) {
 	
-	$scope.toCart = function () {
-		$location.path('cart');
-	};
-    $scope.toDetail = function () {
-        $location.path('mall_goods_detail');
-    };
+	
+    // 广告promise
+    $scope.deferred = $q.defer();
+    // 限时抢购promise
+    $scope.flashSaleDeferred = $q.defer();
+
+
+    $scope.$on('ngRepeatFinished', function () {
+        $scope.deferred.resolve('succeed');
+    });
+    $scope.$on('flashSaleRepeatFinished', function () {
+        $scope.flashSaleDeferred.resolve('succeed'); 
+    });
 
     function init() {
         // 获取商城广告
@@ -21,7 +28,6 @@ index.controller('mallCtrl',
                     adList[i].imgurl = picBasePath + adList[i].imgurl;
                 }
                 $scope.adList = adList;
-                console.log(adList);
             }
         }, function (resp) {
             console.log(resp);
@@ -36,7 +42,15 @@ index.controller('mallCtrl',
         // 限时抢购
         $http.post('/shop/getflashsale.json', {'page': 1}, postCfg)
         .then(function (resp) {
-            // console.log(resp);
+            if (1 === resp.data.code) {
+                var flashSaleList = resp.data.data.goodslist;
+                $scope.limitStartTime = resp.data.data.starttime;
+                $scope.limitEndTime = resp.data.data.endtime;
+                for (var i = 0, j = flashSaleList.length; i < j; i++) {
+                    flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl1;
+                }
+                $scope.flashSaleList = flashSaleList;
+            }
         }, function (resp) {
             console.log(resp);
         });
@@ -60,9 +74,10 @@ index.controller('mallCtrl',
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
                 for (var i = 0, j = goodsList.length; i < j; i++) {
-                    goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl;
+                    goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
                 }
                 $scope.goodsList = goodsList;
+                console.log($scope.goodsList);
             }
         }, function (resp) {
             console.log(resp);
@@ -73,7 +88,17 @@ index.controller('mallCtrl',
 
     // 广告图片跳转事件
     $scope.jump = function (ad) {
-        console.log(ad);
+        $window.location.href = ad.jumpurl;
+    };
+
+    // 跳转到商品详情
+    $scope.toGoodsDetail = function (goods) {
+        $location.path('mall_goods_detail/' + goods.id);
+    };
+
+    // 跳转到购物车
+    $scope.toCart = function () {
+        $location.path('cart');
     };
     
 }]);

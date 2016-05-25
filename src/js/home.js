@@ -2,7 +2,7 @@
  * Created by hugotan on 2016/5/4.
  */
 index.controller('homeCtrl',
-	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
+	['$scope', '$http', '$window', '$location', '$q', function ($scope, $http, $window, $location, $q) {
 
 	$scope.toMore = function (index) {
 		switch (index) {
@@ -48,9 +48,15 @@ index.controller('homeCtrl',
 		}
 	};
 
+	// 轮播图是否加载完毕的promise
+	$scope.deferred = $q.defer();
+	// 明星发型师是否加载完毕的promise
+	$scope.designerDeferred = $q.defer();
+
 	// 首页轮播图
 	$http.post('/home/homead.json', {'cityid': 1}, postCfg)
 	.then(function (resp) {
+		
 		if (1 === resp.data.code) {
 			var homeAdList = resp.data.data.homeadlist;
 			for (var i = 0; i < homeAdList.length; i++) {
@@ -59,7 +65,7 @@ index.controller('homeCtrl',
 			$scope.adList = homeAdList;
 		}
 	}, function (resp) {
-		// alert('数据请求失败!请稍后再试');
+		alert('数据请求失败!请稍后再试');
 	});
 
 	// 轮播图跳转
@@ -96,11 +102,12 @@ index.controller('homeCtrl',
 	$http.post('/home/stardesigner.json', {'areaid': 1}, postCfg)
 	.then(function (resp) {
 		if (1 === resp.data.code) {
-			var starDesigner = resp.data.data.designerlist;
-			for (var i = 0, j = starDesigner.length; i < j; i++) {
-				starDesigner[i].imgurl = picBasePath + starDesigner[i].imgurl;
+			var starDesigners = resp.data.data.designerlist;
+			for (var i = 0, j = starDesigners.length; i < j; i++) {
+				starDesigners[i].imgurl = picBasePath + starDesigners[i].imgurl;
 			}
-			$scope.starDesigner = starDesigner;
+			$scope.starDesigners = starDesigners;
+			console.log($scope.starDesigners);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -140,5 +147,17 @@ index.controller('homeCtrl',
 	$scope.showHairInfo = function (hair) {
 		console.log(hair.id);
 		$location.path('fashion_hair_info/' + hair.id);
+	};
+
+	$scope.$on('ngRepeatFinished', function () {
+		$scope.deferred.resolve('succeed');
+	});
+	$scope.$on('designerRepeatFinished', function () {
+		$scope.designerDeferred.resolve('succeed');
+	});
+
+	// 明星造型师点击跳转
+	$scope.toDesigner = function (designer) {
+		console.log(designer);
 	};
 }]);
