@@ -1,0 +1,61 @@
+<!-- 积分商品确认下单 -->
+<div class="parent-container">
+<div id="point-order-confirm-container">
+<div class="title-bar">
+    <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+    <span>确认订单</span>
+</div>
+<div class="point-order-confirm">
+	<div class="deliver-type">
+		<div class="item">
+			<span class="left">
+				<img src="../../assets/images/pay_selected.png" class="common-icon">
+				<span class="tips">请填写收货人信息</span>
+			</span>
+			<img src="../../assets/images/arrow_r_big.png" class="common-icon">
+		</div>
+		<div class="item">
+			<span class="left">
+				<img src="../../assets/images/pay_unselected.png" class="common-icon">
+				<span class="tips">门店信息</span>
+			</span>
+		</div>
+	</div>
+	<div class="order-info">
+		<div class="goods-info">
+			<span class="left">
+				<img src="../../assets/images/test/goods_pic1.png" class="goods-icon">
+			</span>
+			<span class="right">
+				<span class="name">爱丽小屋旋转自动双头眉笔</span>
+				<span class="price">
+					<span class="highlight">￥ 60 + 60积分</span>
+					<span>X 1</span>
+				</span>
+			</span>
+		</div>
+		<div class="freight">
+			<span>运费:</span>
+			<span class="freight-num">￥0.00</span>
+		</div>
+		<div class="message-container">
+			<span class="title">买家留言：</span>
+			<span class="message">
+				<textarea placeholder="选填，填写您和卖家达成一致的信息..."></textarea>
+			</span>
+			<span class="count-info">
+				<span>共1件商品 合计:</span>
+				<span class="highlight">￥60 + 60积分</span>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="operation">
+	<span class="left">
+		<span>实付：</span>
+		<span class="highlight">￥60 + 60积分</span>
+	</span>
+	<span class="right" ng-click="orderConfirm()">确定</span>
+</div>
+</div>
+</div>

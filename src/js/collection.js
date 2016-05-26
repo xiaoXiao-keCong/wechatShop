@@ -1,18 +1,25 @@
 /**
  * Created by hugotan on 2016/4/11.
  */
-index.controller('collectionCtrl', ['$scope', '$http', function ($scope, $http) {
+index.controller('collectionCtrl',
+    ['$scope', '$http', '$rootScope', '$location', function ($scope, $http, $rootScope, $location) {
 
     $scope.isDesigner = true; 
     var designerPromise = $http.post('/user/mykeepdesigner.json', postCfg);
     designerPromise.then(function (resp) {
         console.log(resp);
-    	var designerList = resp.data.data.designerlist;
-    	// 对图片地址添加前缀
-    	for (var i = 0, j = designerList.length; i < j; i++) {
-    		designerList[i].imgurl = picBaseUrl + designerList[i].imgurl;
-    	}
-    	$scope.designerList = designerList;
+        if (-1 === resp.data.code) {
+            $rootScope.preUrl = $location.url();
+            $location.path('login');
+        }
+        else if (1 === resp.data.code) {
+            var designerList = resp.data.data.designerlist;
+            // 对图片地址添加前缀
+            for (var i = 0, j = designerList.length; i < j; i++) {
+                designerList[i].imgurl = picBaseUrl + designerList[i].imgurl;
+            }
+            $scope.designerList = designerList;
+        }
     }, function (resp) {
     	console.log(resp);
     });

@@ -2,11 +2,10 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('cartCtrl',
-	['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
+	['$scope', '$http', '$location', '$rootScope', '$q', function ($scope, $http, $location, $rootScope, $q) {
 
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
-		console.log(resp);
 		var data = resp.data;
 		if (-1 === data.code) {
 			// 用户未登录
@@ -18,8 +17,19 @@ index.controller('cartCtrl',
 			for (var i =0, j  = cartList.length; i < j; i++) {
 				cartList[i].goods.imgurl = picBasePath + cartList[i].goods.imgurl1;
 				cartList[i].count = cartList[i].price * cartList[i].num;
+				cartList[i].selected = false;
 			}
 			$scope.cartList = cartList;
+			// 获取合计总价
+			$scope.getTotalPrice = function () {
+				var totalPrice = 0;
+				for (var i = 0, j = $scope.cartList.length; i < j; i++) {
+					if ($scope.cartList[i].selected === true) {
+						totalPrice += parseFloat(cartList[i].count);
+					}
+				}
+				return totalPrice;
+			};
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -27,7 +37,8 @@ index.controller('cartCtrl',
 
 	// 增加商品购物车数量
 	$scope.increaseNum = function (goods) {
-		var data = {
+		var index = $scope.cartList.indexOf(goods),
+		    data = {
 			'goodsid': [parseInt(goods.goods.id)],
 			'number': [parseInt(goods.num) + 1]
 		};
@@ -35,12 +46,8 @@ index.controller('cartCtrl',
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var cartList = resp.data.data.cartlist;
-				for (var i =0, j  = cartList.length; i < j; i++) {
-					cartList[i].goods.imgurl = picBasePath + cartList[i].goods.imgurl1;
-					cartList[i].count = cartList[i].price * cartList[i].num;
-				}
-				$scope.cartList = cartList;
-
+				$scope.cartList[index].num = cartList[index].num;
+				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
 			}
 		}, function (resp) {
 			console.log(resp);
@@ -48,10 +55,11 @@ index.controller('cartCtrl',
 	};
 	// 减少商品购物车数量
 	$scope.decreaseNum = function (goods) {
-		if (0 === goods.num) {
+		if (1 === goods.num) {
 			return;
 		}
-		var data = {
+		var index = $scope.cartList.indexOf(goods);
+		    data = {
 			'goodsid': [parseInt(goods.goods.id)],
 			'number': [parseInt(goods.num) - 1]
 		};
@@ -59,14 +67,41 @@ index.controller('cartCtrl',
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var cartList = resp.data.data.cartlist;
-				for (var i =0, j  = cartList.length; i < j; i++) {
-					cartList[i].goods.imgurl = picBasePath + cartList[i].goods.imgurl1;
-					cartList[i].count = cartList[i].price * cartList[i].num;
-				}
-				$scope.cartList = cartList;
+				$scope.cartList[index].num = cartList[index].num;
+				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
 			}
 		}, function (resp) {
 			console.log(resp);
 		});
 	};
+
+	$scope.selectAll = function () {
+		$scope.isSelectAll = !$scope.isSelectAll;
+		var i = 0, j = 0;
+		if ($scope.isSelectAll === true) {
+			// 遍历购物车的商品，选中状态设置为true
+			for (i = 0, j = $scope.cartList.length; i < j; i++) {
+				$scope.cartList[i].selected = true;
+			}
+		}
+		else {
+			// 遍历购物车的商品，选中状态设置为false
+			for (i = 0, j = $scope.cartList.length; i < j; i++) {
+				$scope.cartList[i].selected = false;
+			}
+		}
+	};
+
+	$scope.checkSelectAll = function () {
+		for (var i = 0, j = $scope.cartList.length; i < j; i++) {
+			if ($scope.cartList[i].selected === false) {
+				return false;
+			}
+		}
+		return true;
+	};
+
+	$scope.$watch('checkSelectAll', function (oldValue, newValue) {
+		console.log(oldValue, newValue);
+	});
 }]);

@@ -107,7 +107,6 @@ index.controller('homeCtrl',
 				starDesigners[i].imgurl = picBasePath + starDesigners[i].imgurl;
 			}
 			$scope.starDesigners = starDesigners;
-			console.log($scope.starDesigners);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -145,7 +144,6 @@ index.controller('homeCtrl',
 	
 	// 跳转到时尚发型详情
 	$scope.showHairInfo = function (hair) {
-		console.log(hair.id);
 		$location.path('fashion_hair_info/' + hair.id);
 	};
 
@@ -158,6 +156,6 @@ index.controller('homeCtrl',
 
 	// 明星造型师点击跳转
 	$scope.toDesigner = function (designer) {
-		console.log(designer);
+		$location.path('stylist_detail/' + designer.designerid);
 	};
 }]);

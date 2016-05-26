@@ -105,6 +105,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/point_order_confirm.html',
 			controller: 'pointOrderConfirmCtrl'
 		})
+		.when('/order_confirm', {
+			templateUrl: '../html/order_confirm.html',
+			controller: 'orderConfirmCtrl'
+		})
 		.when('/change_tip', {
 			templateUrl: '../html/change_tip.html',
 			controller: 'changeTipCtrl'
@@ -178,6 +182,7 @@ index.directive('advertise', ['$timeout', function ($timeout) {
 		}
 	};
 }]);
+
 
 // 明星造型师directive
 index.directive('designer', ['$timeout', function ($timeout) {
@@ -274,6 +279,18 @@ index.directive('onFlashSaleRenderFinished', ['$timeout', function ($timeout) {
 					scope.$emit('flashSaleRepeatFinished');
 				});
 			}
+		}
+	};
+}]);
+
+// 禁止滑动的directive
+index.directive('forbidScroll', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			element.on('touchmove', function (e) {
+				e.preventDefault();
+			});
 		}
 	};
 }]);

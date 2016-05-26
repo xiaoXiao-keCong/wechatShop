@@ -2,24 +2,28 @@
 #mall-goods-detail {
 	background-color: #f1f1f1;
 	color: #121212;
+	position: relative;
+	.back {
+		position: absolute;
+		top: 0.133333rem;
+		left: 0.133333rem;
+		z-index: 2;
+	}
+	.share {
+		position: absolute;
+		top: 0.133333rem;
+		right: 0.133333rem;
+		z-index: 2;
+	}
 	.info-container {
 		margin-bottom: 1.306667rem;
 		.goods-pic-container {
 			position: relative;
 			.goods-pic {
 				height: 10.0rem;
-				width: 10.0rem;
+				width: 100%;
 			}
-			.back {
-				position: absolute;
-				top: 0.133333rem;
-				left: 0.133333rem;
-			}
-			.share {
-				position: absolute;
-				top: 0.133333rem;
-				right: 0.133333rem;
-			}
+			
 		}
 		.goods-info {
 			background-color: #ffffff;
@@ -139,4 +143,96 @@
 			color: #ffffff;
 		}
 	}
+
 }
+.buy-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: rgba(0, 0, 0, 0.4);
+		z-index: 2;
+		.buy-info {
+			padding-left: 0.533333rem;
+			position: absolute;
+			bottom: 1.306667rem;
+			width: 100%;
+			height: 10.36rem;
+			background-color: #ffffff;
+			.cancel-btn {
+				height: 0.586667rem;
+				width: 0.586667rem;
+				position: absolute;
+				right: 0.16rem;
+				top: 0.346667rem;
+			}
+			.buy-img {
+				height: 2.96rem;
+				width: 2.96rem;
+				border-radius: 0.133333rem;
+				position: relative;
+				top: -0.666667rem;
+				margin-right: 0.533333rem;
+			}
+			.info {
+				width: 4.426667rem;
+				font-size: 0.373333rem;
+				color: #121212;
+				.flex-column;
+				margin-top: 0.4rem;
+				.price {
+					color: #3dbfd5;
+					font-size: 0.48rem;
+				}
+			}
+			.tips {
+				font-size: 0.4rem;
+				color: #121212;
+			}
+			.buy-num {
+				margin-top: 0.586667rem;
+				img {
+					width: 0.88rem;
+					height: 0.693333rem;
+					float: left;
+				}
+				.num {
+					float: left;
+					color: #333333;
+					font-size: 0.32rem;
+					display: inline-block;
+					width: 1.2rem;
+					border-top: 0.013333rem solid #e8e8e8;
+					border-bottom: 0.013333rem solid #e8e8e8;
+					height: 0.693333rem;
+					text-align: center;
+					line-height: 0.693333rem;
+				}
+				.inventory {
+					height: 0.693333rem;
+					line-height: 0.693333rem;
+					margin-left: 0.533333rem;
+					font-size: 0.32rem;
+					color: #666666;
+					span {
+						color: #333333;
+					}
+				}
+			}
+			
+		}
+		.buy-confirm {
+			background-color: #3dbfd5;
+			height: 1.306667rem;
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+			line-height: 1.306667rem;
+			color: #ffffff;
+			font-weight: bold;
+			font-size: 0.48rem;
+		}
+
+	}
