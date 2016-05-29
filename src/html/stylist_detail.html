@@ -11,11 +11,11 @@
     </span>
 </div>
 <div class="head">
-	<span><img ng-src="../../assets/images/test/fxs_head.png" class="head-pic"></span>
+	<span><img ng-src="{{designer.imgurl}}" class="head-pic"></span>
 	<span class="name" ng-bind="designer.name"></span>
-	<span class="intro" ng-bind="designer.info"></span>
+	<span class="intro" ng-bind="designer.describe"></span>
 	<span class="operation">
-		<span class="btn-operation">
+		<span class="btn-operation" ng-click="">
 			<span>+关注</span>
 		</span>
 		<span class="btn-operation">

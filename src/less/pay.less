@@ -1,3 +1,4 @@
+@import "display";
 #pay-container {
 	background-color: #f1f1f1;
 	.display-flex {
@@ -25,9 +26,20 @@
 			justify-content: space-between;
 			font-size: 0.4rem;
 			color: #333333;
+			.balance-unselected {
+				display: inline-block;
+				width: 0.586667rem;
+				height: 0.586667rem;
+				border: 0.013333rem solid #3dbfd5;
+			}
 			img {
 				width: 0.586667rem;
 				height: 0.586667rem;
+			}
+			#balance {
+				font-size: 0.426667rem;
+				color: #333333;
+				margin-left: 0.906667rem;
 			}
 		}
 		.tips {

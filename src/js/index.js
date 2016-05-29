@@ -105,7 +105,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/point_order_confirm.html',
 			controller: 'pointOrderConfirmCtrl'
 		})
-		.when('/order_confirm', {
+		.when('/order_confirm/:goods_id/:buy_num', {
 			templateUrl: '../html/order_confirm.html',
 			controller: 'orderConfirmCtrl'
 		})
@@ -117,7 +117,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/pay_recharge.html',
 			controller: 'payRechargeCtrl'
 		})
-		.when('/pay_goods', {
+		.when('/pay_goods/:order_id', {
 			templateUrl: '../html/pay_goods.html',
 			controller: 'payGoodsCtrl'
 		})
@@ -160,6 +160,25 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.otherwise({
 			redirectTo: '/'
 		});
+}]);
+
+// 判断用户是否登录
+function checkLogin() {
+	if (!sessionStorage.user) {
+		return false;
+	}
+	return true;
+}
+
+// 创建一个公共服务
+index.service('commonService', [function () {
+	var selecrSite;
+	this.getSite = function () {
+		return this.selectSite;
+	};
+	this.setSite = function (site) {
+		this.selectSite = site;
+	};
 }]);
 
 // 使用swiper插件制作图片轮播directive,这是广告的directive
@@ -226,7 +245,7 @@ index.directive('flashsale', ['$timeout', function ($timeout) {
 				});
 			});
 		}
-	};
+};
 }]);
 
 // 返回directive

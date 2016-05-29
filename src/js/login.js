@@ -21,22 +21,22 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$root
                 sessionStorage.setItem('user', JSON.stringify(resp.data.data));
                 $timeout(function () {
                     // 登录成功，返回上一页或者首页
-                    if ($rootScope.preUrl !== undefined) {
-                        alert('登录成功，即将返回上一页！');
-                        $location.path($rootScope.preUrl).replace();
-                    }
-                    else {
-                        alert('登录成功，即将返回首页！');
-                        $location.path('/').replace();
-                    }
-                    
+                    // if ($rootScope.preUrl !== undefined) {
+                    //     alert('登录成功，即将返回上一页！');
+                    //     // $location.path($rootScope.preUrl).replace();
+                    //     $window.history.back();
+                    // }
+                    // else {
+                    //     alert('登录成功，即将返回首页！');
+                    //     $location.path('/').replace();
+                    // }
+                    $window.history.back();
                 });
             }
             else {
                 alert(resp.data.reason);
             }
         }, function (resp) {
-            console.log(resp);
             alert('数据请求失败!请稍后再试');
         });
     };

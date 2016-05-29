@@ -46,7 +46,9 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 				commentLevel.push({'path': '../../assets/images/star.png'});
 			}
 			designer.commentLevel = commentLevel;
+			designer.imgurl = picBasePath + designer.imgurl;
 			$scope.designer = designer;
+			console.log(designer);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -85,7 +87,6 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 		};
 		$http.post('/designer/work.json', data, postCfg)
 		.then(function (resp) {
-			console.log(resp);
 			if (1 === resp.data.code) {
 				var workList = resp.data.data.designerworklist;
 				$scope.workList = workList;
@@ -117,5 +118,8 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 	$scope.selectService = function (service) {
 		service.selected = !service.selected;
 	};
+
+	// 关注发型师
+	
 
 }]);

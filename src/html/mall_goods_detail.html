@@ -1,6 +1,7 @@
 <!-- 积分商品详情 -->
 <div id="mall-goods-detail">
 	<img src="../../assets/images/back.png" class="back common-icon" back>
+	<img src="../../assets/images/cart.png" class="cart common-icon" ng-click="toCart()">
 	<img src="../../assets/images/share_2.png" class="share common-icon">
 	<div class="info-container">
 		<div advertise class="swiper-container goods-pic-container">
@@ -16,8 +17,12 @@
 			<span class="item name">
 				<span ng-bind="goods.name"></span>
 				<span class="praise">
-					<img src="../../assets/images/zan_2.png" class="common-icon">
-					<span ng-bind="goods.praisenum"></span>
+					<!-- <img src="../../assets/images/zan_2.png" class="common-icon"> -->
+					<span class="glyphicon glyphicon-heart-empty praise-icon" 
+					ng-if="!goods.iskeep" ng-click="praiseOperation(1)"></span>
+					<span class="glyphicon glyphicon-heart praise-icon praised" 
+					ng-if="goods.iskeep" ng-click="praiseOperation(2)"></span>
+					<span ng-bind="goods.praisenum" class="praise-num"></span>
 				</span>
 			</span>
 			<span class="item intro" ng-bind="goods.info">
@@ -55,12 +60,26 @@
 				<img src="../../assets/images/arrow_r_big.png" class="common-icon">
 			</span>
 		</div>
+		<!-- 商品点评 -->
+		<div class="comment-container">
+			<div class="comment-title-bar">
+				<span class="title">商品点评</span>
+				<!-- 评论统计信息 -->
+				<span class="comment-statistics">
+					<img src="../../assets/images/msg.png" class="common-icon">
+					<span><span ng-bind="commentInfo.imgcommentcount"></span>条带图评论</span>
+					<span><span ng-bind="commentInfo.totalcount"></span>条评论</span>
+					<img src="../../assets/images/arrow_r_big.png" class="common-icon">
+				</span>
+			</div>
+		</div>
 	</div>
 <div class="operation">
 	<span class="item add-cart" ng-click="addToCart()">加进购物车</span>
 	<span class="item buy" ng-click="buy()">立即购买</span>
 </div>
 </div>
+<!-- 购买信息 -->
 <div class="buy-container" forbid-scroll ng-show="isBuy">
 	<div class="buy-info">
 		<img src="../../assets/images/cancel.png" class="cancel-btn" ng-click="cancelBuy()">
@@ -68,7 +87,7 @@
 			<img ng-repeat="item in goods.imgarray | limitTo:1" ng-src="{{item.imgurl}}" class="buy-img">
 			<span class="info">
 				<span ng-bind="goods.name"></span>
-				<span class="price">￥<span ng-bind="goods.realprice"></span></span>
+				<span class="price">￥<span ng-bind="goods.price"></span></span>
 			</span>
 		</div>
 		<div class="tips">

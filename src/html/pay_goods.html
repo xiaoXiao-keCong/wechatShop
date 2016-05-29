@@ -7,21 +7,25 @@
 </div>
 <div class="pay">
 	<div class="item">
-		<span>订单号</span>
+		<span>订单号：<span ng-bind="orderInfo.id"></span></span>
+	</div>
+	<div class="item" ng-repeat="goods in orderInfo.goodslist">
+		<span>商品名称：<span ng-bind="goods.name"></span></span>
 	</div>
 	<div class="item">
-		<span>商品名称</span>
+		<span>下单时间：<span ng-bind="orderInfo.time"></span></span>
 	</div>
 	<div class="item">
-		<span>下单时间</span>
-	</div>
-	<div class="item">
-		<span>支付金额：￥</span>
+		<span>支付金额：￥<span ng-bind="orderInfo.actualprice"></span></span>
 	</div>
 	<div class="pay-balance">
-		<span>余额支付</span>
 		<span>
-			<img src="../../assets/images/balance_selected.png">
+			<span>余额支付</span>
+			<span id="balance">￥ <span ng-bind="orderInfo.balanceprice"></span></span>
+		</span>
+		<span>
+			<img src="../../assets/images/common_unselected.png" ng-if="!balancePay" ng-click="chooseBalance(1)"></span>
+			<img src="../../assets/images/common_selected.png" ng-if="balancePay" ng-click="chooseBalance(2)">
 		</span>
 	</div>
 	<div class="other-pay-tips">

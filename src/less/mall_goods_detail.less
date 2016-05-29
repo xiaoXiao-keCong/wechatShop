@@ -9,6 +9,12 @@
 		left: 0.133333rem;
 		z-index: 2;
 	}
+	.cart {
+		position: absolute;
+		top: 0.133333rem;
+		right: 1.2rem;
+		z-index: 2;
+	}
 	.share {
 		position: absolute;
 		top: 0.133333rem;
@@ -16,6 +22,7 @@
 		z-index: 2;
 	}
 	.info-container {
+		padding-bottom: 0.266667rem;
 		margin-bottom: 1.306667rem;
 		.goods-pic-container {
 			position: relative;
@@ -48,8 +55,17 @@
 					top: 0;
 					.flex;
 					align-items: center;
-					color: #3dbfd5;
 					font-size: 0.4rem;
+					.praise-icon {
+						font-size: 0.5rem;
+					}
+					.praised {
+						color: #3dbfd5;
+					}
+					.praise-num {
+						margin-left: 0.066667rem;
+						color: #3dbfd5;
+					}
 				}
 			}
 			.intro {
@@ -112,6 +128,26 @@
 					height: 1.04rem;
 					width: 1.04rem;
 					margin-right: 0.133333rem;
+				}
+			}
+		}
+		.comment-container {
+			margin-top: 0.266667rem;
+			background-color: #ffffff;
+			padding: 0 0.266667rem;
+			.comment-title-bar {
+				.flex;
+				align-items: center;
+				justify-content: space-between;
+				height: 0.96rem;
+				border-bottom: 0.013333rem solid #e8e8e8;
+				.title {
+					font-size: 0.426667rem;
+					color: #121212;
+				}
+				.comment-statistics {
+					font-size: 0.346667rem;
+					color: #999999;
 				}
 			}
 		}

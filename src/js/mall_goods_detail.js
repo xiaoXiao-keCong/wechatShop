@@ -9,9 +9,9 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.buyNum = 1;
 	$scope.deferred = $q.defer();
 
-	var goodsId = $routeParams.id;
+	var goodsId = parseInt($routeParams.id);
 	// 获取商品详情
-	$http.post('/shop/getgoodsbyid.json', {'id': goodsId}, postCfg)
+	$http.post('/shop/getgoodsbyid.json', {id: goodsId}, postCfg)
 	.then(function (resp) {
 		if (1 === resp.data.code) {
 			var goods = resp.data.data;
@@ -19,10 +19,20 @@ index.controller('mallGoodsDetailCtrl',
 				goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
 			}
 			$scope.goods = goods;
-			console.log(goods);
 		}
 	}, function (resp) {
 		console.log(resp);
+	});
+
+	// 获取商品评论统计信息
+	$http.post('/shop/getallgoodscommentofstatistic.json', {id: goodsId}, postCfg)
+	.success(function (data) {
+		if (1 === data.code) {
+			$scope.commentInfo = data.data;
+		}
+	})
+	.error(function (data) {
+		console.log(data);
 	});
 
 	$scope.toGuarantee = function () {
@@ -33,7 +43,6 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.addToCart = function () {
 		if (!sessionStorage.user) {
 			// 未登录，跳转到登录页面，将当前页面url存储到rootScope中
-			$rootScope.preUrl = $location.url();
 			$location.path('login');
 		}
 		else {
@@ -62,7 +71,24 @@ index.controller('mallGoodsDetailCtrl',
 
 	// 立即购买
 	$scope.buy = function () {
-		$scope.isBuy = true;
+		// 判断用户是否登录
+		if (!sessionStorage.user) {
+			// 用户未登录，跳转到登录页面
+			$rootScope.preUrl = $location.url();
+			$location.path('login');
+		}
+		else {
+			var user = JSON.parse(sessionStorage.user);
+			if (1 === user.vip.id) {
+				// 普通会员
+				$scope.goods.price = $scope.goods.realprice;
+			}
+			else {
+				// vip会员
+				$scope.goods.price = $scope.goods.vipprice;
+			}
+			$scope.isBuy = true;
+		}
 	};
 
 	// 取消购买
@@ -75,8 +101,7 @@ index.controller('mallGoodsDetailCtrl',
 		$scope.deferred.resolve('succeed');
 	});
 	$scope.confirmBuy = function () {
-		console.log('确认购买');
-		$location.path('order_confirm');
+		$location.path('order_confirm/' + goodsId + '/' + $scope.buyNum);
 	};
 
 	// 改变购买数量
@@ -91,10 +116,32 @@ index.controller('mallGoodsDetailCtrl',
 			case 2:
 				// 增加数量
 				if ($scope.buyNum != $scope.goods.inventory) {
-					$scope.buyNum++;	
+					$scope.buyNum++;
 				}
 				break;
 		}
+	};
+
+	// 点赞商品，index为1执行点赞，index为2执行取消点赞
+	$scope.praiseOperation = function (index) {
+		var postUrl = index === 1 ? '/user/keepgoods.json' : '/user/unkeepgoods.json';
+		$http.post(postUrl, {goodsid: goodsId}, postCfg)
+		.success(function (data) {
+			if (-1 === data.code) {
+				$location.path('login');
+			}
+			else if (1 === data.code) {
+				$scope.goods.iskeep = index === 1 ? true : false;
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+		});
+	};
+
+	// 跳转到购物车界面
+	$scope.toCart = function () {
+		$location.path('cart');
 	};
 
 }]);

@@ -12,9 +12,9 @@
             <span class="address" ng-bind="addr.address"></span>
         </div>
         <div class="operation-panel">
-            <div class="left">
-                <img src="../../assets/images/selected.png" alt="默认地址" ng-if="checkDefault(addr)">
-                <img src="../../assets/images/unselected.png" alt="非默认地址" ng-if="!checkDefault(addr)">
+            <div class="left" ng-click="setDefaultSite(addr)">
+                <img src="../../assets/images/common_selected.png" alt="默认地址" ng-if="checkDefault(addr)">
+                <img src="../../assets/images/common_unselected.png" alt="非默认地址" ng-if="!checkDefault(addr)">
                 <span class="tips">默认地址</span>
             </div>
             <div class="right">

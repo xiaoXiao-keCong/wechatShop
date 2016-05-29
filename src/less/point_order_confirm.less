@@ -9,9 +9,9 @@
 		.deliver-type {
 			background-color: #ffffff;
 			.item {
-				height: 1.146667rem;
-				.flex-center;
-				justify-content: space-between;
+				min-height: 1.146667rem;
+				.flex;
+				align-items: center;
 				padding: 0 0.133333rem;
 				border-bottom: 0.013333rem solid #d2d2d2;
 				&:last-child {
@@ -19,8 +19,31 @@
 				}
 				.left {
 					.flex-center;
+				}
+				.right {
+					flex: 1;
+					.flex-center;
+					justify-content: space-between;
 					.tips {
 						margin-left: 0.186667rem;
+					}
+					.select-site {
+						margin-left: 0.186667rem;
+						padding: 0.2rem 0;
+						.receiver {
+							font-size: 0.4rem;
+							margin-bottom: 0.04rem;
+							color: #121212;
+						}
+						.phone {
+							font-size: 0.373333rem;
+							margin-left: 1.2rem;
+							color: #333333;
+						}
+						.address {
+							font-size: 0.346667rem;
+							color: #666666;
+						}
 					}
 				}
 			}
@@ -41,6 +64,7 @@
 					 	width: 1.626667rem;
 					 	height: 1.626667rem;
 					 	margin-right: 0.293333rem;
+					 	border-radius: 0.133333rem;
 					 }
 				}
 				.right {
@@ -81,7 +105,7 @@
 						height: 1.413333rem;
 						width: 100%;
 						font-size: 0.32rem;
-						border: 0.026667rem solid #f1f1f1;
+						border: 0.04rem solid #f1f1f1;
 						padding: 0.266667rem;
 						border-radius: 0.133333rem;
 					}
@@ -91,6 +115,23 @@
 					margin-top: 0.4rem;
 				}
 			}
+		}
+		.coupon-container {
+			margin-top: 0.266667rem;
+			height: 1.2rem;
+			width: 100%;
+			background-color: #ffffff;
+			.flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.133333rem;
+			font-size: 0.4rem;
+			color: #333333;
+			.coupon {
+				font-size: 0.346667rem;
+
+			}
+				
 		}
 	}
 	.operation {

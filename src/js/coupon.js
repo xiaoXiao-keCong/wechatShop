@@ -1,21 +1,20 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-index.controller('couponCtrl', ['$scope', '$http', function ($scope, $http) {
-    var transFn = function(data) {
-                return $.param(data);
-        },
-        postCfg = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transFn
-        };
+index.controller('couponCtrl',
+    ['$scope', '$http', '$rootScope', '$location', function ($scope, $http, $rootScope, $location) {
+
     $scope.unused = true;
     $scope.used = false;
     $scope.expired = false;
 
     var couponPromise = $http.post('/user/mycouponlist.json', postCfg);
     couponPromise.then(function (resp) {
-    	if (1 === resp.data.code) {
+        if (-1 === resp.data.code) {
+            $rootScope.preUrl = $location.url();
+            $location.path('login');
+        }
+    	else if (1 === resp.data.code) {
     		var data = resp.data.data;
     		$scope.unusedList = addTypePic(data.unUsed);
     		$scope.noUnused = (0 === $scope.unusedList.length ? true : false);

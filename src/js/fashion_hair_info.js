@@ -18,6 +18,7 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
 
     // 点赞操作，包括点赞和取消点赞
     $scope.praiseOperation = function (hairInfo) {
+        console.log(hairInfo);
     	// 首先判断是否登录
     	if (sessionStorage.user) {
             if (hairInfo.alreadypraise === true) {

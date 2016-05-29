@@ -2,18 +2,17 @@
  * Created by hugotan on 2016/4/12.
  */
 index.controller('addrManageCtrl',
-    ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
-    var transFn = function(data) {
-                return $.param(data);
-        },
-        postCfg = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transFn
-        };
+    ['$scope', '$http', '$window', '$location', '$rootScope',
+    function ($scope, $http, $window, $location, $rootScope) {
+
     // 获取用户收货地址
     $http.post('/user/myaddress.json', postCfg)
         .success(function (data) {
-            if (1 === data.code && 0 < data.data.addresslist.length) {
+            if (-1 === data.code) {
+                $rootScope.preUrl = $location.url();
+                $location.path('login');
+            }
+            else if (1 === data.code && 0 < data.data.addresslist.length) {
                 $scope.addrList = data.data.addresslist;
             }
         })
@@ -53,5 +52,28 @@ index.controller('addrManageCtrl',
                 console.log(resp);
             });
         }
+    };
+
+    // 设置默认地址
+    $scope.setDefaultSite = function (addr) {
+        $http.post('/user/setdefaultaddress.json', {id: addr.id}, postCfg)
+        .success(function (data) {
+            if (-1 === data.code) {
+                $rootScope.preUrl = $location.url();
+                $location.path('login');
+            }
+            else if (1 === data.code) {
+                // 设置成功
+                var index = $scope.addrList.indexOf(addr);
+                for (var i = 0, j = $scope.addrList.length; i < j; i++) {
+                    if (i === index) {
+                        $scope.addrList[i].defaultflag = 1;
+                    }
+                    else {
+                        $scope.addrList[i].defaultflag = 0;
+                    }
+                }
+            }
+        });
     };
 }]);

@@ -16,7 +16,7 @@ index.controller('collectionCtrl',
             var designerList = resp.data.data.designerlist;
             // 对图片地址添加前缀
             for (var i = 0, j = designerList.length; i < j; i++) {
-                designerList[i].imgurl = picBaseUrl + designerList[i].imgurl;
+                designerList[i].imgurl = picBasePath + designerList[i].imgurl;
             }
             $scope.designerList = designerList;
         }
