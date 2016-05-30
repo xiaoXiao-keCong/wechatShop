@@ -1,8 +1,9 @@
 /**
  * Created by hugotan on 2016/4/30.
  */
-index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
-	function ($scope, $routeParams, $http) {
+index.controller('stylistDetailCtrl',
+	['$scope', '$routeParams', '$http', '$location',
+	function ($scope, $routeParams, $http, $location) {
 
 	var priceShowed = false,
 		lifeShowed = false,
@@ -48,7 +49,6 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 			designer.commentLevel = commentLevel;
 			designer.imgurl = picBasePath + designer.imgurl;
 			$scope.designer = designer;
-			console.log(designer);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -104,7 +104,6 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 		};
 		$http.post('/designer/life.json', data, postCfg)
 		.then(function (resp) {
-			console.log(resp);
 			if (1 === resp.data.code) {
 				var LifeList = resp.data.data.designerlifelist;
 				$scope.LifeList = LifeList;
@@ -119,7 +118,22 @@ index.controller('stylistDetailCtrl', ['$scope', '$routeParams', '$http',
 		service.selected = !service.selected;
 	};
 
-	// 关注发型师
-	
+	// 关注（收藏）或者取消关注（取消收藏）发型师
+	$scope.keepDesigner = function (designer) {
+		var postUrl = designer.iskeep ? '/designer/unkeep.json' : '/designer/keep.json';
+		$http.post(postUrl, {designerid: designer.id}, postCfg)
+		.success(function (data) {
+			if (-1 === data.code) {
+				$location.path('login');
+			}
+			else if (1 === data.code) {
+				$scope.designer.iskeep = !$scope.designer.iskeep;
+				console.log($scope.designer);
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+		});
+	};
 
 }]);

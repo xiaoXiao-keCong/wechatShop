@@ -15,8 +15,9 @@
 	<span class="name" ng-bind="designer.name"></span>
 	<span class="intro" ng-bind="designer.describe"></span>
 	<span class="operation">
-		<span class="btn-operation" ng-click="">
-			<span>+关注</span>
+		<span class="btn-operation" ng-click="keepDesigner(designer)">
+			<span ng-if="!designer.iskeep">+关注</span>
+			<span ng-if="designer.iskeep">取消关注</span>
 		</span>
 		<span class="btn-operation">
 			<span>更多介绍</span>
@@ -38,7 +39,9 @@
 			</span>
 		</span>
 		<span class="item">
-			<span><img src="../../assets/images/zan.png" class="zan-icon"></span>
+			<span>
+				<img src="../../assets/images/zan.png" class="zan-icon">
+			</span>
 			<span class="highlight" ng-bind="designer.praisenum"></span>
 		</span>
 	</div>

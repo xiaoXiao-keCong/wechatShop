@@ -41,4 +41,13 @@ index.controller('orderCtrl',
 				break;
 		}
 	};
+
+	// 获取全部商城订单
+	$http.post('/user/mygoodsorder.json', {flag: 2, page: 1}, postCfg)
+	.success(function (data) {
+		console.log(data);
+	})
+	.error(function (data) {
+		console.log(data);
+	});
 }]);

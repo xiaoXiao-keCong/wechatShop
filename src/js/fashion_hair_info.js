@@ -18,53 +18,21 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
 
     // 点赞操作，包括点赞和取消点赞
     $scope.praiseOperation = function (hairInfo) {
-        console.log(hairInfo);
-    	// 首先判断是否登录
-    	if (sessionStorage.user) {
-            if (hairInfo.alreadypraise === true) {
-                // 取消点赞
-                $http.post('/home/fashionhair/unpraise.json', {'fashionhairid': hairInfo.id}, postCfg)
-                .then(function (resp) {
-                    if (-1 === resp.data.code) {
-                        // 用户未登录
-                        sessionStorage.removeItem('user');
-                        $timeout(function () {
-                            alert('请先登录!');
-                        }, 0);
-                        $location.path('login');
-                    }
-                    else if (1 === resp.data.code) {
-                        setHairInfo();
-                        alert('取消点赞成功!');
-                    }
-                }, function (resp) {
-                    console.log(resp);
-                });
+    	var postUrl = hairInfo.iskeep ? '/home/fashionhair/unkeep.json' : '/home/fashionhair/keep.json';
+        $http.post(postUrl, {'fashionhairid': parseInt(hairInfo.id)}, postCfg)
+        .then(function (resp) {
+            console.log(resp);
+            if (-1 === resp.data.code) {
+                // 用户未登录
+                sessionStorage.removeItem('user');
+                $location.path('login');
             }
-            else {
-                // 点赞
-                $http.post('/home/fashionhair/praise.json', {'fashionhairid': hairInfo.id}, postCfg)
-                .then(function (resp) {
-                    if (-1 === resp.data.code) {
-                        // 用户未登录
-                        sessionStorage.removeItem('user');
-                        $timeout(function () {
-                            alert('请先登录!');
-                        }, 0);
-                        $location.path('login');
-                    }
-                    else if (1 === resp.data.code) {
-                        setHairInfo();
-                        alert('点赞成功!');
-                    }
-                }, function (resp) {
-                    console.log(resp);
-                });
+            else if (1 === resp.data.code) {
+                setHairInfo();
             }
-    	}
-    	else {
-    		$location.path('login');
-    	}
+        }, function (resp) {
+            console.log(resp);
+        });
     };
 
 }]); 

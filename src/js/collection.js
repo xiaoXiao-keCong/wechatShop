@@ -9,7 +9,6 @@ index.controller('collectionCtrl',
     designerPromise.then(function (resp) {
         console.log(resp);
         if (-1 === resp.data.code) {
-            $rootScope.preUrl = $location.url();
             $location.path('login');
         }
         else if (1 === resp.data.code) {
@@ -33,4 +32,9 @@ index.controller('collectionCtrl',
             console.log(resp);
         });
     }
+
+    // 跳转到设计师详情
+    $scope.toDesignerDetail = function (designer) {
+        $location.path('stylist_detail/' + designer.id);
+    };
 }]);

@@ -11,12 +11,12 @@
         <span class="nav-item"><a href="javascript:void(0)">悦商品</a></span>
     </div>
     <div class="collection" ng-if="isDesigner">
-        <div class="item" ng-repeat="designer in designerList">
+        <div class="item" ng-repeat="designer in designerList" ng-click="toDesignerDetail(designer)">
             <img ng-src="{{designer.imgurl}}">
             <div class="info">
-                <span class="name">{{designer.name}}</span>
-                <span class="store">{{designer.store.name}}</span>
-                <span class="order">{{designer.collectnum}}单</span>
+                <span class="name"><span ng-bind="designer.name"></span></span>
+                <span class="store"><span ng-bind="designer.store.name"></span></span>
+                <span class="order"><span ng-bind="designer.collectnum"></span>单</span>
             </div>
         </div>
     </div>
