@@ -157,6 +157,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/stylist_detail.html',
 			controller: 'stylistDetailCtrl'
 		})
+		.when('/order_comment', {
+			templateUrl: '../html/order_comment.html',
+			controller: 'orderCommentCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
