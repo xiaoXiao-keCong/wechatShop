@@ -25,7 +25,37 @@
             <img ng-src="{{hair.imgurl}}">
         </span>
     </div>
-    <div class="collection" ng-if="isStore"></div>
-    <div class="collection" ng-if="isGoods"></div>
+    <div class="list-container" ng-if="isStore">
+        <div class="list-item" ng-repeat="store in storeList" ng-click="toStoreDetail(store)">
+            <span><img ng-src="{{store.img1}}" class="store-img"></span>
+            <span class="info">
+                <span class="name" ng-bind="store.name"></span>
+                <span class="intro" ng-bind="store.info"></span>
+                <span class="price">
+                    <span class="star">
+                        <img ng-repeat="star in store.starUrl" ng-src="{{star.path}}">
+                    </span>
+                    <span>￥<span ng-bind="store.average"></span></span>
+                </span>
+                <span class="location">
+                    <span><img src="../../assets/images/location.png"></span>
+                    <span ng-bind="store.location"></span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="goods-container" ng-if="isGoods">
+        <span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
+            <span><img ng-src="{{item.detailimgurl}}" class="goods-img"></span>
+            <span class="goods-name" ng-bind="item.name"></span>
+            <span class="goods-info">
+                <span>￥<span ng-bind="item.realprice"></span></span>
+                <span class="praise">
+                    <span><img src="../../assets/images/zan.png"></span>
+                    <span ng-bind="item.praisenum"></span>
+                </span>
+            </span>
+        </span>
+    </div>
 </div>
 </div>

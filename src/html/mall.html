@@ -81,12 +81,12 @@
 	<div class="goods-container">
 		<span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
 			<span><img ng-src="{{item.detailimgurl}}" class="goods-img"></span>
-			<span class="goods-name" ng-bind="item.name">买一送一美发套装</span>
+			<span class="goods-name" ng-bind="item.name"></span>
 			<span class="goods-info">
 				<span>￥<span ng-bind="item.realprice"></span></span>
 				<span class="praise">
 					<span><img src="../../assets/images/zan.png"></span>
-					<span ng-bind="item.praisenum">74</span>
+					<span ng-bind="item.praisenum"></span>
 				</span>
 			</span>
 		</span>

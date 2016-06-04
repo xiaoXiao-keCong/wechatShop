@@ -14,7 +14,9 @@
 		<span class="nav-item">价格排序<img src="../../assets/images/updown.png" class="icon"></span>
 	</div>
 	<div class="grid-container" ng-if="!isList">
-		<span class="grid-item" ng-repeat="store in storeList" ng-click="toDetail()"><img ng-src="{{store.img2}}"></span>
+		<span class="grid-item" ng-repeat="store in storeList" ng-click="toDetail()">
+			<img ng-src="{{store.img2}}">
+			</span>
 	</div>
 	<div class="list-container" ng-if="isList">
 		<div class="list-item" ng-repeat="store in storeList" ng-click="toDetail(store)">

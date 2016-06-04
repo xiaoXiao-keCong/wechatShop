@@ -62,6 +62,24 @@ index.controller('collectionCtrl',
         $http.post('/user/mykeepstore.json')
         .success(function (data) {
             console.log(data);
+            if (1 === data.code) {
+                var storeList = data.data.storelist,
+                    starUrl1 = '../../assets/images/star_h.png',
+                    starUrl2 = '../../assets/images/star.png',
+                    k, l, n, store;
+                for (k = 0; k < storeList.length; k++) {
+                    storeList[k].img1 = picBasePath + storeList[k].imgurl[0];    // 正方形
+                    storeList[k].starUrl = [];
+                    for (l = 0; l < storeList[k].star; l++) {
+                        storeList[k].starUrl.push({'path': starUrl1});
+                    }
+                    for (n = l; n < 5; n++) {
+                        storeList[k].starUrl.push({'path': starUrl2});
+                    }
+                }
+                $scope.storeList = storeList;
+                console.log($scope.storeList);
+            }
         })
         .error(function (data) {
             console.log(data);
@@ -78,6 +96,14 @@ index.controller('collectionCtrl',
         $http.post('/user/mykeepgoods.json')
         .success(function (data) {
             console.log(data);
+            if (1 === data.code) {
+                var goodsList = data.data.goodslist;
+                for (var i = 0, j = goodsList.length; i < j; i++) {
+                    goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
+                }
+                $scope.goodsList = goodsList;
+                console.log($scope.goodsList);
+            }
         })
         .error(function (data) {
             console.log(data);
@@ -93,5 +119,15 @@ index.controller('collectionCtrl',
     // 跳转到时尚发型详情
     $scope.showHairInfo = function (hair) {
         $location.path('fashion_hair_info/' + hair.id);
+    };
+
+    // 跳转到门店详情
+    $scope.toStoreDetail = function (store) {
+        $location.path('store_detail/' + store.id);
+    };
+
+    // 跳转到悦商品详情
+    $scope.toGoodsDetail = function (goods) {
+        $location.path('mall_goods_detail/' + goods.id);
     };
 }]);
