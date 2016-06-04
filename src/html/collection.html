@@ -5,10 +5,10 @@
 </div>
 <div id="collection-container">
     <div id="top-nav">
-        <span class="nav-item"><a href="javascript:void(0)" class="selected" ng-click="getDesigner()">优秀造型师</a></span>
-        <span class="nav-item"><a href="javascript:void(0)" ng-click="getFashionHair()">时尚发型</a></span>
-        <span class="nav-item"><a href="javascript:void(0)" ng-click="getStarStore()">明星门店</a></span>
-        <span class="nav-item"><a href="javascript:void(0)" ng-click="getGoods()">悦商品</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-class="{'selected': isDesigner}" ng-click="getDesigner()">优秀造型师</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-click="getFashionHair()" ng-class="{'selected': isHair}">时尚发型</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-click="getStarStore()" ng-class="{'selected': isStore}">明星门店</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-class="{'selected': isGoods}" ng-click="getGoods()">悦商品</a></span>
     </div>
     <div class="collection" ng-if="isDesigner">
         <div class="item" ng-repeat="designer in designerList" ng-click="toDesignerDetail(designer)">

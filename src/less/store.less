@@ -1,3 +1,4 @@
+@import "display";
 #store-container {
 	background-color: #f1f1f1;
 	.display-flex {
@@ -72,6 +73,11 @@
 					color: #555353;
 					font-size: 0.32rem;
 					margin-top: 0.2rem;
+					overflow : hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
 				}
 				.price {
 					.display-flex;
@@ -86,7 +92,6 @@
 							width: 0.346667rem;
 							height: 0.346667rem;
 						}
-						
 					}
 				}
 				.location {

@@ -1,20 +1,88 @@
 <div class="parent-container">
 <div id="store-detail-container">
-<div class="title-bar">
-    <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
-    <span>匠舍门店</span>
-    <span class="title-bar-right">
-        <img src="../../assets/images/collect.png" alt="收藏" class="common-icon">
-        <img src="../../assets/images/share.png" class="common-icon share-icon">
-    </span>
-</div>
-<div class="store-detail">
-    <div class="store-pics-container">
-        <img src="../../assets/images/test/store_detail.png">
+    <div class="title-bar">
+        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+        <span>匠舍门店</span>
+        <span class="title-bar-right">
+            <!-- <img src="../../assets/images/collect.png" alt="收藏" class="common-icon"> -->
+            <span class="glyphicon glyphicon-star-empty" ng-if="!store.iskeep" ng-click="keepStore(store)"></span>
+            <span class="glyphicon glyphicon-star keep-store" ng-if="store.iskeep" ng-click="keepStore(store)"></span>
+            <img src="../../assets/images/share.png" class="common-icon share-icon">
+        </span>
     </div>
-    <div class="store-intro">
-        
+    <div class="store-detail">
+        <div advertise class="swiper-container store-pics-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" ng-repeat="item in store.imgs" on-finish-render-filters>
+                    <img ng-src="{{item.path}}">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div id="store-intro">
+            <div class="clearfix">
+                <span ng-bind="store.name"></span>
+                <img ng-repeat="star in store.starUrl" ng-src="{{star.path}}" class="star-icon">
+                <span class="pull-right price-table-btn" ng-click="showPrice()">
+                    <img src="../../assets/images/dingdan_h.png" alt="价目表" class="common-icon">
+                    <span>价目表</span>
+                </span>
+            </div>
+            <div class="time">
+                营业时间 <span ng-bind="store.begintime"></span> - <span ng-bind="store.endtime"></span>
+            </div>
+            <div ng-bind="store.info" class="store-info"></div>
+            <div class="other-info">
+                <span class="">预约数：<span class="text-highlight" ng-bind="store.reservenum"></span>/次</span>
+                <span>均价：<span class="text-highlight" ng-bind="store.average"></span>/元</span>
+            </div>
+            <div class="location">
+                <span class="flex">
+                    <img src="../../assets/images/location.png" class="location-icon">
+                    <span ng-bind="store.location"></span>
+                </span>
+                <img src="../../assets/images/phone_2.png" class="common-icon" name="phone-icon">
+            </div>
+        </div>
+        <div id="store-activity">
+            <div class="text-highlight title">
+                <span>店内活动</span>
+                <span class="en-title">In store activities</span>
+            </div>
+            <div activity class="swiper-container store-activity-pics">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" ng-repeat="activity in activityList" on-activity-finished>
+                        <img ng-src="{{activity.imgurl}}" ng-click="jumpToActivity(activity)">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div id="store-designer">
+            <div class="text-highlight title">
+                <span>优秀发型师</span>
+                <span class="en-title">Excellent hair stylist</span>
+            </div>
+            <div class="designer-item" ng-repeat="designer in designerList">
+                <div class="designer-info-container">
+                    <img ng-src="{{designer.avatar}}" class="designer-icon">
+                    <div class="designer-info">
+                        <div class="designer-name">
+                            <span ng-bind="designer.name"></span>
+                            <span class="text-highlight">￥<span ng-bind="designer.cutmoney"></span>元</span>
+                        </div>
+                        <div class="order-num">
+                            <span>接单：<span ng-bind="designer.ordernum"></span></span>
+                        </div>
+                        <div ng-bind="designer.info" class="info-text"></div>
+                    </div>
+                </div>
+                <div class="operation-container">
+                    <img src="../../assets/images/consult.png" alt="咨询">
+                    <img src="../../assets/images/appoint.png" alt="预约">
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 </div>

@@ -83,7 +83,7 @@ index.controller('collectionCtrl',
             console.log(data);
             alert('数据请求失败，请稍后再试！');
         });
-    }
+    };
 
     // 跳转到设计师详情
     $scope.toDesignerDetail = function (designer) {
@@ -93,5 +93,5 @@ index.controller('collectionCtrl',
     // 跳转到时尚发型详情
     $scope.showHairInfo = function (hair) {
         $location.path('fashion_hair_info/' + hair.id);
-    }
+    };
 }]);
