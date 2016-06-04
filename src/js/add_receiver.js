@@ -2,7 +2,8 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('addReceiverCtrl',
-	['$scope', '$http', '$location', '$rootScope', function ($scope, $http, $location, $rootScope) {
+	['$scope', '$http', '$location', '$rootScope', '$window',
+	function ($scope, $http, $location, $rootScope, $window) {
 
 	// 初始化判断是否有值传过来
 	function init() {
@@ -39,14 +40,15 @@ index.controller('addReceiverCtrl',
 			city: $scope.city,
 			address: $scope.address
 		},
-		    postUrl = '/user/updateaddress.json';
+		    postUrl = '/user/addaddress.json';
 		// 判断更新地址还是添加新地址
 		if ($scope.id) {
 			data.id = $scope.id;
 			postUrl = '/user/updateaddress.json';
 		}
-		var promise = $http.post(postUrl, data, postCfg);
-		promise.then(function (resp) {
+		$http.post(postUrl, data, postCfg)
+		.then(function (resp) {
+			console.log(resp);
 			if (-1 === resp.data.code) {
 				// 用户未登录
 				$rootScope.preUrl = $location.url();

@@ -5,10 +5,10 @@
 </div>
 <div id="collection-container">
     <div id="top-nav">
-        <span class="nav-item"><a href="javascript:void(0)" class="selected">优秀造型师</a></span>
-        <span class="nav-item"><a href="javascript:void(0)">时尚发型</a></span>
-        <span class="nav-item"><a href="javascript:void(0)">明星门店</a></span>
-        <span class="nav-item"><a href="javascript:void(0)">悦商品</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" class="selected" ng-click="getDesigner()">优秀造型师</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-click="getFashionHair()">时尚发型</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-click="getStarStore()">明星门店</a></span>
+        <span class="nav-item"><a href="javascript:void(0)" ng-click="getGoods()">悦商品</a></span>
     </div>
     <div class="collection" ng-if="isDesigner">
         <div class="item" ng-repeat="designer in designerList" ng-click="toDesignerDetail(designer)">
@@ -20,8 +20,12 @@
             </div>
         </div>
     </div>
-    <div class="collection" ng-if="isHaircut">
-        <!-- <div class="item" ng-repeat=""></div> -->
+    <div class="hairstyle-content" ng-if="isHair">
+        <span ng-repeat="hair in hairList" ng-click="showHairInfo(hair)">
+            <img ng-src="{{hair.imgurl}}">
+        </span>
     </div>
+    <div class="collection" ng-if="isStore"></div>
+    <div class="collection" ng-if="isGoods"></div>
 </div>
 </div>

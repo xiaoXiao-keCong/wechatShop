@@ -5,7 +5,6 @@ index.controller('fashionHairStyleCtrl',
     ['$scope', '$http', '$location', function ($scope, $http, $location) {
 	// 跳转到时尚发型详情
 	$scope.showHairInfo = function (hair) {
-		console.log(hair.id);
 		$location.path('fashion_hair_info/' + hair.id);
 	};
 
