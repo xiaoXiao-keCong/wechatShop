@@ -1,3 +1,4 @@
+@import "display";
 .display-flex {
 	display: flex;
 	display: -webkit-flex;
@@ -59,6 +60,7 @@
 				img {
 					width: 2.24rem;
 					height: 2.16rem;
+					border-radius: 100%;
 				}
 			}
 			.info {
@@ -94,6 +96,11 @@
 					color: #666666;
 					font-size: 0.32rem;
 					margin-top: 0.266667rem;
+					overflow : hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
 				}
 			}
 		}
@@ -137,6 +144,29 @@
 	.display-flex;
 	align-items: center;
 	justify-content: center;
+    #time-select-container {
+    	.flex;
+    	position: relative;
+    	margin-top: 0.04rem;
+    	.swiper-container {
+    		flex: 1;
+	        width: 50%;
+	        height: 3.6rem !important;
+			
+	    }
+		.swiper-slide {
+	        text-align: center;
+	        font-size: 0.32rem;
+	        background: #fff;
+			height: 1.2rem !important;
+	        line-height: 1.2rem;
+	        color: #cccccc !important;
+	    }
+	    .swiper-slide-active {
+	    	font-size: 0.4rem;
+	    	color: #666666 !important;
+	    }
+    }
 	.option-container {
 		width: 8.666667rem;
 		background-color: #ffffff;
@@ -168,25 +198,6 @@
 				img {
 					height: 1.626667rem;
 					width: 1.626667rem;
-				}
-			}
-		}
-		.time-option {
-			margin: 0.4rem 0;
-			.display-flex-column;
-			.time-row {
-				height: 1.173333rem;
-				.display-flex;
-				justify-content: space-around;
-				align-items: center;
-				font-size: 0.4rem;
-				color: #666666;
-				background-color: #f4f2f2;
-				&:not(:nth-child(2)) {
-					height: 0.773333rem;
-					color: #cccccc;
-					font-size: 0.32rem;
-					background-color: #ffffff;
 				}
 			}
 		}

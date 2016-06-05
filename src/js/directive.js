@@ -165,3 +165,62 @@ index.directive('forbidScroll', ['$timeout', function ($timeout) {
 		}
 	};
 }]);
+
+
+// 日期选择directive
+index.directive('date', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			// 所有图片加载完毕后才执行swiper的初始化
+			scope.dateDeferred.promise.then(function (msg) {
+				scope.timeSwiper = new Swiper(element.get(0), {
+					direction: 'vertical',
+					speed: 300,
+					loop: false,
+					autoplayDisableOnInteraction: false,
+					watchSlidesProgress : true,
+					watchSlidesVisibility : true,
+					slidesPerView: 3,
+					centeredSlides: true
+				});
+			});
+
+		}
+	};
+}]);
+
+// 时间选择directive
+index.directive('time', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.timeSwiper = new Swiper(element.get(0), {
+				direction: 'vertical',
+				speed: 300,
+				loop: false,
+				autoplayDisableOnInteraction: false,
+				watchSlidesProgress : true,
+				watchSlidesVisibility : true,
+				slidesPerView: 3,
+				centeredSlides: true
+			});
+		}
+	};
+}]);
+
+// 判断限时抢购是否加载完
+index.directive('onTimeFinished', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('timeFinished');
+				});
+			}
+		}
+	};
+}]);

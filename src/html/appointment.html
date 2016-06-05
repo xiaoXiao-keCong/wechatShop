@@ -3,38 +3,69 @@
 	<div class="option-container">
 		<div class="tips">
 			<span class="title">服务项目</span>
-			<span>不限</span>
+			<span>
+				<span ng-repeat="item in selectedItems" ng-bind="item.name">
+				</span>
+			</span>
 		</div>
 		<div class="service-option">
 			<div class="option-row">
-				<span><img src="../../assets/images/jianfa_h.png"></span>
-				<span><img src="../../assets/images/ranfa.png"></span>
-				<span><img src="../../assets/images/tangfa.png"></span>
+				<span ng-if="!jianfa" ng-click="select('jianfa')"><img src="../../assets/images/jianfa.png"></span>
+				<span ng-if="jianfa" ng-click="select('jianfa')"><img src="../../assets/images/jianfa_h.png"></span>
+				<span ng-if="!ranfa" ng-click="select('ranfa')"><img src="../../assets/images/ranfa.png"></span>
+				<span ng-if="ranfa" ng-click="select('ranfa')"><img src="../../assets/images/ranfa_h.png"></span>
+				<span ng-if="!tangfa" ng-click="select('tangfa')"><img src="../../assets/images/tangfa.png"></span>
+				<span ng-if="tangfa" ng-click="select('tangfa')"><img src="../../assets/images/tangfa_h.png"></span>
 			</div>
 			<div class="option-row">
-				<span><img src="../../assets/images/huli.png"></span>
-				<span><img src="../../assets/images/huazhuang.png"></span>
-				<span><img src="../../assets/images/meijia.png"></span>
+				<span ng-if="!huli" ng-click="select('huli')"><img src="../../assets/images/huli.png"></span>
+				<span ng-if="huli" ng-click="select('huli')"><img src="../../assets/images/huli_h.png"></span>
+				<span ng-if="!huazhuang" ng-click="select('huazhuang')"><img src="../../assets/images/huazhuang.png"></span>
+				<span ng-if="huazhuang" ng-click="select('huazhuang')"><img src="../../assets/images/huazhuang_h.png"></span>
+				<span ng-if="!meijia" ng-click="select('meijia')"><img src="../../assets/images/meijia.png"></span>
+				<span ng-if="meijia" ng-click="select('meijia')"><img src="../../assets/images/meijia_h.png"></span>
 			</div>
 		</div>
 		<div class="tips">
 			<span class="title">选择时间</span>
-			<span>不限</span>
+			<!-- <span>不限</span> -->
 		</div>
-		<div class="time-option">
-			<span class="time-row">
-				<span>04月12日(今天)</span>
-				<span>15:30</span>
-			</span>
-			<span class="time-row">
-				<span>04月13日(周一)</span>
-				<span>16:30</span>
-			</span>
-			<span class="time-row">
-				<span>04月14日(周二)</span>
-				<span>17:30</span>
-			</span>
+		<div id="time-select-container">
+			<div class="swiper-container" date id="date-select">
+		        <div class="swiper-wrapper">
+		            <div class="swiper-slide" ng-repeat="time in timeArr" ng-bind="time.date" on-time-finished></div>
+		        </div>
+		    </div>
+		    <div class="swiper-container" time id="time-select">
+		        <div class="swiper-wrapper">
+		            <div class="swiper-slide">10:00</div>
+		            <div class="swiper-slide">10:30</div>
+		            <div class="swiper-slide">11:00</div>
+		            <div class="swiper-slide">11:30</div>
+		            <div class="swiper-slide">12:00</div>
+		            <div class="swiper-slide">12:30</div>
+		            <div class="swiper-slide">13:00</div>
+		            <div class="swiper-slide">13:30</div>
+		            <div class="swiper-slide">14:00</div>
+		            <div class="swiper-slide">14:30</div>
+		            <div class="swiper-slide">15:00</div>
+		            <div class="swiper-slide">15:30</div>
+		            <div class="swiper-slide">16:00</div>
+		            <div class="swiper-slide">16:30</div>
+		            <div class="swiper-slide">17:00</div>
+		            <div class="swiper-slide">17:30</div>
+		            <div class="swiper-slide">18:00</div>
+		            <div class="swiper-slide">18:30</div>
+		            <div class="swiper-slide">19:00</div>
+		            <div class="swiper-slide">19:30</div>
+		            <div class="swiper-slide">20:00</div>
+		            <div class="swiper-slide">20:30</div>
+		            <div class="swiper-slide">21:00</div>
+		            <div class="swiper-slide">21:30</div>
+		        </div>
+		    </div>
 		</div>
+		
 		<div class="operation-panel">
 			<span class="btn-recommend" ng-click="recommend()">智能推荐</span>
 			<span class="btn-jump" ng-click="jump()">
@@ -65,7 +96,7 @@
 			<span><img src="../../assets/images/down_2.png" class="icon" ng-click="itemSelect()"></span>
 		</span>
 	</div>
-	<div class="list-item border-bottom-isolated">
+	<!-- <div class="list-item border-bottom-isolated">
 		<div class="last-appoint">
 			<span class="cn">上次预约</span>
 			<span class="en">Last appointment</span>
@@ -102,8 +133,38 @@
 				<span class="appoint"><img src="../../assets/images/appoint.png"></span>
 			</span>
 		</div>
+	</div> -->
+	<div class="list-item" ng-repeat="designer in designerList">
+		<div class="content">
+			<span class="headpic">
+				<img ng-src="{{designer.avatar}}">
+			</span>
+			<span class="info">
+				<span class="first-row">
+					<span class="left">
+						<span ng-bind="designer.name"></span>
+						<span class="star">
+							<img ng-repeat="star in designer.starUrl" ng-src="{{star.path}}">
+						</span>
+					</span>
+					<span class="right">￥<span ng-bind="designer.cutmoney"></span></span>
+				</span>
+				<span class="intro" ng-bind="designer.info"></span>
+			</span>
+
+		</div>
+		<div class="location">
+			<span class="left">
+				<span><img src="../../assets/images/location.png"></span>
+				<span ng-bind="designer.store.location"></span>
+			</span>
+			<span class="right">
+				<span class="consult"><img src="../../assets/images/consult.png"></span>
+				<span class="appoint"><img src="../../assets/images/appoint.png"></span>
+			</span>
+		</div>
 	</div>
-	<div class="list-item">
+	<!-- <div class="list-item">
 		<div class="content">
 			<span class="headpic">
 				<img src="../../assets/images/test/stylist_headpic.png">
@@ -170,41 +231,7 @@
 				<span class="appoint"><img src="../../assets/images/appoint.png"></span>
 			</span>
 		</div>
-	</div>
-	<div class="list-item">
-		<div class="content">
-			<span class="headpic">
-				<img src="../../assets/images/test/stylist_headpic.png">
-			</span>
-			<span class="info">
-				<span class="first-row">
-					<span class="left">
-						<span>明星</span>
-						<span class="star">
-							<img src="../../assets/images/star_h.png">
-							<img src="../../assets/images/star_h.png">
-							<img src="../../assets/images/star_h.png">
-							<img src="../../assets/images/star.png">
-							<img src="../../assets/images/star.png">
-						</span>
-					</span>
-					<span class="right">￥218</span>
-				</span>
-				<span class="intro">年轻人敢于尝试是好事，但是很多人的选择是盲目的。从发型师的角度而言，我们同时承担了...</span>
-			</span>
-
-		</div>
-		<div class="location">
-			<span class="left">
-				<span><img src="../../assets/images/location.png"></span>
-				<span>北京东方广场店</span>
-			</span>
-			<span class="right">
-				<span class="consult"><img src="../../assets/images/consult.png"></span>
-				<span class="appoint"><img src="../../assets/images/appoint.png"></span>
-			</span>
-		</div>
-	</div>
+	</div> -->
 </div>
 <div class="bottom-nav">
     <span class="item" ng-click="navigate(1)">

@@ -53,6 +53,16 @@ index.controller('homeCtrl',
 	// 明星发型师是否加载完毕的promise
 	$scope.designerDeferred = $q.defer();
 
+	// 获取所有城市
+	$http.post('/home/arealist.json', postCfg)
+	.success(function (data) {
+		console.log(data);
+	})
+	.error(function (data) {
+		console.log(data);
+		alert('数据请求失败，请稍后再试！');
+	});
+
 	// 首页轮播图
 	$http.post('/home/homead.json', {'cityid': 1}, postCfg)
 	.then(function (resp) {

@@ -166,14 +166,6 @@ index.config(['$routeProvider', function ($routeProvider) {
 		});
 }]);
 
-// 判断用户是否登录
-function checkLogin() {
-	if (!sessionStorage.user) {
-		return false;
-	}
-	return true;
-}
-
 // 创建一个公共服务
 index.service('commonService', [function () {
 	var selecrSite;
