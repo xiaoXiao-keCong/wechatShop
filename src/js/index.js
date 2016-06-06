@@ -161,6 +161,14 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/order_comment.html',
 			controller: 'orderCommentCtrl'
 		})
+		.when('/select_datetime/:designer_id', {
+			templateUrl: '../html/select_datetime.html',
+			controller: 'selectDatetimeCtrl'
+		})
+		.when('/appoint_confirm', {
+			templateUrl: '../html/appoint_confirm.html',
+			controller: 'appointConfirmCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

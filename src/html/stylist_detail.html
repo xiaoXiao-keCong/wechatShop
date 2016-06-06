@@ -11,7 +11,7 @@
     </span>
 </div>
 <div class="head">
-	<span><img ng-src="{{designer.imgurl}}" class="head-pic"></span>
+	<span><img ng-src="{{designer.avatar}}" class="head-pic"></span>
 	<span class="name" ng-bind="designer.name"></span>
 	<span class="intro" ng-bind="designer.describe"></span>
 	<span class="operation">
@@ -19,7 +19,7 @@
 			<span ng-if="!designer.iskeep">+关注</span>
 			<span ng-if="designer.iskeep">取消关注</span>
 		</span>
-		<span class="btn-operation">
+		<span class="btn-operation" ng-click="designerIntro(designer)">
 			<span>更多介绍</span>
 		</span>
 	</span>

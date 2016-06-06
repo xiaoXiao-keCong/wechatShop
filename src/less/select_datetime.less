@@ -1,102 +1,67 @@
-.white-backgroud {
-	height: 100%;
+@import "display";
+#datetime-container {
 	background-color: #ffffff;
-	.title-bar1 {
-		text-align: center;
-	  	height: 1.2rem;
-	  	line-height: 1.2rem;
-	  	font-size: 0.48rem;
-	  	color: #121212;
-	  	background-color: #f1f1f1;
-	    position: relative;
-	    .title-bar-left {
-	        position: absolute;
-	        height: 100%;
-	        left: 0.266667rem;
-	        display: flex;
-	        display: -webkit-flex;
-	        align-items: center;
-	        margin-left: 0.133333rem;
-	        .text {
-	          font-size: 0.4rem;
-	          color: #121212;
-	          margin-left: 0.266667rem;
-	        }
-	        img {
-	          height: 0.586667rem;
-	          width: 0.586667rem;
-	        }
-	    }
+	padding-bottom: 0.666667rem;
+	#confirm-btn {
+		font-size: 0.32rem;
+		color:#3dbfd5;
 	}
-	.select-datetime-content {
-		.select-date-content {
-			display: flex;
-			justify-content: space-between;
-			background-color: #f1f1f1;
-			padding-left: 0.266667rem;
-			padding-right: 0.266667rem;
-			height: 1.466667rem;
-			.select-date {
-				flex-grow: 1;
-				text-align: center;
-				font-size: 0.32rem;
-				color: #333333;
-				padding-top: 0.4rem;
-			}
-			.select-date:nth-child(3) {
-				padding-top: 0.266667rem;
-				color: #45b7e7;
-				font-size: 0.373333rem;
-			}				
-			img {
-				width: 1.28rem;
-				height: 0.066667rem;
-				left: 50%;
-				margin-left: -0.64rem;
+	#select-date-container {
+		height: 1.44rem;
+		background: #f1f1f1;
+		.item {
+			width: 2.0rem;
+			height: 1.44rem;
+			.flex-column;
+			align-items: center;
+			justify-content: center;
+			color: #494949;
+		}
+		.selected {
+			font-size: 0.373333rem;
+			color: #3dbfd5;
+			border-bottom: 0.04rem solid #3dbfd5;
+		}
+	}
+	#select-time-container {
+		padding: 0.666667rem 0;
+		width: 100%;
+		.flex;
+		flex-wrap: wrap;
+		.item {
+			width: 2.2rem;
+			height: 1.44rem;
+			margin-left: 0.24rem;
+			margin-bottom: 0.24rem;
+			.flex-column;
+			align-items: center;
+			justify-content: center;
+			font-size: 0.32rem;
+			position: relative;
+			.selected-icon {
+				width: 0.32rem;
+				height: 0.32rem;
+				position: absolute;
 				bottom: 0;
+				right: 0;
 			}
 			
 		}
-		.select-time-content {
-			padding: 0.666667rem 0.466667rem 0 0.56rem;
-			.select-time-row {
-				margin-bottom: 0.24rem;
-				display: flex;
-				justify-content: space-between;
-				.time-block {
-					width: 2.106667rem;
-					height: 1.413333rem;
-					font-size: 0.32rem;
-					text-align: center;
-					color: #666666;
-					background: url("../../assets/images/xzsj_13.png") no-repeat;
-					.time {
-						padding-top: 0.32rem;
-					}
-					.iforder {
-						padding-bottom: 0.32rem;
-					}
-				}
-				.select-block {
-				}
-				.time-block:nth-child(1) {
-					background: url("../../assets/images/xzsj_11.png") no-repeat;
-					color: #d8d8d8;
-				}
-			}
-			.select-time-row:last-child {
-				margin-bottom: 0;
-			}
-
-
+		.useful {
+			border: 0.013333rem solid #3dbfd5;
+			color: #666666;
+		}
+		.unuseful {
+			background-color: #7d7d7d;
+			color: #b8b8b8;
 		}
 	}
-	.flag-icon {
-		width: 2.08rem;
-		height: 1.573333rem;
-		position: absolute;
-		bottom: 1.6rem;
-		left: 50%;
-		margin-left: -1.04rem;
+	#yue-icon {
+		margin-top: 1.333333rem;
+		text-align: center;
+		img {
+			width: 2.08rem;
+			height: 1.573333rem;
+		}
 	}
 }

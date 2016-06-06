@@ -140,7 +140,7 @@ index.directive('onFlashSaleRenderFinished', ['$timeout', function ($timeout) {
 	};
 }]);
 
-// 判断限时抢购是否加载完
+// 判断活动是否加载完
 index.directive('onActivityFinished', ['$timeout', function ($timeout) {
 	return {
 		restrict: 'A',
@@ -223,4 +223,22 @@ index.directive('onTimeFinished', ['$timeout', function ($timeout) {
 			}
 		}
 	};
+}]);
+
+// 发型师预约时间选择页面directive
+index.directive('dateSelect', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.dateDeferred.promise.then(function (msg) {
+				console.log(msg);
+				scope.dateSwiper = new Swiper(element.get(0), {
+					direction: 'horizontal',
+					slidesPerView: 'auto',
+			        freeMode: true
+				});
+			});
+		}
+};
 }]);

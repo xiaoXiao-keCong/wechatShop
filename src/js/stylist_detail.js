@@ -36,6 +36,7 @@ index.controller('stylistDetailCtrl',
 	// 获取发型师详情
 	$http.post('/designer/info.json', {'designerid': $routeParams.id}, postCfg)
 	.then(function (resp) {
+		console.log(resp);
 		if (1 === resp.data.code) {
 			var commentLevel = [],
 				designer = resp.data.data;
@@ -47,7 +48,7 @@ index.controller('stylistDetailCtrl',
 				commentLevel.push({'path': '../../assets/images/star.png'});
 			}
 			designer.commentLevel = commentLevel;
-			designer.imgurl = picBasePath + designer.imgurl;
+			designer.avatar = picBasePath + designer.avatar;
 			$scope.designer = designer;
 		}
 	}, function (resp) {
@@ -55,12 +56,13 @@ index.controller('stylistDetailCtrl',
 	});
 
 	// 初始化就要获取发型师项目
-	$http.post('/designer/service.json', postCfg)
+	$http.post('/designer/service.json', {'designerid': parseInt($routeParams.id)}, postCfg)
 	.then(function (resp) {
+		console.log(resp);
 		if (1 === resp.data.code) {
 			var serviceList = resp.data.data.servicelist;
 			for (var i = 0, j = serviceList.length; i < j; i++) {
-				serviceList[i].serviceTime = serviceList[i].length * 30;
+				serviceList[i].serviceTime = serviceList[i].length;
 				serviceList[i].selected = false;
 			}
 			$scope.serviceList = serviceList;
@@ -128,7 +130,6 @@ index.controller('stylistDetailCtrl',
 			}
 			else if (1 === data.code) {
 				$scope.designer.iskeep = !$scope.designer.iskeep;
-				console.log($scope.designer);
 			}
 		})
 		.error(function (data) {
@@ -136,4 +137,8 @@ index.controller('stylistDetailCtrl',
 		});
 	};
 
+	// 跳转到发型师更多介绍页面
+	$scope.designerIntro = function (designer) {
+		$window.location.href = designer.storyurl;
+	};
 }]);

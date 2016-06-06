@@ -16,11 +16,13 @@ index.controller('appointmentCtrl',
 	$scope.timeArr = [];
 	$scope.dateDeferred = $q.defer();
 	$scope.serviceArr = [];
+	$scope.day = '日期';
+	$scope.time = '选择时间';
+
 
 	// 智能推荐
 	$scope.recommend = function () {
-		var serviceId = ($scope.serviceArr.length === 0) ?
-		    [10, 11, 12, 13, 14, 15] : $scope.serviceArr,
+		var serviceId = $scope.serviceArr,
 		    day = $('#date-select .swiper-slide').index($('#date-select .swiper-slide-active')) + 1,
 		    time = $('#time-select .swiper-slide').index($('#time-select .swiper-slide-active')) + 1,
 		    data = {
@@ -32,11 +34,13 @@ index.controller('appointmentCtrl',
 			},
 			starUrl1 = '../../assets/images/star_h.png',
             starUrl2 = '../../assets/images/star.png';
+
 		$http.post('/designer/quickreserve.json', data, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
 				$scope.showMask = false;
-				console.log(data);
+				$scope.day = $('#date-select .swiper-slide-active').text();
+				$scope.time = $('#time-select .swiper-slide-active').text();
 				var designerList = data.data.designerlist;
 				for (var i = 0; i < designerList.length; i++) {
 					designerList[i].avatar = picBasePath + designerList[i].avatar;
@@ -49,7 +53,6 @@ index.controller('appointmentCtrl',
                     }
 				}
 				$scope.designerList = designerList;
-				console.log($scope.designerList);
 			}
 		})
 		.error(function (data) {
@@ -60,7 +63,36 @@ index.controller('appointmentCtrl',
 	
 	// 跳过，不选择智能推荐
 	$scope.jump = function () {
-		$scope.showMask = false;
+		var data = {
+				page: 1,
+				sort: 'default'
+			},
+			starUrl1 = '../../assets/images/star_h.png',
+            starUrl2 = '../../assets/images/star.png';
+
+		$http.post('/designer/quickreserve.json', data, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				$scope.showMask = false;
+				var designerList = data.data.designerlist;
+				for (var i = 0; i < designerList.length; i++) {
+					designerList[i].avatar = picBasePath + designerList[i].avatar;
+					designerList[i].starUrl = [];
+					for (var j = 0; j < designerList[i].score; j++) {
+                        designerList[i].starUrl.push({'path': starUrl1});
+                    }
+                    for (var k = j; k < 5; k++) {
+                        designerList[i].starUrl.push({'path': starUrl2});
+                    }
+				}
+				$scope.designerList = designerList;
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
 	};
 	$scope.navigate = function (index) {
 		switch (index) {
@@ -216,6 +248,28 @@ index.controller('appointmentCtrl',
 	$scope.$on('timeFinished', function () {
 		$scope.dateDeferred.resolve('succeed');
 	});
+
+	// 点击预约发型师
+	$scope.appoint = function (designer) {
+		console.log(designer);
+		// 判断是否选择了时间和项目
+		if ($scope.serviceArr.length > 0) {
+			if ($scope.day > 0 && $scope.time > 0) {
+				// 选择了项目和时间，直接跳转到提交订单页面
+
+			}
+			else {
+				// 选择了项目，但是没有选择时间，跳转到选择时间的页面
+				$location.path('select_datetime/' + designer.id);
+			}
+		}
+		else {
+			// 没有选择项目，跳转到发型师详情
+			$location.path('stylist_detail/' + designer.id);
+
+		}
+
+	};
 	
 
 }]);
