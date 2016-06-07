@@ -17,6 +17,10 @@ index.controller('stylistDetailCtrl',
 		$scope.work = (4 === index ? true : false);
 		switch (index) {
 			case 2:
+				if (priceShowed !== true) {
+					priceShowed = true;
+					getPrice();
+				}
 				break;
 			case 3:
 				if (lifeShowed !== true) {
@@ -81,6 +85,21 @@ index.controller('stylistDetailCtrl',
 		console.log(resp);
 	});
 
+	// 获取发型师价格
+	function getPrice() {
+		var data = {
+			designerid: $routeParams.id
+		};
+		$http.post('/designer/price.json', data, postCfg)
+		.success(function (data) {
+			console.log(data);
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
+
 	// 获取发型师作品
 	function getWorks() {
 		var data = {
@@ -91,7 +110,11 @@ index.controller('stylistDetailCtrl',
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var workList = resp.data.data.designerworklist;
+				for (var i = 0; i < workList.length; i++) {
+					workList[i].imgurl = picBasePath + workList[i].imgurl;
+				}
 				$scope.workList = workList;
+				console.log($scope.workList);
 			}
 		}, function (resp) {
 			console.log(resp);
@@ -107,8 +130,15 @@ index.controller('stylistDetailCtrl',
 		$http.post('/designer/life.json', data, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
-				var LifeList = resp.data.data.designerlifelist;
-				$scope.LifeList = LifeList;
+				var lifeList = resp.data.data.designerlifelist;
+				for (var i = 0; i < lifeList.length; i++) {
+					lifeList[i].imgArr = [];
+					for (var j = 0; j < lifeList[i].imgurl.length; j++) {
+						lifeList[i].imgArr.push({path: picBasePath + lifeList[i].imgurl[j]});
+					}
+				}
+				$scope.lifeList = lifeList;
+				console.log($scope.lifeList);
 			}
 		}, function (resp) {
 			console.log(resp);
@@ -146,6 +176,11 @@ index.controller('stylistDetailCtrl',
 	$scope.toDesignerComment = function (designer) {
 		console.log(designer);
 		$location.path('stylist_comment/' + designer.id);
+	};
+
+	// 作品详情
+	$scope.toWorkDetail = function (work) {
+		console.log(work);
 	};
 
 }]);

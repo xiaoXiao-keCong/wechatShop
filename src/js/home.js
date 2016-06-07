@@ -2,7 +2,15 @@
  * Created by hugotan on 2016/5/4.
  */
 index.controller('homeCtrl',
-	['$scope', '$http', '$window', '$location', '$q', function ($scope, $http, $window, $location, $q) {
+	['$scope', '$http', '$window', '$location', '$q',
+	function ($scope, $http, $window, $location, $q) {
+
+	// 时尚资讯promise
+    $scope.flashSaleDeferred = $q.defer();
+
+    $scope.$on('flashSaleRepeatFinished', function () {
+        $scope.flashSaleDeferred.resolve('succeed');
+    });
 
 	$scope.toMore = function (index) {
 		switch (index) {
@@ -147,6 +155,7 @@ index.controller('homeCtrl',
 				fashionNewsList[i].imgurl = picBasePath + fashionNewsList[i].imgurl;
 			}
 			$scope.fashionNewsList = fashionNewsList;
+			console.log($scope.fashionNewsList);
 		}
 	}, function (resp) {
 		console.log(resp);
@@ -167,5 +176,11 @@ index.controller('homeCtrl',
 	// 明星造型师点击跳转
 	$scope.toDesigner = function (designer) {
 		$location.path('stylist_detail/' + designer.designerid);
+	};
+
+	// 跳转到时尚资讯
+	$scope.toFashionNews = function (news) {
+		console.log(news);
+		$window.location.href = news.jumpurl;
 	};
 }]);

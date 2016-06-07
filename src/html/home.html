@@ -67,11 +67,13 @@
             <span class="en-title">FASHION INFORMATION</span>
         </span>
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(3)"></span>
-        <div class="content info-container">
-            <span><img src="../../assets/images/test/info_1.png"></span>
-            <span><img src="../../assets/images/test/info_2.png"></span>
-            <span><img src="../../assets/images/test/info_3.png"></span>
-            <span><img src="../../assets/images/test/info_4.png"></span>
+        <div class="swiper-container content info-container" flashsale>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide item" ng-repeat="news in fashionNewsList"
+                 on-flash-sale-render-finished ng-click="toFashionNews(news)">
+                    <img ng-src="{{news.imgurl}}">
+                </div>
+            </div>
         </div>
     </div>
     <div class="home-item highlight">
