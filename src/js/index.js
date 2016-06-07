@@ -97,7 +97,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/point_mall.html',
 			controller: 'pointMallCtrl'
 		})
-		.when('/point_goods_detail', {
+		.when('/point_goods_detail/:id', {
 			templateUrl: '../html/point_goods_detail.html',
 			controller: 'pointGoodsDetailCtrl'
 		})
@@ -157,6 +157,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/stylist_detail.html',
 			controller: 'stylistDetailCtrl'
 		})
+		.when('/stylist_comment/:id', {
+			templateUrl: '../html/stylist_comment.html',
+			controller: 'stylistCommentCtrl'
+		})
 		.when('/order_comment', {
 			templateUrl: '../html/order_comment.html',
 			controller: 'orderCommentCtrl'
@@ -168,6 +172,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.when('/appoint_confirm', {
 			templateUrl: '../html/appoint_confirm.html',
 			controller: 'appointConfirmCtrl'
+		})
+		.when('/goods_comment/:id', {
+			templateUrl: '../html/goods_comment.html',
+			controller: 'goodsCommentCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'

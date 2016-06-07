@@ -17,7 +17,6 @@
 			<span class="item name">
 				<span ng-bind="goods.name"></span>
 				<span class="praise">
-					<!-- <img src="../../assets/images/zan_2.png" class="common-icon"> -->
 					<span class="glyphicon glyphicon-heart-empty praise-icon" 
 					ng-if="!goods.iskeep" ng-click="praiseOperation(1)"></span>
 					<span class="glyphicon glyphicon-heart praise-icon praised" 
@@ -67,17 +66,45 @@
 				<!-- 评论统计信息 -->
 				<span class="comment-statistics">
 					<img src="../../assets/images/msg.png" class="common-icon">
-					<span><span ng-bind="commentInfo.imgcommentcount"></span>条带图评论</span>
-					<span><span ng-bind="commentInfo.totalcount"></span>条评论</span>
+					<span><span ng-bind="commentInfo.imgcommentnum"></span>条带图评论</span>
+					<span><span ng-bind="commentInfo.totalCommentnum"></span>条评论</span>
 					<img src="../../assets/images/arrow_r_big.png" class="common-icon">
+				</span>
+			</div>
+			<div class="comment-item" ng-if="commentInfo.totalCommentnum > 0">
+				<img ng-src="{{commentInfo.userImg}}" class="user-img">
+				<div class="comment-info">
+					<div class="comment-user-info">
+						<div>
+							<span ng-bind="commentInfo.comment.user.name"></span>
+							<img ng-src="{{commentInfo.userVipImg}}" class="vip-icon">
+						</div>
+						<div>
+							<img ng-repeat="star in commentInfo.starUrl" ng-src="{{star.path}}" class="star-icon-2">
+						</div>
+					</div>
+					<div ng-bind="commentInfo.comment.time" class="comment-time"></div>
+					<div ng-bind="commentInfo.comment.content" class="comment-content"></div>
+					<div class="comment-img">
+						<img ng-repeat="img in commentInfo.imgArr" ng-src="{{img.path}}">
+					</div>
+				</div>
+
+			</div>
+			<div class="comment-btn-container" ng-if="commentInfo.totalCommentnum > 0">
+				<span class="comment-btn">
+					全部评价(<span ng-bind="commentInfo.totalCommentnum"></span>)
+				</span>
+				<span class="comment-btn">
+					带图评价(<span ng-bind="commentInfo.imgcommentnum"></span>)
 				</span>
 			</div>
 		</div>
 	</div>
-<div class="operation">
-	<span class="item add-cart" ng-click="addToCart()">加进购物车</span>
-	<span class="item buy" ng-click="buy()">立即购买</span>
-</div>
+	<div class="operation">
+		<span class="item add-cart" ng-click="addToCart()">加进购物车</span>
+		<span class="item buy" ng-click="buy()">立即购买</span>
+	</div>
 </div>
 <!-- 购买信息 -->
 <div class="buy-container" forbid-scroll ng-show="isBuy">

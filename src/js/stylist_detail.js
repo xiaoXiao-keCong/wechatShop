@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/4/30.
  */
 index.controller('stylistDetailCtrl',
-	['$scope', '$routeParams', '$http', '$location',
-	function ($scope, $routeParams, $http, $location) {
+	['$scope', '$routeParams', '$http', '$location', '$window',
+	function ($scope, $routeParams, $http, $location, $window) {
 
 	var priceShowed = false,
 		lifeShowed = false,
@@ -141,4 +141,11 @@ index.controller('stylistDetailCtrl',
 	$scope.designerIntro = function (designer) {
 		$window.location.href = designer.storyurl;
 	};
+
+	// 跳转到发型师评论页面
+	$scope.toDesignerComment = function (designer) {
+		console.log(designer);
+		$location.path('stylist_comment/' + designer.id);
+	};
+
 }]);

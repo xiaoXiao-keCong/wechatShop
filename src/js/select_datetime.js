@@ -141,7 +141,7 @@ index.controller('selectDatetimeCtrl',
 
 	// 选择时间
 	$scope.selectTime = function (status) {
-		$scope.time = status.index
+		$scope.time = status.index;
 		if (status.status == '休息' || status.status == '已预约') {
 			return;
 		}
@@ -157,7 +157,7 @@ index.controller('selectDatetimeCtrl',
 
 	// 确认选择
 	$scope.confirm = function () {
-		if ($scope.time == 0) {
+		if (parseInt($scope.time) === 0) {
 			alert('请选择预约具体时间！');
 			return;
 		}

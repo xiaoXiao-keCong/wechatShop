@@ -60,8 +60,8 @@ index.controller('orderCtrl',
 	$scope.getAppointOrder = getAppointOrder;
 
 	function getAppointOrder(flag) {
-		if (($scope.appointFinished == true && flag == 1) ||
-			    ($scope.appointFinished == false && flag == 0)) {
+		if (($scope.appointFinished === true && flag === 1) ||
+			    ($scope.appointFinished === false && flag === 0)) {
 			return;
 		}
 		$scope.appointFinished = flag == 1 ? true : false;
@@ -99,7 +99,6 @@ index.controller('orderCtrl',
 			}
 			else if (1 === data.code) {
 				alert('订单取消成功!');
-				console.log($scope.reserveOrderList.indexOf(reserve));
 				$scope.reserveOrderList[$scope.reserveOrderList.indexOf(reserve)].state = '已取消';
 				$scope.reserveOrderList[$scope.reserveOrderList.indexOf(reserve)].stateflag = 3;
 			}
@@ -113,13 +112,13 @@ index.controller('orderCtrl',
 	$scope.getServiceRecord = getServiceRecord;
 	// 获取服务记录,flag取值为0,1,2,分别代表未完成、已完成和全部
 	function getServiceRecord(flag) {
-		if (($scope.allService && flag == 2) || ($scope.unfinishedService && flag == 0)
-			|| ($scope.finishedService && flag == 1)) {
+		if (($scope.allService && flag == 2) || ($scope.unfinishedService && flag === 0) ||
+			($scope.finishedService && flag == 1)) {
 			return;
 		}
 		$scope.allService = flag == 2 ? true : false;
-		$scope.unfinishedService = flag == 0 ? true : false;
-		$scope.finishedService = flag == 1 ? true : false;
+		$scope.unfinishedService = flag === 0 ? true : false;
+		$scope.finishedService = flag === 1 ? true : false;
 		$http.post('/user/myconsumerorder.json', {flag: flag, page: 1}, postCfg)
 		.success(function (data) {
 			console.log(data);
@@ -138,7 +137,7 @@ index.controller('orderCtrl',
 		})
 		.error(function (data) {
 			console.log(data);
-			alert('数据请求失败，请稍后再试！')
+			alert('数据请求失败，请稍后再试！');
 		});
 	}
 
@@ -156,7 +155,9 @@ index.controller('orderCtrl',
 				$location.path('login');
 			}
 			else if (1 === data.code) {
-				alert('订单删除成功！');
+				alert('订单取消成功！');
+				$scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].state = '已取消';
+				$scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].stateflag = 2;
 			}
 		})
 		.error(function (data) {
@@ -174,6 +175,7 @@ index.controller('orderCtrl',
 			}
 			else if (1 === data.code) {
 				alert('订单删除成功！');
+				$scope.consumerOrderList.splice($scope.consumerOrderList.indexOf(service), 1);
 			}
 		})
 		.error(function (data) {
@@ -184,13 +186,13 @@ index.controller('orderCtrl',
 	$scope.getMallOrder = getMallOrder;
 	// 获取全部商城订单
 	function getMallOrder(flag) {
-		if (($scope.allGoods && flag == 2) || ($scope.unfinishedGoods && flag == 0)
-			|| ($scope.finishedGoods && flag == 1)) {
+		if (($scope.allGoods && flag === 2) || ($scope.unfinishedGoods && flag === 0)||
+			($scope.finishedGoods && flag === 1)) {
 			return;
 		}
-		$scope.allGoods = flag == 2 ? true : false;
-		$scope.unfinishedGoods = flag == 0 ? true : false;
-		$scope.finishedGoods = flag == 1 ? true : false;
+		$scope.allGoods = flag === 2 ? true : false;
+		$scope.unfinishedGoods = flag === 0 ? true : false;
+		$scope.finishedGoods = flag === 1 ? true : false;
 		$http.post('/user/mygoodsorder.json', {flag: flag, page: 1}, postCfg)
 		.success(function (data) {
 			console.log(data);
@@ -207,7 +209,6 @@ index.controller('orderCtrl',
 					}
 				}
 				$scope.goodsOrderList = goodsOrderList;
-				console.log($scope.goodsOrderList);
 			}
 		})
 		.error(function (data) {
@@ -217,10 +218,48 @@ index.controller('orderCtrl',
 	// 删除商城订单
 	$scope.deleteGoodsOrder = function (goods) {
 		console.log(goods);
+		$http.post('/user/deletegoodsorder.json', {orderid: goods.id}, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (-1 === data.code) {
+				$location.path('login');
+			}
+			else if (1 === data.code) {
+				// 订单删除成功
+				alert('订单删除成功！');
+				$scope.goodsOrderList.splice($scope.goodsOrderList.indexOf(goods), 1);
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
 	};
 	// 取消商城订单
 	$scope.cancelGoodsOrder = function (goods) {
 		console.log(goods);
+		var data = {
+			id: goods.id,
+			flag: 2,
+			page: 1
+		};
+		$http.post('/user/cancelgoodsorder.json', data, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (-1 === data.code) {
+				$location.path('login');
+			}
+			else if (1 === data.code) {
+				// 订单取消成功
+				alert('订单取消成功！');
+				$scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].state = '已取消';
+				$scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].stateflag = 2;
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
 	};
 
 }]);

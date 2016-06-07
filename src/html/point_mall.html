@@ -1,13 +1,18 @@
 <div id="mall-container">
 	<div class="title-bar">
         <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
-	    <span>积分尚城</span>
+	    <span>积分商城</span>
 	    <span class="title-bar-right">
 	        <img src="../../assets/images/search.png" alt="搜索" id="search">
 	    </span>
 	</div>
-	<div class="advertise">
-		<img src="../../assets/images/test/mall_ad.png">
+	<div advertise class="swiper-container advertise">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" ng-repeat="item in adList" on-finish-render-filters>
+				<img ng-src="{{item.imgurl}}" ng-click="jump(item)">
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
 	</div>
 	<div class="top-nav">
 		<span><img src="../../assets/images/qing.png"></span>
@@ -21,14 +26,24 @@
 			<span class="en">FLASH SALE</span>
 			<span class=time-tips>
 				<span>每日</span>
-				<span class="time">10:00</span>
+				<span class="time" ng-bind="limitStartTime"></span>
 				<span>开始-</span>
-				<span class="time">12:00</span>
+				<span class="time" ng-bind="limitEndTime"></span>
 				<span>截止</span>
 			</span>
 		</div>
-		<div class="flash-sale-content">
-			
+		<div class="swiper-container flash-sale-content" flashsale>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide item" ng-repeat="item in flashSaleList" 
+				on-flash-sale-render-finished ng-click="toGoodsDetail(item)">
+					<img ng-src="{{item.imgurl}}">
+					<span ng-bind="item.name" class="name"></span>
+					<span class="bottom-info">
+						<span class="highlight">￥<span ng-bind="item.realprice"></span></span>
+						<del>￥<span ng-bind="item.originalprice"></span></del>
+					</span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="item-container">
@@ -37,11 +52,8 @@
 			<span class="en">BRAND ZONE</span>
 		</div>
 		<div class="brand-content">
-			<span class="item">
-				<img src="../../assets/images/test/brand_1.png">
-			</span>
-			<span class="item">
-				<img src="../../assets/images/test/brand_2.png">
+			<span class="item" ng-repeat="brand in brandList">
+				<img ng-src="{{brand.imgurl}}">
 			</span>
 		</div>
 	</div>
@@ -64,102 +76,16 @@
 		</span>
 	</div>
 	<div class="goods-container">
-		<div class="goods-row">
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_1.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
+		<span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
+			<span><img ng-src="{{item.detailimgurl}}" class="goods-img"></span>
+			<span class="goods-name" ng-bind="item.name"></span>
+			<span class="goods-info">
+				<span>￥<span ng-bind="item.realprice"></span></span>
+				<span class="praise">
+					<span><img src="../../assets/images/zan.png"></span>
+					<span ng-bind="item.praisenum"></span>
 				</span>
 			</span>
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_2.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-		</div>
-		<div class="goods-row">
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_1.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_2.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-		</div>
-		<div class="goods-row">
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_1.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_2.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-		</div>
-		<div class="goods-row">
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_1.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-			<span class="item" ng-click="toGoodsDetail()">
-				<span><img src="../../assets/images/test/goods_2.png" class="goods-img"></span>
-				<span class="goods-name">买一送一美发套装</span>
-				<span class="goods-info">
-					<span>￥60.00</span>
-					<span class="praise">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span>74</span>
-					</span>
-				</span>
-			</span>
-		</div>
-
+		</span>
 	</div>
 </div>

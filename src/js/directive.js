@@ -78,8 +78,9 @@ index.directive('flashsale', ['$timeout', function ($timeout) {
 					direction: 'horizontal',
 					slidesPerView: 'auto',
 			        paginationClickable: true,
-			        spaceBetween: 30,
-			        freeMode: true
+			        // spaceBetween: 30,
+			        freeMode: true,
+			        // centeredSlides: true
 				});
 			});
 		}

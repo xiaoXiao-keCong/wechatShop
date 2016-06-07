@@ -28,7 +28,7 @@
 	<div class="top-panel">
 		<span class="item">
 			<span>评价：</span>
-			<span class="flex-center">
+			<span class="flex-center" ng-click="toDesignerComment(designer)">
 				<img ng-repeat="level in designer.commentLevel" ng-src="{{level.path}}" class="star-icon">
 			</span>
 		</span>

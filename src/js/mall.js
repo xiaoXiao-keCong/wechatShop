@@ -2,7 +2,8 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('mallCtrl',
-    ['$scope', '$http', '$location', '$q', '$window', function ($scope, $http, $location, $q, $window) {
+    ['$scope', '$http', '$location', '$q', '$window',
+    function ($scope, $http, $location, $q, $window) {
 	
 	
     // 广告promise

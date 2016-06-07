@@ -24,11 +24,30 @@ index.controller('mallGoodsDetailCtrl',
 		console.log(resp);
 	});
 
-	// 获取商品评论统计信息
-	$http.post('/shop/getallgoodscommentofstatistic.json', {id: goodsId}, postCfg)
+	// 获取商品评论信息
+	$http.post('/shop/goodscomment.json', {id: goodsId}, postCfg)
 	.success(function (data) {
 		if (1 === data.code) {
-			$scope.commentInfo = data.data;
+			var commentInfo = data.data,
+			    starUrl1 = '../../assets/images/star_h_2.png',
+                starUrl2 = '../../assets/images/star_2.png';
+			commentInfo.imgArr = [];
+			commentInfo.starUrl = [];
+			if (commentInfo.totalCommentnum > 0) {
+				for (var i = 0; i < commentInfo.comment.imgurllist.length; i++) {
+					commentInfo.imgArr.push({path: picBasePath + commentInfo.comment.imgurllist[i]});
+				}
+				for (i = 0; i < commentInfo.comment.star; i++) {
+		            commentInfo.starUrl.push({'path': starUrl1});
+		        }
+		        for (var j = i; j < 5; j++) {
+		            commentInfo.starUrl.push({'path': starUrl2});
+		        }
+				commentInfo.userImg = picBasePath + commentInfo.comment.user.imgurl;
+				commentInfo.userVipImg = picBasePath + commentInfo.comment.user.vipimgurl;
+			}
+			$scope.commentInfo = commentInfo;
+			console.log($scope.commentInfo);
 		}
 	})
 	.error(function (data) {
