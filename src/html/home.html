@@ -94,7 +94,7 @@
             <span class="en-title">FASHION HAIRSTYLE</span>
         </span>
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(5)"></span>
-        <div class="haristyle-nav">
+        <div class="haristyle-nav" infinite-scroll="" infinite-scroll-distance="3">
             <span class="item">
                 <span><img src="../../assets/images/rexiao_h.png"></span>
                 <span class="text">综合</span>
@@ -108,11 +108,16 @@
                 <span class="text">人气</span>
             </span>
         </div>
-        <div class="hairstyle-content">
-            <span ng-repeat="hair in fashionHairList" ng-click="showHairInfo(hair)">
-                <img ng-src="{{hair.imgurl}}">
-            </span>
+        <div infinite-scroll="load.nextPage()" infinite-scroll-disabled="load.busy" infinite-scroll-distance="1">
+            <div class="hairstyle-content">
+                <span ng-repeat="hair in load.items" ng-click="showHairInfo(hair)">
+                    <img ng-src="{{hair.imgurl}}">
+                </span>
+            </div>
+            <div ng-show="load.loading" class="load">加载中......</div>
+            <div ng-show="load.loaded" class="load">没有更多了</div>
         </div>
+        
     </div>
 </div>
 <div class="bottom-nav">

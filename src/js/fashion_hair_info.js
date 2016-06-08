@@ -7,9 +7,13 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
     function setHairInfo() {
         $http.post('/home/fashionhair/info.json', {'fashionhairid': $routeParams.hairId}, postCfg)
         .then(function (resp) {
-            var hairInfo = resp.data;
-            hairInfo.imgurl = picBasePath + hairInfo.imgurl;
-            $scope.hairInfo = hairInfo;
+            console.log(resp);
+            if (1 === resp.data.code) {
+                var hairInfo = resp.data.data;
+                hairInfo.imgurl = picBasePath + hairInfo.imgurl;
+                $scope.hairInfo = hairInfo;
+            }
+            
         }, function (resp) {
             console.log(resp);
         });
