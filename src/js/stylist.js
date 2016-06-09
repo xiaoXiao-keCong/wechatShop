@@ -78,5 +78,5 @@ index.controller('stylistCtrl',
 		.error(function (data) {
 			console.log(data);
 		});
-	}
+	};
 }]);
