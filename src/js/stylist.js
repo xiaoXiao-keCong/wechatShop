@@ -28,6 +28,10 @@ index.controller('stylistCtrl',
 	}, function (resp) {
 		console.log(resp);
 	});
+
+
+
+	// 显示方式切换
 	$scope.switch = function () {
 		$scope.isList = !$scope.isList;
 	};
@@ -54,4 +58,25 @@ index.controller('stylistCtrl',
 	$scope.toDetail = function (designer) {
 		$location.path('stylist_detail/' + designer.id);
 	};
+
+	// 进入发型师搜索界面
+	$scope.searchDesigner = function () {
+		$location.path('designer_search');
+	};
+
+	// 获取门店列表信息用作筛选
+	$scope.showStoreInfo = function () {
+		$http.post('/store/all.json', postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				var areaList = data.data.arealist;
+
+				$scope.areaList = areaList;
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+		});
+	}
 }]);

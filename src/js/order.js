@@ -262,4 +262,8 @@ index.controller('orderCtrl',
 		});
 	};
 
+	$scope.remarkDesigner = function (service) {
+		$location.path('remark_designer/' + service.designer.id);
+	};
+
 }]);

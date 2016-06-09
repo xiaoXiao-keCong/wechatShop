@@ -38,7 +38,6 @@ index.controller('storeCtrl',
                 }
             }
             $scope.storeList = storeList;
-            console.log($scope.storeList);
         }
     })
     .error(function (data) {

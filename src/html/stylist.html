@@ -5,14 +5,14 @@
     </span>
     <span>发型师</span>
     <span class="title-bar-right">
-        <img src="../../assets/images/search.png" alt="搜索" id="search">
+        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="searchDesigner()">
         <img src="../../assets/images/list.png" alt="列表显示" class="switch" ng-click="switch()" ng-if="isList">
         <img src="../../assets/images/grid.png" alt="网格显示" class="switch" ng-if="!isList" ng-click="switch()">
     </span>
 </div>
 <div id="stylist">
 	<div class="top-nav">
-		<span class="nav-item selected">门店查找<img src="../../assets/images/down_h.png" class="icon"></span>
+		<span class="nav-item selected" ng-click="showStoreInfo()">门店查找<img src="../../assets/images/down_h.png" class="icon"></span>
 		<span class="nav-item">自助筛选<img src="../../assets/images/down.png" class="icon"></span>
 		<span class="nav-item">综合排序<img src="../../assets/images/updown.png" class="icon"></span>
 	</div>

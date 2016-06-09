@@ -1,0 +1,67 @@
+@import "display";
+#home-search,
+#designer-search,
+#store-search {
+	background-color: #f1f1f1;
+	.item-container {
+		background-color: #ffffff;
+		margin-bottom: 0.133333rem;
+		padding: 0 0.266667rem;
+		.type-name {
+			height: 0.88rem;
+			width: 100%;
+			font-size: 0.346667rem;
+			color: #121212;
+			line-height: 0.88rem;
+		}
+		.item {
+			border-top: 1px solid #d2d2d2;
+			height: 2.133333rem;
+			.flex;
+			align-items: center;
+			.designer-head-pic {
+				width: 1.64rem;
+				height: 1.64rem;
+				border-radius: 100%;
+			}
+			.goods-pic,
+			.store-pic {
+				width: 1.64rem;
+				height: 1.64rem;
+				border-radius: 0.133333rem;
+			}
+			.info {
+				flex: 1;
+				.flex-column;
+				margin-left: 0.266667rem;
+				.price {
+					font-size: 0.373333rem;
+					color: #3dbfd5;
+					text-align: right;
+				}
+				.middle {
+					.flex;
+					align-items: center;
+					.name {
+						font-size: 0.4rem;
+						color: #0e0014;
+						.flex;
+						align-items: center;
+						margin-right: 0.4rem;
+					}
+				}
+				
+				.bottom {
+					font-size: 0.293333rem;
+					color: #040014;
+					.flex;
+					align-items: center;
+					justify-content: flex-end;
+					.inventory {
+						margin-left: 0.8rem;
+					}
+				}
+			}
+		}
+	}
+}

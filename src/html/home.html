@@ -5,7 +5,7 @@
     </span>
     <span>ARTISAN HOUSE</span>
     <span class="title-bar-right">
-        <img src="../../assets/images/search.png" alt="搜索" id="search">
+        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="homeSearch()">
     </span>
 </div>
 <div class="home">
@@ -114,10 +114,9 @@
                     <img ng-src="{{hair.imgurl}}">
                 </span>
             </div>
-            <div ng-show="load.loading" class="load">加载中......</div>
-            <div ng-show="load.loaded" class="load">没有更多了</div>
+            <div ng-show="load.loading" class="load">加载中...</div>
+            <div ng-show="load.loaded" class="load"></i>没有更多了</div>
         </div>
-        
     </div>
 </div>
 <div class="bottom-nav">

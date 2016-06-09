@@ -199,4 +199,9 @@ index.controller('homeCtrl',
 		console.log(news);
 		$window.location.href = news.jumpurl;
 	};
+
+	// 跳转到首页搜索
+	$scope.homeSearch = function () {
+		$location.path('home_search');
+	};
 }]);
