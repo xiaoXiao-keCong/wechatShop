@@ -197,6 +197,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/mall_search.html',
 			controller: 'mallSearchCtrl'
 		})
+		.when('/edit_info', {
+			templateUrl: '../html/edit_info.html',
+			controller: 'editInfoCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
