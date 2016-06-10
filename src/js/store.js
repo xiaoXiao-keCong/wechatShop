@@ -44,4 +44,10 @@ index.controller('storeCtrl',
         console.log(data);
         alert('数据请求失败，请稍后再试！');
     });
+
+    // 跳转到门店搜索页面
+    $scope.storeSearch = function () {
+        $location.path('store_search');
+    };
+
 }]);

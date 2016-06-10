@@ -101,5 +101,10 @@ index.controller('mallCtrl',
     $scope.toCart = function () {
         $location.path('cart');
     };
+
+    // 跳转到商品搜索页面
+    $scope.searchGoods = function () {
+        $location.path('mall_search');
+    };
     
 }]);

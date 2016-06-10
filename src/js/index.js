@@ -189,6 +189,14 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/remark_designer.html',
 			controller: 'remarkDesignerCtrl'
 		})
+		.when('/store_search', {
+			templateUrl: '../html/store_search.html',
+			controller: 'storeSearchCtrl'
+		})
+		.when('/mall_search', {
+			templateUrl: '../html/mall_search.html',
+			controller: 'mallSearchCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

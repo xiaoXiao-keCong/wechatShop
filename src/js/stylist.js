@@ -5,6 +5,9 @@ index.controller('stylistCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 
 	var isGetStoreInfo = false;
+	var isGetActivity = false;
+	$scope.vh = [];
+	$scope.nu = [];
 
 	// 获取发型师列表
 	function getDesignerInfo(data) {
@@ -26,6 +29,7 @@ index.controller('stylistCtrl',
 	                }
 				}
 				$scope.designerList = designerList;
+
 			}
 		}, function (resp) {
 			console.log(resp);
@@ -71,7 +75,9 @@ index.controller('stylistCtrl',
 	// 获取门店列表信息用作筛选
 	$scope.getStoreInfo = function () {
 		$scope.showStore = !$scope.showStore;
-		$scope.showMask = !$scope.showMask;
+		$scope.showMask = $scope.showStore ? true : false;
+		$scope.filterShow = false;
+		$scope.isShowSort = false;
 		if (!isGetStoreInfo) {
 			$http.post('/store/all.json', postCfg)
 			.success(function (data) {
@@ -124,22 +130,136 @@ index.controller('stylistCtrl',
 		}
 	};
 
-	// 自助筛选
-	$scope.filter = function (type) {
+	// 显示自助筛选的条目
+	$scope.showFilterItems = function () {
 		$scope.filterShow = !$scope.filterShow;
+		$scope.showMask = $scope.filterShow ? true : false;
+		$scope.showStore = false;
+		$scope.isShowSort = false;
+	};
+
+	// 自助筛选
+	$scope.filter = function (type, e) {
+		e.stopPropagation();
+		$scope.filterShow = false;
+		$scope.showMask = false;
 		$scope.filterDefault = (type === 'default') ? true : false;
 		$scope.filterMostReserve = (type === 'mostreserve') ? true : false;
 		$scope.filterHighestScore = (type === 'highestscore') ? true : false;
 		$scope.filterNearest = (type === 'nearest') ? true : false;
 		$scope.filterCheapest = (type === 'cheapest') ? true : false;
 		$scope.filterExpensive = (type === 'expensive') ? true : false;
-		if ($scope.type !== type) {
+		if ($scope.sort !== type) {
 			var data = {
 				page: 1,
 				storeid: $scope.storeId,
-				sort: $scope.sort || 'default'
+				sort: type || 'default'
 			};
 			getDesignerInfo(data);
+			$scope.sort = type;
 		}
 	};
+
+	$scope.showSort = function () {
+		$scope.isShowSort = !$scope.isShowSort;
+		$scope.showMask = $scope.isShowSort ? true : false;
+		$scope.filterShow = false;
+		$scope.showStore = false;
+		// 获取优惠活动和新用户专享数据
+		if (!isGetActivity) {
+			// 获取优惠活动
+			$http.post('/designer/getactivityofyouhui.json', postCfg)
+			.success(function (data) {
+				console.log(data);
+				if (1 === data.code) {
+					$scope.couponActivity = data.data.activitylist;
+					console.log($scope.couponActivity);
+				}
+			})
+			.error(function (data) {
+				console.log(data);
+				alert('数据请求失败，请稍后再试！');
+			});
+			// 获取新用户活动
+			$http.post('/designer/getactivityofnewuser.json', postCfg)
+			.success(function (data) {
+				console.log(data);
+				if (1 === data.code) {
+					$scope.newUserActivity = data.data.activitylist;
+					console.log($scope.newUserActivity);
+				}
+			})
+			.error(function (data) {
+				console.log(data);
+				alert('数据请求失败，请稍后再试！');
+			});
+			isGetActivity = true;
+		}
+	};
+
+	// 自主排序中选择店铺类型
+	$scope.selectStoreType = function (type) {
+		$scope.isDirectSale = type === 1 ? true : false;
+		$scope.isCooperate = type === 2 ? true : false;
+	}
+
+	// 自主筛选中选择优惠活动
+	$scope.selectCouponActivity = function (activity) {
+		activity.selected = !activity.selected;
+		if (activity.selected) {
+			$scope.vh.push(activity.id);
+		}
+		else {
+			var index = $scope.vh.indexOf(activity.id);
+			$scope.vh.splice(index, 1);
+		}
+	};
+
+	// 自主筛选中选择新用户活动
+	$scope.selectNewUserActivity = function (activity) {
+		activity.selected = !activity.selected;
+		if (activity.selected) {
+			$scope.nu.push(activity.id);
+		}
+		else {
+			var index = $scope.nu.indexOf(activity.id);
+			$scope.nu.splice(index, 1);
+		}
+		console.log(activity);
+	};
+
+
+	// 自主筛选结束，点击确定
+	$scope.selfFilter = function () {
+		$scope.isShowSort = false;
+		$scope.showMask = false;
+		var data = {
+			storetype: 1,
+			vh: $scope.vh,
+			nu: $scope.nu
+		};
+		$http.post('/designer/searchbystoreandactivity.json', data, postCfg)
+		.success(function (data) {
+			console.log(data);
+			var starUrl1 = '../../assets/images/star_h.png',
+	            starUrl2 = '../../assets/images/star.png';
+			var designerList = data.data.designerlist;
+			for (var i = 0; i < designerList.length; i++) {
+				designerList[i].starUrl = [];
+				designerList[i].avatar = picBasePath + designerList[i].avatar;
+				designerList[i].imgurl = picBasePath + designerList[i].imgurl;
+				for (var j = 0; j < designerList[i].score; j++) {
+                    designerList[i].starUrl.push({'path': starUrl1});
+                }
+                for (var k = j; k < 5; k++) {
+                    designerList[i].starUrl.push({'path': starUrl2});
+                }
+			}
+			$scope.designerList = designerList;
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
 }]);

@@ -12,8 +12,9 @@
 </div>
 <div id="stylist">
 	<div class="top-nav">
-		<span class="nav-item" ng-click="getStoreInfo()">
-			门店查找<img src="../../assets/images/down.png" class="icon">
+		<span ng-class="{'nav-item':true,'selected':showStore}" ng-click="getStoreInfo()">
+			门店查找<img src="../../assets/images/down.png" class="icon" ng-show="!showStore">
+			<img src="../../assets/images/down_h.png" class="icon" ng-show="showStore">
 			<ul class="city-item-container" ng-show="showStore">
 				<li class="city-item" ng-repeat="area in areaList">
 					<span ng-bind="area.name" ng-class="{'item-text':true,'text-highlight':area.citySelected}" ng-click="selectCity(area, $event)"></span>
@@ -25,31 +26,33 @@
 				</li>
 			</ul>
 		</span>
-		<span class="nav-item">
-			自助筛选<img src="../../assets/images/down.png" class="icon">
+		<span ng-class="{'nav-item':true,'selected':filterShow}" ng-click="showFilterItems()">
+			综合排序<img src="../../assets/images/down.png" class="icon" ng-show="!filterShow">
+			<img src="../../assets/images/down_h.png" class="icon" ng-show="filterShow">
 			<ul class="filter-container" ng-show="filterShow">
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('default')">综合排序</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterDefault}" ng-click="filter('default', $event)">综合排序</span>
 				</li>
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('mostreserve')">订单最多</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterMostReserve}" ng-click="filter('mostreserve', $event)">订单最多</span>
 				</li>
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('highestscore')">好评优先</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterHighestScore}" ng-click="filter('highestscore', $event)">好评优先</span>
 				</li>
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('nearest')">离我最近</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterNearest}" ng-click="filter('nearest', $event)">离我最近</span>
 				</li>
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('cheapest')">价格最低</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterCheapest}" ng-click="filter('cheapest', $event)">价格最低</span>
 				</li>
 				<li class="filter-item">
-					<span class="item-text" ng-click="filter('expensive')">价格最高</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterExpensive}" ng-click="filter('expensive', $event)">价格最高</span>
 				</li>
 			</ul>
 		</span>
-		<span class="nav-item">
-			综合排序<img src="../../assets/images/updown.png" class="icon">
+		<span ng-class="{'nav-item':true,'selected':isShowSort}" ng-click="showSort()">
+			自主筛选<img src="../../assets/images/updown1.png" class="icon" ng-show="!isShowSort">
+			<img src="../../assets/images/updown1_h.png" class="icon" ng-show="isShowSort">
 		</span>
 	</div>
 	<div class="grid-container" ng-if="isList">
@@ -131,4 +134,37 @@
         <span class="text">我的</span>
     </span>
 </div>
-<div class="designer-mask" ng-show="showMask" forbid-scroll></div>
+<div class="designer-mask" ng-show="showMask" forbid-scroll>
+	<div class="sort-container" ng-show="isShowSort">
+		<div class="type-container">
+			<div class="title">
+				门店类型
+			</div>
+			<div>
+				<span ng-class="{'item':true,'selected':isDirectSale}" ng-click="selectStoreType(1)">直营店</span>
+				<span ng-class="{'item':true,'selected':isCooperate}" ng-click="selectStoreType(2)">合作店</span>
+			</div>
+		</div>
+		<div class="type-container">
+			<div class="title">
+				优惠活动
+			</div>
+			<div>
+				<span ng-repeat="activity in couponActivity" ng-class="{'item':true,'selected':activity.selected}" ng-bind="activity.name"
+				 ng-click="selectCouponActivity(activity)"></span>
+			</div>
+		</div>
+		<div class="type-container border-bottom-none">
+			<div class="title">
+				新用户专享
+			</div>
+			<div>
+				<span ng-repeat="activity in newUserActivity" ng-class="{'item':true,'selected':activity.selected}" ng-bind="activity.name"
+				 ng-click="selectNewUserActivity(activity)"></span>
+			</div>
+		</div>
+		<div class="clearfix">
+			<span class="confirm-btn pull-right" ng-click="selfFilter()">确定</span>
+		</div>
+	</div>
+</div>
