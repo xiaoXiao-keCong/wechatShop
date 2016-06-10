@@ -12,9 +12,45 @@
 </div>
 <div id="stylist">
 	<div class="top-nav">
-		<span class="nav-item selected" ng-click="showStoreInfo()">门店查找<img src="../../assets/images/down_h.png" class="icon"></span>
-		<span class="nav-item">自助筛选<img src="../../assets/images/down.png" class="icon"></span>
-		<span class="nav-item">综合排序<img src="../../assets/images/updown.png" class="icon"></span>
+		<span class="nav-item" ng-click="getStoreInfo()">
+			门店查找<img src="../../assets/images/down.png" class="icon">
+			<ul class="city-item-container" ng-show="showStore">
+				<li class="city-item" ng-repeat="area in areaList">
+					<span ng-bind="area.name" ng-class="{'item-text':true,'text-highlight':area.citySelected}" ng-click="selectCity(area, $event)"></span>
+					<ul class="store-item-container" ng-show="area.citySelected">
+						<li class="store-item" ng-repeat="store in area.storelist">
+							<span ng-bind="store.name" ng-class="{'item-text':true,'text-highlight':store.selected}" ng-click="selectStore(store, $event)"></span>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</span>
+		<span class="nav-item">
+			自助筛选<img src="../../assets/images/down.png" class="icon">
+			<ul class="filter-container" ng-show="filterShow">
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('default')">综合排序</span>
+				</li>
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('mostreserve')">订单最多</span>
+				</li>
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('highestscore')">好评优先</span>
+				</li>
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('nearest')">离我最近</span>
+				</li>
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('cheapest')">价格最低</span>
+				</li>
+				<li class="filter-item">
+					<span class="item-text" ng-click="filter('expensive')">价格最高</span>
+				</li>
+			</ul>
+		</span>
+		<span class="nav-item">
+			综合排序<img src="../../assets/images/updown.png" class="icon">
+		</span>
 	</div>
 	<div class="grid-container" ng-if="isList">
 		<div class="item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
@@ -95,3 +131,4 @@
         <span class="text">我的</span>
     </span>
 </div>
+<div class="designer-mask" ng-show="showMask" forbid-scroll></div>
