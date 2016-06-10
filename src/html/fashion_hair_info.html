@@ -1,5 +1,5 @@
 <div class="fashion-hair-info-container">
-	<div class="title-bar bg-black border-bottom-none">
+	<div class="title-bar bg-black border-bottom-none hair-title-bar">
 	    <span class="title-bar-left" back><img src="../../assets/images/back_white.png"></span>
 	    <span class="title-bar-right"><img src="../../assets/images/share_white.png"></span>
 	</div>
@@ -8,14 +8,13 @@
 	</div>
 	<div class="bottom-operation">
 		<div class="left">
-			<!-- <img src="../../assets/images/zan_white.png" class="common-icon zan-icon" ng-click="praiseOperation(hairInfo)"> -->
 			<span class="glyphicon glyphicon-heart-empty praise-icon" 
 			ng-if="!hairInfo.iskeep" ng-click="praiseOperation(hairInfo)"></span>
 			<span class="glyphicon glyphicon-heart praise-icon praised" 
 			ng-if="hairInfo.iskeep" ng-click="praiseOperation(hairInfo)"></span>
 			<span ng-bind="hairInfo.praisenum"></span>
 		</div>
-		<div class="right">
+		<div class="right" ng-click="appoint(hairInfo)">
 			<img src="../../assets/images/ring.png" class="common-icon ring-icon">
 			<span>预约</span>
 		</div>

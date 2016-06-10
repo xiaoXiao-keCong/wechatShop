@@ -39,4 +39,8 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
         });
     };
 
+    $scope.appoint = function (hairInfo) {
+        console.log(hairInfo);
+    };
+
 }]); 

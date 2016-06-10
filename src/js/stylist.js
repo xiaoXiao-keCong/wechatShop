@@ -201,7 +201,7 @@ index.controller('stylistCtrl',
 	$scope.selectStoreType = function (type) {
 		$scope.isDirectSale = type === 1 ? true : false;
 		$scope.isCooperate = type === 2 ? true : false;
-	}
+	};
 
 	// 自主筛选中选择优惠活动
 	$scope.selectCouponActivity = function (activity) {
@@ -261,5 +261,5 @@ index.controller('stylistCtrl',
 			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
-	}
+	};
 }]);

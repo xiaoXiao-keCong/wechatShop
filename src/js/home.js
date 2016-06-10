@@ -108,7 +108,7 @@ index.controller('homeCtrl',
 		// alert('数据请求失败!请稍后再试');
 	});
 
-	// 悦尚城
+	// 悦商城
 	$http.post('/home/baseinfo.json', {'flag': 2}, postCfg)
 	.then(function (resp) {
 		if (1 === resp.data.code) {
@@ -203,5 +203,32 @@ index.controller('homeCtrl',
 	// 跳转到首页搜索
 	$scope.homeSearch = function () {
 		$location.path('home_search');
+	};
+
+	// 显示价目表
+	$scope.showPrice = function () {
+		$http.post('/home/baseinfo.json', {flag: 4}, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				$scope.priceImg = picBasePath + data.data.imgurl;
+				console.log($scope.priceImg);
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
+	};
+
+	// 首页明星门店图片点击
+	$scope.storeDetail = function (store) {
+		console.log(store);
+		$location.path('store_detail/' + store.id);
+	};
+
+	// 首页悦商城图片点击
+	$scope.goodsDetail = function (goods) {
+		$location.path('mall_goods_detail/' + goods.id);
 	};
 }]);

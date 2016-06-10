@@ -18,11 +18,11 @@
         <div class="swiper-pagination"></div>
     </div>
 	<div class="top-nav">
-		<span class="item">
+		<span class="item" ng-click="toMore(5)">
             <span><img src="../../assets/images/shishangfaxing.png"></span>      
             <span class="text">时尚发型</span>
         </span>
-        <span class="item">
+        <span class="item" ng-click="showPrice()">
             <span><img src="../../assets/images/jiamubiao.png"></span>
             <span class="text">价目表</span>
         </span>
@@ -57,7 +57,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(2)"></span>
         <div class="content store-container">
             <span>
-                <img ng-src="{{starStore.imgurl}}">
+                <img ng-src="{{starStore.imgurl}}" ng-click="storeDetail(starStore)">
             </span>
         </div>
     </div>
@@ -84,7 +84,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(4)"></span>
         <div class="content mall-container">
             <span>
-                <img ng-src="{{mall.imgurl}}">
+                <img ng-src="{{mall.imgurl}}" ng-click="goodsDetail(mall)">
             </span>
         </div>
     </div>
