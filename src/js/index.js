@@ -185,7 +185,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/designer_search.html',
 			controller: 'designerSearchCtrl'
 		})
-		.when('/remark_designer/:id', {
+		.when('/remark_designer/:order_id', {
 			templateUrl: '../html/remark_designer.html',
 			controller: 'remarkDesignerCtrl'
 		})

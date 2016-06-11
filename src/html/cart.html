@@ -22,8 +22,8 @@
         <div class="operation-panel">
             <span class="left-panel">
                 <span class="selected-pic">
-                    <img src="../../assets/images/pay_unselected.png" ng-show="!goods.selected" ng-click="goods.selected = !goods.selected">
-                    <img src="../../assets/images/pay_selected.png" ng-show="goods.selected" ng-click="goods.selected = !goods.selected">
+                    <img src="../../assets/images/pay_unselected.png" ng-show="!goods.selected" ng-click="selectGoods(goods)">
+                    <img src="../../assets/images/pay_selected.png" ng-show="goods.selected" ng-click="selectGoods(goods)">
                 </span>
                 <span class="item-count">小计：￥<span ng-bind="goods.count"></span></span>
             </span>
@@ -54,7 +54,7 @@
         <span class="count-num">合计：<span ng-bind="getTotalPrice()"></span>元</span>
         <span class="price">已优惠：0元</span>
     </span>
-    <span class="right-panel">
+    <span class="right-panel" ng-click="calculate()">
         去结算
     </span>
 </div>

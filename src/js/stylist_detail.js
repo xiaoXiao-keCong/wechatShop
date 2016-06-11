@@ -190,7 +190,7 @@ index.controller('stylistDetailCtrl',
 		var serviceList = [];
 		for (var i = 0; i < $scope.serviceList.length; i++) {
 			if ($scope.serviceList[i].selected) {
-				serviceList.push($scope.serviceList[i].id)
+				serviceList.push($scope.serviceList[i].id);
 			}
 		}
 		$rootScope.serviceItems = serviceList;

@@ -92,7 +92,8 @@ index.controller('cartCtrl',
 		}
 	};
 
-	$scope.checkSelectAll = function () {
+	// 检查是否全部选中了
+	function checkSelectAll() {
 		for (var i = 0, j = $scope.cartList.length; i < j; i++) {
 			if ($scope.cartList[i].selected === false) {
 				return false;
@@ -101,7 +102,15 @@ index.controller('cartCtrl',
 		return true;
 	};
 
-	$scope.$watch('checkSelectAll', function (oldValue, newValue) {
-		console.log(oldValue, newValue);
-	});
+	// 点击购物车中的商品选中按钮
+	$scope.selectGoods = function (goods) {
+		goods.selected = !goods.selected;
+		$scope.isSelectAll = checkSelectAll();
+	};
+
+	// 点击去结算
+	$scope.calculate = function () {
+		
+	};
+
 }]);

@@ -12,6 +12,7 @@
 		img {
 			width: 1.746667rem;
 			height: 1.746667rem;
+			border-radius: 100%;
 		}
 		.datainfo {
 			flex: 1;
@@ -54,6 +55,9 @@
 				text-align: center;
 				line-height: 0.693333rem;
 			}
+			.selected {
+				border: 0.013333rem solid #3dbfd5;
+			}
 		}
 		.line-star {
 			margin-top: 0.266667rem;
@@ -63,17 +67,11 @@
 		.mark-star {
 			margin-top: 0.533333rem;
 			margin-bottom: 0.533333rem;
-			.star-make {
-				display: inline-block;
-				margin-right: 0.133333rem;
-				width: 0.48rem;
-				height: 0.48rem;
-				img {
-					width: 0.48rem;
-					height: 0.48rem;
-				}
+			font-size: 0.48rem;
+			.selected {
+				color: #3dbfd5;
 			}
-			
+
 		}
 	}
 	#comment-text-container {
@@ -93,6 +91,11 @@
 			align-items: center;
 			font-size: 0.32rem;
 			color: #666666;
+			span {
+				&:last-child {
+					margin-left: 0.24rem;
+				}
+			}
 		}
 	}
 	#submit-btn {

@@ -5,11 +5,11 @@
     </div>
     <div class="personal-data">
     	<div class="personal-head">
-    		<img src="../../assets/images/test/stylist_headpic.png">
+    		<img ng-src="{{designer.imgurl}}">
     	</div>
     	<div class="datainfo">
-    		<div class="profession">明星</div>
-    		<div class="phone-no">1383838438</div>
+    		<div class="profession" ng-bind="designer.name">明星</div>
+    		<div class="phone-no" ng-bind="designer.telephone"></div>
     	</div>
     </div>
     <div class="person-marking">
@@ -17,51 +17,28 @@
     		选出对她的印象：
     	</div>
     	<div class="mark-describe">
-    		<div class="mark-make">
-    			棒棒15
-    		</div>
-    		<div class="mark-make">
-    			棒棒15
-    		</div>
-    		<div class="mark-make">
-    			棒棒15
-    		</div>
-    		<div class="mark-make">
-    			棒棒15
-    		</div>
+    		<div ng-repeat="remark in remarkList" ng-class="{'mark-make':true,'selected':remark.selected}" ng-bind="remark.name" ng-click="selectRemark(remark)"></div>
+    		
     	</div>
     	<div class="line-star">
     		总体评分：
     	</div>
     	<div class="mark-star">
-    		<div class="star-make">
-    			<img src="../../assets/images/pj_star.png">
-    		</div>
-    		<div class="star-make">
-    			<img src="../../assets/images/pj_star.png">
-    		</div>
-    		<div class="star-make">
-    			<img src="../../assets/images/pj_star.png">
-    		</div>
-    		<div class="star-make">
-    			<img src="../../assets/images/pj_star.png">
-    		</div>
-    		<div class="star-make">
-    			<img src="../../assets/images/pj_star.png">
-    		</div>
+            <span ng-class="{'icon-star-empty':starNum<1,'icon-star':starNum>=1,'selected':starNum>=1}" ng-click="starOrder(1)"></span>
+    		<span ng-class="{'icon-star-empty':starNum<2,'icon-star':starNum>=2,'selected':starNum>=2}" ng-click="starOrder(2)"></span>
+            <span ng-class="{'icon-star-empty':starNum<3,'icon-star':starNum>=3,'selected':starNum>=3}" ng-click="starOrder(3)"></span>
+            <span ng-class="{'icon-star-empty':starNum<4,'icon-star':starNum>=4,'selected':starNum>=4}" ng-click="starOrder(4)"></span>
+            <span ng-class="{'icon-star-empty':starNum<5,'icon-star':starNum>=5,'selected':starNum>=5}" ng-click="starOrder(5)"></span>
     	</div>
     </div>
     <div id="comment-text-container">
-		<textarea name="comment-text" id="comment-text" placeholder="写下你想说的..."></textarea> 
+		<textarea name="comment-text" id="comment-text" placeholder="写下你想说的..." ng-model="content"></textarea> 
 		<div name="check-anonymity">
-			<img src="../../assets/images/checkbox.png" class="common-icon">
+			<span ng-class="{'icon-check-empty':!anonymity,'icon-check':anonymity,'text-highlight':anonymity}" ng-click="checkAnonymity()"></span>
 			<span>匿名提交</span>
 		</div>
 	</div>
-	<div id="submit-btn">
+	<div id="submit-btn" ng-click="submit()">
 		提交
 	</div>
-<!--     <div class="write-review">
-    	
-    </div> -->
 </div>

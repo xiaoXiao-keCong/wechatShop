@@ -161,15 +161,16 @@ index.controller('selectDatetimeCtrl',
 			alert('请选择预约具体时间！');
 			return;
 		}
+		var serviceTime;
 		$rootScope.dateIndex = $scope.day;
 		$rootScope.timeIndex = $scope.time;
 		console.log($scope.timeArr);
 		for (var i = 0; i < $scope.timeArr.length; i++) {
 			if ($scope.timeArr[i].selected) {
-				var serviceTime = $scope.timeArr[i].date + ' (' + $scope.timeArr[i].week + ') ';
+				serviceTime = $scope.timeArr[i].date + ' (' + $scope.timeArr[i].week + ') ';
 			}
 		}
-		serviceTime = serviceTime + sepcificTimeArr[$scope.time - 1]
+		serviceTime = serviceTime + sepcificTimeArr[$scope.time - 1];
 		$rootScope.serviceTime = serviceTime;
 		$location.path('appoint_confirm/' + designerId);
 		
