@@ -261,9 +261,14 @@ index.controller('orderCtrl',
 			alert('数据请求失败，请稍后再试！');
 		});
 	};
-
+	// 去评价服务
 	$scope.remarkDesigner = function (service) {
 		$location.path('remark_designer/' + service.id);
+	};
+
+	// 去支付
+	$scope.toPay = function (order) {
+		$location.path('pay_goods/' + order.id);
 	};
 
 }]);

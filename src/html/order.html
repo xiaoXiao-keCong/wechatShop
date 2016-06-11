@@ -152,7 +152,7 @@
 				<div class="operation">
 					<span>实付：<span class="highlight">￥<span ng-bind="goods.actualprice"></span></span></span>
 					<span class="right">
-						<button ng-if="goods.stateflag==0">立即支付</button>
+						<button ng-if="goods.stateflag==0" ng-click="toPay(goods)">立即支付</button>
 						<button ng-if="goods.stateflag==0" ng-click="cancelGoodsOrder(goods)">取消订单</button>
 						<button ng-if="goods.stateflag==8">去评价</button>
 						<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8">申请退款</button>

@@ -5,17 +5,21 @@
 index.controller('orderConfirmCtrl',
 	['$scope', '$http', '$location', '$routeParams', '$rootScope', '$timeout',
 	function ($scope, $http, $location, $routeParams, $rootScope, $timeout) {
-	var goodsId = $routeParams.goods_id;
-    $scope.buyNum = $routeParams.buy_num;
+
+	$scope.goodsArr = $rootScope.goodsArr;
+    $scope.numArr = $rootScope.numArr;
+    var cartFlag = $rootScope.cartFlag;
+    $scope.totalPrice = 0;
     // 默认取货方式为邮寄
     $scope.type = "address";
 
-	function init() {
+    // 初始化执行
+	(function init() {
 		setSite();
-		getGoods();
-	}
-
-	init();
+		getTotalPrice();
+		getFreight();
+		getCoupon();
+	})();
 
 	// 设置用户收货地址
 	function setSite() {
@@ -29,7 +33,6 @@ index.controller('orderConfirmCtrl',
 		    .then(function (resp) {
 		    	if (-1 === resp.data.code) {
 		    		// 用户未登录
-		    		$rootScope.preUrl = $location.url();
 		    		$location.path('login');
 		    	}
 		    	else if (1 === resp.data.code) {
@@ -47,35 +50,13 @@ index.controller('orderConfirmCtrl',
 		}
 	}
 
-	// 通过商品id获取商品详情
-	function getGoods() {
-		$http.post('/shop/getgoodsbyid.json', {'id': goodsId}, postCfg)
-		.then(function (resp) {
-			if (1 === resp.data.code) {
-				var goods = resp.data.data;
-				for (var i = 0, j = goods.imgarray.length; i < j; i++) {
-					goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
-				}
-				
-				if (sessionStorage.user) {
-					var user = JSON.parse(sessionStorage.user);
-					// 用户vip对象的id等于1为普通用户
-					if (user.vip.id === 1) {
-						// 普通用户，使用realprice
-						goods.price = goods.realprice;
-					}
-					else {
-						// vip用户，使用vipprice
-						goods.price = goods.vipprice;
-					}
-				}
-				$scope.goods = goods;
-				$scope.totalPrice = parseFloat(goods.price) * parseInt($scope.buyNum);
-				getFreight();
-			}
-		}, function (resp) {
-			console.log(resp);
-		});
+	// 计算总价
+	function getTotalPrice() {
+		var totalPrice = 0;
+		for (var i = 0; i < $scope.goodsArr.length; i++) {
+			totalPrice += $scope.goodsArr[i].price * $scope.numArr[i];
+		}
+		$scope.totalPrice = totalPrice;
 	}
 
 	// 获取运费
@@ -89,6 +70,28 @@ index.controller('orderConfirmCtrl',
 		.error(function (data) {
 			console.log(data);
 		});
+	}
+
+	// 获取可用的优惠券
+	function getCoupon() {
+		$http.post('/user/mycouponwithprice.json',
+			{price: $scope.totalPrice, type: 1}, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				if (0 === data.data.couponlist.length) {
+					$scope.couponInfo = '无可用优惠券';
+				}
+				else {
+					$scope.couponInfo = '有' + data.data.couponlist.length + '张优惠券可用';
+				}
+			}
+		})
+		.error(function (data) {
+			console.log(data);
+			alert('数据请求失败，请稍后再试！');
+		});
+
 	}
 
 	// 跳转到选择地址界面
@@ -116,12 +119,16 @@ index.controller('orderConfirmCtrl',
 
 	// 提交订单事件
 	$scope.orderConfirm = function () {
+		var goodsIdArr = [];
+		for (var i = 0; i < $scope.goodsArr.length; i++) {
+			goodsIdArr.push($scope.goodsArr[i].id)
+		}
 		var data = {
-			goodsid: [parseInt(goodsId)],
-			num: [$scope.buyNum],
+			goodsid: goodsIdArr,
+			num: $scope.numArr,
 			type: $scope.type,
 			addressid: $scope.site.id || 0,
-			cartflag: 0,
+			cartflag: cartFlag,
 			couponid: parseInt($scope.couponId) || 0,
 			remark: $scope.remark,
 			freightcharges: parseFloat($scope.freight)
@@ -137,7 +144,7 @@ index.controller('orderConfirmCtrl',
 				$timeout(function () {
 					alert('下单成功！');
 					// 应该跳转到支付页面
-					$location.path('pay_goods/' + data.data.id);
+					$location.path('pay_goods/' + data.data.id).replace();
 				});
 			}
 		})

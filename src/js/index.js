@@ -105,7 +105,11 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/point_order_confirm.html',
 			controller: 'pointOrderConfirmCtrl'
 		})
-		.when('/order_confirm/:goods_id/:buy_num', {
+		// .when('/order_confirm/:goods_id/:buy_num', {
+		// 	templateUrl: '../html/order_confirm.html',
+		// 	controller: 'orderConfirmCtrl'
+		// })
+		.when('/order_confirm', {
 			templateUrl: '../html/order_confirm.html',
 			controller: 'orderConfirmCtrl'
 		})

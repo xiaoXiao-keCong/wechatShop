@@ -38,15 +38,15 @@
 				</div>
 			</div>
 			<div class="order-info">
-				<div class="goods-info">
+				<div class="goods-info" ng-repeat="goods in goodsArr">
 					<span class="left">
-						<img ng-repeat="item in goods.imgarray | limitTo:1" ng-src="{{item.imgurl}}" class="goods-icon">
+						<img ng-src="{{goods.imgurl}}" class="goods-icon">
 					</span>
 					<span class="right">
 						<span class="name" ng-bind="goods.name"></span>
 						<span class="price">
 							<span class="highlight">￥ <span ng-bind="goods.price"></span></span>
-							<span>X <span ng-bind="buyNum"></span></span>
+							<span>X <span ng-bind="goods.buyNum"></span></span>
 						</span>
 					</span>
 				</div>
@@ -68,7 +68,7 @@
 			<div class="coupon-container" ng-click="selectCoupon()">
 				<span>使用代金券</span>
 				<span class="coupon">
-					<span ng-bind="couponInfo || '未使用'"></span>
+					<span ng-bind="couponInfo"></span>
 					<img src="../../assets/images/arrow_r_big.png" class="common-icon">
 				</span>
 			</div>

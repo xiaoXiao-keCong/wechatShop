@@ -7,6 +7,7 @@ index.controller('cartCtrl',
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
 		var data = resp.data;
+		console.log(data);
 		if (-1 === data.code) {
 			// 用户未登录
 			$rootScope.preUrl = $location.url();
@@ -108,9 +109,29 @@ index.controller('cartCtrl',
 		$scope.isSelectAll = checkSelectAll();
 	};
 
-	// 点击去结算
+	// 点击去结算，跳转到订单确认页面
 	$scope.calculate = function () {
-		
+		console.log($scope.cartList);
+		var goodsArr = [];
+		var numArr = [];
+		var flag = 0;    // 代表购物车是否有商品被选中
+		for (var i = 0; i < $scope.cartList.length; i++) {
+			if ($scope.cartList[i].selected) {
+				$scope.cartList[i].goods.buyNum = $scope.cartList[i].num;
+				$scope.cartList[i].goods.price = $scope.cartList[i].price;
+				goodsArr.push($scope.cartList[i].goods);
+				numArr.push($scope.cartList[i].num);
+				flag = 1;
+			}
+		}
+		if (flag == 0) {
+			alert('请先选择商品!');
+			return;
+		}
+		$rootScope.goodsArr = goodsArr;
+		$rootScope.numArr = numArr;
+		$rootScope.cartFlag = 1;
+		$location.path('order_confirm');
 	};
 
 }]);

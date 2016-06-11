@@ -18,6 +18,7 @@ index.controller('mallGoodsDetailCtrl',
 			for (var i = 0, j = goods.imgarray.length; i < j; i++) {
 				goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
 			}
+			goods.imgurl = goods.imgarray[0].imgurl;
 			$scope.goods = goods;
 		}
 	}, function (resp) {
@@ -119,8 +120,15 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.$on('ngRepeatFinished', function () {
 		$scope.deferred.resolve('succeed');
 	});
+	// 确认购买
 	$scope.confirmBuy = function () {
-		$location.path('order_confirm/' + goodsId + '/' + $scope.buyNum);
+		$rootScope.goodsArr = [];
+		$rootScope.numArr = [];
+		$scope.goods.buyNum = $scope.buyNum;
+		$rootScope.goodsArr.push($scope.goods);
+		$rootScope.numArr.push($scope.buyNum);
+		$rootScope.cartFlag = 0;
+		$location.path('order_confirm');
 	};
 
 	// 改变购买数量
