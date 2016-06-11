@@ -2,12 +2,13 @@
  * Created by hugotan on 2016/4/30.
  */
 index.controller('stylistDetailCtrl',
-	['$scope', '$routeParams', '$http', '$location', '$window',
-	function ($scope, $routeParams, $http, $location, $window) {
+	['$scope', '$routeParams', '$http', '$location', '$window', '$rootScope',
+	function ($scope, $routeParams, $http, $location, $window, $rootScope) {
 
 	var priceShowed = false,
 		lifeShowed = false,
 		workShowed = false;
+    var designerId = $routeParams.id;
 
 	$scope.project = true;
 	$scope.show = function (index) {
@@ -181,6 +182,27 @@ index.controller('stylistDetailCtrl',
 	// 作品详情
 	$scope.toWorkDetail = function (work) {
 		console.log(work);
+	};
+
+	// 点击预约按钮
+	$scope.appoint = function () {
+		// 设置选择的项目
+		var serviceList = [];
+		for (var i = 0; i < $scope.serviceList.length; i++) {
+			if ($scope.serviceList[i].selected) {
+				serviceList.push($scope.serviceList[i].id)
+			}
+		}
+		$rootScope.serviceItems = serviceList;
+		if ($rootScope.dateIndex > 0 && $rootScope.timeIndex > 0) {
+			console.log($rootScope.dateIndex, $rootScope.timeIndex);
+			// 选择了时间，则跳转到预约确认的界面
+			$location.path('appoint_confirm/' + designerId);
+		}
+		else {
+			// 跳转到选择时间页面
+			$location.path('select_datetime/' + designerId);
+		}
 	};
 
 }]);

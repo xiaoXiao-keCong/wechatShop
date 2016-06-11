@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/6/6.
  */
 index.controller('selectDatetimeCtrl',
-	['$scope', '$http', '$location', '$window', '$routeParams', '$q',
-	function ($scope, $http, $location, $window, $routeParams, $q) {
+	['$scope', '$http', '$location', '$window', '$routeParams', '$q', '$rootScope',
+	function ($scope, $http, $location, $window, $routeParams, $q, $rootScope) {
 	
 	var designerId = $routeParams.designer_id,
 	    reserveTimeArr, workTimeArr;
@@ -12,6 +12,10 @@ index.controller('selectDatetimeCtrl',
 	$scope.appointStatusArr = [];
 	$scope.day = 1;
 	$scope.time = 0;
+	var sepcificTimeArr = ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', 
+				    '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', 
+				    '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', 
+				    '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'];
 
 	// 构造day的取值
 	(function init() {
@@ -44,11 +48,7 @@ index.controller('selectDatetimeCtrl',
 
 	function setStatus(index) {
 		$scope.appointStatusArr = [];
-		var sepcificTimeArr = ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', 
-				    '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', 
-				    '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', 
-				    '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'],
-		    statusArr = ['未预约', '已预约', '休息'];
+		var statusArr = ['未预约', '已预约', '休息'];
 		var reserveTime = reserveTimeArr[index];
 		for (var j = 0; j < reserveTime.length; j++) {
 			if (reserveTime.charAt(j) === '0') {
@@ -161,31 +161,18 @@ index.controller('selectDatetimeCtrl',
 			alert('请选择预约具体时间！');
 			return;
 		}
-		var data = {
-			designerid: designerId,
-			day: $scope.day,
-			time: $scope.time,
-			serviceid: [11]
-		};
-		$http.post('/designer/reserve.json', data, postCfg)
-		.success(function (data) {
-			console.log(data);
-			if (-1 === data.code) {
-				$location.path('login');
+		$rootScope.dateIndex = $scope.day;
+		$rootScope.timeIndex = $scope.time;
+		console.log($scope.timeArr);
+		for (var i = 0; i < $scope.timeArr.length; i++) {
+			if ($scope.timeArr[i].selected) {
+				var serviceTime = $scope.timeArr[i].date + ' (' + $scope.timeArr[i].week + ') ';
 			}
-			else if (1 === data.code) {
-				// 进入确认下单界面
-				
-			}
-			else if (0 === data.code) {
-				// 已被预约
-				alert('该时间段已被预约，请选择其它预约时间！');
-			}
-		})
-		.error(function (data) {
-			console.log(data);
-			alert('数据请求失败，请稍后再试！');
-		});
+		}
+		serviceTime = serviceTime + sepcificTimeArr[$scope.time - 1]
+		$rootScope.serviceTime = serviceTime;
+		$location.path('appoint_confirm/' + designerId);
+		
 	};
 
 }]);

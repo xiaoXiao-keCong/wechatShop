@@ -192,6 +192,29 @@ index.directive('date', ['$timeout', function ($timeout) {
 	};
 }]);
 
+index.directive('dateOnly', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			// 所有图片加载完毕后才执行swiper的初始化
+			scope.dateOnlyDeferred.promise.then(function (msg) {
+				scope.timeOnlySwiper = new Swiper(element.get(0), {
+					direction: 'vertical',
+					speed: 300,
+					loop: false,
+					autoplayDisableOnInteraction: false,
+					watchSlidesProgress : true,
+					watchSlidesVisibility : true,
+					slidesPerView: 5,
+					centeredSlides: true
+				});
+			});
+
+		}
+	};
+}]);
+
 // 时间选择directive
 index.directive('time', ['$timeout', function ($timeout) {
 	return {
@@ -211,8 +234,26 @@ index.directive('time', ['$timeout', function ($timeout) {
 		}
 	};
 }]);
+// 时间选择directive
+index.directive('timeSelect', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.timeSwiper = new Swiper(element.get(0), {
+				direction: 'vertical',
+				speed: 300,
+				loop: false,
+				autoplayDisableOnInteraction: false,
+				watchSlidesProgress : true,
+				watchSlidesVisibility : true,
+				slidesPerView: 5,
+				centeredSlides: true
+			});
+		}
+	};
+}]);
 
-// 判断限时抢购是否加载完
 index.directive('onTimeFinished', ['$timeout', function ($timeout) {
 	return {
 		restrict: 'A',
@@ -220,6 +261,18 @@ index.directive('onTimeFinished', ['$timeout', function ($timeout) {
 			if (scope.$last === true) {
 				$timeout(function () {
 					scope.$emit('timeFinished');
+				});
+			}
+		}
+	};
+}]);
+index.directive('onTimeOnlyFinished', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('timeOnlyFinished');
 				});
 			}
 		}
@@ -242,4 +295,5 @@ index.directive('dateSelect', ['$timeout', function ($timeout) {
 			});
 		}
 };
+
 }]);

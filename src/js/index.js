@@ -169,7 +169,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/select_datetime.html',
 			controller: 'selectDatetimeCtrl'
 		})
-		.when('/appoint_confirm', {
+		.when('/appoint_confirm/:id', {
 			templateUrl: '../html/appoint_confirm.html',
 			controller: 'appointConfirmCtrl'
 		})

@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/5/4.
  */
 index.controller('appointmentCtrl',
-	['$scope', '$http', '$window', '$location', '$q',
-	function ($scope, $http, $window, $location, $q) {
+	['$scope', '$http', '$window', '$location', '$q', '$rootScope',
+	function ($scope, $http, $window, $location, $q, $rootScope) {
 
 	$scope.showMask = true;
 	$scope.selectedItems = [{}, {}, {}, {}, {}, {}];
@@ -15,9 +15,17 @@ index.controller('appointmentCtrl',
 	$scope.meijia = false;
 	$scope.timeArr = [];
 	$scope.dateDeferred = $q.defer();
+	$scope.dateOnlyDeferred = $q.defer();
 	$scope.serviceArr = [];
 	$scope.day = '日期';
 	$scope.time = '选择时间';
+	$scope.itemName = '项目';
+	$scope.dateIndex = 0;
+	$scope.timeIndex = 0;
+	$rootScope.dateIndex = 0;
+	$rootScope.timeIndex = 0;
+	$rootScope.serviceTime = '';
+	$rootScope.serviceItems = [];
 
 
 	// 智能推荐
@@ -34,7 +42,8 @@ index.controller('appointmentCtrl',
 			},
 			starUrl1 = '../../assets/images/star_h.png',
             starUrl2 = '../../assets/images/star.png';
-
+        $scope.dateIndex = day;
+        $scope.timeIndex = time;
 		$http.post('/designer/quickreserve.json', data, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
@@ -249,27 +258,113 @@ index.controller('appointmentCtrl',
 		$scope.dateDeferred.resolve('succeed');
 	});
 
+	$scope.$on('timeOnlyFinished', function () {
+		$scope.dateOnlyDeferred.resolve('succeed');
+	});
+
 	// 点击预约发型师
-	$scope.appoint = function (designer) {
-		console.log(designer);
+	$scope.appoint = function (designer, e) {
+		// 阻止冒泡
+		e.stopPropagation();
+		console.log($scope.dateIndex, $scope.timeIndex, $scope.serviceArr);
 		// 判断是否选择了时间和项目
 		if ($scope.serviceArr.length > 0) {
-			if ($scope.day > 0 && $scope.time > 0) {
+			if ($scope.dateIndex > 0 && $scope.timeIndex > 0) {
 				// 选择了项目和时间，直接跳转到提交订单页面
-
+				$rootScope.dateIndex = $scope.dateIndex;
+				$rootScope.timeIndex = $scope.timeIndex;
+				$rootScope.serviceTime = $scope.day + ' ' + $scope.time;
+				$rootScope.serviceItems = $scope.serviceArr;
+				$location.path('appoint_confirm/' + designer.id);
 			}
 			else {
 				// 选择了项目，但是没有选择时间，跳转到选择时间的页面
+				$rootScope.serviceItems = $scope.serviceArr;
 				$location.path('select_datetime/' + designer.id);
 			}
 		}
 		else {
-			// 没有选择项目，跳转到发型师详情
+			// 没有选择项目，跳转到发型师详情进行选择
+			if ($scope.dateIndex > 0 && $scope.timeIndex > 0) {
+				$rootScope.dateIndex = $scope.dateIndex;
+				$rootScope.timeIndex = $scope.timeIndex;
+				$rootScope.serviceItems = $scope.serviceArr;
+			}
 			$location.path('stylist_detail/' + designer.id);
 
 		}
 
 	};
 	
+	$scope.selectTime = function () {
+		var selectTime = $('#time-select-only').find('.swiper-slide-active').text();
+		$scope.time = selectTime;
+		$scope.appointMaskShow = false;
+		$scope.timeShow = false;
+		var timeIndex = $('#time-select-only .swiper-slide')
+		.index($('#time-select-only .swiper-slide-active')) + 1;
+		$scope.timeIndex = timeIndex;
+	};
 
+	$scope.selectDate = function () {
+		var selectDate = $('#date-select-only').find('.swiper-slide-active').text();
+		$scope.day = selectDate;
+		$scope.appointMaskShow = false;
+		$scope.dateShow = false;
+		var dateIndex = $('#date-select-only .swiper-slide')
+		.index($('#date-select-only .swiper-slide-active')) + 1;
+		$scope.dateIndex = dateIndex;
+	};
+
+	$scope.selectItem = function () {
+		var selectItem = $('#item-select-only').find('.swiper-slide-active').text();
+		$scope.itemName = selectItem;
+		$scope.appointMaskShow = false;
+		$scope.itemShow = false;
+		var items = ['jianfa', 'tangfa', 'ranfa', 'huli', 'meijia'];
+		var indexArr = [10, 11, 12, 13, 14, 15];
+		var itemIndex = $('#item-select-only .swiper-slide')
+		.index($('#item-select-only .swiper-slide-active'));
+		$scope.serviceArr.push(indexArr[itemIndex]);
+	};
+
+	// 点击选择时间
+	$scope.showTimeSelect = function () {
+		$scope.dateShow = false;
+		$scope.itemShow = false;
+		$scope.timeShow = !$scope.timeShow;
+		$scope.appointMaskShow = $scope.timeShow;
+		
+	};
+
+	// 点击选择日期
+	$scope.showDateSelect = function () {
+		$scope.dateShow = !$scope.dateShow;
+		$scope.itemShow = false;
+		$scope.timeShow = false;
+		
+	};
+
+	// 点击选择项目
+	$scope.showItemSelect = function () {
+		$scope.dateShow = false;
+		$scope.itemShow = !$scope.itemShow;
+		$scope.timeShow = false;
+		$scope.appointMaskShow = $scope.itemShow;
+		$scope.serviceArr = [];
+		
+	};
+
+	// 取消选择时间
+	$scope.cancelSelect = function () {
+		$scope.dateShow = false;
+		$scope.itemShow = false;
+		$scope.timeShow = false;
+		$scope.appointMaskShow = false;
+	};
+
+	// 点击列表，进入设计师详情
+	$scope.toDetail = function (designer) {
+		$location.path('stylist_detail/' + designer.id);
+	};
 }]);

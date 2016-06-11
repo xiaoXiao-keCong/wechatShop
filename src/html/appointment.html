@@ -1,5 +1,19 @@
 <!-- 一键预约 -->
-<div class="option" ng-if="showMask" ng-class="test" forbid-scroll>
+<div ng-class="{'date-select-only-mask':true,'visibility-hide':!dateShow}" forbid-scroll>
+	<div ng-class="{'date-container':true,'visibility-hide':!dateShow}">
+		<div class="title">
+			<span ng-click="cancelSelect()">取消</span>
+			<span class="confirm" ng-click="selectDate()">确定</span>
+		</div>
+		<div class="swiper-container select-only" date-only id="date-select-only">
+	        <div class="swiper-wrapper">
+	            <div class="swiper-slide" ng-repeat="time in timeArr" ng-bind="time.date" on-time-only-finished></div>
+	        </div>
+	    </div>
+	</div>
+</div>
+	
+<div class="option" ng-if="showMask" forbid-scroll>
 	<div class="option-container">
 		<div class="tips">
 			<span class="title">服务项目</span>
@@ -78,25 +92,77 @@
 		</div>
 	</div>
 </div>
+<div class="appoint-mask" ng-show="appointMaskShow" forbid-scroll>
+	<div class="time-container" ng-show="timeShow">
+		<div class="title">
+			<span ng-click="cancelSelect()">取消</span>
+			<span class="confirm" ng-click="selectTime()">确定</span>
+		</div>
+		<div class="swiper-container select-only" time-select id="time-select-only">
+	        <div class="swiper-wrapper">
+	            <div class="swiper-slide">10:00</div>
+	            <div class="swiper-slide">10:30</div>
+	            <div class="swiper-slide">11:00</div>
+	            <div class="swiper-slide">11:30</div>
+	            <div class="swiper-slide">12:00</div>
+	            <div class="swiper-slide">12:30</div>
+	            <div class="swiper-slide">13:00</div>
+	            <div class="swiper-slide">13:30</div>
+	            <div class="swiper-slide">14:00</div>
+	            <div class="swiper-slide">14:30</div>
+	            <div class="swiper-slide">15:00</div>
+	            <div class="swiper-slide">15:30</div>
+	            <div class="swiper-slide">16:00</div>
+	            <div class="swiper-slide">16:30</div>
+	            <div class="swiper-slide">17:00</div>
+	            <div class="swiper-slide">17:30</div>
+	            <div class="swiper-slide">18:00</div>
+	            <div class="swiper-slide">18:30</div>
+	            <div class="swiper-slide">19:00</div>
+	            <div class="swiper-slide">19:30</div>
+	            <div class="swiper-slide">20:00</div>
+	            <div class="swiper-slide">20:30</div>
+	            <div class="swiper-slide">21:00</div>
+	            <div class="swiper-slide">21:30</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="item-container" ng-show="itemShow">
+		<div class="title">
+			<span ng-click="cancelSelect()">取消</span>
+			<span class="confirm" ng-click="selectItem()">确定</span>
+		</div>
+		<div class="swiper-container select-only" time-select id="item-select-only">
+	        <div class="swiper-wrapper">
+	            <div class="swiper-slide">剪发</div>
+	            <div class="swiper-slide">染发</div>
+	            <div class="swiper-slide">烫发</div>
+	            <div class="swiper-slide">护理</div>
+	            <div class="swiper-slide">化妆</div>
+	            <div class="swiper-slide">美甲</div>
+	        </div>
+	    </div>
+	</div>
+</div>
 <div class="title-bar">
     <span>一键预约</span>
 </div>
 <div id="appointment">
 	<div class="top-nav">
-		<span class="nav-item selected">
+		<span class="nav-item" ng-click="showDateSelect()">
 			<span ng-bind="day"></span>
-			<span><img src="../../assets/images/down_2_h.png" class="icon"></span>
+			<span><img src="../../assets/images/down_2.png" class="icon"></span>
 		</span>
-		<span class="nav-item">
+		<span class="nav-item" ng-click="showTimeSelect()">
 			<span ng-bind="time"></span>
 			<span><img src="../../assets/images/down_2.png" class="icon"></span>
 		</span>
-		<span class="nav-item">
-			<span>项目</span>
+		<span class="nav-item" ng-click="showItemSelect()">
+			<span ng-bind="itemName"></span>
 			<span><img src="../../assets/images/down_2.png" class="icon" ng-click="itemSelect()"></span>
 		</span>
 	</div>
-	<div class="list-item" ng-repeat="designer in designerList">
+	<div class="list-item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
 		<div class="content">
 			<span class="headpic">
 				<img ng-src="{{designer.avatar}}">
@@ -122,7 +188,7 @@
 			</span>
 			<span class="right">
 				<span class="consult"><img src="../../assets/images/consult.png"></span>
-				<span class="appoint"><img src="../../assets/images/appoint.png" ng-click="appoint(designer)"></span>
+				<span class="appoint"><img src="../../assets/images/appoint.png" ng-click="appoint(designer, $event)"></span>
 			</span>
 		</div>
 	</div>
