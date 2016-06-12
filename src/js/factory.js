@@ -42,7 +42,3 @@ index.factory('Load', ['$http', function ($http) {
 	};
 	return Load;
 }]);
-
-index.factory('Designer', ['$http', function ($http) {
-	
-}]);

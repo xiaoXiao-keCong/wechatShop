@@ -121,7 +121,7 @@ index.controller('orderConfirmCtrl',
 	$scope.orderConfirm = function () {
 		var goodsIdArr = [];
 		for (var i = 0; i < $scope.goodsArr.length; i++) {
-			goodsIdArr.push($scope.goodsArr[i].id)
+			goodsIdArr.push($scope.goodsArr[i].id);
 		}
 		var data = {
 			goodsid: goodsIdArr,

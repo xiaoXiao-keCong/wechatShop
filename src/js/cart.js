@@ -101,7 +101,7 @@ index.controller('cartCtrl',
 			}
 		}
 		return true;
-	};
+	}
 
 	// 点击购物车中的商品选中按钮
 	$scope.selectGoods = function (goods) {
@@ -124,7 +124,7 @@ index.controller('cartCtrl',
 				flag = 1;
 			}
 		}
-		if (flag == 0) {
+		if (0 === flag) {
 			alert('请先选择商品!');
 			return;
 		}

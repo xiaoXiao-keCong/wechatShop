@@ -8,35 +8,99 @@ index.controller('stylistCtrl',
 	var isGetActivity = false;
 	$scope.vh = [];
 	$scope.nu = [];
+	$scope.designerList = [];
+	$scope.page = 1;
+	$scope.isSelfFilter = false;
+
 
 	// 获取发型师列表
-	function getDesignerInfo(data) {
-		$http.post('/designer/list.json', data, postCfg)
-		.then(function (resp) {
-			if (1 === resp.data.code) {
+	function getDesignerInfo () {
+		if ($scope.loading) {
+			return;
+		}
+		$scope.loading = true;
+		if (!$scope.isSelfFilter) {
+			var data = {
+				page: $scope.page,
+				sort: $scope.sort,
+				positionx: $scope.positionX,
+				positiony: $scope.positionY,
+				storeid: $scope.storeId
+			};
+			$http.post('/designer/list.json', data, postCfg)
+			.then(function (resp) {
+				if (1 === resp.data.code) {
+					var starUrl1 = '../../assets/images/star_h.png',
+			            starUrl2 = '../../assets/images/star.png';
+					var designerList = resp.data.data.designerlist;
+					if (designerList.length > 0) {
+						for (var i = 0; i < designerList.length; i++) {
+							designerList[i].starUrl = [];
+							designerList[i].avatar = picBasePath + designerList[i].avatar;
+							designerList[i].imgurl = picBasePath + designerList[i].imgurl;
+							for (var j = 0; j < designerList[i].score; j++) {
+			                    designerList[i].starUrl.push({'path': starUrl1});
+			                }
+			                for (var k = j; k < 5; k++) {
+			                    designerList[i].starUrl.push({'path': starUrl2});
+			                }
+			                $scope.designerList.push(designerList[i]);
+						}
+						$scope.loading = false;
+						$scope.page += 1;
+					}
+					else {
+						$scope.loaded = true;
+					}
+				}
+			}, function (resp) {
+				console.log(resp);
+			});
+		}
+		else {
+			var data = {
+				page: $scope.page,
+				storetype: $scope.storeType,
+				vh: $scope.vh,
+				nu: $scope.nu
+			};
+			$http.post('/designer/searchbystoreandactivity.json', data, postCfg)
+			.success(function (data) {
+				console.log(data);
 				var starUrl1 = '../../assets/images/star_h.png',
 		            starUrl2 = '../../assets/images/star.png';
-				var designerList = resp.data.data.designerlist;
-				for (var i = 0; i < designerList.length; i++) {
-					designerList[i].starUrl = [];
-					designerList[i].avatar = picBasePath + designerList[i].avatar;
-					designerList[i].imgurl = picBasePath + designerList[i].imgurl;
-					for (var j = 0; j < designerList[i].score; j++) {
-	                    designerList[i].starUrl.push({'path': starUrl1});
-	                }
-	                for (var k = j; k < 5; k++) {
-	                    designerList[i].starUrl.push({'path': starUrl2});
-	                }
+				var designerList = data.data.designerlist;
+				if (designerList.length > 0) {
+					for (var i = 0; i < designerList.length; i++) {
+						designerList[i].starUrl = [];
+						designerList[i].avatar = picBasePath + designerList[i].avatar;
+						designerList[i].imgurl = picBasePath + designerList[i].imgurl;
+						for (var j = 0; j < designerList[i].score; j++) {
+		                    designerList[i].starUrl.push({'path': starUrl1});
+		                }
+		                for (var k = j; k < 5; k++) {
+		                    designerList[i].starUrl.push({'path': starUrl2});
+		                }
+		                $scope.designerList.push(designerList[i]);
+		                
+					}
+					$scope.loading = false;
+	                $scope.page += 1;
 				}
-				$scope.designerList = designerList;
-
-			}
-		}, function (resp) {
-			console.log(resp);
-		});
+				else {
+					$scope.loaded = true;
+				}
+				
+			})
+			.error(function (data) {
+				console.log(data);
+				alert('数据请求失败，请稍后再试！');
+			});
+		}
 	}
+
+	$scope.getDesignerInfo = getDesignerInfo;
 	
-	getDesignerInfo({page: 1});
 
 
 	// 显示方式切换
@@ -111,6 +175,7 @@ index.controller('stylistCtrl',
 	// 选择门店
 	$scope.selectStore = function (store, e) {
 		e.stopPropagation();
+		$scope.isSelfFilter = false;
 		if (!store.selected) {
 			for (var i = 0; i < $scope.areaList.length; i++) {
 				for (var j = 0; j < $scope.areaList[i].storelist.length; j++) {
@@ -119,12 +184,11 @@ index.controller('stylistCtrl',
 			}
 			store.selected = true;
 			$scope.storeId = store.id;
-			var data = {
-				page: 1,
-				storeid: $scope.storeId,
-				sort: $scope.sort || 'default'
-			};
-			getDesignerInfo(data);
+			$scope.designerList = [];
+			$scope.page = 1;
+			$scope.loading = false;
+			$scope.loaded = false;
+			getDesignerInfo();
 			$scope.showStore = false;
 			$scope.showMask = false;
 		}
@@ -141,6 +205,7 @@ index.controller('stylistCtrl',
 	// 自助筛选
 	$scope.filter = function (type, e) {
 		e.stopPropagation();
+		$scope.isSelfFilter = false;
 		$scope.filterShow = false;
 		$scope.showMask = false;
 		$scope.filterDefault = (type === 'default') ? true : false;
@@ -150,13 +215,12 @@ index.controller('stylistCtrl',
 		$scope.filterCheapest = (type === 'cheapest') ? true : false;
 		$scope.filterExpensive = (type === 'expensive') ? true : false;
 		if ($scope.sort !== type) {
-			var data = {
-				page: 1,
-				storeid: $scope.storeId,
-				sort: type || 'default'
-			};
-			getDesignerInfo(data);
+			$scope.designerList = [];
+			$scope.page = 1;
+			$scope.loading = false;
+			$scope.loaded = false;
 			$scope.sort = type;
+			getDesignerInfo();
 		}
 	};
 
@@ -199,6 +263,7 @@ index.controller('stylistCtrl',
 
 	// 自主排序中选择店铺类型
 	$scope.selectStoreType = function (type) {
+		$scope.storeType = type;
 		$scope.isDirectSale = type === 1 ? true : false;
 		$scope.isCooperate = type === 2 ? true : false;
 	};
@@ -233,33 +298,11 @@ index.controller('stylistCtrl',
 	$scope.selfFilter = function () {
 		$scope.isShowSort = false;
 		$scope.showMask = false;
-		var data = {
-			storetype: 1,
-			vh: $scope.vh,
-			nu: $scope.nu
-		};
-		$http.post('/designer/searchbystoreandactivity.json', data, postCfg)
-		.success(function (data) {
-			console.log(data);
-			var starUrl1 = '../../assets/images/star_h.png',
-	            starUrl2 = '../../assets/images/star.png';
-			var designerList = data.data.designerlist;
-			for (var i = 0; i < designerList.length; i++) {
-				designerList[i].starUrl = [];
-				designerList[i].avatar = picBasePath + designerList[i].avatar;
-				designerList[i].imgurl = picBasePath + designerList[i].imgurl;
-				for (var j = 0; j < designerList[i].score; j++) {
-                    designerList[i].starUrl.push({'path': starUrl1});
-                }
-                for (var k = j; k < 5; k++) {
-                    designerList[i].starUrl.push({'path': starUrl2});
-                }
-			}
-			$scope.designerList = designerList;
-		})
-		.error(function (data) {
-			console.log(data);
-			alert('数据请求失败，请稍后再试！');
-		});
+		$scope.isSelfFilter =  true;
+		$scope.page = 1;
+		$scope.designerList = [];
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerInfo();
 	};
 }]);

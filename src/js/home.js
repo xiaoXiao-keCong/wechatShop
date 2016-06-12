@@ -7,6 +7,11 @@ index.controller('homeCtrl',
 
 	// 时尚资讯promise
     $scope.flashSaleDeferred = $q.defer();
+    $scope.loading = false;
+    $scope.loaded = false;
+    $scope.page = 1;
+    $scope.type = 'default';
+    $scope.fashionHairList = [];
 
 
     $scope.$on('flashSaleRepeatFinished', function () {
@@ -14,7 +19,7 @@ index.controller('homeCtrl',
     });
 
     // 加载时尚发型
-    $scope.load = new Load();
+    // $scope.load = new Load();
 
 	$scope.toMore = function (index) {
 		switch (index) {
@@ -153,29 +158,49 @@ index.controller('homeCtrl',
 		console.log(resp);
 	});
 
-	// function getFashionHair() {
-	// 	if ($scope.busy) {
-	// 		return;
-	// 	}
-	// 	$scope.busy = true;
-	// 	// 时尚发型列表
-	// 	$http.post('/home/fashionhair.json', {'page': 1}, postCfg)
-	// 	.then(function (resp) {
-	// 		if (1 === resp.data.code) {
-	// 			var fashionHairList = resp.data.data.fashionhairlist;
-	// 			for (var i = 0, j = fashionHairList.length; i < j; i++) {
-	// 				fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
-	// 			}
-	// 			$scope.fashionHairList = fashionHairList;
-	// 		}
-	// 	}, function (resp) {
-	// 		console.log(resp);
-	// 		alert('数据请求失败，请稍后再试！');
-	// 	});
-	// }
-
-	// getFashionHair();
+	function getFashionHair() {
+		if ($scope.loading) {
+			return;
+		}
+		$scope.loading = true;
+		// 时尚发型列表
+		$http.post('/home/fashionhair.json', {'page': $scope.page, type: $scope.type}, postCfg)
+		.then(function (resp) {
+			if (1 === resp.data.code) {
+				var fashionHairList = resp.data.data.fashionhairlist;
+				if (fashionHairList.length > 0) {
+					for (var i = 0, j = fashionHairList.length; i < j; i++) {
+						fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
+						$scope.fashionHairList.push(fashionHairList[i]);
+					}
+					// $scope.fashionHairList = fashionHairList;
+					$scope.loading = false;
+					$scope.page += 1;
+				}
+				else {
+					// 加载完成
+					$scope.loaded = true;
+				}
+				
+			}
+		}, function (resp) {
+			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
+	$scope.getFashionHair = getFashionHair;
 	
+	// 时尚发型按类型排序
+	$scope.sort = function (type) {
+		if ($scope.type && $scope.type === type) {
+			return;
+		}
+		$scope.type = type;
+		$scope.fashionHairList = [];
+		$scope.page = 1;
+		$scope.loaded = false;
+		$scope.loading = false;
+	};
 	
 	// 跳转到时尚发型详情
 	$scope.showHairInfo = function (hair) {
