@@ -94,7 +94,7 @@
             <span class="en-title">FASHION HAIRSTYLE</span>
         </span>
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(5)"></span>
-        <div class="haristyle-nav">
+        <div class="hairstyle-nav">
             <span class="item" ng-click="sort('popular')">
                 <span ng-hide="type=='popular'"><img src="../../assets/images/rexiao.png"></span>
                 <span ng-show="type=='popular'"><img src="../../assets/images/rexiao_h.png"></span>
@@ -111,7 +111,7 @@
                 <span ng-class="{'text':true,'text-highlight':type=='hottest'}">人气</span>
             </span>
         </div>
-        <div infinite-scroll="getFashionHair()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
+        <div infinite-scroll="getFashionHair()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
             <div class="hairstyle-content">
                 <span ng-repeat="hair in fashionHairList" ng-click="showHairInfo(hair)">
                     <img ng-src="{{hair.imgurl}}">

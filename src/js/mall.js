@@ -10,6 +10,12 @@ index.controller('mallCtrl',
     $scope.deferred = $q.defer();
     // 限时抢购promise
     $scope.flashSaleDeferred = $q.defer();
+    // 商品列表数组
+    $scope.goodsList = [];
+    $scope.page = 1;
+    $scope.loading = false;
+    $scope.loaded = false;
+    $scope.type = 'hot';
 
 
     $scope.$on('ngRepeatFinished', function () {
@@ -19,7 +25,7 @@ index.controller('mallCtrl',
         $scope.flashSaleDeferred.resolve('succeed'); 
     });
 
-    function init() {
+    (function init() {
         // 获取商城广告
         $http.post('/shop/getshopad.json', postCfg)
         .then(function (resp) {
@@ -68,24 +74,9 @@ index.controller('mallCtrl',
         }, function (resp) {
             console.log(resp);
         });
-        // 热销排序产品
-        $http.post('/shop/searchgoodsbycondition.json',
-            {'page': 1, 'sort': 'hot'}, postCfg)
-        .then(function (resp) {
-            if (1 === resp.data.code) {
-                var goodsList = resp.data.data.goodslist;
-                for (var i = 0, j = goodsList.length; i < j; i++) {
-                    goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
-                }
-                $scope.goodsList = goodsList;
-                console.log($scope.goodsList);
-            }
-        }, function (resp) {
-            console.log(resp);
-        });
-    }
+        getGoods();
+    })();
 
-    init();
 
     // 广告图片跳转事件
     $scope.jump = function (ad) {
@@ -106,5 +97,50 @@ index.controller('mallCtrl',
     $scope.searchGoods = function () {
         $location.path('mall_search');
     };
+
+    // 获取商品列表
+    function getGoods() {
+        if ($scope.loading) {
+            return;
+        }
+        $scope.loading = true;
+        var data = {
+            page: $scope.page,
+            sort: $scope.type
+        };
+        $http.post('/shop/searchgoodsbycondition.json',data, postCfg)
+        .then(function (resp) {
+            if (1 === resp.data.code) {
+                var goodsList = resp.data.data.goodslist;
+                if (goodsList.length > 0) {
+                    for (var i = 0, j = goodsList.length; i < j; i++) {
+                        goodsList[i].imgurl = picBasePath + goodsList[i].imgurl1;
+                        $scope.goodsList.push(goodsList[i]);
+                    }
+                    $scope.page += 1;
+                    $scope.loading = false;
+                }
+                else {
+                    $scope.loaded = true;
+                }
+            }
+        }, function (resp) {
+            console.log(resp);
+        });
+    }
+
+    // 选择排序方式
+    $scope.setSort = function (type) {
+        if ($scope.type && $scope.type === type) {
+            return;
+        }
+        $scope.type = type;
+        $scope.goodsList = [];
+        $scope.page = 1;
+        $scope.loaded = false;
+        $scope.loading = false;
+        getGoods();
+    };
     
+    $scope.getGoods = getGoods;
 }]);
