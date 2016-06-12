@@ -15,12 +15,13 @@ index.controller('stylistCtrl',
 
 	// 获取发型师列表
 	function getDesignerInfo () {
+		var data;
 		if ($scope.loading) {
 			return;
 		}
 		$scope.loading = true;
 		if (!$scope.isSelfFilter) {
-			var data = {
+			data = {
 				page: $scope.page,
 				sort: $scope.sort,
 				positionx: $scope.positionX,
@@ -58,7 +59,7 @@ index.controller('stylistCtrl',
 			});
 		}
 		else {
-			var data = {
+			data = {
 				page: $scope.page,
 				storetype: $scope.storeType,
 				vh: $scope.vh,

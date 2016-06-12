@@ -9,14 +9,15 @@
 <div id="order">
 	<div ng-if="isAppointOrder">
 		<div class="top-nav">
-			<span ng-class="{'item':true,'selected':!appointFinished}" ng-click="getAppointOrder(0)">
+			<span ng-class="{'item':true,'selected':appointFlag==0}" ng-click="setAppointType(0)">
 				未完成
 			</span>
-			<span ng-class="{'item':true,'selected':appointFinished}" ng-click="getAppointOrder(1)">
+			<span ng-class="{'item':true,'selected':appointFlag==1}" ng-click="setAppointType(1)">
 				已完成
 			</span>
 		</div>
 		<!-- 我的预约 -->
+		<div infinite-scroll="getAppointOrder()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
 			<div class="order-item-container">
 				<!-- 待接单 -->
 				<div class="order-item" ng-repeat="reserve in reserveOrderList">
@@ -61,106 +62,117 @@
 					</div>
 				</div>
 			</div>
+			<div ng-show="loading && !loaded" class="load">加载中...</div>
+	        <div ng-show="loaded" class="load"></i>没有更多了</div>
+		</div>
 	</div>
 	<!-- 服务记录 -->
 	<div ng-if="isServiceOrder">
 		<div class="top-nav">
-			<span ng-class="{'item':true,'selected':allService}" ng-click="getServiceRecord(2)">
+			<span ng-class="{'item':true,'selected':serviceType==2}" ng-click="setServiceType(2)">
 				全部
 			</span>
-			<span ng-class="{'item':true,'selected':unfinishedService}" ng-click="getServiceRecord(0)">
+			<span ng-class="{'item':true,'selected':serviceType==0}" ng-click="setServiceType(0)">
 				未完成
 			</span>
-			<span ng-class="{'item':true,'selected':finishedService}" ng-click="getServiceRecord(1)">
+			<span ng-class="{'item':true,'selected':serviceType==1}" ng-click="setServiceType(1)">
 				已完成
 			</span>
 		</div>
-		<div class="record-item-container">
-			<div class="record-item" ng-repeat="service in consumerOrderList">
-				<div class="top-panel">
-					<span class="order-num">订单号：<span ng-bind="service.id"></span></span>
-					<span class="right">
-						<span ng-bind="service.state"></span>
-						<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="service.stateflag == 2 || service.stateflag == 3" ng-click="deleteConsumerOrder(service)">
-					</span>
-				</div>
-				<div class="order-info">
-					<img ng-src="{{service.designer.imgurl}}" class="record-icon">
-					<span class="text-info">
-						<span class="user-info">
-							<span class="name" ng-bind="service.designer.name"></span>
-							<span class="phone" ng-bind="service.designer.telephone"></span>
+		<div infinite-scroll="getServiceRecord()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+			<div class="record-item-container">
+				<div class="record-item" ng-repeat="service in consumerOrderList">
+					<div class="top-panel">
+						<span class="order-num">订单号：<span ng-bind="service.id"></span></span>
+						<span class="right">
+							<span ng-bind="service.state"></span>
+							<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="service.stateflag == 2 || service.stateflag == 3" ng-click="deleteConsumerOrder(service)">
 						</span>
-						<span>下单时间：<span ng-bind="service.time"></span></span>
-						<span>服务店面：<span ng-bind="service.store.name"></span></span>
-						<span class="location">
-							<img src="../../assets/images/location_3.png" class="location-icon">
-							<span ng-bind="service.store.location"></span>
-						</span>
-					</span>
-				</div>
-				<div class="items-text">
-					<span>项目：</span>
-					<span class="items">
-						<span ng-repeat="item in service.item" class="item-info">
-							<span ng-bind="item.name"></span>
-							<span class="price">
-								<del ng-bind="item.price"></del>
-								<span class="highlight">￥<span ng-bind="item.actualprice"></span></span>
+					</div>
+					<div class="order-info">
+						<img ng-src="{{service.designer.imgurl}}" class="record-icon">
+						<span class="text-info">
+							<span class="user-info">
+								<span class="name" ng-bind="service.designer.name"></span>
+								<span class="phone" ng-bind="service.designer.telephone"></span>
+							</span>
+							<span>下单时间：<span ng-bind="service.time"></span></span>
+							<span>服务店面：<span ng-bind="service.store.name"></span></span>
+							<span class="location">
+								<img src="../../assets/images/location_3.png" class="location-icon">
+								<span ng-bind="service.store.location"></span>
 							</span>
 						</span>
-					</span>
-				</div>
-				<div class="price-info">
-					<span>费用合计：￥<span ng-bind="service.price"></span></span>
-					<span>优惠：<span ng-bind="service.discount"></span></span>
-					<span>实付：<span class="highlight">￥<span ng-bind="service.actualprice"></span></span></span>
-				</div>
-				<div class="operation">
-					<button ng-if="service.stateflag == 0" ng-click="cancelConsumerOrder(service)">取消订单</button>
-					<button class="btn-pay" ng-if="service.stateflag == 0">立即支付</button>
-					<button ng-if="service.stateflag == 1" ng-click="remarkDesigner(service)">去评价</button>
+					</div>
+					<div class="items-text">
+						<span>项目：</span>
+						<span class="items">
+							<span ng-repeat="item in service.item" class="item-info">
+								<span ng-bind="item.name"></span>
+								<span class="price">
+									<del ng-bind="item.price"></del>
+									<span class="highlight">￥<span ng-bind="item.actualprice"></span></span>
+								</span>
+							</span>
+						</span>
+					</div>
+					<div class="price-info">
+						<span>费用合计：￥<span ng-bind="service.price"></span></span>
+						<span>优惠：<span ng-bind="service.discount"></span></span>
+						<span>实付：<span class="highlight">￥<span ng-bind="service.actualprice"></span></span></span>
+					</div>
+					<div class="operation">
+						<button ng-if="service.stateflag == 0" ng-click="cancelConsumerOrder(service)">取消订单</button>
+						<button class="btn-pay" ng-if="service.stateflag == 0">立即支付</button>
+						<button ng-if="service.stateflag == 1" ng-click="remarkDesigner(service)">去评价</button>
+					</div>
 				</div>
 			</div>
+			<div ng-show="loading && !loaded" class="load">加载中...</div>
+	        <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>
 	<!-- 商城订单 -->
 	<div ng-if="isMallOrder">
 		<div class="top-nav">
-			<span ng-class="{'item':true,'selected':allGoods}" ng-click="getMallOrder(2)">
+			<span ng-class="{'item':true,'selected':mallFlag==2}" ng-click="setMallFlag(2)">
 				全部
 			</span>
-			<span ng-class="{'item':true,'selected':unfinishedGoods}" ng-click="getMallOrder(0)">
+			<span ng-class="{'item':true,'selected':mallFlag==0}" ng-click="setMallFlag(0)">
 				未完成
 			</span>
-			<span ng-class="{'item':true,'selected':finishedGoods}" ng-click="getMallOrder(1)">
+			<span ng-class="{'item':true,'selected':mallFlag==1}" ng-click="setMallFlag(1)">
 				已完成
 			</span>
 		</div>
-		<div class="mall-order-container">
-			<div class="mall-order-item" ng-repeat="goods in goodsOrderList">
-				<div class="top-panel">
-					<span>订单号：<span ng-bind="goods.id"></span></span>
-					<span class="right">
-						<span ng-bind="goods.state"></span>
-						<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods)">
-					</span>
-				</div>
-				<div class="pic-panel">
-					<img ng-repeat="img in goods.imgUrlArr" ng-src="{{img.path}}">
-				</div>
-				<div class="operation">
-					<span>实付：<span class="highlight">￥<span ng-bind="goods.actualprice"></span></span></span>
-					<span class="right">
-						<button ng-if="goods.stateflag==0" ng-click="toPay(goods)">立即支付</button>
-						<button ng-if="goods.stateflag==0" ng-click="cancelGoodsOrder(goods)">取消订单</button>
-						<button ng-if="goods.stateflag==8">去评价</button>
-						<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8">申请退款</button>
-						<button ng-if="goods.stateflag==8">确认收货</button>
-						<button ng-if="goods.stateflag==8">申请退款</button>
-					</span>
+		<div infinite-scroll="getMallOrder()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+			<div class="mall-order-container">
+				<div class="mall-order-item" ng-repeat="goods in goodsOrderList">
+					<div class="top-panel">
+						<span>订单号：<span ng-bind="goods.id"></span></span>
+						<span class="right">
+							<span ng-bind="goods.state"></span>
+							<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods)">
+						</span>
+					</div>
+					<div class="pic-panel">
+						<img ng-repeat="img in goods.imgUrlArr" ng-src="{{img.path}}">
+					</div>
+					<div class="operation">
+						<span>实付：<span class="highlight">￥<span ng-bind="goods.actualprice"></span></span></span>
+						<span class="right">
+							<button ng-if="goods.stateflag==0" ng-click="toPay(goods)">立即支付</button>
+							<button ng-if="goods.stateflag==0" ng-click="cancelGoodsOrder(goods)">取消订单</button>
+							<button ng-if="goods.stateflag==8">去评价</button>
+							<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8">申请退款</button>
+							<button ng-if="goods.stateflag==8">确认收货</button>
+							<button ng-if="goods.stateflag==8">申请退款</button>
+						</span>
+					</div>
 				</div>
 			</div>
+			<div ng-show="loading && !loaded" class="load">加载中...</div>
+	        <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>
 </div>
