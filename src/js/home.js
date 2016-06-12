@@ -256,4 +256,10 @@ index.controller('homeCtrl',
 	$scope.goodsDetail = function (goods) {
 		$location.path('mall_goods_detail/' + goods.id);
 	};
+
+	// 点击vip专区跳转到购买vip页面
+	$scope.toVip = function () {
+		$location.path('recharge');
+	};
+
 }]);

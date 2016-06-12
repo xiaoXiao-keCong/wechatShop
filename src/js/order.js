@@ -163,7 +163,7 @@ index.controller('orderCtrl',
 		var data = {
 			flag: $scope.serviceType,
 			page: $scope.page
-		}
+		};
 		$http.post('/user/myconsumerorder.json', data, postCfg)
 		.success(function (data) {
 			if (-1 === data.code) {
@@ -181,7 +181,7 @@ index.controller('orderCtrl',
 					$scope.page += 1;
 				}
 				else {
-					$scope.loaded = true
+					$scope.loaded = true;
 				}
 			}
 		})
