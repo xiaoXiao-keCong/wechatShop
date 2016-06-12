@@ -162,35 +162,39 @@
 			<span><img src="../../assets/images/down_2.png" class="icon" ng-click="itemSelect()"></span>
 		</span>
 	</div>
-	<div class="list-item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
-		<div class="content">
-			<span class="headpic">
-				<img ng-src="{{designer.avatar}}">
-			</span>
-			<span class="info">
-				<span class="first-row">
-					<span class="left">
-						<span ng-bind="designer.name"></span>
-						<span class="star">
-							<img ng-repeat="star in designer.starUrl" ng-src="{{star.path}}">
-						</span>
-					</span>
-					<span class="right">￥<span ng-bind="designer.cutmoney"></span></span>
+	<div infinite-scroll="getDesignerList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+		<div class="list-item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
+			<div class="content">
+				<span class="headpic">
+					<img ng-src="{{designer.avatar}}">
 				</span>
-				<span class="intro" ng-bind="designer.info"></span>
-			</span>
+				<span class="info">
+					<span class="first-row">
+						<span class="left">
+							<span ng-bind="designer.name"></span>
+							<span class="star">
+								<img ng-repeat="star in designer.starUrl" ng-src="{{star.path}}">
+							</span>
+						</span>
+						<span class="right">￥<span ng-bind="designer.cutmoney"></span></span>
+					</span>
+					<span class="intro" ng-bind="designer.info"></span>
+				</span>
 
+			</div>
+			<div class="location">
+				<span class="left">
+					<span><img src="../../assets/images/location.png"></span>
+					<span ng-bind="designer.store.location"></span>
+				</span>
+				<span class="right">
+					<span class="consult"><img src="../../assets/images/consult.png"></span>
+					<span class="appoint"><img src="../../assets/images/appoint.png" ng-click="appoint(designer, $event)"></span>
+				</span>
+			</div>
 		</div>
-		<div class="location">
-			<span class="left">
-				<span><img src="../../assets/images/location.png"></span>
-				<span ng-bind="designer.store.location"></span>
-			</span>
-			<span class="right">
-				<span class="consult"><img src="../../assets/images/consult.png"></span>
-				<span class="appoint"><img src="../../assets/images/appoint.png" ng-click="appoint(designer, $event)"></span>
-			</span>
-		</div>
+		<div ng-show="loading && !loaded" class="load">加载中...</div>
+        <div ng-show="loaded" class="load"></i>没有更多了</div>
 	</div>
 </div>
 <div class="bottom-nav">
@@ -216,7 +220,7 @@
         <span>
             <img src="../../assets/images/dingdan.png">
         </span>
-        <span class="text">订单</span>   
+        <span class="text">订单</span> 
     </span>
     <span class="item" ng-click="navigate(5)">
         <span>

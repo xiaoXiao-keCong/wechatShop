@@ -22,87 +22,86 @@ index.controller('appointmentCtrl',
 	$scope.itemName = '项目';
 	$scope.dateIndex = 0;
 	$scope.timeIndex = 0;
+	$scope.designerList = [];
+
 	$rootScope.dateIndex = 0;
 	$rootScope.timeIndex = 0;
 	$rootScope.serviceTime = '';
 	$rootScope.serviceItems = [];
 
+	var starUrl1 = '../../assets/images/star_h.png',
+        starUrl2 = '../../assets/images/star.png';
 
-	// 智能推荐
-	$scope.recommend = function () {
-		var serviceId = $scope.serviceArr,
-		    day = $('#date-select .swiper-slide').index($('#date-select .swiper-slide-active')) + 1,
-		    time = $('#time-select .swiper-slide').index($('#time-select .swiper-slide-active')) + 1,
-		    data = {
-				day: day,
-				time: time,
-				serviceid: serviceId,
-				page: 1,
-				sort: 'default'
-			},
-			starUrl1 = '../../assets/images/star_h.png',
-            starUrl2 = '../../assets/images/star.png';
-        $scope.dateIndex = day;
-        $scope.timeIndex = time;
+	$scope.page = 1;
+
+	function getDesignerList() {
+		if ($scope.loading) {
+			return;
+		}
+		
+		$scope.loading = true;
+		var data = {
+			day: $scope.dateIndex,
+			time: $scope.timeIndex,
+			serviceid: $scope.serviceArr,
+			page: $scope.page
+		};
 		$http.post('/designer/quickreserve.json', data, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
-				$scope.showMask = false;
-				$scope.day = $('#date-select .swiper-slide-active').text();
-				$scope.time = $('#time-select .swiper-slide-active').text();
 				var designerList = data.data.designerlist;
-				for (var i = 0; i < designerList.length; i++) {
-					designerList[i].avatar = picBasePath + designerList[i].avatar;
-					designerList[i].starUrl = [];
-					for (var j = 0; j < designerList[i].score; j++) {
-                        designerList[i].starUrl.push({'path': starUrl1});
-                    }
-                    for (var k = j; k < 5; k++) {
-                        designerList[i].starUrl.push({'path': starUrl2});
-                    }
+				if (designerList.length > 0) {
+					for (var i = 0; i < designerList.length; i++) {
+						designerList[i].avatar = picBasePath + designerList[i].avatar;
+						designerList[i].starUrl = [];
+						for (var j = 0; j < designerList[i].score; j++) {
+	                        designerList[i].starUrl.push({'path': starUrl1});
+	                    }
+	                    for (var k = j; k < 5; k++) {
+	                        designerList[i].starUrl.push({'path': starUrl2});
+	                    }
+	                    $scope.designerList.push(designerList[i]);
+					}
+					console.log($scope.designerList);
+					$scope.loading = false;
+					$scope.page += 1;
 				}
-				$scope.designerList = designerList;
+				else {
+					$scope.loaded = true;
+				}
 			}
 		})
 		.error(function (data) {
 			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
+	}
+
+	$scope.getDesignerList = getDesignerList;
+
+
+	// 智能推荐
+	$scope.recommend = function () {
+		var day = $('#date-select .swiper-slide').index($('#date-select .swiper-slide-active')) + 1,
+		    time = $('#time-select .swiper-slide').index($('#time-select .swiper-slide-active')) + 1;
+		$scope.showMask = false;
+        $scope.dateIndex = day;
+        $scope.timeIndex = time;
+        $scope.day = $('#date-select .swiper-slide-active').text();
+		$scope.time = $('#time-select .swiper-slide-active').text();
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+        getDesignerList();
 	};
 	
 	// 跳过，不选择智能推荐
 	$scope.jump = function () {
-		var data = {
-				page: 1,
-				sort: 'default'
-			},
-			starUrl1 = '../../assets/images/star_h.png',
-            starUrl2 = '../../assets/images/star.png';
-
-		$http.post('/designer/quickreserve.json', data, postCfg)
-		.success(function (data) {
-			console.log(data);
-			if (1 === data.code) {
-				$scope.showMask = false;
-				var designerList = data.data.designerlist;
-				for (var i = 0; i < designerList.length; i++) {
-					designerList[i].avatar = picBasePath + designerList[i].avatar;
-					designerList[i].starUrl = [];
-					for (var j = 0; j < designerList[i].score; j++) {
-                        designerList[i].starUrl.push({'path': starUrl1});
-                    }
-                    for (var k = j; k < 5; k++) {
-                        designerList[i].starUrl.push({'path': starUrl2});
-                    }
-				}
-				$scope.designerList = designerList;
-			}
-		})
-		.error(function (data) {
-			console.log(data);
-			alert('数据请求失败，请稍后再试！');
-		});
+		$scope.showMask = false;
 	};
+
+
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
@@ -288,32 +287,47 @@ index.controller('appointmentCtrl',
 			if ($scope.dateIndex > 0 && $scope.timeIndex > 0) {
 				$rootScope.dateIndex = $scope.dateIndex;
 				$rootScope.timeIndex = $scope.timeIndex;
+				$rootScope.serviceTime = $scope.day + ' ' + $scope.time;
 				$rootScope.serviceItems = $scope.serviceArr;
 			}
 			$location.path('stylist_detail/' + designer.id);
-
 		}
-
 	};
 	
 	$scope.selectTime = function () {
-		var selectTime = $('#time-select-only').find('.swiper-slide-active').text();
-		$scope.time = selectTime;
 		$scope.appointMaskShow = false;
 		$scope.timeShow = false;
 		var timeIndex = $('#time-select-only .swiper-slide')
 		.index($('#time-select-only .swiper-slide-active')) + 1;
+		if (timeIndex == $scope.timeIndex) {
+			return;
+		}
+		var selectTime = $('#time-select-only').find('.swiper-slide-active').text();
+		$scope.time = selectTime;
 		$scope.timeIndex = timeIndex;
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerList();
 	};
 
 	$scope.selectDate = function () {
-		var selectDate = $('#date-select-only').find('.swiper-slide-active').text();
-		$scope.day = selectDate;
-		$scope.appointMaskShow = false;
-		$scope.dateShow = false;
 		var dateIndex = $('#date-select-only .swiper-slide')
 		.index($('#date-select-only .swiper-slide-active')) + 1;
+		$scope.appointMaskShow = false;
+		$scope.dateShow = false;
+		if (dateIndex == $scope.dateIndex) {
+			return;
+		}
+		var selectDate = $('#date-select-only').find('.swiper-slide-active').text();
+		$scope.day = selectDate;
 		$scope.dateIndex = dateIndex;
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerList();
 	};
 
 	$scope.selectItem = function () {
@@ -326,6 +340,11 @@ index.controller('appointmentCtrl',
 		var itemIndex = $('#item-select-only .swiper-slide')
 		.index($('#item-select-only .swiper-slide-active'));
 		$scope.serviceArr.push(indexArr[itemIndex]);
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerList();
 	};
 
 	// 点击选择时间

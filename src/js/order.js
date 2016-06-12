@@ -79,7 +79,6 @@ index.controller('orderCtrl',
 				for (var i = 0; i < reserveOrderList.length; i++) {
 					reserveOrderList[i].designer.imgurl = picBasePath +
 					    reserveOrderList[i].designer.imgurl;
-
 				}
 				$scope.reserveOrderList = reserveOrderList;
 			}

@@ -17,50 +17,50 @@
 			</span>
 		</div>
 		<!-- 我的预约 -->
-		<div class="order-item-container">
-			<!-- 待接单 -->
-			<div class="order-item" ng-repeat="reserve in reserveOrderList">
-				<div class="item-top">
-					<span class="order-num">订单号：<span ng-bind="reserve.id"></span></span>
-					<span class="order-state" ng-bind="reserve.state"></span>
-				</div>
-				<div class="order-detail">
-					<span class="left"><img ng-src="{{reserve.designer.imgurl}}"></span>
-					<span class="right">
-						<div class="right-row">
-							<span class="right-cell-left ellipsis name" ng-bind="reserve.designer.name"></span>
-							<span class="right-cell-right phone" ng-bind="reserve.designer.telephone"></span>
-						</div>
-						<div class="right-row">
-							<span class="right-cell-left">项目:</span>
-							<span class="right-cell-right">染发</span>
-						</div>
-						<div class="right-row">
-							<span class="right-cell-left">服务时间:</span>
-							<span class="right-cell-right" ng-bind="reserve.servicetime"></span>
-						</div>
-						<div class="right-row">
-							<span class="right-cell-left">服务门店:</span>
-							<span class="right-cell-right" ng-bind="reserve.store.name"></span>
-						</div>
-						<div class="right-row">
-							<span class="right-cell-left">预约时间:</span>
-							<span class="right-cell-right" ng-bind="reserve.duetime"></span>
-						</div>
-					</span>
-				</div>
-				<div class="operation">
-					<span class="location">
-						<img src="../../assets/images/location.png">
-						<span ng-bind="reserve.store.location"></span>
-					</span>
-					<span>
-						<span class="btn-cancel" ng-if="reserve.stateflag == 4 || reserve.stateflag == 0" ng-click="cancelReserveOrder(reserve)">取消订单</span>
-						<span class="btn-cancel" ng-if="reserve.stateflag == 5">立即支付</span>
-					</span>
+			<div class="order-item-container">
+				<!-- 待接单 -->
+				<div class="order-item" ng-repeat="reserve in reserveOrderList">
+					<div class="item-top">
+						<span class="order-num">订单号：<span ng-bind="reserve.id"></span></span>
+						<span class="order-state" ng-bind="reserve.state"></span>
+					</div>
+					<div class="order-detail">
+						<span class="left"><img ng-src="{{reserve.designer.imgurl}}"></span>
+						<span class="right">
+							<div class="right-row">
+								<span class="right-cell-left ellipsis name" ng-bind="reserve.designer.name"></span>
+								<span class="right-cell-right phone" ng-bind="reserve.designer.telephone"></span>
+							</div>
+							<div class="right-row">
+								<span class="right-cell-left">项目:</span>
+								<span class="right-cell-right">染发</span>
+							</div>
+							<div class="right-row">
+								<span class="right-cell-left">服务时间:</span>
+								<span class="right-cell-right" ng-bind="reserve.servicetime"></span>
+							</div>
+							<div class="right-row">
+								<span class="right-cell-left">服务门店:</span>
+								<span class="right-cell-right" ng-bind="reserve.store.name"></span>
+							</div>
+							<div class="right-row">
+								<span class="right-cell-left">预约时间:</span>
+								<span class="right-cell-right" ng-bind="reserve.duetime"></span>
+							</div>
+						</span>
+					</div>
+					<div class="operation">
+						<span class="location">
+							<img src="../../assets/images/location.png">
+							<span ng-bind="reserve.store.location"></span>
+						</span>
+						<span>
+							<span class="btn-cancel" ng-if="reserve.stateflag == 4 || reserve.stateflag == 0" ng-click="cancelReserveOrder(reserve)">取消订单</span>
+							<span class="btn-cancel" ng-if="reserve.stateflag == 5">立即支付</span>
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 	<!-- 服务记录 -->
 	<div ng-if="isServiceOrder">
