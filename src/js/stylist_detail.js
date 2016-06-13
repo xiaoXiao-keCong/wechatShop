@@ -9,6 +9,7 @@ index.controller('stylistDetailCtrl',
 		lifeShowed = false,
 		workShowed = false;
     var designerId = $routeParams.id;
+    $scope.priceList = [];
 
 	$scope.project = true;
 	$scope.show = function (index) {
@@ -63,7 +64,6 @@ index.controller('stylistDetailCtrl',
 	// 初始化就要获取发型师项目
 	$http.post('/designer/service.json', {'designerid': parseInt($routeParams.id)}, postCfg)
 	.then(function (resp) {
-		console.log(resp);
 		if (1 === resp.data.code) {
 			var serviceList = resp.data.data.servicelist;
 			for (var i = 0, j = serviceList.length; i < j; i++) {
@@ -93,10 +93,23 @@ index.controller('stylistDetailCtrl',
 		};
 		$http.post('/designer/price.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
+			if (1 === data.code) {
+				var data = data.data;
+				for (var key1 in data) {
+					var priceItem = {};
+					priceItem.title = key1;
+					priceItem.items = [];
+					for (var key2 in data[key1]) {
+						for (var key3 in data[key1][key2]) {
+							priceItem.items.push({title: key2 + '-' + key3, price: data[key1][key2][key3]});
+						}
+					}
+					$scope.priceList.push(priceItem);
+				}
+				console.log($scope.priceList);
+			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
@@ -115,7 +128,6 @@ index.controller('stylistDetailCtrl',
 					workList[i].imgurl = picBasePath + workList[i].imgurl;
 				}
 				$scope.workList = workList;
-				console.log($scope.workList);
 			}
 		}, function (resp) {
 			console.log(resp);
@@ -203,6 +215,16 @@ index.controller('stylistDetailCtrl',
 			// 跳转到选择时间页面
 			$location.path('select_datetime/' + designerId);
 		}
+	};
+
+	// 跳转到活动页面
+	$scope.jumpToActivity = function (activity) {
+		$window.location.href = activity.jumpurl;
+	};
+
+	// 展开价格
+	$scope.showItems = function (price) {
+		price.show = !price.show;
 	};
 
 }]);
