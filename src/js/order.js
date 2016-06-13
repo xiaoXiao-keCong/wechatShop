@@ -354,4 +354,32 @@ index.controller('orderCtrl',
 		$location.path('pay_goods/' + order.id);
 	};
 
+	// 去评论商品订单
+	$scope.toRemarkGoods = function (order) {
+		$location.path('order_comment');
+	};
+
+	// 商品确认收货
+	$scope.confirmReceipt = function (order) {
+		$http.post('/user/confirmreceipt.json', {orderid: order.id}, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				alert('确认收货成功！');
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	};
+
+	// 商城订单申请退款
+	$scope.applyRefund = function (order) {
+		// 跳转到申请退款页面
+		$location.path('refund');
+	};
+
 }]);

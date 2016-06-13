@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-    <meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="yes" name="apple-touch-fullscreen">
-    <meta content="telephone=no,email=no" name="format-detection">
-    <title>申请退款</title>
-    <script src="../../assets/js/flexible_css.debug.js"></script>
-    <script src="../../assets/js/flexible.debug.js"></script>
-    <link rel="stylesheet" href="../../build/css/app.min.css">
-</head>
-<body>
-	<div class="title-bar">
-		<span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
-		<span>申请退款</span>
-	</div>
-    <div class="refund-content">
-        <div class="reason-group">
-            <span class="icon">
-                <img src="../../assets/images/sqtk_10.png">
-            </span>
+<div class="title-bar">
+	<span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	<span>申请退款</span>
+</div>
+<div class="refund-content">
+    <div class="reason-group">
+        <span class="icon">
+            <img src="../../assets/images/sqtk_10.png">
+        </span>
+        <span class="text-container">
+            <input type="text" placeholder="退款原因（必填）" class="input-text">
+        </span>
+        <span class="choice-icon">
+            <img src="../../assets/images/sqtk_07.png">
+        </span>
+
+    </div>
+    <div class="instruction-group">
+        <div class="instruction-choice">
             <span class="text-container">
-                <input type="text" placeholder="退款原因（必填）" class="input-text">
+                <input type="text" placeholder="退款说明" class="input-text">
             </span>
             <span class="choice-icon">
                 <img src="../../assets/images/sqtk_07.png">
             </span>
+        </div>
+        <div class="instruction-fill">
+            <textarea class="input-text" placeholder="最多200字"></textarea>
+        </div>
 
-        </div>
-        <div class="instruction-group">
-            <div class="instruction-choice">
-                <span class="text-container">
-                    <input type="text" placeholder="退款说明" class="input-text">
-                </span>
-                <span class="choice-icon">
-                    <img src="../../assets/images/sqtk_07.png">
-                </span>
-            </div>
-            <div class="instruction-fill">
-                <textarea class="input-text" placeholder="最多200字"></textarea>
-            </div>
-
-        </div>
-        <div class="add-piture">
-            <div class="add-text">上传凭证</div>
-            <div class="add-text">（最多三张）</div>
-            <!-- <img src="../../assets/images/sqtk_19.png"> -->
-        </div>
-        <div class="submit-reply">
-            <button class="submit-btn">提交申请</button>
-        </div>
     </div>
-</body>
-</html>
+    <div class="add-piture">
+        <div class="add-text">上传凭证</div>
+        <div class="add-text">（最多三张）</div>
+        <!-- <img src="../../assets/images/sqtk_19.png"> -->
+    </div>
+    <div class="submit-reply">
+        <button class="submit-btn">提交申请</button>
+    </div>
+</div>

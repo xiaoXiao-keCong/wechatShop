@@ -163,9 +163,10 @@
 						<span class="right">
 							<button ng-if="goods.stateflag==0" ng-click="toPay(goods)">立即支付</button>
 							<button ng-if="goods.stateflag==0" ng-click="cancelGoodsOrder(goods)">取消订单</button>
-							<button ng-if="goods.stateflag==8">去评价</button>
-							<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8">申请退款</button>
-							<button ng-if="goods.stateflag==8">确认收货</button>
+							<button ng-if="goods.stateflag==8" ng-click="toRemarkGoods(goods)">去评价</button>
+							<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8"
+							 ng-click="applyRefund(goods)">申请退款</button>
+							<button ng-if="goods.stateflag==8" ng-click="confirmReceipt(goods)">确认收货</button>
 						</span>
 					</div>
 				</div>

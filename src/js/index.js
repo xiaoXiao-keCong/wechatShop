@@ -213,6 +213,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/select_coupon.html',
 			controller: 'selectCouponCtrl'
 		})
+		.when('/refund', {
+			templateUrl: '../html/refund.html',
+			controller: 'refundCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
