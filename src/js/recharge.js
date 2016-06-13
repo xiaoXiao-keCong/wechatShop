@@ -1,40 +1,49 @@
 /**
  * Created by hugotan on 2016/4/10.
  */
-index.controller('rechargeCtrl', ['$scope', '$http', '$location',
-	function ($scope, $http, $location) {
+index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
+	function ($scope, $http, $location, $rootScope) {
 
     var priceRe = /^(0|[1-9][0-9]{0,9})(\.[0-9]{1,2})?$/;
-	// 获取当前余额
-	$http.post('/user/getcurrentbalance.json', postCfg)
-	.success(function (data) {
-		console.log(data);
-		if (-1 === data.code) {
-			$location.path('login');
-			return;
-		}
-		if (1 === data.code) {
-			$scope.balance = data.data.balance;
-		}
+    var designerId = 0;
 
-	})
+    $scope.recommend = '';
 
-    // 获取所有vip信息
-    $http.post('/user/getallvip.json', postCfg)
-    .success(function (data) {
-    	console.log(data);
-    	if (1 === data.code) {
-    		var vipList = data.data.viplist;
-    		for (var i = 0; i < vipList.length; i++) {
-    			vipList[i].imgurl = picBasePath + '/' + vipList[i].imgurl;
-    		}
-    		$scope.vipList = vipList;
-    	}
-    })
-    .error(function (data) {
-    	console.log(data);
-    	alert('数据请求失败，请稍后再试！')
-    });
+    (function init() {
+        // 获取当前余额
+        if ($rootScope.designer) {
+            $scope.designer = $rootScope.designer;
+            designerId = $scope.designer.id;
+        }
+        $http.post('/user/getcurrentbalance.json', postCfg)
+        .success(function (data) {
+            if (-1 === data.code) {
+                $location.path('login');
+                return;
+            }
+            if (1 === data.code) {
+                $scope.balance = data.data.balance;
+            }
+
+        })
+
+        // 获取所有vip信息
+        $http.post('/user/getallvip.json', postCfg)
+        .success(function (data) {
+            if (1 === data.code) {
+                var vipList = data.data.viplist;
+                for (var i = 0; i < vipList.length; i++) {
+                    vipList[i].imgurl = picBasePath + '/' + vipList[i].imgurl;
+                }
+                $scope.vipList = vipList;
+            }
+        })
+        .error(function (data) {
+            console.log(data);
+            alert('数据请求失败，请稍后再试！')
+        });
+    })();
+	
 
     // 选择vip
     $scope.selectVip = function (vip) {
@@ -44,6 +53,14 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location',
     	}
         $scope.otherPrice = false;
     	vip.selected = state;
+    };
+
+    $scope.selectOptionVip = function (vip) {
+        var state = !vip.selected;
+        for (var i = 0; i < $scope.vipOptionList.length; i++) {
+            $scope.vipOptionList[i].selected = false;
+        }
+        vip.selected = state;
     };
 
     // 选择其他金额
@@ -64,12 +81,58 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location',
         $http.post('/user/buyvipfirststep.json', data, postCfg)
         .success(function (data) {
             console.log(data);
+            if (1 === data.code) {
+                var vipList = data.data.viplist;
+                if (1 === vipList.length) {
+                    $scope.vipId = data.data.viplist[0].id;
+                    buyVipSecondStep();
+                }
+                else if (2 === vipList.length) {
+                    // 弹出框让用户选择
+                    $scope.showVipOption = true;
+                    var vipList = data.data.viplist;
+                    for (var i = 0; i < vipList.length; i++) {
+                        vipList[i].imgurl = picBasePath + '/' + vipList[i].imgurl;
+                    }
+                    $scope.vipOptionList = vipList;
+                }
+            }
         })
         .error(function (data) {
             console.log(data);
             alert('数据请求失败，请稍后再试！');
         });
     };
+
+    // 购买vip第二步
+    function buyVipSecondStep() {
+        var data = {
+            vipid: $scope.vipId,
+            paymoney: $scope.payMoney,
+            designerid: designerId
+        };
+        $http.post('/user/buyvipsecondstep.json', data, postCfg)
+        .success(function (data) {
+            console.log(data);
+            if (-1 === data.code) {
+                $location.path('login');
+                return;
+            }
+            if (1 === data.code) {
+                // 下单成功，跳转到充值支付页面
+                var order = data.data;
+                $location.path('pay_recharge').search({
+                    id: order.id,
+                    time: order.time,
+                    price: order.price,
+                    recommendBy: order.recommendby
+                });
+            }
+        })
+        .error(function (data) {
+            alert('数据请求失败，请稍后再试！');
+        });
+    }
 
     function checkParams() {
         var flag = false;
@@ -101,4 +164,24 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location',
         }
     }
 
+    // 点击选择推荐人
+    $scope.selectStore = function () {
+        $location.path('select_store');
+    };
+
+    // 确认选择弹框的vip
+    $scope.confirmSelect = function () {
+        for (var i =0; i < $scope.vipOptionList.length; i++) {
+            if ($scope.vipOptionList[i].selected) {
+                break;
+            }
+        }
+        if (2 === i) {
+            alert('请选择需要购买的vip');
+            return;
+        }
+        $scope.vipId = $scope.vipOptionList[i].id;
+        $scope.payMoney = $scope.vipOptionList[i].price;
+        buyVipSecondStep();
+    };
 }]);
