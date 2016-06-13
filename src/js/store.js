@@ -75,7 +75,7 @@ index.controller('storeCtrl',
         })
         .error(function (data) {
             alert('数据请求失败，请稍后再试！');
-        })
+        });
     }
 
     // 跳转到门店搜索页面

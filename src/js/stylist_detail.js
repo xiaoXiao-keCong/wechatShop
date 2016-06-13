@@ -9,6 +9,11 @@ index.controller('stylistDetailCtrl',
 		lifeShowed = false,
 		workShowed = false;
     var designerId = $routeParams.id;
+    $scope.lifePage = 1;
+    $scope.workPage = 1;
+    $scope.lifeList = [];
+    $scope.workList = [];
+
     $scope.priceList = [];
 
 	$scope.project = true;
@@ -27,13 +32,11 @@ index.controller('stylistDetailCtrl',
 			case 3:
 				if (lifeShowed !== true) {
 					lifeShowed = true;
-					getLife();
 				}
 				break;
 			case 4:
 				if (workShowed !== true) {
 					workShowed = true;
-					getWorks();
 				}
 				break;
 		}
@@ -94,19 +97,18 @@ index.controller('stylistDetailCtrl',
 		$http.post('/designer/price.json', data, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
-				var data = data.data;
-				for (var key1 in data) {
+				var dataArr = data.data;
+				for (var key1 in dataArr) {
 					var priceItem = {};
 					priceItem.title = key1;
 					priceItem.items = [];
-					for (var key2 in data[key1]) {
-						for (var key3 in data[key1][key2]) {
-							priceItem.items.push({title: key2 + '-' + key3, price: data[key1][key2][key3]});
+					for (var key2 in dataArr[key1]) {
+						for (var key3 in dataArr[key1][key2]) {
+							priceItem.items.push({title: key2 + '-' + key3, price: dataArr[key1][key2][key3]});
 						}
 					}
 					$scope.priceList.push(priceItem);
 				}
-				console.log($scope.priceList);
 			}
 		})
 		.error(function (data) {
@@ -114,47 +116,72 @@ index.controller('stylistDetailCtrl',
 		});
 	}
 
+	$scope.getWorks = getWorks;
 	// 获取发型师作品
 	function getWorks() {
+		if ($scope.workLoading) {
+			return;
+		}
+		$scope.workLoading = true;
 		var data = {
 			designerid: $routeParams.id,
-			page: 1
+			page: $scope.workPage
 		};
 		$http.post('/designer/work.json', data, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var workList = resp.data.data.designerworklist;
-				for (var i = 0; i < workList.length; i++) {
-					workList[i].imgurl = picBasePath + workList[i].imgurl;
+				if (workList.length > 0) {
+					for (var i = 0; i < workList.length; i++) {
+						workList[i].imgurl = picBasePath + workList[i].imgurl;
+						$scope.workList.push(workList[i]);
+					}
+					$scope.workLoading = false;
+					$scope.workPage += 1;
 				}
-				$scope.workList = workList;
+				else {
+					$scope.workLoaded = true;
+				}
 			}
 		}, function (resp) {
 			console.log(resp);
 		});
 	}
 
+	$scope.getLife = getLife;
 	// 获取发型师生活
+	
 	function getLife() {
+		if ($scope.lifeLoading) {
+			return;
+		}
+		$scope.lifeLoading = true;
 		var data = {
 			designerid: $routeParams.id,
-			page: 1
+			page: $scope.lifePage
 		};
 		$http.post('/designer/life.json', data, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var lifeList = resp.data.data.designerlifelist;
-				for (var i = 0; i < lifeList.length; i++) {
-					lifeList[i].imgArr = [];
-					for (var j = 0; j < lifeList[i].imgurl.length; j++) {
-						lifeList[i].imgArr.push({path: picBasePath + lifeList[i].imgurl[j]});
+				if (lifeList.length > 0) {
+					for (var i = 0; i < lifeList.length; i++) {
+						lifeList[i].imgArr = [];
+						for (var j = 0; j < lifeList[i].imgurl.length; j++) {
+							lifeList[i].imgArr.push({path: picBasePath + lifeList[i].imgurl[j]});
+						}
+						$scope.lifeList.push(lifeList[i]);
 					}
+					$scope.lifeLoading = false;
+					$scope.lifePage += 1;
 				}
-				$scope.lifeList = lifeList;
-				console.log($scope.lifeList);
+				else {
+					$scope.lifeLoaded = true;
+				}
 			}
 		}, function (resp) {
 			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
 		});
 	}
 

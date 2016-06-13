@@ -58,5 +58,5 @@ index.controller('selectDesignerCtrl',
 	$scope.selectDesigner = function (designer) {
 		$rootScope.designer = designer;
 		$window.history.go(-2);
-	}
+	};
 }]);

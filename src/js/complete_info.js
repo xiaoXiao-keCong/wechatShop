@@ -14,7 +14,7 @@ index.controller('completeInfoCtrl',
 	
 	$scope.complete = function () {
 		console.log($scope.nickname);
-		if (!$scope.nickname || $scope.nickname == '') {
+		if (!$scope.nickname || $scope.nickname === '') {
 			alert('请输入您的昵称');
 			return;
 		}

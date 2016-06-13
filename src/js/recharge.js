@@ -25,7 +25,7 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
                 $scope.balance = data.data.balance;
             }
 
-        })
+        });
 
         // 获取所有vip信息
         $http.post('/user/getallvip.json', postCfg)
@@ -40,7 +40,7 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
         })
         .error(function (data) {
             console.log(data);
-            alert('数据请求失败，请稍后再试！')
+            alert('数据请求失败，请稍后再试！');
         });
     })();
 	
@@ -80,9 +80,9 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
         };
         $http.post('/user/buyvipfirststep.json', data, postCfg)
         .success(function (data) {
-            console.log(data);
+            var vipList;
             if (1 === data.code) {
-                var vipList = data.data.viplist;
+                vipList = data.data.viplist;
                 if (1 === vipList.length) {
                     $scope.vipId = data.data.viplist[0].id;
                     buyVipSecondStep();
@@ -90,7 +90,7 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
                 else if (2 === vipList.length) {
                     // 弹出框让用户选择
                     $scope.showVipOption = true;
-                    var vipList = data.data.viplist;
+                    vipList = data.data.viplist;
                     for (var i = 0; i < vipList.length; i++) {
                         vipList[i].imgurl = picBasePath + '/' + vipList[i].imgurl;
                     }

@@ -22,7 +22,7 @@ index.controller('balanceCtrl', ['$scope', '$http', '$location',
 	})
 	.error(function (data) {
 		alert('数据请求失败，请稍后再试！');
-	})
+	});
 	
 	$scope.getBalanceList = getBalanceList;
 
@@ -31,13 +31,14 @@ index.controller('balanceCtrl', ['$scope', '$http', '$location',
 			return;
 		}
 		$scope.loading = true;
+		var data;
 		if (!$scope.filter) {
-			var data = {
+			data = {
 				page: $scope.page
 			};
 			$http.post('/user/mybalancerecord.json', data, postCfg)
 			.then(function (resp) {
-				var data = resp.data;
+				data = resp.data;
 				if (-1 === data.code) {
 					$location.path('login');
 					return;
@@ -60,7 +61,7 @@ index.controller('balanceCtrl', ['$scope', '$http', '$location',
 			});
 		}
 		else {
-			var data = {
+			data = {
 				page: $scope.page,
 				type: $scope.filterType,
 				starttime: startTime,

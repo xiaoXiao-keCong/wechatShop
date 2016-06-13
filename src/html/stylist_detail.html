@@ -109,24 +109,38 @@
 </div>
 <!-- 发型师生活 -->
 <div class="stylist-life-container" ng-if="life">
-	<div class="item" ng-repeat="life in lifeList">
-		<div class="time">
-			<img src="../../assets/images/time_circle.png" class="time-circle">
-			<span ng-bind="life.time"></span>
-		</div>
-		<div class="content">
-			<div ng-bind="life.content"></div>
-			<div class="pic">
-				<img ng-repeat="img in life.imgArr" ng-src="{{img.path}}" alt="">
+	<div infinite-scroll="getLife()" infinite-scroll-disabled="lifeLoading" infinite-scroll-distance="1">
+		<div class="item" ng-repeat="life in lifeList">
+			<div class="time">
+				<img src="../../assets/images/time_circle.png" class="time-circle">
+				<span ng-bind="life.time"></span>
+			</div>
+			<div class="content">
+				<div ng-bind="life.content"></div>
+				<div class="pic">
+					<img ng-repeat="img in life.imgArr" ng-src="{{img.path}}" alt="">
+				</div>
 			</div>
 		</div>
 	</div>
+	<div ng-show="lifeLoading && !lifeLoaded" class="load">加载中...</div>
+    <div ng-show="lifeLoaded" class="load"></i>没有更多了</div>
 </div>
 <!-- 发型师作品 -->
 <div class="stylist-work-container" ng-if="work">
-	<span class="item" ng-repeat="work in workList" ng-click="toWorkDetail(work)">
-		<img ng-src="{{work.imgurl}}">
-	</span>
+	<div infinite-scroll="getWorks()" infinite-scroll-disabled="workLoading" infinite-scroll-distance="1">
+		<div class="work-container">
+			<span class="item" ng-repeat="work in workList" ng-click="toWorkDetail(work)">
+				<img ng-src="{{work.imgurl}}">
+				<div class="info">
+					<span ng-bind="work.name" class="ellipsis"></span>
+					<span class="num"><span ng-bind="work.num"></span>张</span>
+				</div>
+			</span>
+		</div>
+		<div ng-show="workLoading && !workLoaded" class="load">加载中...</div>
+	    <div ng-show="workLoaded" class="load"></i>没有更多了</div>	
+	</div>
 </div>
 </div>
 </div>

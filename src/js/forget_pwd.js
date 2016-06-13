@@ -38,7 +38,7 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
 				}, 1000);
 			}
 			else {
-				alert('验证码发送失败，请稍后再试！')
+				alert('验证码发送失败，请稍后再试！');
 			}
 		})
 		.error(function (data) {
