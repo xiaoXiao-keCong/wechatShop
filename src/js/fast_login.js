@@ -5,6 +5,7 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
     function ($scope, $http, $window, $location, $interval) {
 
     var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    var codeRe = /^\d{4}$/;
     $scope.sendCodeText = '发送验证码';
 
     // 获取验证码
@@ -38,6 +39,9 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
     };
     // 确认登录
     $scope.confirmLogin = function () {
+        if (-1 === checkParams()) {
+            return;
+        }
     	var data = {
     		telnum: $scope.phone,
     		check: $scope.code
@@ -49,6 +53,10 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                 // 登录成功，将登录用户信息写到sessionStorage
                 sessionStorage.setItem('user', JSON.stringify(resp.data.data));
                 alert('登录成功，即将返回首页！');
+                $location.path('/');
+            }
+            else if (0 === resp.data.code) {
+                alert(resp.data.reason);
             }
     	}, function (resp) {
     		console.log(resp);
@@ -59,4 +67,16 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
     $scope.toLogin = function () {
     	$location.path('login');
     };
+
+    function checkParams() {
+        if (!phoneRe.test($scope.phone)) {
+            alert('手机号无效！');
+            return -1;
+        }
+        if (!codeRe.test($scope.code)) {
+            alert('验证码无效！');
+            return -1;
+        }
+        return 1;
+    }
 }]);

@@ -7,56 +7,33 @@
 <div class="recharge">
 	<div class="account">
 		<a class="instruction">充值说明</a>
-		<span class="balance">账户余额 ￥10000</span>
+		<span class="balance">账户余额 ￥<span ng-bind="balance"></span></span>
 		<span class="activity-info">现在充值，送VIP卡哦！</span>
 	</div>
 	<div class="item-container">
-		<div class="item">
+		<div class="item" ng-repeat="vip in vipList">
 			<span class="select-icon">
-				<img src="../../assets/images/unselected_2.png">
+				<img src="../../assets/images/common_selected.png" ng-show="vip.selected" ng-click="selectVip(vip)">
+				<img src="../../assets/images/common_unselected.png" ng-hide="vip.selected" ng-click="selectVip(vip)">
 			</span>
-			<span class="price">￥5000</span>
+			<span class="price">￥<span ng-bind="vip.price"></span></span>
 			<span class="type-icon">
-				<img src="../../assets/images/recharge_1.png">
+				<img ng-src="{{vip.imgurl}}">
 			</span>
 			<span class="type-text">
-				8.5折VIP 12个月
+				<span ng-bind="vip.goodsdiscount"></span>折VIP <span ng-bind="vip.duration"></span>个月
 			</span>
 		</div>
 		<div class="item">
 			<span class="select-icon">
-				<img src="../../assets/images/unselected_2.png">
-			</span>
-			<span class="price">￥10000</span>
-			<span class="type-icon">
-				<img src="../../assets/images/recharge_2.png">
-			</span>
-			<span class="type-text">
-				8折VIP 18个月
-			</span>
-		</div>
-		<div class="item">
-			<span class="select-icon">
-				<img src="../../assets/images/unselected_2.png">
-			</span>
-			<span class="price">￥30000</span>
-			<span class="type-icon">
-				<img src="../../assets/images/recharge_3.png">
-			</span>
-			<span class="type-text">
-				7折VIP 24个月
-			</span>
-		</div>
-		<div class="item">
-			<span class="select-icon">
-				<img src="../../assets/images/unselected_2.png">
+				<img src="../../assets/images/common_selected.png" ng-show="otherPrice" ng-click="selectOtherPrice()">
+				<img src="../../assets/images/common_unselected.png" ng-hide="otherPrice" ng-click="selectOtherPrice()">
 			</span>
 			<span class="price">其他金额</span>
 			<span class="type-icon">
-				
 			</span>
 			<span class="type-text">
-				<input name="other-price" type="text"></input>
+				<input name="other-price" type="text" ng-model="otherPriceNum"></input>
 			</span>
 		</div>
 	</div>
@@ -65,7 +42,7 @@
 		<span class="text-small">(选填)</span>
 		<span class="arrow-r"><img src="../../assets/images/arrow_r_2.png"></span>
 	</div>
-	<div class="confirm-btn">
+	<div class="confirm-btn" ng-click="buyVip()">
 		确 认
 	</div>
 </div>

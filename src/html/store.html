@@ -44,27 +44,38 @@
 		<!-- <span class="nav-item">价格排序<img src="../../assets/images/updown.png" class="icon"></span> -->
 	</div>
 	<div class="grid-container" ng-if="!isList">
-		<span class="grid-item" ng-repeat="store in storeList" ng-click="toDetail(store)">
-			<img ng-src="{{store.img2}}">
-			</span>
+		<div infinite-scroll="getStoreList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+			<div class="item-container">
+				<span class="grid-item" ng-repeat="store in storeList" ng-click="toDetail(store)">
+					<img ng-src="{{store.img2}}">
+				</span>
+			</div>
+			
+			<div ng-show="loading && !loaded" class="load">加载中...</div>
+            <div ng-show="loaded" class="load"></i>没有更多了</div>
+		</div>
 	</div>
 	<div class="list-container" ng-if="isList">
-		<div class="list-item" ng-repeat="store in storeList" ng-click="toDetail(store)">
-			<span><img ng-src="{{store.img1}}" class="store-img"></span>
-			<span class="info">
-				<span class="name" ng-bind="store.name"></span>
-				<span class="intro" ng-bind="store.info"></span>
-				<span class="price">
-					<span class="star">
-						<img ng-repeat="star in store.starUrl" ng-src="{{star.path}}">
+		<div infinite-scroll="getStoreList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+			<div class="list-item" ng-repeat="store in storeList" ng-click="toDetail(store)">
+				<span><img ng-src="{{store.img1}}" class="store-img"></span>
+				<span class="info">
+					<span class="name" ng-bind="store.name"></span>
+					<span class="intro" ng-bind="store.info"></span>
+					<span class="price">
+						<span class="star">
+							<img ng-repeat="star in store.starUrl" ng-src="{{star.path}}">
+						</span>
+						<span>￥<span ng-bind="store.average"></span></span>
 					</span>
-					<span>￥<span ng-bind="store.average"></span></span>
+					<span class="location">
+						<span><img src="../../assets/images/location.png"></span>
+						<span ng-bind="store.location"></span>
+					</span>
 				</span>
-				<span class="location">
-					<span><img src="../../assets/images/location.png"></span>
-					<span ng-bind="store.location"></span>
-				</span>
-			</span>
+			</div>
+			<div ng-show="loading && !loaded" class="load">加载中...</div>
+            <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>
 </div>

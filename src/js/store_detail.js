@@ -105,4 +105,8 @@ index.controller('storeDetailCtrl',
 		});
 	};
 
+	$scope.toDesignerDetail = function (designer) {
+		$location.path('stylist_detail/' + designer.id);
+	};
+
 }]);

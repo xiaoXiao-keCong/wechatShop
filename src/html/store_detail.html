@@ -63,7 +63,7 @@
                 <span>优秀发型师</span>
                 <span class="en-title">Excellent hair stylist</span>
             </div>
-            <div class="designer-item" ng-repeat="designer in designerList">
+            <div class="designer-item" ng-repeat="designer in designerList" ng-click="toDesignerDetail(designer)">
                 <div class="designer-info-container">
                     <img ng-src="{{designer.avatar}}" class="designer-icon">
                     <div class="designer-info">

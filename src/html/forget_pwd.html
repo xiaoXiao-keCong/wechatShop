@@ -8,7 +8,7 @@
             <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
         </span>
         <span class="text-container">
-            <input type="text" placeholder="请输入您的手机号" class="input-text" ng-model="phoneNum">
+            <input type="text" placeholder="请输入您的手机号" class="input-text" ng-model="phoneNum" maxlength="11">
         </span>
     </div>
     <div class="form-group margin-top-28 border-bottom-none code-container">
@@ -17,11 +17,10 @@
                 <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
             </span>
             <span class="text-container">
-                <input type="text" placeholder="请输您获取的验证码" class="input-text">
+                <input type="text" placeholder="请输您获取的验证码" class="input-text" ng-model="code" maxlength="4">
             </span>
         </div>
-        <div class="get-code-btn" ng-click="sendCode()" ng-bind="sendCodeText">
-            
+        <div ng-class="{'get-code-btn':true,'unuseful':sending}" ng-click="sendCode()" ng-bind="sendCodeText">
         </div>
     </div>
     <div class="form-group margin-top-28">
@@ -29,7 +28,7 @@
             <img src="../../assets/images/lock.png" alt="密码" class="pwd-icon">
         </span>
         <span class="text-container">
-            <input type="password" placeholder="请输入您的新密码" class="input-text">
+            <input type="password" placeholder="请输入您的新密码" class="input-text" ng-model="password" maxlength="20">
         </span>
     </div>
     <div class="form-group margin-top-28">
@@ -37,10 +36,10 @@
             <img src="../../assets/images/lock.png" class="pwd-icon">
         </span>
         <span class="text-container">
-            <input type="password" placeholder="请确认密码" class="input-text">
+            <input type="password" placeholder="请确认密码" class="input-text" ng-model="repeatPwd" maxlength="20">
         </span>
     </div>
-    <div id="modify-btn" class="btn-common">
+    <div id="modify-btn" class="btn-common" ng-click="confirm()">
         确认修改
     </div>
 </div>

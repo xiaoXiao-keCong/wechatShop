@@ -95,19 +95,24 @@
 	.grid-container {
 		background-color: #ffffff;
 		padding: 0.266667rem;
-		.display-flex-column;
-		justify-content: center;
-		align-items: center;
-		.grid-item:not(:last-child) {
-			margin-bottom: 0.266667rem;
-		}
-		.grid-item {
-			img {
-				height: 5.36rem;
-				width: 9.466667rem;
-				border-radius: 0.133333rem;
+		
+		.item-container {
+			.display-flex-column;
+			justify-content: center;
+			align-items: center;
+			.grid-item:not(:last-child) {
+				margin-bottom: 0.266667rem;
+			}
+			.grid-item {
+				margin-bottom: 0.266667rem;
+				img {
+					height: 5.36rem;
+					width: 9.466667rem;
+					border-radius: 0.133333rem;
+				}
 			}
 		}
+		
 	}
 	.list-container {
 		.list-item {

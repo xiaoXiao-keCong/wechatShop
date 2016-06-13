@@ -17,7 +17,7 @@
                 <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
             </span>
             <span class="text-container">
-                <input type="text" placeholder="请输验证码" class="input-text" ng-model="code">
+                <input type="text" placeholder="请输验证码" class="input-text" ng-model="code" maxlength="4">
             </span>
         </div>
         <div ng-class="{'get-code-btn':true,'unuseful':sending}" ng-click="getCode()" ng-bind="sendCodeText"></div>
