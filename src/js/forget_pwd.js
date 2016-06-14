@@ -8,6 +8,32 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
     var codeRe = /^\d{4}$/;
     var pwdRe = /^[0-9a-zA-Z_]{6,20}/;
 	$scope.sendCodeText = '获取验证码';
+
+    var type = $location.search().type;
+    var sendCodeUrl = '';
+    var targetUrl = '';
+
+    (function init() {
+        switch (type) {
+            case 'forget_pwd':
+                $scope.title = '忘记密码';
+                sendCodeUrl = '/user/sendforget.json';
+                targetUrl = '/user/forget.json';
+                break;
+            case 'login':
+                $scope.title = '修改登录密码';
+                sendCodeUrl = '/user/modifypasswordcode.json';
+                targetUrl = '/user/editpassword.json';
+                break;
+            case 'pay':
+                $scope.title = '修改支付密码';
+                sendCodeUrl = '/user/modifypaypasswordcode.json';
+                targetUrl = '/user/editpaypassword.json';
+                break;
+            default:
+                break;
+        }
+    })();
 	
 	$scope.sendCode = function () {
 		if ($scope.sending) {
@@ -20,7 +46,7 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
 		var data = {
 			telnum: $scope.phoneNum
 		};
-		$http.post('/user/sendforget.json', data, postCfg)
+		$http.post(sendCodeUrl, data, postCfg)
 		.success(function (data) {
 			console.log(data);
 			if (1 === data.code) {
@@ -28,7 +54,7 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
 				$scope.sending = true;
 				var timer = $interval(function () {
 					if (remainTime > 0) {
-						$scope.sendCodeText = '发送成功(' + (remainTime--) + ')';
+						$scope.sendCodeText = '重新发送(' + (remainTime--) + ')';
 					}
 					else {
 						$scope.sending = false;
@@ -55,7 +81,7 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
             alert('验证码无效！');
             return -1;
         }
-        if (!pwdRe.test($scope.password) || !pwdRe.test($scope.repeatPwd)) {
+        if (!$scope.password || !$scope.repeatPwd || !pwdRe.test($scope.password) || !pwdRe.test($scope.repeatPwd)) {
             alert('密码无效！');
             return -1;
         }
@@ -75,7 +101,13 @@ index.controller('forgetPwdCtrl', ['$scope', '$interval', '$http', '$location',
     		password: $scope.password,
     		check: $scope.code
     	};
-    	$http.post('/user/forget.json', data, postCfg)
+        if (type === 'pay') {
+            data = {
+                paypassword: $scope.password,
+                check: $scope.code
+            };
+        }
+    	$http.post(targetUrl, data, postCfg)
     	.then(function (resp) {
     		console.log(resp);
     		if (1 === resp.data.code) {

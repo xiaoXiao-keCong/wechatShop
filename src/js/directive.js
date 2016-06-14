@@ -297,3 +297,41 @@ index.directive('dateSelect', ['$timeout', function ($timeout) {
 };
 
 }]);
+
+// 判断热销推荐是否加载完
+index.directive('onHotSaleFinished', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			if (scope.$last === true) {
+				$timeout(function () {
+					scope.$emit('hotSaleRepeatFinished');
+				});
+			}
+		}
+	};
+}]);
+
+// 热销推荐directive
+index.directive('hotsale', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.hotSaleDeferred.promise.then(function (msg) {
+				scope.hotSaleSwiper = new Swiper(element.get(0), {
+					direction: 'horizontal',
+					slidesPerView: 'auto',
+			        paginationClickable: true,
+			        freeMode: true,
+			        observer: true,
+			        observerParents: true,
+			        onReachEnd: function (swiper) {
+			        	scope.hotSalePage += 1;
+			        	scope.getHotSaleRecommend();
+			        }
+				});
+			});
+		}
+};
+}]);

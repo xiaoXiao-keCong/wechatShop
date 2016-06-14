@@ -11,31 +11,33 @@
 	<div class="info-edit">
 		<div class="info-input">
 			<span>昵称：</span>
-			<input type="text" name="input-info">
+			<span ng-bind="nickname"></span>
 		</div>
 		<div class="info-input">
 			<span>手机：</span>
-			<input type="text" name="input-info">
+			<span ng-bind="phone"></span>
 		</div>
 		<div class="info-input">
 			<span>性别：</span>
-			<input type="text" name="input-info">
-		</div>
-		<div class="info-input">
-			<span>邮箱：</span>
-			<input type="text" name="input-info">
+			<span class="right-info">
+				<span ng-bind="sex"></span>
+				<img src="../../assets/images/arrow_r.png" class="arrow">
+			</span>
 		</div>
 		<div class="info-input">
 			<span>生日：</span>
-			<input type="text" name="input-info">
+			<span class="right-info">
+				<span ng-bind="birthday"></span>
+				<img src="../../assets/images/arrow_r.png" class="arrow">
+			</span>
 		</div>
-		<div class="info-input">
+		<div class="info-input" ng-click="editLoginPwd()">
 			<span>修改登录密码：</span>
-			<input type="password" name="input-info">
+			<img src="../../assets/images/arrow_r.png" class="arrow">
 		</div>
-		<div class="info-input">
+		<div class="info-input" ng-click="editPayPwd()">
 			<span>修改支付密码：</span>
-			<input type="password" name="input-info">
+			<img src="../../assets/images/arrow_r.png" class="arrow">
 		</div>
 	</div>
 </div>

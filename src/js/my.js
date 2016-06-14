@@ -109,4 +109,12 @@ index.controller('myCtrl',
 				break;
 		}
 	};
+
+	$scope.toEditInfo = function () {
+		if (!sessionStorage.user) {
+			$location.path('login');
+			return;
+		}
+		$location.path('edit_info');
+	};
 }]);

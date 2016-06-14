@@ -51,10 +51,6 @@
 		<div class="goods-detail">
 			<span>商品详情</span>
 			<span class="right-panel">
-				<img src="../../assets/images/test/goods_pic2.png" class="goods-pic-small">
-				<img src="../../assets/images/test/goods_pic2.png" class="goods-pic-small">
-				<img src="../../assets/images/test/goods_pic2.png" class="goods-pic-small">
-				<img src="../../assets/images/test/goods_pic2.png" class="goods-pic-small">
 				<img src="../../assets/images/arrow_r_big.png" class="common-icon">
 			</span>
 		</div>
@@ -91,12 +87,27 @@
 
 			</div>
 			<div class="comment-btn-container" ng-if="commentInfo.totalCommentnum > 0">
-				<span class="comment-btn">
+				<span class="comment-btn" ng-click="toGoodsComment()">
 					全部评价(<span ng-bind="commentInfo.totalCommentnum"></span>)
 				</span>
 				<span class="comment-btn">
 					带图评价(<span ng-bind="commentInfo.imgcommentnum"></span>)
 				</span>
+			</div>
+		</div>
+
+		<div class="swiper-container hot-sale-recommend" hotsale>
+			<div class="title-bar"><span>热销推荐</span></div>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide item" ng-repeat="item in hotSaleGoods" 
+				on-hot-sale-finished ng-click="toGoodsDetail(item)">
+					<img ng-src="{{item.imgurl}}">
+					<span ng-bind="item.name" class="name"></span>
+					<span class="bottom-info">
+						<span class="highlight">￥<span ng-bind="item.realprice"></span></span>
+						<del>￥<span ng-bind="item.originalprice"></span></del>
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>

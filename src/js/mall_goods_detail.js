@@ -8,6 +8,10 @@ index.controller('mallGoodsDetailCtrl',
 	// 购买数量默认为1
 	$scope.buyNum = 1;
 	$scope.deferred = $q.defer();
+	$scope.hotSaleDeferred = $q.defer();
+	$scope.hotSaleGoods = [];
+
+	$scope.hotSalePage = 1;
 
 	var goodsId = parseInt($routeParams.id);
 	// 获取商品详情
@@ -120,6 +124,10 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.$on('ngRepeatFinished', function () {
 		$scope.deferred.resolve('succeed');
 	});
+
+	$scope.$on('hotSaleRepeatFinished', function () {
+		$scope.hotSaleDeferred.resolve('succeed');
+	});
 	// 确认购买
 	$scope.confirmBuy = function () {
 		$rootScope.goodsArr = [];
@@ -169,6 +177,36 @@ index.controller('mallGoodsDetailCtrl',
 	// 跳转到购物车界面
 	$scope.toCart = function () {
 		$location.path('cart');
+	};
+
+	// 获取热销推荐
+	function getHotSaleRecommend() {
+		$http.post('/shop/recommendhotgoods.json', {page: $scope.hotSalePage}, postCfg)
+		.success(function (data) {
+			if (1 === data.code) {
+				var goodsList = data.data.goodslist;
+                if (goodsList.length > 0) {
+                    for (var i = 0, j = goodsList.length; i < j; i++) {
+                        goodsList[i].imgurl = picBasePath + goodsList[i].imgurl1;
+                        $scope.hotSaleGoods.push(goodsList[i]);
+                    }
+                }
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
+
+	$scope.getHotSaleRecommend = getHotSaleRecommend;
+	getHotSaleRecommend();
+
+	$scope.toGoodsDetail = function (goods) {
+		$location.path('mall_goods_detail/' + goods.id);
+	};
+
+	$scope.toGoodsComment = function () {
+		$location.path('goods_comment/' + $scope.goods.id);
 	};
 
 }]);
