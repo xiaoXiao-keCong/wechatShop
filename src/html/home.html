@@ -22,7 +22,7 @@
             <span><img src="../../assets/images/shishangfaxing.png"></span>      
             <span class="text">时尚发型</span>
         </span>
-        <span class="item" ng-click="showPrice()">
+        <span class="item" ng-click="showPrice($event)">
             <span><img src="../../assets/images/jiamubiao.png"></span>
             <span class="text">价目表</span>
         </span>
@@ -154,4 +154,11 @@
         </span>
         <span class="text">我的</span>
     </span>
+</div>
+
+<div class="option" ng-if="showMask" forbid-scroll name="mask">
+    <div class="price-container">
+        <img ng-src="{{priceImg}}">
+        <img src="../../assets/images/cancel.png" class="cancel common-icon" ng-click="hideMask()">
+    </div>
 </div>

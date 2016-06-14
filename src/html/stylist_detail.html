@@ -39,9 +39,13 @@
 			</span>
 		</span>
 		<span class="item">
-			<span>
+			<!-- <span>
 				<img src="../../assets/images/zan.png" class="zan-icon">
-			</span>
+			</span> -->
+			<span class="glyphicon glyphicon-heart-empty praise-icon" 
+			ng-if="!designer.iskeep" ng-click="keepDesigner(designer)"></span>
+			<span class="glyphicon glyphicon-heart praise-icon praised" 
+			ng-if="designer.iskeep" ng-click="keepDesigner(designer)"></span>
 			<span class="highlight" ng-bind="designer.praisenum"></span>
 		</span>
 	</div>
@@ -96,7 +100,8 @@
 	<div class="common-proj" ng-repeat="price in priceList">
 		<span class="title" ng-click="showItems(price)">
 			<span ng-bind="price.title"></span>
-			<img src="../../assets/images/down_big.png" class="common-icon">
+			<img src="../../assets/images/down_big.png" class="common-icon" ng-hide="price.show">
+			<img src="../../assets/images/up.png" class="common-icon" ng-show="price.show">
 		</span>
 		<span class="common-proj-item" ng-repeat="items in price.items" ng-show="price.show">
 			<span ng-bind="items.title" class="item-title"></span>

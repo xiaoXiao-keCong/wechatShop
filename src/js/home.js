@@ -12,14 +12,13 @@ index.controller('homeCtrl',
     $scope.page = 1;
     $scope.type = 'default';
     $scope.fashionHairList = [];
+    // 是否显示过价目表
+    var isShowPrice = false;
 
 
     $scope.$on('flashSaleRepeatFinished', function () {
         $scope.flashSaleDeferred.resolve('succeed');
     });
-
-    // 加载时尚发型
-    // $scope.load = new Load();
 
 	$scope.toMore = function (index) {
 		switch (index) {
@@ -231,19 +230,21 @@ index.controller('homeCtrl',
 	};
 
 	// 显示价目表
-	$scope.showPrice = function () {
-		$http.post('/home/baseinfo.json', {flag: 4}, postCfg)
-		.success(function (data) {
-			console.log(data);
-			if (1 === data.code) {
-				$scope.priceImg = picBasePath + data.data.imgurl;
-				console.log($scope.priceImg);
-			}
-		})
-		.error(function (data) {
-			console.log(data);
-			alert('数据请求失败，请稍后再试！');
-		});
+	$scope.showPrice = function (e) {
+		e.stopPropagation();
+		$scope.showMask = true;
+		if (!isShowPrice) {
+			$http.post('/home/baseinfo.json', {flag: 4}, postCfg)
+			.success(function (data) {
+				if (1 === data.code) {
+					$scope.priceImg = picBasePath + data.data.imgurl;
+				}
+			})
+			.error(function (data) {
+				console.log(data);
+				alert('数据请求失败，请稍后再试！');
+			});
+		}
 	};
 
 	// 首页明星门店图片点击
@@ -265,6 +266,11 @@ index.controller('homeCtrl',
 	// 点击去买单
 	$scope.goPay = function () {
 		$location.path('go_pay');
+	};
+
+	// 取消显示价格
+	$scope.hideMask = function () {
+		$scope.showMask = false;
 	};
 
 }]);
