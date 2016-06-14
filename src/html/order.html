@@ -147,15 +147,15 @@
 		</div>
 		<div infinite-scroll="getMallOrder()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
 			<div class="mall-order-container">
-				<div class="mall-order-item" ng-repeat="goods in goodsOrderList">
-					<div class="top-panel">
+				<div class="mall-order-item" ng-repeat="goods in goodsOrderList" >
+					<div class="top-panel" ng-click="toOrderDetail(goods)">
 						<span>订单号：<span ng-bind="goods.id"></span></span>
 						<span class="right">
 							<span ng-bind="goods.state"></span>
 							<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods)">
 						</span>
 					</div>
-					<div class="pic-panel">
+					<div class="pic-panel" ng-click="toOrderDetail(goods)">
 						<img ng-repeat="img in goods.imgUrlArr" ng-src="{{img.path}}">
 					</div>
 					<div class="operation">
@@ -166,7 +166,7 @@
 							<button ng-if="goods.stateflag==8" ng-click="toRemarkGoods(goods)">去评价</button>
 							<button ng-if="goods.stateflag==3||goods.stateflag==4||goods.stateflag==5||goods.stateflag==8"
 							 ng-click="applyRefund(goods)">申请退款</button>
-							<button ng-if="goods.stateflag==8" ng-click="confirmReceipt(goods)">确认收货</button>
+							<button ng-if="goods.stateflag==4" ng-click="confirmReceipt(goods)">确认收货</button>
 						</span>
 					</div>
 				</div>

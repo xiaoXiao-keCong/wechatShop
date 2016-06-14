@@ -26,13 +26,15 @@
 			margin-bottom: 0.4rem;
 			.flex;
 			align-items: center;
+			font-size: 0.4rem;
 			&:last-child {
 				margin-bottom: 0;
 			}
-			img {
-				height: 0.4rem;
-				width: 0.4rem;
-				margin-right: 0.08rem;
+			span[name="star"] {
+				margin-right: 0.12rem;
+			}
+			.selected {
+				color: #3dbfd5;
 			}
 		}
 	}
@@ -48,17 +50,24 @@
 			border-radius: 0.133333rem;
 			margin-bottom: 0.266667rem;
 		}
-		div[name="check-anonymity"] {
-			.flex;
-			align-items: center;
-			font-size: 0.32rem;
-			color: #666666;
+	}
+	div[name="check-anonymity"] {
+		.flex;
+		align-items: center;
+		font-size: 0.32rem;
+		color: #666666;
+		padding: 0 0.4rem;
+		span {
+			&:last-child {
+				margin-left: 0.16rem;
+			}
+			
 		}
 	}
 	#submit-btn {
 		height: 1.066667rem;
 		width: 9.2rem;
-		margin: 2.666667rem auto 0 auto;
+		margin: 0.8rem auto 0 auto;
 		background-color: #3dbfd5;
 		color: #ffffff;
 		text-align: center;

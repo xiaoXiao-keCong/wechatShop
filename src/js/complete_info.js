@@ -13,7 +13,6 @@ index.controller('completeInfoCtrl',
 	};
 	
 	$scope.complete = function () {
-		console.log($scope.nickname);
 		if (!$scope.nickname || $scope.nickname === '') {
 			alert('请输入您的昵称');
 			return;
@@ -28,7 +27,6 @@ index.controller('completeInfoCtrl',
 			url: '/user/edit.json',
 			data: data
 		}).then(function (resp) {
-			console.log(resp);
 			if (-1 === resp.data.code) {
 				$location.path('login');
 				return;

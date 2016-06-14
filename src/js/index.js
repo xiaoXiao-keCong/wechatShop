@@ -133,7 +133,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/store_detail.html',
 			controller: 'storeDetailCtrl'
 		})
-		.when('/order_detail', {
+		.when('/order_detail/:id', {
 			templateUrl: '../html/order_detail.html',
 			controller: 'orderDetailCtrl'
 		})
@@ -161,7 +161,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/stylist_comment.html',
 			controller: 'stylistCommentCtrl'
 		})
-		.when('/order_comment', {
+		.when('/order_comment/:id', {
 			templateUrl: '../html/order_comment.html',
 			controller: 'orderCommentCtrl'
 		})
@@ -213,23 +213,33 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/select_coupon.html',
 			controller: 'selectCouponCtrl'
 		})
-		.when('/refund', {
+		.when('/refund/:id', {
 			templateUrl: '../html/refund.html',
 			controller: 'refundCtrl'
+		})
+		.when('/go_pay', {
+			templateUrl: '../html/go_pay.html',
+			controller: 'goPayCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
 		});
 }]);
 
-// 创建一个公共服务
-index.service('commonService', [function () {
-	var selecrSite;
-	this.getSite = function () {
-		return this.selectSite;
-	};
-	this.setSite = function (site) {
-		this.selectSite = site;
-	};
-}]);
 
+// 获取地理位置并设置到localStorage中
+(function getLocation() {
+	if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else {
+    	alert('当前浏览器不支持navigator.geolacation');
+    }
+})();
+
+function showPosition(position) {
+	var positionx =  position.coords.latitude,
+	    positiony =  position.coords.longitude;
+	localStorage.setItem('positionx', positionx);
+	localStorage.setItem('positiony', positiony);
+}

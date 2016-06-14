@@ -36,8 +36,8 @@ index.controller('storeCtrl',
         var data = {
             page: $scope.page,
             sort: $scope.sort || 'default',
-            positionx: $scope.positionx,
-            positiony: $scope.positiony,
+            positionx: localStorage.getItem('positionx'),
+            positiony: localStorage.getItem('positiony'),
             areaid: $scope.areaId
         };
         $http.post('/store/list.json', data, postCfg)

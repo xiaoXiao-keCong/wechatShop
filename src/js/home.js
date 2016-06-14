@@ -262,4 +262,9 @@ index.controller('homeCtrl',
 		$location.path('recharge');
 	};
 
+	// 点击去买单
+	$scope.goPay = function () {
+		$location.path('go_pay');
+	};
+
 }]);

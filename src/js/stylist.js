@@ -24,8 +24,8 @@ index.controller('stylistCtrl',
 			data = {
 				page: $scope.page,
 				sort: $scope.sort,
-				positionx: $scope.positionX,
-				positiony: $scope.positionY,
+				positionx: localStorage.getItem('positionx'),
+				positiony: localStorage.getItem('positiony'),
 				storeid: $scope.storeId
 			};
 			$http.post('/designer/list.json', data, postCfg)

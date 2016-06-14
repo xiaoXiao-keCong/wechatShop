@@ -59,9 +59,7 @@ index.controller('orderCtrl',
 	$scope.toPay = function () {
 		$location.path('pay_goods');
 	};
-	$scope.toOrderDetail = function () {
-		$location.path('order_detail');
-	};
+
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:
@@ -356,7 +354,8 @@ index.controller('orderCtrl',
 
 	// 去评论商品订单
 	$scope.toRemarkGoods = function (order) {
-		$location.path('order_comment');
+		console.log(order);
+		$location.path('order_comment/' + order.id);
 	};
 
 	// 商品确认收货
@@ -379,7 +378,12 @@ index.controller('orderCtrl',
 	// 商城订单申请退款
 	$scope.applyRefund = function (order) {
 		// 跳转到申请退款页面
-		$location.path('refund');
+		$location.path('refund/' + order.id);
+	};
+
+	$scope.toOrderDetail = function (order) {
+		console.log(order);
+		$location.path('order_detail/' + order.id);
 	};
 
 }]);

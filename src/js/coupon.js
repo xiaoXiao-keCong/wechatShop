@@ -10,8 +10,8 @@ index.controller('couponCtrl',
 
     var couponPromise = $http.post('/user/mycouponlist.json', postCfg);
     couponPromise.then(function (resp) {
+        console.log(resp);
         if (-1 === resp.data.code) {
-            $rootScope.preUrl = $location.url();
             $location.path('login');
         }
     	else if (1 === resp.data.code) {
@@ -34,15 +34,15 @@ index.controller('couponCtrl',
     	for (var i = 0, j = couponList.length; i < j; i++) {
     		var coupon = couponList[i];
     		switch(coupon.type) {
-    			case 1:
+    			case 0:
     				couponList[i].typeText = typePrefix + '全部分类';
     				couponList[i].typePic = picRelativePath + (isUsed ? 'quan_grey.png' : 'quan.png');
     				break;
-				case 2:
+				case 1:
 					couponList[i].typeText = typePrefix + '商品类';
 					couponList[i].typePic = picRelativePath + (isUsed ? 'shang_grey.png' : 'shang.png');
 					break;
-				case 3:
+				case 2:
 					couponList[i].typeText = typePrefix + '服务品类';
 					couponList[i].typePic = picRelativePath + (isUsed ? 'fu_grey.png' : 'fu.png');
     		}

@@ -97,7 +97,13 @@ index.controller('orderConfirmCtrl',
 	// 跳转到选择地址界面
 	$scope.selectAddress = function (addr) {
 		// $rootScope.preUrl = $location.url();
-		$location.path('address').search({current_id: addr.id});
+		if (addr) {
+			$location.path('address').search({current_id: addr.id});
+		}
+		else {
+			$location.path('address');
+		}
+		
 	};
 
 	// 选择收货方式

@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/4/12.
  */
 index.controller('addressCtrl',
-    ['$scope', '$http', '$location', '$rootScope', 'commonService', '$window',
-    function ($scope, $http, $location, $rootScope, commonService, $window) {
+    ['$scope', '$http', '$location', '$rootScope', '$window',
+    function ($scope, $http, $location, $rootScope, $window) {
 
     function init() {
         // 获取用户收货地址

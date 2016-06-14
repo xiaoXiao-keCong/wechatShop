@@ -3,38 +3,23 @@
 	<span>申请退款</span>
 </div>
 <div class="refund-content">
-    <div class="reason-group">
-        <span class="icon">
-            <img src="../../assets/images/sqtk_10.png">
-        </span>
-        <span class="text-container">
-            <input type="text" placeholder="退款原因（必填）" class="input-text">
-        </span>
-        <span class="choice-icon">
-            <img src="../../assets/images/sqtk_07.png">
-        </span>
-
-    </div>
-    <div class="instruction-group">
-        <div class="instruction-choice">
+    <form ng-submit="submit()">
+        <div class="reason-group">
             <span class="text-container">
-                <input type="text" placeholder="退款说明" class="input-text">
+                <select name="reasonflag" class="reason-select" ng-model="reasonFlag"
+                placeholder="退款原因(必填)" ng-options="reason.id as reason.reason for reason in reasonList">
+                    <option value="">退款原因(必填)</option>
+                </select>
             </span>
-            <span class="choice-icon">
-                <img src="../../assets/images/sqtk_07.png">
-            </span>
-        </div>
-        <div class="instruction-fill">
-            <textarea class="input-text" placeholder="最多200字"></textarea>
-        </div>
+            
 
-    </div>
-    <div class="add-piture">
-        <div class="add-text">上传凭证</div>
-        <div class="add-text">（最多三张）</div>
-        <!-- <img src="../../assets/images/sqtk_19.png"> -->
-    </div>
-    <div class="submit-reply">
-        <button class="submit-btn">提交申请</button>
-    </div>
+        </div>
+        <textarea class="refund-brief" placeholder="退款说明(最多200字)" name="describe" ng-model="describe"></textarea>
+        <img ngf-thumbnail="pic1 || '../../assets/images/upload.png'" ngf-select ng-model="pic1" name="imgs" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" class="upload-pic">
+        <img ngf-thumbnail="pic2 || '../../assets/images/upload.png'" ngf-select ng-model="pic2" name="imgs" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" class="upload-pic">
+        <img ngf-thumbnail="pic3 || '../../assets/images/upload.png'" ngf-select ng-model="pic3" name="imgs" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" class="upload-pic">
+        <div class="submit-reply">
+            <input type="submit" class="submit-btn" value="提交申请">
+        </div>
+    </form>
 </div>

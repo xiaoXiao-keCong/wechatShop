@@ -9,8 +9,8 @@
 <div class="order-detail">
 	<div class="order-state">
 		<div class="order-num">
-			<span>订单号：0123456789</span>
-			<span class="highlight">已完成</span>
+			<span>订单号：<span ng-bind="order.id"></span></span>
+			<span class="highlight" ng-bind="order.state"></span>
 		</div>
 		<div class="welcome-text">
 			<span>感谢您在悦艺术家购物，欢迎下次光临！</span>
@@ -20,11 +20,10 @@
 		<span><img src="../../assets/images/location_2.png" class="common-icon"></span>
 		<span class="user-info">
 			<span class="top">
-				<span class="name">收货人：李鑫</span>
-				<span class="phone">15311828791</span>
+				<span class="name">收货人：<span ng-bind="order.name"></span></span>
+				<span class="phone" ng-bind="order.telephone"></span>
 			</span>
-			<span class="site">
-				北京市三里屯
+			<span class="site" ng-bind="order.address">
 			</span>
 		</span>
 	</div>
@@ -33,47 +32,21 @@
 			商品清单
 		</div>
 		<div class="item-container">
-			<div class="item">
-				<img src="../../assets/images/test/goods_item.png" class="goods-icon">
+			<div class="item" ng-repeat="goods in order.goodslist">
+				<img ng-src="{{goods.imgurl}}" class="goods-icon">
 				<span class="goods-info">
 					<span class="intro">
-						<span class="name">
-							永久 26寸铝合金 27速 双碟刹可锁死铝肩前叉永久
+						<span class="name" ng-bind="goods.name">
 						</span>
-						<span class="price">￥ 210</span>
+						<span class="price">￥ <span ng-bind="goods.price"></span></span>
 					</span>
-					<span class="buy-num">X 1</span>
+					<span class="buy-num">X <span ng-bind="goods.number"></span></span>
 				</span>
 			</div>
-			<div class="item">
-				<img src="../../assets/images/test/goods_item.png" class="goods-icon">
-				<span class="goods-info">
-					<span class="intro">
-						<span class="name">
-							永久 26寸铝合金 27速 双碟刹可锁死铝肩前叉永久
-						</span>
-						<span class="price">￥ 210</span>
-					</span>
-					<span class="buy-num">X 1</span>
-				</span>
-			</div>
-			<div class="item">
-				<img src="../../assets/images/test/goods_item.png" class="goods-icon">
-				<span class="goods-info">
-					<span class="intro">
-						<span class="name">
-							永久 26寸铝合金 27速 双碟刹可锁死铝肩前叉永久
-						</span>
-						<span class="price">￥ 210</span>
-					</span>
-					<span class="buy-num">X 1</span>
-				</span>
-			</div>
-			
 		</div>
-		<div class="show-more">
+		<!-- <div class="show-more">
 			<img src="../../assets/images/down_big.png" class="common-icon">
-		</div>
+		</div> -->
 	</div>
 	<div class="call-container">
 		<div class="call">
@@ -85,29 +58,29 @@
 		<div class="top">
 			<span class="item count-price">
 				<span>商品总额</span>
-				<span class="highlight">￥ 47.80</span>
+				<span class="highlight">￥ <span ng-bind="order.price"></span></span>
 			</span>
 			<span class="item other-price">
 				<span>- 优惠</span>
-				<span class="highlight">￥ 0.00</span>
+				<span class="highlight">￥ <span ng-bind="order.favourableprice"></span></span>
 			</span>
 			<span class="item other-price">
 				<span>+运费</span>
-				<span class="highlight">￥ 4.00</span>
+				<span class="highlight">￥ <span ng-bind="order.freightcharges"></span></span>
 			</span>
 		</div>
 		<div class="bottom">
 			<span class="item real-pay">
 				<span>实付款：</span>
-				<span class="highlight">￥51.80</span>
+				<span class="highlight">￥ <span ng-bind="order.actualprice"></span></span>
 			</span>
 			<span class="item order-time">
 				<span>下单时间：</span>
-				<span>2016-01-22 15:14:06</span>
+				<span ng-bind="order.time"></span>
 			</span>
 			<span class="item">
 				<span>付款方式：</span>
-				<span>微信支付</span>
+				<span ng-bind="order.payway"></span>
 			</span>
 		</div>
 	</div>
