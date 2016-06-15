@@ -5,7 +5,17 @@
     </div>
     <div class="go-pay">
         <div class="item-container">
-            
+            <div class="item" ng-repeat="service in serviceList">
+            	<img ng-src="{{service.imgurl}}">
+            	<span ng-bind="service.name" class="service-name"></span>
+            </div>
         </div>
+        <div class="select-designer" ng-click="selectStore()">
+	    	<span>请选择发型师</span>
+	    	<span class="designer">
+	    		<span ng-bind="selectDesigner"></span>
+	    		<img src="../../assets/images/arrow_r.png" class="arrow-icon">
+	    	</span>
+	    </div>
     </div>
 </div>

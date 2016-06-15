@@ -1,8 +1,43 @@
+@import "display";
 #go-pay-container {
 	background-color: #ffffff;
+	color: #121212;
 	.go-pay {
 		.item-container {
-			
+			.flex;
+			flex-wrap: wrap;
+			margin-bottom: 0.4rem;
+			.item {
+				.flex-column;
+				align-items: center;
+				font-size: 0.4rem;
+				margin-left: 0.8rem;
+				margin-top: 0.48rem;
+				img {
+					width: 2.266667rem;
+					height: 2.266667rem;
+				}
+				.service-name {
+					color: #121212;
+					margin-top: 0.08rem;
+				}
+			}
+		}
+
+		.select-designer {
+			font-size: 0.4rem;
+			.flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 0.4rem;
+			.designer {
+				.flex;
+				align-items: center;
+				.arrow-icon {
+					width: 0.4rem;
+					height: 0.4rem;
+				}
+			}
 		}
 	}	
 }
