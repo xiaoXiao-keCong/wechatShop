@@ -7,6 +7,8 @@ index.controller('goPayCtrl',
 	
 	var hasDesigner = false;
 	$scope.tabs = [];
+	$scope.selectedItemId = [];
+	$scope.price = '请先选择项目';
 
 	(function init() {
 		if ($rootScope.designer) {
@@ -102,37 +104,66 @@ index.controller('goPayCtrl',
 
 	// 选择新用户活动
 	$scope.selectNUActivity = function (activity) {
+		if (!$scope.selectedItemId || $scope.selectedItemId.length === 0) {
+			alert('请先选择项目!');
+			return;
+		}
 		activity.selected = !activity.selected;
+		var nuActivityIdList  = [];
+		for (var i = 0; i < $scope.nuActivityList.length; i++) {
+			if ($scope.nuActivityList[i].selected) {
+				nuActivityIdList.push($scope.nuActivityList[i].id);
+			}
+		}
+		$scope.nuActivityIdList = nuActivityIdList;
+		getConsumerSumPrice();
 	};
 
 	// 选择打折和立减活动列表
 	$scope.selectCommonActivity = function (activity) {
+		if (!$scope.selectedItemId || $scope.selectedItemId.length === 0) {
+			alert('请先选择项目!');
+			return;
+		}
 		var flag = !activity.selected;
 		for (var i = 0; i < $scope.commonActivityList.length; i++) {
 			$scope.commonActivityList[i].selected = false;
 		}
 		activity.selected = flag;
+		if (activity.selected) {
+			// 选中了打折和立减活动
+			$scope.discountFlag = 3;
+			$scope.discountValue = activity.id;
+		}
+		else {
+			$scope.discountFlag = 0;
+			$scope.discountValue = 0;
+		}
+		getConsumerSumPrice();
 	};
 
 
 	// 下订单
 	$scope.confirm = function () {
-		var nuActivityId = [],
-		    i;
-		for (i = 0; i < $scope.nuActivityList.length; i++) {
-			if ($scope.nuActivityList[i].selected) {
-				nuActivityId.push($scope.nuActivityList[i].id);
-			}
-		}
-		for (i = 0; i < $scope.commonActivityList.length; i++) {
-
+		if (!$scope.selectedItemId || $scope.selectedItemId.length === 0) {
+			alert('请先选择项目!');
+			return;
 		}
 		var data = {
-
+			designerservicethreeid: $scope.selectedItemId,
+			designerid: $scope.designer.id,
+			discountflag: $scope.discountFlag,
+			discountvalue: $scope.discountValue,
+			newuseractivityid: $scope.nuActivityIdList
 		};
 		$http.post('/user/generateconsumedorder.json', data, postCfg)
 		.success(function (data) {
 			console.log(data);
+			if (1 === data.code) {
+				alert('下单成功!');
+				// 跳转到支付页面
+				// $location.path('');
+			}
 		})
 		.error(function (data) {
 			alert('数据请求失败，请稍后再试！');
@@ -168,6 +199,7 @@ index.controller('goPayCtrl',
 				else {
 					// 显示tab并且显示每一个tab中对应的项目
 					$scope.hasTab = true;
+					$scope.tabs = [];
 					$scope.itemData = itemData;
 					for (var i = 0; i < tab.length; i++) {
 						$scope.tabs.push({tabName: tab[i], selected: false});
@@ -180,6 +212,10 @@ index.controller('goPayCtrl',
 		.error(function (data) {
 			alert('数据请求失败，请稍后再试！');
 		});
+	};
+
+	$scope.hideMask = function () {
+		$scope.showMask = false;
 	};
 
 	// 选中项目
@@ -201,8 +237,40 @@ index.controller('goPayCtrl',
 
 	// 确认选中项目
 	$scope.confirmSelectItem = function () {
+		var selectFlag = false;
+		$scope.selectedItemId = [];
+		for (var i = 0; i < $scope.serviceItemList.length; i++) {
+			if ($scope.serviceItemList[i].selected) {
+				$scope.selectedItemId.push($scope.serviceItemList[i].id);
+				selectFlag = true;
+			}
+		}
+		if (!selectFlag) {
+			alert('请选择项目!');
+			return;
+		}
 		$scope.showMask = false;
-		
+		// 计算价格
+		getConsumerSumPrice();
 	};
+
+	// 计算总计金额
+	function getConsumerSumPrice() {
+		var data = {
+			designerservicethreeid: $scope.selectedItemId,
+			discountflag: $scope.discountFlag,
+			discountvalue: $scope.discountValue,
+			newuseractivityid: $scope.nuActivityIdList
+		};
+		$http.post('/user/getconsumersumprice.json', data, postCfg)
+		.success(function (data) {
+			if (1 === data.code) {
+				$scope.price = data.data.price;
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
 
 }]);

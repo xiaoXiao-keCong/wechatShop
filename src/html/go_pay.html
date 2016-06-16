@@ -12,7 +12,7 @@
         </div>
         <div class="price">
         	<span>总计金额：</span>
-        	<span>请先选择项目</span>
+        	<span ng-bind="price"></span>
         </div>
         <div class="select-designer" ng-click="selectStore()">
 	    	<span>请选择发型师</span>
@@ -62,5 +62,6 @@
     	<div class="ok-btn" ng-click="confirmSelectItem()">
     		<button>OK</button>
     	</div>
+    	<img src="../../assets/images/cancel.png" class="cancel-icon" ng-click="hideMask()">
     </div>
 </div>
