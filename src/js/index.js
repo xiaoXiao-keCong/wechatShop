@@ -237,6 +237,14 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/menu_detail.html',
 			controller: 'menuDetailCtrl'
 		})
+		.when('/brand_detail/:id', {
+			templateUrl: '../html/brand_detail.html',
+			controller: 'brandDetailCtrl'
+		})
+		.when('/flash_sale_list', {
+			templateUrl: '../html/flash_sale_list.html',
+			controller: 'flashSaleListCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

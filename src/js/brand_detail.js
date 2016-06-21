@@ -1,11 +1,11 @@
 /**
  * Created by hugotan on 2016/5/4.
  */
-index.controller('menuDetailCtrl',
+index.controller('brandDetailCtrl',
 	['$scope', '$http', '$location', '$window', '$routeParams',
 	function ($scope, $http, $location, $window, $routeParams) {
 	
-	var menuId = $routeParams.id;
+	var brandId = $routeParams.id;
 	$scope.title = $location.search().name;
 
 	$scope.goodsList = [];
@@ -27,13 +27,12 @@ index.controller('menuDetailCtrl',
         }
         $scope.loading = true;
         var data = {
-        	goodskindid: menuId,
+        	brandkindid: brandId,
             page: $scope.page,
             sort: $scope.type
         };
-        $http.post('/shop/searchgoodsbygoodskindandcondition.json', data, postCfg)
+        $http.post('/shop/searchgoodsbybrandkindandcondition.json', data, postCfg)
         .then(function (resp) {
-        	console.log(resp);
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
                 if (goodsList.length > 0) {
@@ -49,7 +48,7 @@ index.controller('menuDetailCtrl',
                 }
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
     }
 
@@ -68,7 +67,7 @@ index.controller('menuDetailCtrl',
 
     // 跳转到商品详情
     $scope.toGoodsDetail = function (goods) {
-        $location.path('mall_goods_detail/' + goods.id);
+        $location.path('mall_goods_detail/' + goods.id).search({});
     };
 
 }]);

@@ -23,6 +23,7 @@
 		</span>
 	</div>
 	<div class="item-container">
+		<img src="../../assets/images/more.png" class="more-icon" ng-click="moreFlashSale()">
 		<div class="title">
 			<span class="cn">限时抢购</span>
 			<span class="en">FLASH SALE</span>
@@ -54,7 +55,7 @@
 			<span class="en">BRAND ZONE</span>
 		</div>
 		<div class="brand-content">
-			<span class="item" ng-repeat="brand in brandList">
+			<span class="item" ng-repeat="brand in brandList" ng-click="brandDetail(brand)">
 				<img ng-src="{{brand.imgurl}}">
 			</span>
 		</div>

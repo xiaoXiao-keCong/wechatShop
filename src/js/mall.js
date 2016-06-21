@@ -67,7 +67,7 @@ index.controller('mallCtrl',
                 $scope.flashSaleList = flashSaleList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！')
         });
         // 品牌专区
         $http.post('/shop/getshopbrand.json', postCfg)
@@ -156,4 +156,16 @@ index.controller('mallCtrl',
     $scope.toMenuDetail = function (menu) {
         $location.path('menu_detail/' + menu.id).search({name: menu.name});
     };
+
+    // 进入品牌专区详情
+    $scope.brandDetail = function (brand) {
+        console.log(brand);
+        $location.path('brand_detail/' + brand.id).search({name: brand.name});
+    };
+
+    // 限时抢购更多
+    $scope.moreFlashSale = function () {
+        $location.path('flash_sale_list');
+    };
+
 }]);

@@ -10,6 +10,13 @@ index.controller('pointMallCtrl',
     // 限时抢购promise
     $scope.flashSaleDeferred = $q.defer();
 
+    // 商品列表数组
+    $scope.goodsList = [];
+    $scope.page = 1;
+    $scope.loading = false;
+    $scope.loaded = false;
+    $scope.type = 'hot';
+
     $scope.$on('ngRepeatFinished', function () {
         $scope.deferred.resolve('succeed');
     });
@@ -47,7 +54,6 @@ index.controller('pointMallCtrl',
                     flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl1;
                 }
                 $scope.flashSaleList = flashSaleList;
-                console.log($scope.flashSaleList);
             }
         }, function (resp) {
             console.log(resp);
@@ -65,21 +71,69 @@ index.controller('pointMallCtrl',
         }, function (resp) {
             console.log(resp);
         });
-        $http.post('/integralshop/searchgoodsbycondition.json',
-            {'page': 1, 'sort': 'hot'}, postCfg)
+        // $http.post('/integralshop/searchgoodsbycondition.json',
+        //     {'page': 1, 'sort': 'hot'}, postCfg)
+        // .then(function (resp) {
+        //     if (1 === resp.data.code) {
+        //         var goodsList = resp.data.data.goodslist;
+        //         for (var i = 0, j = goodsList.length; i < j; i++) {
+        //             goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
+        //         }
+        //         $scope.goodsList = goodsList;
+        //         console.log($scope.goodsList);
+        //     }
+        // }, function (resp) {
+        //     console.log(resp);
+        // });
+	})();
+
+    // 获取商品列表
+    function getGoods() {
+        if ($scope.loading) {
+            return;
+        }
+        $scope.loading = true;
+        var data = {
+            page: $scope.page,
+            sort: $scope.type
+        };
+        $http.post('/integralshop/searchgoodsbycondition.json', data, postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
-                for (var i = 0, j = goodsList.length; i < j; i++) {
-                    goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
+                if (goodsList.length > 0) {
+                    for (var i = 0, j = goodsList.length; i < j; i++) {
+                        goodsList[i].imgurl = picBasePath + goodsList[i].imgurl1;
+                        $scope.goodsList.push(goodsList[i]);
+                    }
+                    $scope.page += 1;
+                    $scope.loading = false;
                 }
-                $scope.goodsList = goodsList;
-                console.log($scope.goodsList);
+                else {
+                    $scope.loaded = true;
+                }
             }
         }, function (resp) {
             console.log(resp);
         });
-	})();
+    }
+
+    $scope.getGoods = getGoods;
+
+     // 选择排序方式
+    $scope.setSort = function (type) {
+        if ($scope.type && $scope.type === type) {
+            return;
+        }
+        $scope.type = type;
+        $scope.goodsList = [];
+        $scope.page = 1;
+        $scope.loaded = false;
+        $scope.loading = false;
+        getGoods();
+    };
+    
+    
 
     // 跳转到积分商城搜索
     $scope.pointMallSearch = function () {
