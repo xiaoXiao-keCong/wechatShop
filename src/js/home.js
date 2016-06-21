@@ -220,7 +220,6 @@ index.controller('homeCtrl',
 
 	// 跳转到时尚资讯
 	$scope.toFashionNews = function (news) {
-		console.log(news);
 		$window.location.href = news.jumpurl;
 	};
 
