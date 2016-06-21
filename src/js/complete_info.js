@@ -2,11 +2,25 @@
  * Created by hugotan on 2016/4/9.
  */
 index.controller('completeInfoCtrl',
-	['$scope', '$http', '$window', 'Upload', '$location',
-	function ($scope, $http, $window, Upload, $location) {
+	['$scope', '$http', '$window', 'Upload', '$location', '$routeParams',
+	function ($scope, $http, $window, Upload, $location, $routeParams) {
 
-	// 性别默认为男
-	$scope.sexFlag = 0;
+	(function init() {
+		if ($location.search().type && $location.search().type === 'modify') {
+			// 修改信息，不是完善信息
+			$scope.modify = true;
+			var user = JSON.parse(sessionStorage.user);
+			$scope.avatar = picBasePath + user.imgurl;
+			$scope.nickname = user.nickname;
+			$scope.sexFlag = parseInt(user.sexflag);
+			$scope.birthday = new Date(user.birthday);
+		}
+		else {
+			// 完善信息中默认性别为男
+			$scope.sexFlag = 0;
+		}
+	})();
+
 	// 设置性别
 	$scope.setSexFlag = function (flag) {
 		$scope.sexFlag = flag;

@@ -80,4 +80,9 @@ index.controller('pointMallCtrl',
             console.log(resp);
         });
 	})();
+
+    // 跳转到积分商城搜索
+    $scope.pointMallSearch = function () {
+        $location.path('point_mall_search');
+    };
 }]);

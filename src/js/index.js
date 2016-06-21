@@ -105,6 +105,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/point_order_confirm.html',
 			controller: 'pointOrderConfirmCtrl'
 		})
+		.when('/point_mall_search', {
+			templateUrl: '../html/point_mall_search.html',
+			controller: 'pointMallSearchCtrl'
+		})
 		.when('/order_confirm', {
 			templateUrl: '../html/order_confirm.html',
 			controller: 'orderConfirmCtrl'
@@ -220,6 +224,18 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.when('/go_pay', {
 			templateUrl: '../html/go_pay.html',
 			controller: 'goPayCtrl'
+		})
+		.when('/stylist_work_detail/:id', {
+			templateUrl: '../html/stylist_work_detail.html',
+			controller: 'stylistWorkDetailCtrl'
+		})
+		.when('/feedback', {
+			templateUrl: '../html/feedback.html',
+			controller: 'feedbackCtrl'
+		})
+		.when('/menu_detail/:id', {
+			templateUrl: '../html/menu_detail.html',
+			controller: 'menuDetailCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'

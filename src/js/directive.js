@@ -335,3 +335,16 @@ index.directive('hotsale', ['$timeout', function ($timeout) {
 		}
 };
 }]);
+
+index.directive('commonSwiper', ['$timeout', function ($timeout) {
+	return {
+		restrict: 'EA',
+		replace: true,
+		link: function (scope, element, attrs) {
+			scope.commonSwiper = new Swiper(element.get(0), {
+				observer: true,
+				observerParents: true
+			});
+		}
+	};
+}]);

@@ -41,10 +41,18 @@ index.controller('mallCtrl',
         });
         // 获取首页目录
         $http.post('/shop/getshopmenu.json', postCfg)
-        .then(function (resp) {
-            // console.log(resp);
-        }, function (resp) {
-            console.log(resp);
+        .success(function (data) {
+            if (1 === data.code) {
+                var menuList = data.data.menulist;
+                for (var i = 0; i < menuList.length; i++) {
+                    menuList[i].imgurl = picBasePath + '/' + menuList[i].imgurl;
+                }
+                $scope.menuList = menuList;
+                console.log(menuList);
+            }
+        })
+        .error(function (data) {
+            alert('数据请求失败，请稍后再试！');
         });
         // 限时抢购
         $http.post('/shop/getflashsale.json', {'page': 1}, postCfg)
@@ -143,4 +151,9 @@ index.controller('mallCtrl',
     };
     
     $scope.getGoods = getGoods;
+
+    // 进入清洁洗韵目录详情
+    $scope.toMenuDetail = function (menu) {
+        $location.path('menu_detail/' + menu.id).search({name: menu.name});
+    };
 }]);

@@ -18,10 +18,9 @@
 		<div class="swiper-pagination"></div>
 	</div>
 	<div class="top-nav">
-		<span><img src="../../assets/images/qing.png"></span>
-		<span><img src="../../assets/images/jie.png"></span>
-		<span><img src="../../assets/images/hu.png"></span>
-		<span><img src="../../assets/images/yun.png"></span>
+		<span ng-repeat="menu in menuList">
+			<img ng-src="{{menu.imgurl}}" ng-click="toMenuDetail(menu)">
+		</span>
 	</div>
 	<div class="item-container">
 		<div class="title">

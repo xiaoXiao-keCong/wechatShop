@@ -1,11 +1,13 @@
 @import "display";
-.fashion-hair-info-container {
+.fashion-hair-info-container,
+.stylist-work-detail-container {
 	background-color: #000000;
 	height: 100%;
 	width: 100%;
 	position: absolute;
 	.flex-column;
 	.hair-title-bar {
+		z-index: 10;
 		position: fixed;
 		background: rgba(0, 0, 0, 0.8);
 		width: 100%;
@@ -18,6 +20,9 @@
 			width: 100%;
 			height: auto;
 		}
+	}
+	.pic-item {
+		.flex-center;
 	}
 	.bottom-operation {
 		

@@ -220,7 +220,7 @@ index.controller('stylistDetailCtrl',
 
 	// 作品详情
 	$scope.toWorkDetail = function (work) {
-		console.log(work);
+		$location.path('stylist_work_detail/' + work.id);
 	};
 
 	// 点击预约按钮

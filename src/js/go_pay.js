@@ -204,7 +204,7 @@ index.controller('goPayCtrl',
 					for (var i = 0; i < tab.length; i++) {
 						$scope.tabs.push({tabName: tab[i], selected: false});
 					}
-					$scope.tabs[0].selected = true
+					$scope.tabs[0].selected = true;
 					$scope.serviceItemList = $scope.itemData[tab[0]];
 				}
 			}

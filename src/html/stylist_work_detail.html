@@ -1,0 +1,13 @@
+<div class="stylist-work-detail-container">
+    <div class="title-bar bg-black border-bottom-none hair-title-bar">
+        <span class="title-bar-left" back><img src="../../assets/images/back_white.png"></span>
+        <span class="title-bar-right"><img src="../../assets/images/share_white.png"></span>
+    </div>
+    <div common-swiper class="swiper-container slider-container content">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide pic-item" ng-repeat="item in workPicList">
+                <img ng-src="{{item.imgurl}}">
+            </div>
+        </div>
+    </div>
+</div>

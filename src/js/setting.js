@@ -20,8 +20,12 @@ index.controller('settingCtrl',
 				$location.path('login');
 			}
 		}, function (resp) {
-			console.log(resp);
 			alert('数据请求失败!请稍后再试');
 		});
+	};
+
+	// 到意见反馈
+	$scope.toFeedback = function () {
+		$location.path('feedback');
 	};
 }]);

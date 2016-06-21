@@ -4,21 +4,21 @@
 </div>
 <div id="complete-info-container">
     <form>
-        <div class="success-tips" >
+        <div class="success-tips" ng-hide="modify">
             <img src="../../assets/images/dui.png" alt="正确图标">
             恭喜您！注册成功
         </div>
         <img ngf-thumbnail="avatar || '../../assets/images/zhaoxiang.png'" id="upload-headpic" ngf-select ng-model="avatar" name="avatar" ngf-pattern="'image/*'"
          ngf-accept="'image/*'" ngf-max-size="5MB">
         <div class="upload-tips">“点击上传真实的头像”</div>
-        <div class="use-tips">填写完整信息赠送10积分，可直接用于积分商城哦~</div>
+        <div class="use-tips" ng-hide="modify">填写完整信息赠送10积分，可直接用于积分商城哦~</div>
         <div class="input-container margin-top-88">
             <img src="../../assets/images/nickname.png" id="nickname-icon">
             <input type="text" placeholder="请输入您的昵称（必填）" ng-model="nickname"/>
         </div>
         <div class="input-container margin-top-55">
             <img src="../../assets/images/shengri.png" id="shengri-icon">
-            <input type="text" placeholder="请输入您的生日（选填）" ng-model="birthday"/>
+            <input type="date" placeholder="请输入您的生日（选填）" ng-model="birthday" class="birthday">
         </div>
         <div class="sex-select">
             <span class="sex-group sex-male">

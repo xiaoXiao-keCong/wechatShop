@@ -12,6 +12,7 @@ index.controller('editInfoCtrl',
 		$scope.phone = user.account;
 		$scope.sex = user.sexname;
 		$scope.birthday = user.birthday;
+		$scope.imgurl = picBasePath + user.imgurl;
 	})();
 
 	// 修改登录密码
@@ -22,5 +23,10 @@ index.controller('editInfoCtrl',
 	// 修改支付密码
 	$scope.editPayPwd = function () {
 		$location.path('forget_pwd').search({type: 'pay'});
+	};
+
+	// 跳转到完善信息界面
+	$scope.toCompleteInfo = function () {
+		$location.path('complete_info').search({type: 'modify'});
 	};
 }]);

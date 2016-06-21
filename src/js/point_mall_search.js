@@ -1,19 +1,18 @@
 /**
  * Created by hugotan on 2016/5/4.
  */
-index.controller('mallSearchCtrl',
+index.controller('pointMallSearchCtrl',
 	['$scope', '$http', '$location', '$window',
 	function ($scope, $http, $location, $window) {
 	
-	// 商城搜索
+	// 积分商城搜索
 	$scope.search = function () {
 		var data = {
-			kind: 'goods',
 			q: $scope.word,
 			page: 1,
 			// areaid: 
 		};
-		$http.post('/home/search.json', data, postCfg)
+		$http.post('/integralshop/search.json', data, postCfg)
 		.success(function (data) {
 			console.log(data);
 			if (1 === data.code) {
@@ -28,12 +27,12 @@ index.controller('mallSearchCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 
 	// 跳转到商品详情
 	$scope.toGoodsDetail = function (goods) {
-		$location.path('mall_goods_detail/' + goods.id);
+		$location.path('point_mall_goods_detail/' + goods.id);
 	};
 }]);

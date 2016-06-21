@@ -1,14 +1,10 @@
 /**
  * Created by hugotan on 2016/4/16.
  */
-angular.module('feedback', []).controller('feedbackCtrl', ['$scope', '$http', function ($scope, $http) {
-    var transFn = function(data) {
-                return $.param(data);
-        },
-        postCfg = {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transFn
-        };
+index.controller('feedbackCtrl',
+    ['$scope', '$http', '$window', '$location',
+    function ($scope, $http, $window, $location) {
+    
 
     // 监听值的变化并改变提交按钮的样式
     $scope.$watch('feedback', function (newValue, oldValue, scope) {
@@ -21,7 +17,8 @@ angular.module('feedback', []).controller('feedbackCtrl', ['$scope', '$http', fu
             $scope.isFeedbackEmpty = false;
         }
     });
-    // var couponPromise = $http.post('/user/mycouponlist.json', postCfg);
+
+    
     $scope.submitFeedback = function () {
         var feedbackText = $scope.feedback.replace(/(^\s*)|(\s*$)/g, ''),
             data = {
@@ -29,11 +26,16 @@ angular.module('feedback', []).controller('feedbackCtrl', ['$scope', '$http', fu
             };
         var feedbackPromise = $http.post('/user/feedback.json', data, postCfg);
         feedbackPromise.then(function (resp) {
+            if (-1 === resp.data.code) {
+                $location.path('login');
+                return;
+            }
             if (1 === resp.data.code) {
                 alert('提交成功');
+                $window.history.back();
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
     };
 }]);
