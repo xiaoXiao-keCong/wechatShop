@@ -386,4 +386,10 @@ index.controller('orderCtrl',
 		$location.path('order_detail/' + order.id);
 	};
 
+	// 服务订单支付
+	$scope.payService = function (service) {
+		console.log(service);
+		$location.path('pay_service').search({service: JSON.stringify(service)});
+	};
+
 }]);

@@ -272,4 +272,16 @@ index.controller('homeCtrl',
 		$scope.showMask = false;
 	};
 
+	// 首页弹窗最新活动
+	$http.post('/home/newactivity.json', postCfg)
+	.success(function (data) {
+		console.log(data);
+		if (1 === data.code) {
+			$scope.activity = data.data;
+		}
+	})
+	.error(function (data) {
+		alert('数据请求失败，请稍后再试！');
+	})
+
 }]);

@@ -123,7 +123,7 @@
 					</div>
 					<div class="operation">
 						<button ng-if="service.stateflag == 0" ng-click="cancelConsumerOrder(service)">取消订单</button>
-						<button class="btn-pay" ng-if="service.stateflag == 0">立即支付</button>
+						<button class="btn-pay" ng-if="service.stateflag == 0" ng-click="payService(service)">立即支付</button>
 						<button ng-if="service.stateflag == 1" ng-click="remarkDesigner(service)">去评价</button>
 					</div>
 				</div>

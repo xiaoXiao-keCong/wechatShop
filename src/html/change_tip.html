@@ -1,17 +1,15 @@
 <div class="title-bar">
 	<span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
-	<span>兑换成功</span>
+	<span ng-bind="title"></span>
 </div>
 <div class="change-info-content">
-	<div class="change-background">
-		恭喜您兑换成功！
-	</div>
+	<div class="change-background" ng-bind="tips"></div>
 	<div class="change-btn-content">
 		<div class="change-btn">
 			<a ng-href="#/">返回首页</a>
 		</div>
 		<div class="change-btn">
-			<a>查看订单</a>
+			<a ng-click="orderDetail()"></a>
 		</div>
 	</div>
 	<div class="change-icon">

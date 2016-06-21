@@ -8,6 +8,116 @@
 	.pay {
 		background-color: #f1f1f1;
 		padding-bottom: 0.853333rem;
+		.record-item {
+			font-size: 0.32rem;
+			background-color: #ffffff;
+			margin-bottom: 0.133333rem;
+			padding: 0 0.266667rem 0.266667rem 0.266667rem;
+			.right {
+				.flex;
+				align-items: center;
+				img {
+					margin-left: 0.2rem;
+				}
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+			// .flex;
+			.top-panel {
+				width: 100%;
+				.flex-center;
+				justify-content: space-between;
+				height: 0.866667rem;
+				border-bottom: 0.013333rem solid #c1c1c1;
+				margin-bottom: 0.266667rem;
+				.order-num {
+					font-size: 0.346667rem;
+				}
+			}
+			.order-info {
+				height: 2.56rem;
+				width: 100%;
+				.flex;
+				align-items: center;
+				margin-bottom: 0.4rem;
+				.record-icon {
+					width: 2.56rem;
+					height: 2.56rem;
+					border-radius: 0.133333rem;
+				}
+				.text-info {
+					margin-left: 0.266667rem;
+					height: 100%;
+					.flex-column;
+					justify-content: space-between;
+					color: #666666;
+					.user-info {
+						color: #121212;
+						.flex;
+						align-items: baseline;
+						.name {
+							font-size: 0.346667rem;
+							margin-right: 0.666667rem;
+						}
+					}
+					.location {
+						.flex;
+						align-items: center;
+						font-size: 0.293333rem;
+						.location-icon {
+							width: 0.4rem;
+							height: 0.48rem;
+						}
+					}
+					
+				}
+			}
+			.items-text {
+				color: #666666;
+				.flex;
+				.items {
+					flex: 1;
+					.flex-column;
+					.item-info {
+						margin-bottom: 0.4rem;
+						margin-left: 0.266667rem;
+						.flex;
+						justify-content: space-between;
+						.price {
+							del {
+								margin-right: 0.88rem;
+							}
+						}
+					}
+				}
+			}
+			.price-info {
+				color: #666666;
+				.flex;
+				justify-content: space-between;
+				width: 100%;
+			}
+			.operation {
+				margin-top: 0.48rem;
+				width: 100%;
+				.flex-center;
+				justify-content: flex-end;
+				button {
+					background-color: #3dbfd5;
+					border-radius: 0.133333rem;
+					color: #ffffff;
+					width: 1.626667rem;
+					height: 0.693333rem;
+					text-align: center;
+					line-height: 0.693333rem;
+					border: none;
+				}
+				.btn-pay {
+					margin-left: 0.266667rem;
+				}
+			}
+		}
 		.item {
 			padding: 0 0.533333rem;
 			border-bottom: 0.013333rem solid #cccccc;
@@ -16,8 +126,13 @@
 			height: 1.173333rem;
 			line-height: 1.173333rem;
 			background-color: #ffffff;
+			.price-text {
+				color: #3dbfd5;
+				font-size: 0.48rem;
+			}
 		}
 		.pay-balance {
+			margin-top: 0.266667rem;
 			background-color: #ffffff;
 			.display-flex;
 			align-items: center;
@@ -44,13 +159,15 @@
 		}
 		.tips {
 			height: 0.933333rem;
-			padding: 0.4rem 0.533333rem 0 0.533333rem;
+			line-height: 0.933333rem;
+			padding-left: 0.533333rem;
 			font-size: 0.32rem;
 			color: #121212;
 		}
 		.other-pay-tips {
 			height: 1.253333rem;
-			padding: 0.533333rem 0.533333rem 0 0.533333rem;
+			line-height: 1.253333rem;
+			padding-left: 0.533333rem;
 			font-size: 0.426667rem;
 			color: #121212;
 		}

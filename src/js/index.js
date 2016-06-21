@@ -245,6 +245,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/flash_sale_list.html',
 			controller: 'flashSaleListCtrl'
 		})
+		.when('/pay_service', {
+			templateUrl: '../html/pay_service.html',
+			controller: 'payServiceCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
