@@ -156,9 +156,15 @@
     </span>
 </div>
 
-<div class="option" ng-if="showMask" forbid-scroll name="mask">
-    <div class="price-container">
+<div class="option" ng-if="showMask" forbid-scroll name="mask" ng-click="hideMask()">
+    <div class="price-container" ng-if="!activityShow" ng-click="forbidHide($event)">
         <img ng-src="{{priceImg}}">
         <img src="../../assets/images/cancel.png" class="cancel common-icon" ng-click="hideMask()">
+        <!-- <img ng-src="{{activity.imgurl}}"> -->
+    </div>
+    <div class="activity-container" ng-if="activityShow">
+        <img src="../../assets/images/activity_cancel.png" class="activity-cancel-icon" ng-click="hideActivity()">
+        <img ng-src="{{activity.imgurl}}" ng-click="toActivity(activity, $event)">
+
     </div>
 </div>

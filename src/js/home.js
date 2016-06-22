@@ -56,9 +56,29 @@ index.controller('homeCtrl',
 				$location.path('appointment');
 				break;
 			case 4:
+				if (!sessionStorage.user) {
+					alert('请先登录!');
+					$location.path(login);
+					return;
+				}
+				var user = JSON.parse(sessionStorage.user);
+				if (user.nickname === '') {
+					// 跳转到完善信息
+					alert('请填写您的昵称!');
+					$location.path('complete_info').search({type: 'modify'});
+					return;
+				}
 				$location.path('order');
 				break;
 			case 5:
+			    if (sessionStorage.user) {
+			    	var user = JSON.parse(sessionStorage.user);
+			    	if (user.nickname === '') {
+			    		alert('请填写您的昵称!');
+			    		$location.path('complete_info').search({type: 'modify'});
+			    		return;
+			    	}
+			    }
 				$location.path('my');
 				break;
 		}
@@ -75,7 +95,6 @@ index.controller('homeCtrl',
 		console.log(data);
 	})
 	.error(function (data) {
-		console.log(data);
 		alert('数据请求失败，请稍后再试！');
 	});
 
@@ -109,7 +128,7 @@ index.controller('homeCtrl',
 		}
 		
 	}, function (resp) {
-		// alert('数据请求失败!请稍后再试');
+		alert('数据请求失败!请稍后再试');
 	});
 
 	// 悦商城
@@ -121,7 +140,7 @@ index.controller('homeCtrl',
 			$scope.mall = mall;
 		}
 	}, function (resp) {
-		// alert('数据请求失败!请稍后再试');
+		alert('数据请求失败!请稍后再试');
 	});
 
 	// 明星造型师
@@ -135,8 +154,7 @@ index.controller('homeCtrl',
 			$scope.starDesigners = starDesigners;
 		}
 	}, function (resp) {
-		console.log(resp);
-		// alert('数据请求失败!请稍后再试');
+		alert('数据请求失败!请稍后再试');
 	});
 
 	
@@ -154,7 +172,7 @@ index.controller('homeCtrl',
 			console.log($scope.fashionNewsList);
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	function getFashionHair() {
@@ -248,7 +266,7 @@ index.controller('homeCtrl',
 
 	// 首页明星门店图片点击
 	$scope.storeDetail = function (store) {
-		console.log(store);
+		
 		$location.path('store_detail/' + store.id);
 	};
 
@@ -259,29 +277,68 @@ index.controller('homeCtrl',
 
 	// 点击vip专区跳转到购买vip页面
 	$scope.toVip = function () {
+		if (!sessionStorage.user) {
+			$location.path(login);
+		}
+		var user = JSON.parse(sessionStorage.user);
+		if (user.nickname === '') {
+			// 跳转到完善信息
+			alert('请填写您的昵称!');
+			$location.path('complete_info').search({type: 'modify'});
+		}
 		$location.path('recharge');
 	};
 
 	// 点击去买单
 	$scope.goPay = function () {
+
+		if (!sessionStorage.user) {
+			$location.path(login);
+		}
+		var user = JSON.parse(sessionStorage.user);
+		if (user.nickname === '') {
+			// 跳转到完善信息
+			alert('请填写您的昵称!');
+			$location.path('complete_info').search({type: 'modify'});
+			return;
+		}
 		$location.path('go_pay');
 	};
 
 	// 取消显示价格
 	$scope.hideMask = function () {
+		$scope.activityShow = false;
 		$scope.showMask = false;
 	};
 
 	// 首页弹窗最新活动
 	$http.post('/home/newactivity.json', postCfg)
 	.success(function (data) {
-		console.log(data);
+		console.log('首页弹窗最新活动', data);
 		if (1 === data.code) {
-			$scope.activity = data.data;
+			$scope.showMask = true;
+			$scope.activityShow = true;
+			var activity = data.data;
+			activity.imgurl = picBasePath + activity.imgurl;
+			$scope.activity = activity;
 		}
 	})
 	.error(function (data) {
 		alert('数据请求失败，请稍后再试！');
-	})
+	});
+
+	$scope.toActivity = function (activity, e) {
+		e.stopPropagation();
+		$window.location.href = activity.jumpurl;
+	};
+
+	$scope.forbidHide = function (e) {
+		e.stopPropagation();
+	};
+
+	$scope.hideActivity = function () {
+		$scope.activityShow = false;
+		$scope.showMask = false;
+	};
 
 }]);

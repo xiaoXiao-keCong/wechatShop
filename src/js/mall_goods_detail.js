@@ -68,29 +68,36 @@ index.controller('mallGoodsDetailCtrl',
 		if (!sessionStorage.user) {
 			// 未登录，跳转到登录页面，将当前页面url存储到rootScope中
 			$location.path('login');
+			return;
 		}
-		else {
-			// 用户已经登录，添加商品到购物车
-			var data = {
-				'goodsid': parseInt(goodsId),
-				'number': 1
-			};
-			$http.post('/user/addtocart.json', data, postCfg)
-			.then(function (resp) {
-				if (1 === resp.data.code) {
-					// 添加进购物车成功
-					alert('商品添加购物车成功！');
-				}
-				else if (-1 === resp.data.code) {
-					// 用户未登录
-					$rootScope.preUrl = $location.url();
-					$location.path('login');
-				}
-			}, function (resp) {
-				console.log(resp);
-			});
+		var user = JSON.parse(sessionStorage.user);
+		if (user.nickname === '') {
+			// 跳转到完善信息页面
+			$location.path('complete_info').search({type: 'modify'});
+			return;
+		}
+		// 用户已经登录，添加商品到购物车
+		var data = {
+			'goodsid': parseInt(goodsId),
+			'number': 1
+		};
+		$http.post('/user/addtocart.json', data, postCfg)
+		.then(function (resp) {
+			if (1 === resp.data.code) {
+				// 添加进购物车成功
+				alert('商品添加购物车成功！');
+			}
+			else if (-1 === resp.data.code) {
+				// 用户未登录
+				$location.path('login');
+			}
+			else if (2 === resp.data.code) {
 
-		}
+			}
+		}, function (resp) {
+			console.log(resp);
+		});
+
 	};
 
 	// 立即购买

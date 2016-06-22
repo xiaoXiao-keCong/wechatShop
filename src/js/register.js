@@ -35,7 +35,7 @@ index.controller('registerCtrl', ['$scope', '$http', '$window', '$interval',
                             var leftTime = 60;
                             var timer = $interval(function () {
                                 if (leftTime > 0) {
-                                    $scope.sendCodeText = '发送成功(' + (leftTime--) + ')';
+                                    $scope.sendCodeText = '重新发送(' + (leftTime--) + ')';
                                 }
                                 else {
                                     $scope.sendCodeText = '发送验证码';
@@ -50,7 +50,7 @@ index.controller('registerCtrl', ['$scope', '$http', '$window', '$interval',
     			}
     		}
     	}, function (resp) {
-    		console.log(resp);
+    		alert('数据请求失败，请稍后再试！');
     	});
     };
 
@@ -69,14 +69,14 @@ index.controller('registerCtrl', ['$scope', '$http', '$window', '$interval',
     		if (1 === resp.data.code) {
     			alert('注册成功');
     			// 跳转到完善信息界面
-    			$window.location.replace('complete_info');
+    			$location.path('complete_info').replace();
     		}
-            else {
+            else if (0 === resp.data.code) {
                 alert(resp.data.reason);
                 return;
             }
     	}, function (resp) {
-    		console.log(resp);
+    		alert('数据请求失败，请稍后再试！');
     	});
     };
 

@@ -4,11 +4,12 @@
 index.controller('orderCtrl',
 	['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
 
-	var titles = ['我的预约', '服务记录', '商城订单'];
+	var titles = ['我的预约', '服务记录', '商城订单', '积分商城订单'];
 	$scope.title = '我的预约';
 	$scope.isAppointOrder = true;
 	$scope.isServiceOrder = false;
 	$scope.isMallOrder = false;
+	$scope.isPointOrder = false;
 
 	$scope.reserveOrderList = [];
 	$scope.consumerOrderList = [];
@@ -35,7 +36,8 @@ index.controller('orderCtrl',
 		}
 		$scope.isAppointOrder = (1 === index ? true : false);
 		$scope.isServiceOrder = (2 === index ? true : false);
-		$scope.isMallOrder = (3 === index ? true: false);
+		$scope.isMallOrder = (3 === index ? true : false);
+		$scope.isPointOrder = (4 === index ? true: false);
 		$scope.title = titles[index - 1];
 		$scope.loading = false;
 		$scope.loaded = false;
@@ -53,6 +55,12 @@ index.controller('orderCtrl',
 		        break;
 		    case 3:
 			    $scope.mallFlag = 2;
+			    $scope.goodsOrderType = 1;
+			    break;
+			case 4:
+				$scope.mallFlag = 2;
+				$scope.goodsOrderType = 2;
+				break;
 		}
 	};
 
@@ -92,6 +100,10 @@ index.controller('orderCtrl',
 		.success(function (data) {
 			if (-1 === data.code) {
 				$location.path('login');
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
+				return;
 			}
 			else if (1 === data.code) {
 				var reserveOrderList = data.data.reserveorderlist;
@@ -134,6 +146,11 @@ index.controller('orderCtrl',
 		.success(function (data) {
 			if (-1 === data.code) {
 				$location.path('login');
+				return;
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
+				return;
 			}
 			else if (1 === data.code) {
 				alert('订单取消成功!');
@@ -211,6 +228,9 @@ index.controller('orderCtrl',
 			if (-1 === data.code) {
 				$location.path('login');
 			}
+			else if (0 === data.code) {
+				alert(data.reason);
+			}
 			else if (1 === data.code) {
 				alert('订单取消成功！');
 				$scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].state = '已取消';
@@ -229,6 +249,9 @@ index.controller('orderCtrl',
 			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
 			}
 			else if (1 === data.code) {
 				alert('订单删除成功！');
@@ -249,13 +272,17 @@ index.controller('orderCtrl',
 		$scope.loading = true;
 		var data = {
 			flag: $scope.mallFlag,
-			page: $scope.page
+			page: $scope.page,
+			type: $scope.goodsOrderType
 		};
 		$http.post('/user/mygoodsorder.json', data, postCfg)
 		.success(function (data) {
 			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
 			}
 			else if (1 === data.code) {
 				var goodsOrderList = data.data.goodsorderList;
@@ -301,6 +328,9 @@ index.controller('orderCtrl',
 			if (-1 === data.code) {
 				$location.path('login');
 			}
+			else if (0 === data.code) {
+				alert(data.reason);
+			}
 			else if (1 === data.code) {
 				// 订单删除成功
 				alert('订单删除成功！');
@@ -323,6 +353,9 @@ index.controller('orderCtrl',
 		.success(function (data) {
 			if (-1 === data.code) {
 				$location.path('login');
+			}
+			else if (0 === data.code) {
+				alert(data.reason);
 			}
 			else if (1 === data.code) {
 				// 订单取消成功

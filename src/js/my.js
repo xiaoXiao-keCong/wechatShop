@@ -8,7 +8,8 @@ index.controller('myCtrl',
 		if (sessionStorage.user) {
 			$scope.isLogin = true;
 			var user = JSON.parse(sessionStorage.user);
-			$scope.userPic = picBasePath + user.imgurl;
+			console.log(user);
+			$scope.userPic = user.imgurl === '' ? '../../assets/images/head-none.png' : picBasePath + user.imgurl;
 			$scope.name = user.nickname;
 			$scope.type = user.vip.name;
 			$scope.typeImg = picBasePath + user.vip.smallimgurl;

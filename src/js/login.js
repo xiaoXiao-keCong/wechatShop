@@ -20,7 +20,13 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$root
             
             if (1 === resp.data.code) {
                 // 存储用户信息到sessionStorage
-                sessionStorage.setItem('user', JSON.stringify(resp.data.data));
+                var user = resp.data.data;
+                sessionStorage.setItem('user', JSON.stringify(user));
+                if (user.nickname === '') {
+                    // 昵称为空，跳转到完善信息页面
+                    $location.path('complete_info').search({type: 'modify'}).replace();
+                    return;
+                }
                 $timeout(function () {
                     $window.history.back();
                 });

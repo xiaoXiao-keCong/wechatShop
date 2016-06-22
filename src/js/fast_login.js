@@ -24,7 +24,7 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                 var leftTime = 60;
     			var timer = $interval(function () {
                     if (leftTime > 0) {
-                        $scope.sendCodeText = '发送成功(' + (leftTime--) + ')';
+                        $scope.sendCodeText = '重新发送(' + (leftTime--) + ')';
                     }
                     else {
                         $scope.sendCodeText = '发送验证码';

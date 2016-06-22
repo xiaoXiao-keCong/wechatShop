@@ -75,7 +75,6 @@ index.controller('balanceCtrl', ['$scope', '$http', '$location',
 					return;
 				}
 				if (1 === data.code) {
-					$scope.balance = data.data.balance;
 					var balanceList = data.data.balancelist;
 					if (balanceList.length > 0) {
 						for (var i = 0; i < balanceList.length; i++) {
@@ -146,7 +145,13 @@ index.controller('balanceCtrl', ['$scope', '$http', '$location',
 				endTime = $scope.endTime;
 			}
 		}
-		
-		// $scope.isFiltering = false;
+	};
+
+	$scope.hideFilter = function () {
+		$scope.isFiltering = false;
+	};
+
+	$scope.preventHideFilter = function (e) {
+		e.stopPropagation();
 	};
 }]);

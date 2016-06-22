@@ -17,9 +17,9 @@
  <div infinite-scroll="getBalanceList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
     <div class="balance-item" ng-repeat="balance in balanceList">
         <!-- 收支余额 -->
-        <span class="price">￥<span ng-bind="balance.price"></span></span>
+        <span class="price"><span ng-bind="balance.price"></span></span>
         <!-- 累计余额 -->
-        <span class="price">￥<span ng-bind="balance.currentbalance"></span></span>
+        <span class="price"><span ng-bind="balance.currentbalance"></span></span>
         <!-- 时间 -->
         <span class="time" ng-bind="balance.time"></span>
         <!-- 类型 -->
@@ -28,8 +28,8 @@
     <div ng-show="loading && !loaded" class="load">加载中...</div>
         <div ng-show="loaded" class="load"></i>没有更多了</div>
 </div>
-<div class="filter clearfix" forbid-scroll ng-show="isFiltering">
-    <div class="attr-select">
+<div class="filter clearfix" forbid-scroll ng-show="isFiltering" ng-click="hideFilter()">
+    <div class="attr-select" ng-click="preventHideFilter($event)">
         <div class="title">方式</div>
         <div class="filter-row">
             <span ng-class="{'filter-item':true,'selected-item':filterType==1}" ng-click="setFilter(1)">收入</span>

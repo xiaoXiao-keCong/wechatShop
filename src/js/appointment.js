@@ -114,9 +114,29 @@ index.controller('appointmentCtrl',
 				$location.path('appointment');
 				break;
 			case 4:
+				if (!sessionStorage.user) {
+					alert('请先登录!');
+					$location.path(login);
+					return;
+				}
+				var user = JSON.parse(sessionStorage.user);
+				if (user.nickname === '') {
+					// 跳转到完善信息
+					alert('请填写您的昵称!');
+					$location.path('complete_info').search({type: 'modify'});
+					return;
+				}
 				$location.path('order');
 				break;
 			case 5:
+				if (sessionStorage.user) {
+			    	var user = JSON.parse(sessionStorage.user);
+			    	if (user.nickname === '') {
+			    		alert('请填写您的昵称!');
+			    		$location.path('complete_info').search({type: 'modify'});
+			    		return;
+			    	}
+			    }
 				$location.path('my');
 				break;
 		}
