@@ -12,8 +12,6 @@ index.controller('pointOrderConfirmCtrl',
 	goods.countIntegral = parseInt(goods.integral) * buyNum;
 	$scope.goods = goods;
 	$scope.buyNum = buyNum;
-	console.log($scope.goods);
-
 
 	// 默认取货方式为邮寄
     $scope.type = "address";

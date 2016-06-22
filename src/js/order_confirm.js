@@ -74,23 +74,29 @@ index.controller('orderConfirmCtrl',
 
 	// 获取可用的优惠券
 	function getCoupon() {
-		$http.post('/user/mycouponwithprice.json',
-			{price: $scope.totalPrice, type: 1}, postCfg)
-		.success(function (data) {
-			console.log(data);
-			if (1 === data.code) {
-				if (0 === data.data.couponlist.length) {
-					$scope.couponInfo = '无可用优惠券';
+		if (!$rootScope.selectedCoupon) {
+			$http.post('/user/mycouponwithprice.json',
+				{price: $scope.totalPrice, type: 1}, postCfg)
+			.success(function (data) {
+				console.log(data);
+				if (1 === data.code) {
+					if (0 === data.data.couponlist.length) {
+						$scope.couponInfo = '无可用优惠券';
+					}
+					else {
+						$scope.couponInfo = '有' + data.data.couponlist.length + '张优惠券可用';
+					}
 				}
-				else {
-					$scope.couponInfo = '有' + data.data.couponlist.length + '张优惠券可用';
-				}
-			}
-		})
-		.error(function (data) {
-			alert('数据请求失败，请稍后再试！');
-		});
-
+			})
+			.error(function (data) {
+				alert('数据请求失败，请稍后再试！');
+			});
+		}
+		else {
+			var coupon = $rootScope.selectedCoupon;
+			$scope.couponInfo = coupon.rule;
+			$scope.couponId = coupon.id;
+		}
 	}
 
 	// 跳转到选择地址界面
@@ -119,7 +125,7 @@ index.controller('orderConfirmCtrl',
 	};
 
 	$scope.selectCoupon = function () {
-		$location.path('coupon');
+		$location.path('select_coupon').search({price: $scope.totalPrice, type: 1});
 	};
 
 	// 提交订单事件

@@ -77,7 +77,7 @@ index.controller('menuDetailCtrl',
             $location.path('point_goods_detail/' + goods.id).search({});
             return;
         }
-        $location.path('mall_goods_detail/' + goods.id);
+        $location.path('mall_goods_detail/' + goods.id).search({});
     };
 
 }]);
