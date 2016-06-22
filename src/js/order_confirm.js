@@ -61,7 +61,7 @@ index.controller('orderConfirmCtrl',
 
 	// 获取运费
 	function getFreight() {
-		$http.post('/integralshop/getfreightcharges.json', {paymoney: $scope.totalPrice}, postCfg)
+		$http.post('/shop/getfreightcharges.json', {paymoney: $scope.totalPrice}, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
 				$scope.freight = data.data.freightcharges;
@@ -88,7 +88,6 @@ index.controller('orderConfirmCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 

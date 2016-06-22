@@ -87,7 +87,7 @@ index.controller('pointGoodsDetailCtrl',
                 break;
             case 2:
                 // 增加数量
-                if ($scope.buyNum != $scope.goods.inventory) {
+                if ($scope.buyNum != $scope.goods.inventory && $scope.buyNum != $scope.goods.buylimit) {
                     $scope.buyNum++;
                 }
                 break;
