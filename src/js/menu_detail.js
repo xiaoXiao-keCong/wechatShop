@@ -6,7 +6,9 @@ index.controller('menuDetailCtrl',
 	function ($scope, $http, $location, $window, $routeParams) {
 	
 	var menuId = $routeParams.id;
+    var type = $location.search().type || '';
 	$scope.title = $location.search().name;
+
 
 	$scope.goodsList = [];
     $scope.page = 1;
@@ -31,7 +33,10 @@ index.controller('menuDetailCtrl',
             page: $scope.page,
             sort: $scope.type
         };
-        $http.post('/shop/searchgoodsbygoodskindandcondition.json', data, postCfg)
+        var url = type === 'point' ? '/integralshop/searchgoodsbygoodskindandcondition.json' :
+        '/shop/searchgoodsbygoodskindandcondition.json';
+
+        $http.post(url, data, postCfg)
         .then(function (resp) {
         	console.log(resp);
             if (1 === resp.data.code) {
@@ -68,6 +73,10 @@ index.controller('menuDetailCtrl',
 
     // 跳转到商品详情
     $scope.toGoodsDetail = function (goods) {
+        if (type === 'point') {
+            $location.path('point_goods_detail/' + goods.id).search({});
+            return;
+        }
         $location.path('mall_goods_detail/' + goods.id);
     };
 

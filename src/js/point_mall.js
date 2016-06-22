@@ -1,21 +1,22 @@
 /**
- * Created by hugotan on 2016/5/4.
+ * Created by hugotan on 2016/4/16.
  */
 index.controller('pointMallCtrl',
-	['$scope', '$http', '$location', '$q',
-	function ($scope, $http, $location, $q) {
-
-	// 广告promise
+    ['$scope', '$http', '$location', '$q', '$window',
+    function ($scope, $http, $location, $q, $window) {
+    
+    
+    // 广告promise
     $scope.deferred = $q.defer();
     // 限时抢购promise
     $scope.flashSaleDeferred = $q.defer();
-
     // 商品列表数组
     $scope.goodsList = [];
     $scope.page = 1;
     $scope.loading = false;
     $scope.loaded = false;
     $scope.type = 'hot';
+
 
     $scope.$on('ngRepeatFinished', function () {
         $scope.deferred.resolve('succeed');
@@ -24,13 +25,9 @@ index.controller('pointMallCtrl',
         $scope.flashSaleDeferred.resolve('succeed'); 
     });
 
-	$scope.toGoodsDetail = function (goods) {
-		$location.path('point_goods_detail/' + goods.id);
-	};
-
-	(function init() {
-		// 获取积分商城首页广告
-		$http.post('/integralshop/getshopad.json', postCfg)
+    (function init() {
+        // 获取商城广告
+        $http.post('/integralshop/getshopad.json', postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var adList = resp.data.data.shopadvertisementlist;
@@ -42,7 +39,20 @@ index.controller('pointMallCtrl',
         }, function (resp) {
             console.log(resp);
         });
-
+        // 获取首页目录
+        $http.post('/integralshop/getshopmenu.json', postCfg)
+        .success(function (data) {
+            if (1 === data.code) {
+                var menuList = data.data.menulist;
+                for (var i = 0; i < menuList.length; i++) {
+                    menuList[i].imgurl = picBasePath + '/' + menuList[i].imgurl;
+                }
+                $scope.menuList = menuList;
+            }
+        })
+        .error(function (data) {
+            alert('数据请求失败，请稍后再试！');
+        });
         // 限时抢购
         $http.post('/integralshop/getflashsale.json', {'page': 1}, postCfg)
         .then(function (resp) {
@@ -56,7 +66,7 @@ index.controller('pointMallCtrl',
                 $scope.flashSaleList = flashSaleList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！')
         });
         // 品牌专区
         $http.post('/integralshop/getshopbrand.json', postCfg)
@@ -71,21 +81,24 @@ index.controller('pointMallCtrl',
         }, function (resp) {
             console.log(resp);
         });
-        // $http.post('/integralshop/searchgoodsbycondition.json',
-        //     {'page': 1, 'sort': 'hot'}, postCfg)
-        // .then(function (resp) {
-        //     if (1 === resp.data.code) {
-        //         var goodsList = resp.data.data.goodslist;
-        //         for (var i = 0, j = goodsList.length; i < j; i++) {
-        //             goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
-        //         }
-        //         $scope.goodsList = goodsList;
-        //         console.log($scope.goodsList);
-        //     }
-        // }, function (resp) {
-        //     console.log(resp);
-        // });
-	})();
+        getGoods();
+    })();
+
+
+    // 广告图片跳转事件
+    $scope.jump = function (ad) {
+        $window.location.href = ad.jumpurl;
+    };
+
+    // 跳转到商品详情
+    $scope.toGoodsDetail = function (goods) {
+        $location.path('point_goods_detail/' + goods.id);
+    };
+
+    // 跳转到商品搜索页面
+    $scope.pointMallSearch = function () {
+        $location.path('point_mall_search');
+    };
 
     // 获取商品列表
     function getGoods() {
@@ -97,7 +110,7 @@ index.controller('pointMallCtrl',
             page: $scope.page,
             sort: $scope.type
         };
-        $http.post('/integralshop/searchgoodsbycondition.json', data, postCfg)
+        $http.post('/integralshop/searchgoodsbycondition.json',data, postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
@@ -118,9 +131,7 @@ index.controller('pointMallCtrl',
         });
     }
 
-    $scope.getGoods = getGoods;
-
-     // 选择排序方式
+    // 选择排序方式
     $scope.setSort = function (type) {
         if ($scope.type && $scope.type === type) {
             return;
@@ -133,10 +144,21 @@ index.controller('pointMallCtrl',
         getGoods();
     };
     
-    
+    $scope.getGoods = getGoods;
 
-    // 跳转到积分商城搜索
-    $scope.pointMallSearch = function () {
-        $location.path('point_mall_search');
+    // 进入清洁洗韵目录详情
+    $scope.toMenuDetail = function (menu) {
+        $location.path('menu_detail/' + menu.id).search({name: menu.name, type: 'point'});
     };
+
+    // 进入品牌专区详情
+    $scope.brandDetail = function (brand) {
+        $location.path('brand_detail/' + brand.id).search({name: brand.name, type: 'point'});
+    };
+
+    // 限时抢购更多
+    $scope.moreFlashSale = function () {
+        $location.path('flash_sale_list').search({type: 'point'});
+    };
+
 }]);

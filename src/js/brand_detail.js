@@ -6,6 +6,7 @@ index.controller('brandDetailCtrl',
 	function ($scope, $http, $location, $window, $routeParams) {
 	
 	var brandId = $routeParams.id;
+    var type = $location.search().type || '';
 	$scope.title = $location.search().name;
 
 	$scope.goodsList = [];
@@ -31,7 +32,9 @@ index.controller('brandDetailCtrl',
             page: $scope.page,
             sort: $scope.type
         };
-        $http.post('/shop/searchgoodsbybrandkindandcondition.json', data, postCfg)
+        var url = type === 'point' ? '/integralshop/searchgoodsbybrandkindandcondition.json' :
+        '/shop/searchgoodsbybrandkindandcondition.json';
+        $http.post(url, data, postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
@@ -67,6 +70,10 @@ index.controller('brandDetailCtrl',
 
     // 跳转到商品详情
     $scope.toGoodsDetail = function (goods) {
+        if (type === 'point') {
+            $location.path('point_goods_detail/' + goods.id).search({});
+            return;
+        }
         $location.path('mall_goods_detail/' + goods.id).search({});
     };
 

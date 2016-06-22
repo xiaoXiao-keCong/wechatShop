@@ -5,6 +5,7 @@ index.controller('flashSaleListCtrl',
 	['$scope', '$http', '$location', '$window', '$routeParams',
 	function ($scope, $http, $location, $window, $routeParams) {
 
+    var type = $location.search().type || '';
 	$scope.goodsList = [];
     $scope.page = 1;
     $scope.loading = false;
@@ -27,7 +28,8 @@ index.controller('flashSaleListCtrl',
             page: $scope.page,
             sort: $scope.type
         };
-        $http.post('/shop/searchgoodsbycondition.json', data, postCfg)
+        var url = type === 'point' ? '/integralshop/searchgoodsbycondition.json' : '/shop/searchgoodsbycondition.json';
+        $http.post(url, data, postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
@@ -63,6 +65,10 @@ index.controller('flashSaleListCtrl',
 
     // 跳转到商品详情
     $scope.toGoodsDetail = function (goods) {
+        if (type === 'point') {
+            $location.path('point_goods_detail/' + goods.id).search({});
+            return;
+        }
         $location.path('mall_goods_detail/' + goods.id).search({});
     };
 

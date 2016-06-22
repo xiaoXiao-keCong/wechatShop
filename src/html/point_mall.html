@@ -1,6 +1,8 @@
 <div id="mall-container">
 	<div class="title-bar">
-        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	    <span class="title-bar-left">
+	        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	    </span>
 	    <span>积分商城</span>
 	    <span class="title-bar-right">
 	        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="pointMallSearch()">
@@ -15,12 +17,12 @@
 		<div class="swiper-pagination"></div>
 	</div>
 	<div class="top-nav">
-		<span><img src="../../assets/images/qing.png"></span>
-		<span><img src="../../assets/images/jie.png"></span>
-		<span><img src="../../assets/images/hu.png"></span>
-		<span><img src="../../assets/images/yun.png"></span>
+		<span ng-repeat="menu in menuList">
+			<img ng-src="{{menu.imgurl}}" ng-click="toMenuDetail(menu)">
+		</span>
 	</div>
 	<div class="item-container">
+		<img src="../../assets/images/more.png" class="more-icon" ng-click="moreFlashSale()">
 		<div class="title">
 			<span class="cn">限时抢购</span>
 			<span class="en">FLASH SALE</span>
@@ -52,7 +54,7 @@
 			<span class="en">BRAND ZONE</span>
 		</div>
 		<div class="brand-content">
-			<span class="item" ng-repeat="brand in brandList">
+			<span class="item" ng-repeat="brand in brandList" ng-click="brandDetail(brand)">
 				<img ng-src="{{brand.imgurl}}">
 			</span>
 		</div>
