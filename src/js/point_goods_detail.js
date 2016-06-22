@@ -18,10 +18,9 @@ index.controller('pointGoodsDetailCtrl',
                 goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
             }
             $scope.goods = goods;
-            console.log(goods);
         }
     }, function (resp) {
-        console.log(resp);
+        alert('数据请求失败，请稍后再试！');
     });
 
     // 点赞商品，index为1执行点赞，index为2执行取消点赞
@@ -38,7 +37,7 @@ index.controller('pointGoodsDetailCtrl',
             }
         })
         .error(function (data) {
-            console.log(data);
+            alert('数据请求失败，请稍后再试！');
         });
     };
 
@@ -50,4 +49,53 @@ index.controller('pointGoodsDetailCtrl',
     $scope.$on('ngRepeatFinished', function () {
         $scope.deferred.resolve('succeed');
     });
+
+    // 立即购买
+    $scope.buy = function () {
+        // 判断用户是否登录
+        if (!sessionStorage.user) {
+            // 用户未登录，跳转到登录页面
+            $location.path('login');
+        }
+        else {
+            var user = JSON.parse(sessionStorage.user);
+            if (1 === user.vip.id) {
+                // 普通会员
+                $scope.goods.price = $scope.goods.realprice;
+            }
+            else {
+                // vip会员
+                $scope.goods.price = $scope.goods.vipprice;
+            }
+            $scope.isBuy = true;
+        }
+    };
+
+    // 取消购买
+    $scope.cancelBuy = function () {
+        $scope.isBuy = false;
+    };
+
+    // 改变购买数量
+    $scope.changeBuyNum = function (type) {
+        switch (type) {
+            case 1:
+                // 减少数量
+                if (1 !== $scope.buyNum) {
+                    $scope.buyNum--;
+                }
+                break;
+            case 2:
+                // 增加数量
+                if ($scope.buyNum != $scope.goods.inventory) {
+                    $scope.buyNum++;
+                }
+                break;
+        }
+    };
+
+    // 确认购买
+    $scope.confirmBuy = function () {
+        $location.path('point_order_confirm').search({goods: JSON.stringify($scope.goods), buyNum: $scope.buyNum});
+    };
 }]);

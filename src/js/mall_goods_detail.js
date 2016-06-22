@@ -98,7 +98,6 @@ index.controller('mallGoodsDetailCtrl',
 		// 判断用户是否登录
 		if (!sessionStorage.user) {
 			// 用户未登录，跳转到登录页面
-			$rootScope.preUrl = $location.url();
 			$location.path('login');
 		}
 		else {

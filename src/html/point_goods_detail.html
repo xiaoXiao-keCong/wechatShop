@@ -59,6 +59,33 @@
 		</div>
 	</div>
 	<div class="btn-exchange-container">
-		<div class="btn-exchange" ng-click="orderConfirm()">立即兑换</div>
+		<div class="btn-exchange" ng-click="buy()">立即兑换</div>
+	</div>
+</div>
+<!-- 购买信息 -->
+<div class="buy-container" forbid-scroll ng-show="isBuy">
+	<div class="buy-info">
+		<img src="../../assets/images/cancel.png" class="cancel-btn" ng-click="cancelBuy()">
+		<div class="flex">
+			<img ng-repeat="item in goods.imgarray | limitTo:1" ng-src="{{item.imgurl}}" class="buy-img">
+			<span class="info">
+				<span ng-bind="goods.name"></span>
+				<span class="price">￥<span ng-bind="goods.price"></span></span>
+			</span>
+		</div>
+		<div class="tips">
+			数量
+		</div>
+		<div class="buy-num">
+			<img src="../../assets/images/decrease.png" ng-click="changeBuyNum(1)">
+			<span class="num" ng-bind="buyNum"></span>
+			<img src="../../assets/images/increase.png" ng-click="changeBuyNum(2)">
+			<span class="inventory">
+				库存<span ng-bind="goods.inventory"></span>件
+			</span>
+		</div>
+	</div>
+	<div class="buy-confirm" ng-click="confirmBuy()">
+		确认
 	</div>
 </div>
