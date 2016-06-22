@@ -208,4 +208,9 @@ index.controller('mallGoodsDetailCtrl',
 		$location.path('goods_comment/' + $scope.goods.id);
 	};
 
+	// 进入商品详情
+    $scope.goodsDetail = function (goods) {
+        $window.location.href = goods.detailimgurl;
+    };
+
 }]);

@@ -68,7 +68,7 @@ index.controller('orderConfirmCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	}
 
@@ -78,9 +78,9 @@ index.controller('orderConfirmCtrl',
 			$http.post('/user/mycouponwithprice.json',
 				{price: $scope.totalPrice, type: 1}, postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code) {
 					if (0 === data.data.couponlist.length) {
+						$scope.noUsefulCoupon = true;
 						$scope.couponInfo = '无可用优惠券';
 					}
 					else {
@@ -125,6 +125,9 @@ index.controller('orderConfirmCtrl',
 	};
 
 	$scope.selectCoupon = function () {
+		if ($scope.noUsefulCoupon === true) {
+			return;
+		}
 		$location.path('select_coupon').search({price: $scope.totalPrice, type: 1});
 	};
 

@@ -6,8 +6,8 @@ index.controller('selectCouponCtrl',
 	function ($scope, $http, $location, $window, $rootScope) {
 	
 	//根据用户价格返回可用的优惠券
-	var price = $location.search().price,
-		type = $location.search().type;
+	var price = parseFloat($location.search().price),
+		type = parseInt($location.search().type);
 
 	// 获取可用的优惠券
 	(function getCoupon() {
@@ -49,6 +49,11 @@ index.controller('selectCouponCtrl',
 
     // 点击优惠券选择
     $scope.selectCoupon = function (coupon) {
+    	if (2 === type) {
+    		$rootScope.serviceCoupon = coupon;
+    		$window.history.back();
+    		return;
+    	}
     	$rootScope.selectedCoupon = coupon;
     	$window.history.back();
     };

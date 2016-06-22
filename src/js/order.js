@@ -56,9 +56,6 @@ index.controller('orderCtrl',
 		}
 	};
 
-	$scope.toPay = function () {
-		$location.path('pay_goods');
-	};
 
 	$scope.navigate = function (index) {
 		switch (index) {
@@ -301,7 +298,6 @@ index.controller('orderCtrl',
 	$scope.deleteGoodsOrder = function (goods) {
 		$http.post('/user/deletegoodsorder.json', {orderid: goods.id}, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -312,7 +308,6 @@ index.controller('orderCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	};
@@ -326,7 +321,6 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/cancelgoodsorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -338,7 +332,6 @@ index.controller('orderCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	};
@@ -354,7 +347,6 @@ index.controller('orderCtrl',
 
 	// 去评论商品订单
 	$scope.toRemarkGoods = function (order) {
-		console.log(order);
 		$location.path('order_comment/' + order.id);
 	};
 
@@ -362,7 +354,6 @@ index.controller('orderCtrl',
 	$scope.confirmReceipt = function (order) {
 		$http.post('/user/confirmreceipt.json', {orderid: order.id}, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (1 === data.code) {
 				alert('确认收货成功！');
 			}
@@ -382,7 +373,6 @@ index.controller('orderCtrl',
 	};
 
 	$scope.toOrderDetail = function (order) {
-		console.log(order);
 		$location.path('order_detail/' + order.id);
 	};
 

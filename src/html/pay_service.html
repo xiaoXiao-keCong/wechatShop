@@ -42,7 +42,15 @@
 				<span>实付：<span class="highlight">￥<span ng-bind="service.actualprice"></span></span></span>
 			</div>
 		</div>
-		<div class="pay-balance">
+		<div class="pay-balance coupon-select" ng-click="selectCoupon()">
+			<span>选择优惠券</span>
+			<span class="coupon-info">
+				<span ng-bind="couponInfo"></span>
+				<img src="../../assets/images/arrow_r.png" class="common-icon">
+			</span>
+			
+		</div>
+		<div class="pay-balance margin-top-none">
 			<span>
 				<span>余额支付</span>
 				<span id="balance">￥ <span ng-bind="balance"></span></span>

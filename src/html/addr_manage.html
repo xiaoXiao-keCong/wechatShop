@@ -9,7 +9,7 @@
         <div class="info-panel">
             <span class="name" ng-bind="addr.name"></span>
             <span class="phone" ng-bind="addr.telephone"></span>
-            <span class="address" ng-bind="addr.address"></span>
+            <span class="address"><span ng-bind="addr.city"></span><span ng-bind="addr.address"></span></span>
         </div>
         <div class="operation-panel">
             <div class="left" ng-click="setDefaultSite(addr)">

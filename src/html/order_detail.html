@@ -23,7 +23,9 @@
 				<span class="name">收货人：<span ng-bind="order.name"></span></span>
 				<span class="phone" ng-bind="order.telephone"></span>
 			</span>
-			<span class="site" ng-bind="order.address">
+			<span class="site">
+				<span ng-bind="order.city"></span>
+				<span ng-bind="order.address"></span>
 			</span>
 		</span>
 	</div>
@@ -78,17 +80,23 @@
 				<span>下单时间：</span>
 				<span ng-bind="order.time"></span>
 			</span>
-			<span class="item">
+			<span class="item" ng-if="order.stateflag==3||order.stateflag==4||order.stateflag==5||order.stateflag==8">
 				<span>付款方式：</span>
-				<span ng-bind="order.payway"></span>
+				<span class="pay-way">
+					<span ng-repeat="item in order.payway" ng-bind="item.name"></span>
+				</span>
 			</span>
 		</div>
 	</div>
 </div>
 <div class="operation">
-	<span class="operation-item">删除订单</span>
-	<span class="operation-item">申请退款</span>
-	<span class="operation-item">评价晒单</span>
-	<span class="operation-item">再次购买</span>
+	<span class="operation-item" ng-if="order.stateflag==0" ng-click="toPay(order)">立即支付</span>
+	<span class="operation-item" ng-if="order.stateflag==0" ng-click="cancelGoodsOrder(order)">取消订单</span>
+	<span class="operation-item" ng-if="order.stateflag==8" ng-click="toRemarkGoods(order)">去评价</span>
+	<span class="operation-item" ng-if="order.stateflag==3||order.stateflag==4||order.stateflag==5||order.stateflag==8"
+	 ng-click="applyRefund(order)">申请退款</span>
+	<span class="operation-item" ng-if="order.stateflag==4" ng-click="confirmReceipt(order)">确认收货</span>
+	<span class="operation-item" ng-if="order.stateflag==2||order.stateflag==4||order.stateflag==6||order.stateflag==7" ng-click="deleteGoodsOrder(order)">删除订单</span>
+	
 </div>
 </div>

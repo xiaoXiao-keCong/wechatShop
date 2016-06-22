@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/5/2.
  */
 index.controller('pointGoodsDetailCtrl',
-	['$scope', '$http', '$location', '$q', '$routeParams',
-    function ($scope, $http, $location, $q, $routeParams) {
+	['$scope', '$http', '$location', '$q', '$routeParams', '$window',
+    function ($scope, $http, $location, $q, $routeParams, $window) {
    // 购买数量默认为1
     $scope.buyNum = 1;
     $scope.deferred = $q.defer();
@@ -97,5 +97,15 @@ index.controller('pointGoodsDetailCtrl',
     // 确认购买
     $scope.confirmBuy = function () {
         $location.path('point_order_confirm').search({goods: JSON.stringify($scope.goods), buyNum: $scope.buyNum});
+    };
+
+    // 进入商品详情
+    $scope.goodsDetail = function (goods) {
+        $window.location.href = goods.detailimgurl;
+    };
+
+    // 悦艺术家保障
+    $scope.toGuarantee = function () {
+        $window.location.href = $scope.goods.yueurl;
     };
 }]);
