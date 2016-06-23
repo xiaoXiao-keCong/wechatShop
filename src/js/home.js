@@ -311,21 +311,29 @@ index.controller('homeCtrl',
 		$scope.showMask = false;
 	};
 
-	// 首页弹窗最新活动
-	$http.post('/home/newactivity.json', postCfg)
-	.success(function (data) {
-		console.log('首页弹窗最新活动', data);
-		if (1 === data.code) {
-			$scope.showMask = true;
-			$scope.activityShow = true;
-			var activity = data.data;
-			activity.imgurl = picBasePath + activity.imgurl;
-			$scope.activity = activity;
+	(function getActivity() {
+		if (sessionStorage.hasShowActivity && sessionStorage.hasShowActivity === 'true') {
+			return;
 		}
-	})
-	.error(function (data) {
-		alert('数据请求失败，请稍后再试！');
-	});
+		// 首页弹窗最新活动
+		$http.post('/home/newactivity.json', postCfg)
+		.success(function (data) {
+			console.log('首页弹窗最新活动', data);
+			if (1 === data.code) {
+				sessionStorage.setItem('hasShowActivity', 'true');
+				$scope.showMask = true;
+				$scope.activityShow = true;
+				var activity = data.data;
+				activity.imgurl = picBasePath + activity.imgurl;
+				$scope.activity = activity;
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	})();
+
+	
 
 	$scope.toActivity = function (activity, e) {
 		e.stopPropagation();

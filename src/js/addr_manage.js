@@ -33,9 +33,10 @@ index.controller('addrManageCtrl',
     };
 
     // 编辑地址
-    $scope.edit = function (address) {
-        console.log(address);
-
+    $scope.toEditAddr = function (e, addr) {
+        e.stopPropagation();
+        // 传id的值到编辑页面
+        $location.path('add_receiver').search({addr_id: addr.id});
     };
     // 删除地址
     $scope.delete = function (address) {

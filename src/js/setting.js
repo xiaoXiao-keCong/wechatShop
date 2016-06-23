@@ -23,6 +23,15 @@ index.controller('settingCtrl',
 			alert('数据请求失败!请稍后再试');
 		});
 	};
+	// 到使用须知
+	$scope.toUseMsg = function () {
+		$location.path('use_msg');
+	};
+
+	// 到关于我们
+	$scope.toAboutUs = function () {
+		$location.path('about_us');
+	};
 
 	// 到意见反馈
 	$scope.toFeedback = function () {

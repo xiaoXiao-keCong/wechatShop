@@ -249,6 +249,12 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/pay_service.html',
 			controller: 'payServiceCtrl'
 		})
+		.when('/about_us', {
+			templateUrl: '../html/about_us.html',
+		})
+		.when('/use_msg', {
+			templateUrl: '../html/use_msg.html',
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
