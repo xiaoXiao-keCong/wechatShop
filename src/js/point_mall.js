@@ -66,7 +66,7 @@ index.controller('pointMallCtrl',
                 $scope.flashSaleList = flashSaleList;
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！')
+            alert('数据请求失败，请稍后再试！');
         });
         // 品牌专区
         $http.post('/integralshop/getshopbrand.json', postCfg)
@@ -112,6 +112,7 @@ index.controller('pointMallCtrl',
         };
         $http.post('/integralshop/searchgoodsbycondition.json',data, postCfg)
         .then(function (resp) {
+            console.log(resp);
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.goodslist;
                 if (goodsList.length > 0) {

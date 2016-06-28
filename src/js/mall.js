@@ -37,7 +37,7 @@ index.controller('mallCtrl',
                 $scope.adList = adList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
         // 获取首页目录
         $http.post('/shop/getshopmenu.json', postCfg)
@@ -48,7 +48,6 @@ index.controller('mallCtrl',
                     menuList[i].imgurl = picBasePath + '/' + menuList[i].imgurl;
                 }
                 $scope.menuList = menuList;
-                console.log(menuList);
             }
         })
         .error(function (data) {
@@ -67,7 +66,7 @@ index.controller('mallCtrl',
                 $scope.flashSaleList = flashSaleList;
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！')
+            alert('数据请求失败，请稍后再试！');
         });
         // 品牌专区
         $http.post('/shop/getshopbrand.json', postCfg)
@@ -80,7 +79,7 @@ index.controller('mallCtrl',
                 $scope.brandList = brandList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
         getGoods();
     })();
@@ -133,7 +132,7 @@ index.controller('mallCtrl',
                 }
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
     }
 

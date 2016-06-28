@@ -26,7 +26,7 @@ index.controller('mallGoodsDetailCtrl',
 			$scope.goods = goods;
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	// 获取商品评论信息

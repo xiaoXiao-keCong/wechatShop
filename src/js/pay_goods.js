@@ -6,6 +6,8 @@ index.controller('payGoodsCtrl',
 	['$scope', '$http','$location', '$routeParams',
 	function ($scope, $http, $location, $routeParams) {
 
+	// 获取来源，包括悦商城和积分商城两种来源
+	var origin = $location.search().origin || '';
 	// 获取订单id
 	var orderId = $routeParams.order_id;
 	// 默认选中余额支付
@@ -23,21 +25,22 @@ index.controller('payGoodsCtrl',
 				$scope.balance = data.data.balance;
 			}
 		});
+		// 获取订单详情
+		$http.post('/user/goodsorderdetail.json', {id: orderId}, postCfg)
+		.success(function (data) {
+			if (-1 === data.code) {
+				$location.path('login');
+			}
+			else if (1 === data.code) {
+				$scope.orderInfo = data.data;
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
 	})();
 
-	$http.post('/user/goodsorderdetail.json', {id: orderId}, postCfg)
-	.success(function (data) {
-		if (-1 === data.code) {
-			$location.path('login');
-		}
-		else if (1 === data.code) {
-			$scope.orderInfo = data.data;
-			console.log($scope.orderInfo);
-		}
-	})
-	.error(function (data) {
-		alert('数据请求失败，请稍后再试！');
-	});
+
 
 	// 选择余额支付
 	$scope.chooseBalance = function (index) {
@@ -74,14 +77,17 @@ index.controller('payGoodsCtrl',
 		};
 		$http.post('/pay/paywithbalance.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
+			if (-1 === data.code) {
+				$location.path('login');
+				return;
+			}
 			if (0 === data.code) {
 				alert(data.reason);
 			}
 			else if (1 === data.code) {
 				alert('支付成功！');
 				// 跳转到支付成功界面
-				$location.path('change_tip').search({type: 'pay', orderId: orderId}).replace();
+				$location.path('change_tip').search({type: 'pay', orderId: orderId, origin: origin}).replace();
 			}
 		})
 		.error(function (data) {

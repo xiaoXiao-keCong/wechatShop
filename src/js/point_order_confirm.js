@@ -128,7 +128,7 @@ index.controller('pointOrderConfirmCtrl',
 			if (1 === data.code) {
 				// 下单成功，跳转到支付页面
 				alert('下单成功!');
-				$location.path('pay_goods/' + data.data.id).replace().search({});
+				$location.path('pay_goods/' + data.data.id).replace().search({origin: 'point'});
 			}
 		})
 		.error(function (data) {

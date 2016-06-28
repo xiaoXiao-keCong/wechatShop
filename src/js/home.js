@@ -45,6 +45,7 @@ index.controller('homeCtrl',
 		}
 	};
 	$scope.navigate = function (index) {
+		var user;
 		switch (index) {
 			case 1:
 				$location.path('/');
@@ -58,10 +59,10 @@ index.controller('homeCtrl',
 			case 4:
 				if (!sessionStorage.user) {
 					alert('请先登录!');
-					$location.path(login);
+					$location.path('login');
 					return;
 				}
-				var user = JSON.parse(sessionStorage.user);
+				user = JSON.parse(sessionStorage.user);
 				if (user.nickname === '') {
 					// 跳转到完善信息
 					alert('请填写您的昵称!');
@@ -72,7 +73,7 @@ index.controller('homeCtrl',
 				break;
 			case 5:
 			    if (sessionStorage.user) {
-			    	var user = JSON.parse(sessionStorage.user);
+			    	user = JSON.parse(sessionStorage.user);
 			    	if (user.nickname === '') {
 			    		alert('请填写您的昵称!');
 			    		$location.path('complete_info').search({type: 'modify'});
@@ -278,7 +279,7 @@ index.controller('homeCtrl',
 	// 点击vip专区跳转到购买vip页面
 	$scope.toVip = function () {
 		if (!sessionStorage.user) {
-			$location.path(login);
+			$location.path('login');
 		}
 		var user = JSON.parse(sessionStorage.user);
 		if (user.nickname === '') {
@@ -293,7 +294,7 @@ index.controller('homeCtrl',
 	$scope.goPay = function () {
 
 		if (!sessionStorage.user) {
-			$location.path(login);
+			$location.path('login');
 		}
 		var user = JSON.parse(sessionStorage.user);
 		if (user.nickname === '') {

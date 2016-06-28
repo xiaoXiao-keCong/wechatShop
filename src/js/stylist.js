@@ -109,6 +109,7 @@ index.controller('stylistCtrl',
 		$scope.isList = !$scope.isList;
 	};
 	$scope.navigate = function (index) {
+		var user;
 		switch (index) {
 			case 1:
 				$location.path('/');
@@ -122,10 +123,10 @@ index.controller('stylistCtrl',
 			case 4:
 				if (!sessionStorage.user) {
 					alert('请先登录!');
-					$location.path(login);
+					$location.path('login');
 					return;
 				}
-				var user = JSON.parse(sessionStorage.user);
+				user = JSON.parse(sessionStorage.user);
 				if (user.nickname === '') {
 					// 跳转到完善信息
 					alert('请填写您的昵称!');
@@ -136,7 +137,7 @@ index.controller('stylistCtrl',
 				break;
 			case 5:
 				if (sessionStorage.user) {
-			    	var user = JSON.parse(sessionStorage.user);
+			    	user = JSON.parse(sessionStorage.user);
 			    	if (user.nickname === '') {
 			    		alert('请填写您的昵称!');
 			    		$location.path('complete_info').search({type: 'modify'});

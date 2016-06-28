@@ -27,24 +27,28 @@ index.controller('myCtrl',
 		switch (index) {
 			case 1:
 				// 我的余额
+				checkLogin();
 				$timeout(function () {
 					$location.path('balance');
 				}, 0);
 				break;
 			case 2:
 				// 充值
+				checkLogin();
 				$timeout(function () {
 					$location.path('recharge');
 				}, 0);
 				break;
 			case 3:
 				// 优惠券
+				checkLogin();
 				$timeout(function () {
 					$location.path('coupon');
 				}, 0);
 				break;
 			case 4:
 				// 我的收藏
+				checkLogin();
 				$timeout(function () {
 					$location.path('collection');
 				}, 0);
@@ -57,12 +61,14 @@ index.controller('myCtrl',
 				break;
 			case 6:
 				// 购物车
+				checkLogin();
 				$timeout(function () {
 					$location.path('cart');
 				}, 0);
 				break;
 			case 7:
 				// 地址管理
+				checkLogin();
 				$timeout(function () {
 					$location.path('addr_manage');
 				}, 0);
@@ -75,12 +81,29 @@ index.controller('myCtrl',
 				break;
 			case 9:
 				// 设置
+				checkLogin();
 				$timeout(function () {
 					$location.path('setting');
 				}, 0);
 				break;
 		}
 	};
+
+	function checkLogin() {
+		if (!sessionStorage.user) {
+			// 用户未登录，跳转到登录页面
+			$location.path('login');
+			return;
+		}
+		var user = JSON.parse(sessionStorage.user);
+		if (user.nickname === '') {
+			// 跳转到完善信息
+			alert('请填写您的昵称!');
+			$location.path('complete_info').search({type: 'modify'});
+			return;
+		}
+	}
+
 	$scope.navigate = function (index) {
 		switch (index) {
 			case 1:

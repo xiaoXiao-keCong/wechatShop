@@ -161,6 +161,9 @@ index.controller('orderConfirmCtrl',
 					$location.path('pay_goods/' + data.data.id).replace();
 				});
 			}
+			else if (0 === data.code) {
+				alert(data.reason);
+			}
 		})
 		.error(function (data) {
 			alert('数据请求失败!请稍后再试！');

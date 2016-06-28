@@ -343,7 +343,8 @@ index.directive('commonSwiper', ['$timeout', function ($timeout) {
 		link: function (scope, element, attrs) {
 			scope.commonSwiper = new Swiper(element.get(0), {
 				observer: true,
-				observerParents: true
+				observerParents: true,
+				direction: 'vertical'
 			});
 		}
 	};
