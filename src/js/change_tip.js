@@ -25,7 +25,7 @@ index.controller('changeTipCtrl',
 			}
 			else if (1 === data.code) {
 				var goods = data.data.goodslist[0];
-				var data = {
+				data = {
 					id: goods.id
 				};
 				var url = origin === 'point' ? '/integralshop/recommendgoodsafterpay.json' : '/shop/recommendgoodsafterpay.json';

@@ -44,6 +44,13 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide item" ng-repeat="designer in starDesigners" on-designer-render-finished>
                         <img ng-src="{{designer.imgurl}}" ng-click="toDesigner(designer)">
+                        <div class="info">
+                            <div class="name" ng-bind="designer.designername"></div>
+                            <div class="bottom-info">
+                                <span ng-bind="designer.storename"></span>
+                                <span><span ng-bind="designer.ordernum"></span>单</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,7 +65,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(2)"></span>
         <div class="content store-container">
             <span>
-                <img ng-src="{{starStore.imgurl}}" ng-click="storeDetail(starStore)">
+                <img ng-src="{{starStore.imgurl}}" ng-click="toMore(2)">
             </span>
         </div>
     </div>
@@ -85,7 +92,7 @@
         <span class="more"><img src="../../assets/images/more.png" ng-click="toMore(4)"></span>
         <div class="content mall-container">
             <span>
-                <img ng-src="{{mall.imgurl}}" ng-click="goodsDetail(mall)">
+                <img ng-src="{{mall.imgurl}}" ng-click="toMore(4)">
             </span>
         </div>
     </div>

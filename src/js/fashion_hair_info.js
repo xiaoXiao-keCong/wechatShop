@@ -25,7 +25,7 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
     	var postUrl = hairInfo.iskeep ? '/home/fashionhair/unkeep.json' : '/home/fashionhair/keep.json';
         $http.post(postUrl, {'fashionhairid': parseInt(hairInfo.id)}, postCfg)
         .then(function (resp) {
-            console.log(resp);
+            
             if (-1 === resp.data.code) {
                 // 用户未登录
                 sessionStorage.removeItem('user');
@@ -39,8 +39,8 @@ index.controller('fashionHairInfoCtrl', ['$scope', '$window', '$http', '$locatio
         });
     };
 
-    $scope.appoint = function (hairInfo) {
-        console.log(hairInfo);
+    $scope.appoint = function () {
+        $location.path('appointment');
     };
 
 }]); 

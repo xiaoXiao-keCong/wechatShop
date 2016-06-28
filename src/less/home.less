@@ -48,10 +48,40 @@
 			margin-top: 0.4rem;
 			height: 5.493333rem;
 			width: 100%;
-			.item,
-			img {
+			.item {
 				height: 5.493333rem;
 				width: 4.026667rem;
+				position: relative;
+				border-radius: 0.133333rem;
+				margin-left: 0.4rem;
+				img {
+					height: 5.493333rem;
+					width: 4.026667rem;
+				}
+			}
+			.info {
+				height: 1.2rem;
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.5);
+				border-bottom-left-radius: 0.133333rem;
+				border-bottom-right-radius: 0.133333rem;
+				padding: 0 0.266667rem;
+				.flex-column;
+				align-items: center;
+				justify-content: space-around;
+				color: #ffffff;
+				font-size: 0.32rem;
+				.name {
+					font-size: 0.4rem;
+				}
+				.bottom-info {
+					width: 100%;
+					.flex;
+					justify-content: space-between;
+				}
 			}
 		}
 		.item-title-bar {

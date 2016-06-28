@@ -34,13 +34,14 @@ index.directive('designer', ['$timeout', function ($timeout) {
 			        centeredSlides: true,
 			        slidesPerView: 'auto',
 			        coverflow: {
-			            rotate: 50,
+			            rotate: 0,
 			            stretch: 0,
 			            depth: 100,
 			            modifier: 1,
 			            slideShadows : true
 			        }
 				});
+				scope.designerSwiper.slideTo(1, 500, false);
 			});
 		}
 	};

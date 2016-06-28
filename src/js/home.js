@@ -153,6 +153,7 @@ index.controller('homeCtrl',
 				starDesigners[i].imgurl = picBasePath + starDesigners[i].imgurl;
 			}
 			$scope.starDesigners = starDesigners;
+			console.log(starDesigners);
 		}
 	}, function (resp) {
 		alert('数据请求失败!请稍后再试');
@@ -163,14 +164,12 @@ index.controller('homeCtrl',
 	// 时尚资讯列表
 	$http.post('/home/fashionnews.json', {'sort': 'recommend'}, postCfg)
 	.then(function (resp) {
-		console.log(resp);
 		if (1 === resp.data.code) {
 			var fashionNewsList = resp.data.data.fashionnewslist;
 			for (var i = 0, j = fashionNewsList.length; i < j; i++) {
 				fashionNewsList[i].imgurl = picBasePath + fashionNewsList[i].imgurl;
 			}
 			$scope.fashionNewsList = fashionNewsList;
-			console.log($scope.fashionNewsList);
 		}
 	}, function (resp) {
 		alert('数据请求失败，请稍后再试！');
@@ -182,7 +181,7 @@ index.controller('homeCtrl',
 		}
 		$scope.loading = true;
 		// 时尚发型列表
-		$http.post('/home/fashionhair.json', {'page': $scope.page, type: $scope.type}, postCfg)
+		$http.post('/home/fashionhair.json', {'page': $scope.page, sort: $scope.type}, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var fashionHairList = resp.data.data.fashionhairlist;
@@ -191,7 +190,6 @@ index.controller('homeCtrl',
 						fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
 						$scope.fashionHairList.push(fashionHairList[i]);
 					}
-					// $scope.fashionHairList = fashionHairList;
 					$scope.loading = false;
 					$scope.page += 1;
 				}
@@ -202,10 +200,10 @@ index.controller('homeCtrl',
 				
 			}
 		}, function (resp) {
-			console.log(resp);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
+	getFashionHair();
 	$scope.getFashionHair = getFashionHair;
 	
 	// 时尚发型按类型排序
@@ -259,7 +257,6 @@ index.controller('homeCtrl',
 				}
 			})
 			.error(function (data) {
-				console.log(data);
 				alert('数据请求失败，请稍后再试！');
 			});
 		}
@@ -319,7 +316,6 @@ index.controller('homeCtrl',
 		// 首页弹窗最新活动
 		$http.post('/home/newactivity.json', postCfg)
 		.success(function (data) {
-			console.log('首页弹窗最新活动', data);
 			if (1 === data.code) {
 				sessionStorage.setItem('hasShowActivity', 'true');
 				$scope.showMask = true;

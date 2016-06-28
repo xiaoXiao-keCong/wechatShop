@@ -7,7 +7,16 @@ index.controller('homeSearchCtrl',
 	
 	// 首页搜索
 	$scope.search = function () {
-		var data = {};
+		if (!$scope.keyword || $.trim($scope.keyword) === '') {
+			alert('请输入搜索关键字！');
+			return;
+		}
+		$scope.designerList = [];
+		$scope.storeList = [];
+		$scope.goodsList = [];
+		var data = {
+			q: $scope.keyword
+		};
 		$http.post('/home/searchall.json', data, postCfg)
 		.success(function (data) {
 			console.log(data);
@@ -18,39 +27,46 @@ index.controller('homeSearchCtrl',
 				    starUrl1 = '../../assets/images/star_h.png',
 		            starUrl2 = '../../assets/images/star.png',
 		            i, j, k;
-		        // 处理发型师数据
-				for (i = 0; i < designerList.length; i++) {
-					designerList[i].starUrl = [];
-					designerList[i].avatar = picBasePath + designerList[i].avatar;
-					for (j = 0; j < designerList[i].score; j++) {
-	                    designerList[i].starUrl.push({'path': starUrl1});
-	                }
-	                for (k = j; k < 5; k++) {
-	                    designerList[i].starUrl.push({'path': starUrl2});
-	                }
-				}
-				// 处理门店数据
-				for (i = 0; i < storeList.length; i++) {
-					storeList[i].img = picBasePath + storeList[i].imgurl[0];
-					storeList[i].starUrl = [];
-					for (j = 0; j < storeList[i].star; j++) {
-	                    storeList[i].starUrl.push({'path': starUrl1});
-	                }
-	                for (k = j; k < 5; k++) {
-	                    storeList[i].starUrl.push({'path': starUrl2});
-	                }
-				}
-				for (i = 0; i < goodsList.length; i++) {
-					goodsList[i].img = picBasePath + goodsList[i].imgarray[0].imgurl;
-				}
-				$scope.designerList = designerList;
-				$scope.storeList = storeList;
-				$scope.goodsList = goodsList;
-				console.log(storeList, goodsList);
+		        if (0 === designerList.length && 0 === goodsList.length && 0 === storeList.length) {
+		        	$scope.hasNoResult = true;
+		        	return;
+		        }
+		        else {
+		        	$scope.hasNoResult = false;
+		        	// 处理发型师数据
+					for (i = 0; i < designerList.length; i++) {
+						designerList[i].starUrl = [];
+						designerList[i].avatar = picBasePath + designerList[i].avatar;
+						for (j = 0; j < designerList[i].score; j++) {
+		                    designerList[i].starUrl.push({'path': starUrl1});
+		                }
+		                for (k = j; k < 5; k++) {
+		                    designerList[i].starUrl.push({'path': starUrl2});
+		                }
+					}
+					// 处理门店数据
+					for (i = 0; i < storeList.length; i++) {
+						storeList[i].img = picBasePath + storeList[i].imgurl[0];
+						storeList[i].starUrl = [];
+						for (j = 0; j < storeList[i].star; j++) {
+		                    storeList[i].starUrl.push({'path': starUrl1});
+		                }
+		                for (k = j; k < 5; k++) {
+		                    storeList[i].starUrl.push({'path': starUrl2});
+		                }
+					}
+					for (i = 0; i < goodsList.length; i++) {
+						goodsList[i].img = picBasePath + goodsList[i].imgarray[0].imgurl;
+					}
+					$scope.designerList = designerList;
+					$scope.storeList = storeList;
+					$scope.goodsList = goodsList;
+		        }
+		        
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 

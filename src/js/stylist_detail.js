@@ -232,6 +232,10 @@ index.controller('stylistDetailCtrl',
 				serviceList.push($scope.serviceList[i].id);
 			}
 		}
+		if (0 === serviceList.length) {
+			alert('请选择预约项目！');
+			return;
+		}
 		$rootScope.serviceItems = serviceList;
 		if ($rootScope.dateIndex > 0 && $rootScope.timeIndex > 0) {
 			console.log($rootScope.dateIndex, $rootScope.timeIndex);

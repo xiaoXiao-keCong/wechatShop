@@ -11,6 +11,7 @@ index.controller('stylistCtrl',
 	$scope.designerList = [];
 	$scope.page = 1;
 	$scope.isSelfFilter = false;
+	$scope.isList = true;
 
 
 	// 获取发型师列表
@@ -30,6 +31,7 @@ index.controller('stylistCtrl',
 			};
 			$http.post('/designer/list.json', data, postCfg)
 			.then(function (resp) {
+				console.log(resp);
 				if (1 === resp.data.code) {
 					var starUrl1 = '../../assets/images/star_h.png',
 			            starUrl2 = '../../assets/images/star.png';

@@ -4,7 +4,7 @@
 			<span class="search-box">
 				<img src="../../assets/images/search_1.png" alt="搜索图标" class="common-icon">
 				<form ng-submit="search()">
-					<input type="search" placeholder="请输入发型师姓名/门店名" ng-model="word">
+					<input type="search" placeholder="请输入发型师姓名/门店名" ng-model="keyword">
 				</form>
 				
 			</span>
@@ -69,5 +69,6 @@
 				</div>
 			</div>
 		</div>
+		<div ng-if="hasNoResult" class="text-center">暂无搜索内容！</div>
 	</div>
 </div>
