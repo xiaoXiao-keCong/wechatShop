@@ -23,7 +23,7 @@ index.controller('fashionInformationCtrl',
 		}
 		$scope.loading = true;
 		// 时尚发型列表
-		$http.post('/home/fashionnews.json', {'page': $scope.page, type: $scope.type}, postCfg)
+		$http.post('/home/fashionnews.json', {'page': $scope.page, sort: $scope.type}, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
 				var fashionInfoList = resp.data.data.fashionnewslist;

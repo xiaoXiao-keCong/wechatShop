@@ -15,7 +15,7 @@ index.controller('storeCtrl',
     $scope.storeList = [];
 
 
-    $scope.isList = true;
+    $scope.isList = false;
     $scope.switch = function () {
     	$scope.isList = !$scope.isList;
     };

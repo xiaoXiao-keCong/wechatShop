@@ -45,7 +45,6 @@ index.controller('stylistDetailCtrl',
 	// 获取发型师详情
 	$http.post('/designer/info.json', {'designerid': $routeParams.id}, postCfg)
 	.then(function (resp) {
-		console.log(resp);
 		if (1 === resp.data.code) {
 			var commentLevel = [],
 				designer = resp.data.data;
@@ -59,9 +58,10 @@ index.controller('stylistDetailCtrl',
 			designer.commentLevel = commentLevel;
 			designer.avatar = picBasePath + designer.avatar;
 			$scope.designer = designer;
+			console.log(designer);
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	// 初始化就要获取发型师项目
@@ -86,7 +86,7 @@ index.controller('stylistDetailCtrl',
 			};
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	// 获取发型师价格
@@ -144,7 +144,7 @@ index.controller('stylistDetailCtrl',
 				}
 			}
 		}, function (resp) {
-			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
 		});
 	}
 
@@ -180,7 +180,6 @@ index.controller('stylistDetailCtrl',
 				}
 			}
 		}, function (resp) {
-			console.log(resp);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
@@ -203,7 +202,7 @@ index.controller('stylistDetailCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 
@@ -214,7 +213,6 @@ index.controller('stylistDetailCtrl',
 
 	// 跳转到发型师评论页面
 	$scope.toDesignerComment = function (designer) {
-		console.log(designer);
 		$location.path('stylist_comment/' + designer.id);
 	};
 

@@ -2,12 +2,12 @@
 <div id="store-detail-container">
     <div class="title-bar">
         <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
-        <span>匠舍门店</span>
+        <span ng-bind="store.name"></span>
         <span class="title-bar-right">
             <!-- <img src="../../assets/images/collect.png" alt="收藏" class="common-icon"> -->
             <span class="glyphicon glyphicon-star-empty" ng-if="!store.iskeep" ng-click="keepStore(store)"></span>
             <span class="glyphicon glyphicon-star keep-store" ng-if="store.iskeep" ng-click="keepStore(store)"></span>
-            <img src="../../assets/images/share.png" class="common-icon share-icon">
+            <!-- <img src="../../assets/images/share.png" class="common-icon share-icon"> -->
         </span>
     </div>
     <div class="store-detail">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="operation-container">
-                    <img src="../../assets/images/consult.png" alt="咨询">
+                    <!-- <img src="../../assets/images/consult.png" alt="咨询"> -->
                     <img src="../../assets/images/appoint.png" alt="预约">
                 </div>
             </div>

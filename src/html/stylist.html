@@ -16,9 +16,15 @@
 			门店查找<img src="../../assets/images/down.png" class="icon" ng-show="!showStore">
 			<img src="../../assets/images/down_h.png" class="icon" ng-show="showStore">
 			<ul class="city-item-container" ng-show="showStore">
+				<li class="city-item">
+					<span ng-class="{'item-text':true}">全部</span>
+				</li>
 				<li class="city-item" ng-repeat="area in areaList">
 					<span ng-bind="area.name" ng-class="{'item-text':true,'text-highlight':area.citySelected}" ng-click="selectCity(area, $event)"></span>
 					<ul class="store-item-container" ng-show="area.citySelected">
+						<li class="store-item">
+							<span ng-class="{'item-text':true}">全部</span>
+						</li>
 						<li class="store-item" ng-repeat="store in area.storelist">
 							<span ng-bind="store.name" ng-class="{'item-text':true,'text-highlight':store.selected}" ng-click="selectStore(store, $event)"></span>
 						</li>

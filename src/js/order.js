@@ -98,6 +98,7 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/myreserveorder.json', data, postCfg)
 		.success(function (data) {
+			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -142,26 +143,30 @@ index.controller('orderCtrl',
 
 	// 取消预约订单
 	$scope.cancelReserveOrder = function (reserve) {
-		$http.post('/user/cancelreserveorder.json', {id: reserve.id, page: 1}, postCfg)
-		.success(function (data) {
-			if (-1 === data.code) {
-				$location.path('login');
-				return;
-			}
-			else if (0 === data.code) {
-				alert(data.reason);
-				return;
-			}
-			else if (1 === data.code) {
-				alert('订单取消成功!');
-				reserve.state = '已取消';
-				reserve.stateflag = 3;
-			}
-		})
-		.error(function (data) {
-			console.log(data);
-			alert('数据请求失败，请稍后再试！');
-		});
+		var isConfirm = $window.confirm('确定取消订单？');
+		if (isConfirm) {
+			$http.post('/user/cancelreserveorder.json', {id: reserve.id, page: 1}, postCfg)
+			.success(function (data) {
+				if (-1 === data.code) {
+					$location.path('login');
+					return;
+				}
+				else if (0 === data.code) {
+					alert(data.reason);
+					return;
+				}
+				else if (1 === data.code) {
+					alert('订单取消成功!');
+					reserve.state = '已取消';
+					reserve.stateflag = 3;
+				}
+			})
+			.error(function (data) {
+				console.log(data);
+				alert('数据请求失败，请稍后再试！');
+			});
+		}
+		
 	};
 
 	$scope.getServiceRecord = getServiceRecord;

@@ -108,7 +108,7 @@
 				<span class="goods-name" ng-bind="item.name"></span>
 				<span class="goods-info">
 					<span>￥<span ng-bind="item.realprice"></span></span>
-					<span class="praise">
+					<span class="praise" ng-click="praise(item, $event)">
 						<span><img src="../../assets/images/zan.png"></span>
 						<span ng-bind="item.praisenum"></span>
 					</span>

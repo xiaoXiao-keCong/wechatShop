@@ -167,4 +167,10 @@ index.controller('mallCtrl',
         $location.path('flash_sale_list');
     };
 
+    // 点赞商品
+    $scope.praise = function (goods, e) {
+        e.stopPropagation();
+        console.log(goods);
+    };
+
 }]);

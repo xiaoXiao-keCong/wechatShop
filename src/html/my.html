@@ -22,11 +22,11 @@
                             <img ng-src="{{typeImg}}" class="type-img">
                         </span>
                     </div>
-                    <div>
+                    <div ng-click="toBalance()">
                         <span>余额</span>
                         <span class="account-val" ng-bind="balance"></span>
                     </div>
-                    <div class="border-bottom-none">
+                    <div class="border-bottom-none" ng-click="toPointMall()">
                         <span>积分</span>
                         <span class="account-val" ng-bind="score"></span>
                     </div>

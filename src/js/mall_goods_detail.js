@@ -14,50 +14,53 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.hotSalePage = 1;
 
 	var goodsId = parseInt($routeParams.id);
-	// 获取商品详情
-	$http.post('/shop/getgoodsbyid.json', {id: goodsId}, postCfg)
-	.then(function (resp) {
-		if (1 === resp.data.code) {
-			var goods = resp.data.data;
-			for (var i = 0, j = goods.imgarray.length; i < j; i++) {
-				goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
-			}
-			goods.imgurl = goods.imgarray[0].imgurl;
-			$scope.goods = goods;
-		}
-	}, function (resp) {
-		alert('数据请求失败，请稍后再试！');
-	});
 
-	// 获取商品评论信息
-	$http.post('/shop/goodscomment.json', {id: goodsId}, postCfg)
-	.success(function (data) {
-		if (1 === data.code) {
-			var commentInfo = data.data,
-			    starUrl1 = '../../assets/images/star_h_2.png',
-                starUrl2 = '../../assets/images/star_2.png';
-			commentInfo.imgArr = [];
-			commentInfo.starUrl = [];
-			if (commentInfo.totalCommentnum > 0) {
-				for (var i = 0; i < commentInfo.comment.imgurllist.length; i++) {
-					commentInfo.imgArr.push({path: picBasePath + commentInfo.comment.imgurllist[i]});
+	(function init() {
+		// 获取商品详情
+		$http.post('/shop/getgoodsbyid.json', {id: goodsId}, postCfg)
+		.then(function (resp) {
+			if (1 === resp.data.code) {
+				var goods = resp.data.data;
+				for (var i = 0, j = goods.imgarray.length; i < j; i++) {
+					goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
 				}
-				for (i = 0; i < commentInfo.comment.star; i++) {
-		            commentInfo.starUrl.push({'path': starUrl1});
-		        }
-		        for (var j = i; j < 5; j++) {
-		            commentInfo.starUrl.push({'path': starUrl2});
-		        }
-				commentInfo.userImg = picBasePath + commentInfo.comment.user.imgurl;
-				commentInfo.userVipImg = picBasePath + commentInfo.comment.user.vipimgurl;
+				goods.imgurl = goods.imgarray[0].imgurl;
+				$scope.goods = goods;
 			}
-			$scope.commentInfo = commentInfo;
-			console.log($scope.commentInfo);
-		}
-	})
-	.error(function (data) {
-		console.log(data);
-	});
+		}, function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
+
+		// 获取商品评论信息
+		$http.post('/shop/goodscomment.json', {id: goodsId}, postCfg)
+		.success(function (data) {
+			if (1 === data.code) {
+				var commentInfo = data.data,
+				    starUrl1 = '../../assets/images/star_h_2.png',
+	                starUrl2 = '../../assets/images/star_2.png';
+				commentInfo.imgArr = [];
+				commentInfo.starUrl = [];
+				if (commentInfo.totalCommentnum > 0) {
+					for (var i = 0; i < commentInfo.comment.imgurllist.length; i++) {
+						commentInfo.imgArr.push({path: picBasePath + commentInfo.comment.imgurllist[i]});
+					}
+					for (i = 0; i < commentInfo.comment.star; i++) {
+			            commentInfo.starUrl.push({'path': starUrl1});
+			        }
+			        for (var j = i; j < 5; j++) {
+			            commentInfo.starUrl.push({'path': starUrl2});
+			        }
+					commentInfo.userImg = picBasePath + commentInfo.comment.user.imgurl;
+					commentInfo.userVipImg = picBasePath + commentInfo.comment.user.vipimgurl;
+				}
+				$scope.commentInfo = commentInfo;
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	})();
+	
 
 	$scope.toGuarantee = function () {
 		$window.location.href = $scope.goods.yueurl;
@@ -176,7 +179,7 @@ index.controller('mallGoodsDetailCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 

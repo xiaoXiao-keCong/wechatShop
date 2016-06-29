@@ -1,9 +1,11 @@
 <!-- 订单 -->
 <div class="parent-container">
 <div class="title-bar">
-    <span ng-bind="title"></span>
-    <span class="down-icon">
-	    <img src="../../assets/images/down_2.png" class="common-icon" ng-click="showMask = !showMask">
+	<span ng-click="showMask = !showMask">
+		<span ng-bind="title"></span>
+	    <span class="down-icon">
+		    <img src="../../assets/images/down_2.png" class="common-icon">
+		</span>
 	</span>
 </div>
 <div id="order">
@@ -27,14 +29,21 @@
 					</div>
 					<div class="order-detail">
 						<span class="left"><img ng-src="{{reserve.designer.imgurl}}"></span>
-						<span class="right">
-							<div class="right-row">
-								<span class="right-cell-left ellipsis name" ng-bind="reserve.designer.name"></span>
+						<span class="right whole-width">
+							<div class="right-row flex-between whole-width">
+								<span class="name" ng-bind="reserve.designer.name"></span>
 								<span class="right-cell-right phone" ng-bind="reserve.designer.telephone"></span>
 							</div>
 							<div class="right-row">
-								<span class="right-cell-left">项目:</span>
-								<span class="right-cell-right">染发</span>
+								<span class="right-cell-left">项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目:</span>
+								<span class="right-cell-right whole-width">
+									<span ng-repeat="item in reserve.servicelist" class="whole-width flex-between">
+										<span ng-bind="item.name"></span>
+										<span class="item-time">
+											<span ng-bind="item.length * 30"></span>min
+										</span>
+									</span>
+								</span>
 							</div>
 							<div class="right-row">
 								<span class="right-cell-left">服务时间:</span>

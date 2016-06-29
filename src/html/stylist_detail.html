@@ -13,7 +13,8 @@
 <div class="head">
 	<span><img ng-src="{{designer.avatar}}" class="head-pic"></span>
 	<span class="name" ng-bind="designer.name"></span>
-	<span class="intro" ng-bind="designer.describe"></span>
+	<!-- <span class="intro" ng-bind="designer.describe"></span> -->
+	<span class="intro" ng-bind="designer.simpleinfo"></span>
 	<span class="operation">
 		<!-- <span class="btn-operation" ng-click="keepDesigner(designer)">
 			<span ng-if="!designer.iskeep">+关注</span>

@@ -1,13 +1,32 @@
 /**
  * Created by hugotan on 2016/4/9.
  */
-index.controller('registerCtrl', ['$scope', '$http', '$window', '$interval',
+index.controller('registerCtrl',
+    ['$scope', '$http', '$window', '$interval',
     function ($scope, $http, $window, $interval) {
     
     var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
     var codeRe = /^\d{4}$/;
     var pwdRe = /^[0-9a-zA-Z_]{6,20}/;
     $scope.sendCodeText = '发送验证码';
+
+    (function init() {
+        // 初始化获取个人信息保护政策链接
+        $http.post('/home/baseinfo.json', {flag: 5}, postCfg)
+        .success(function (data) {
+            console.log(data);
+            if (1 === data.code) {
+                $scope.link = data.data.imgurl;
+            }
+            else if (0 === data.code) {
+                alert(data.reason);
+            }
+        })
+        .error(function (data) {
+            alert('数据请求失败，请稍后再试！');
+        });
+    })();
+
     $scope.agree = false;
     // 发送验证码事件
     $scope.getCode = function () {
@@ -80,7 +99,7 @@ index.controller('registerCtrl', ['$scope', '$http', '$window', '$interval',
     	});
     };
 
-    // 勾选是否阅读
+    // 勾选是否阅读个人信息保护政策
     $scope.checkAgree = function () {
         $scope.agree = !$scope.agree;
     };
