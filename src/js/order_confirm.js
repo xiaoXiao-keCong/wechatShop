@@ -156,10 +156,9 @@ index.controller('orderConfirmCtrl',
 			else if (1 === data.code) {
 				// 下单成功
 				$timeout(function () {
-					alert('下单成功！');
-					// 应该跳转到支付页面
+					// 跳转到支付页面
 					$location.path('pay_goods/' + data.data.id).replace();
-				});
+				}, 0);
 			}
 			else if (0 === data.code) {
 				alert(data.reason);

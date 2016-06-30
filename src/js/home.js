@@ -153,7 +153,6 @@ index.controller('homeCtrl',
 				starDesigners[i].imgurl = picBasePath + starDesigners[i].imgurl;
 			}
 			$scope.starDesigners = starDesigners;
-			console.log(starDesigners);
 		}
 	}, function (resp) {
 		alert('数据请求失败!请稍后再试');

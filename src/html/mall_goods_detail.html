@@ -15,7 +15,7 @@
 	    </div>
 		<div class="goods-info">
 			<span class="item name">
-				<span ng-bind="goods.name"></span>
+				<span ng-bind="goods.name" class="goods-name ellipsis"></span>
 				<span class="praise">
 					<span class="glyphicon glyphicon-heart-empty praise-icon" 
 					ng-if="!goods.iskeep" ng-click="praiseOperation(1)"></span>

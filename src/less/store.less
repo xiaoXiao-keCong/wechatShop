@@ -28,9 +28,11 @@
 			position: relative;
 		}
 		.icon {
+			position: relative;
 			width: 0.4rem;
 			height: 0.4rem;
 			margin-left: 0.106667rem;
+			top: -0.026667rem;
 		}
 		.city-item-container {
 			position: absolute;
@@ -102,13 +104,36 @@
 			align-items: center;
 			.grid-item:not(:last-child) {
 				margin-bottom: 0.266667rem;
+				position: relative;
 			}
 			.grid-item {
 				margin-bottom: 0.266667rem;
-				img {
+				position: relative;
+				.store-img {
 					height: 5.36rem;
 					width: 9.466667rem;
 					border-radius: 0.133333rem;
+				}
+				.store-info-mask {
+					position: absolute;
+					background: rgba(0, 0, 0, 0.5);
+					height: 100%;
+					width: 100%;
+					top: 0;
+					left: 0;
+					border-radius: 0.133333rem;
+					.store-name {
+						font-size: 0.96rem;
+						color: #f6f9f9;
+						text-align: center;
+						margin-top: 1.56rem;
+					}
+					.store-address {
+						margin-top: 0.533333rem;
+						.flex-center;
+						font-size: 0.32rem;
+						color: #ffffff;
+					}
 				}
 			}
 		}

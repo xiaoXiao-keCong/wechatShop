@@ -15,6 +15,9 @@
 				<img src="../../assets/images/down.png" class="icon" ng-if="!showStore">
 				<img src="../../assets/images/down_h.png" class="icon" ng-if="showStore">
 				<ul class="city-item-container" ng-show="showStore">
+					<li class="city-item" ng-click="selectCity('all', $event)">
+						<span ng-class="{'item-text':true,'text-highlight':allArea}">全部区域</span>
+					</li>
 					<li class="city-item" ng-repeat="area in areaList">
 						<span ng-bind="area.name" ng-class="{'item-text':true,'text-highlight':area.selected}" ng-click="selectCity(area, $event)"></span>
 					</li>
@@ -48,7 +51,14 @@
 			<div infinite-scroll="getStoreList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
 				<div class="item-container">
 					<span class="grid-item" ng-repeat="store in storeList" ng-click="toDetail(store)">
-						<img ng-src="{{store.img2}}">
+						<img ng-src="{{store.img2}}" class="store-img">
+						<div class="store-info-mask">
+							<div class="store-name" ng-bind="store.name"></div>
+							<div class="store-address">
+								<img src="../../assets/images/location_4.png" class="common-icon">
+								<span ng-bind="store.location"></span>
+							</div>
+						</div>
 					</span>
 				</div>
 				

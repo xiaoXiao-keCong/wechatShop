@@ -166,6 +166,7 @@ index.controller('stylistDetailCtrl',
 				var lifeList = resp.data.data.designerlifelist;
 				if (lifeList.length > 0) {
 					for (var i = 0; i < lifeList.length; i++) {
+						lifeList[i].imgLength = lifeList[i].imgurl.length;
 						lifeList[i].imgArr = [];
 						for (var j = 0; j < lifeList[i].imgurl.length; j++) {
 							lifeList[i].imgArr.push({path: picBasePath + lifeList[i].imgurl[j]});
@@ -254,6 +255,12 @@ index.controller('stylistDetailCtrl',
 	// 展开价格
 	$scope.showItems = function (price) {
 		price.show = !price.show;
+	};
+
+	// 点击发型师生活中的图片
+	$scope.showLifeImg = function (life, img) {
+		console.log(life.imgArr.indexOf(img));
+		// console.log(life, img);
 	};
 
 }]);

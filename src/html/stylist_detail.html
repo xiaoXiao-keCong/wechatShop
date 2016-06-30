@@ -12,7 +12,7 @@
 </div>
 <div class="head">
 	<span><img ng-src="{{designer.avatar}}" class="head-pic"></span>
-	<span class="name" ng-bind="designer.name"></span>
+	<!-- <span class="name" ng-bind="designer.name"></span> -->
 	<!-- <span class="intro" ng-bind="designer.describe"></span> -->
 	<span class="intro" ng-bind="designer.simpleinfo"></span>
 	<span class="operation">
@@ -46,7 +46,7 @@
 			<span class="glyphicon glyphicon-heart-empty praise-icon" 
 			ng-if="!designer.iskeep" ng-click="keepDesigner(designer)"></span>
 			<span class="glyphicon glyphicon-heart praise-icon praised" 
-			ng-if="designer.iskeep" ng-click="keepDesigner(designer)"></span>
+			ng-if="designer.iskeep" ng-click="keepDesigner(designer)"></span>&nbsp;
 			<span class="highlight" ng-bind="designer.praisenum"></span>
 		</span>
 	</div>
@@ -121,10 +121,15 @@
 				<img src="../../assets/images/time_circle.png" class="time-circle">
 				<span ng-bind="life.time"></span>
 			</div>
-			<div class="content">
+			<div ng-class="{'content':true,'padding-bottom-none':life.imgLength==0}">
 				<div ng-bind="life.content"></div>
 				<div class="pic">
-					<img ng-repeat="img in life.imgArr" ng-src="{{img.path}}" alt="">
+					<span ng-class="{'life-img':true,'life-img-1':life.imgLength==1,'life-img-2':life.imgLength==2||life.imgLength==4,'life-img-3':life.imgLength==3||life.imgLength>4}" 
+					ng-repeat="img in life.imgArr" 
+					ng-style="{'background-image':'url({{img.path}})'}" ng-click="showLifeImg(life, img)"></span>
+					<!-- <span ng-class="{'life-img':true,'life-img-1':life.imgLength==1,'life-img-2':life.imgLength==2||life.imgLenth==4,}" 
+					ng-repeat="img in life.imgArr" 
+					ng-style="{'background-image':'url({{img.path}})'}" ng-click="showLifeImg(life, img)"></span> -->
 				</div>
 			</div>
 		</div>
@@ -139,7 +144,7 @@
 			<span class="item" ng-repeat="work in workList" ng-click="toWorkDetail(work)">
 				<img ng-src="{{work.imgurl}}">
 				<div class="info">
-					<span ng-bind="work.name" class="ellipsis"></span>
+					<span ng-bind="work.name" class="ellipsis text-center"></span>
 					<span class="num"><span ng-bind="work.num"></span>张</span>
 				</div>
 			</span>

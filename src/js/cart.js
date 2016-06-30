@@ -2,15 +2,14 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('cartCtrl',
-	['$scope', '$http', '$location', '$rootScope', '$q', function ($scope, $http, $location, $rootScope, $q) {
+	['$scope', '$http', '$location', '$rootScope', '$q', '$window',
+	function ($scope, $http, $location, $rootScope, $q, $window) {
 
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
 		var data = resp.data;
-		console.log(data);
 		if (-1 === data.code) {
 			// 用户未登录
-			$rootScope.preUrl = $location.url();
 			$location.path('login');
 		}
 		else if (1 === data.code && 0 < data.data.cartlist.length) {
@@ -33,7 +32,7 @@ index.controller('cartCtrl',
 			};
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	// 增加商品购物车数量
@@ -51,7 +50,7 @@ index.controller('cartCtrl',
 				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
 			}
 		}, function (resp) {
-			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 	// 减少商品购物车数量
@@ -72,7 +71,7 @@ index.controller('cartCtrl',
 				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
 			}
 		}, function (resp) {
-			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
 		});
 	};
 
@@ -111,7 +110,6 @@ index.controller('cartCtrl',
 
 	// 点击去结算，跳转到订单确认页面
 	$scope.calculate = function () {
-		console.log($scope.cartList);
 		var goodsArr = [];
 		var numArr = [];
 		var flag = 0;    // 代表购物车是否有商品被选中
@@ -132,6 +130,47 @@ index.controller('cartCtrl',
 		$rootScope.numArr = numArr;
 		$rootScope.cartFlag = 1;
 		$location.path('order_confirm');
+	};
+
+	// 删除购物车商品
+	$scope.deleteCart = function () {
+		var idArr = [],
+		    indexList = [];
+		var flag = 0;    // 代表购物车是否有商品被选中
+		for (var i = 0; i < $scope.cartList.length; i++) {
+			if ($scope.cartList[i].selected) {
+				indexList.push(i);
+				idArr.push($scope.cartList[i].goods.id);
+				flag = 1;
+			}
+		}
+		if (0 === flag) {
+			alert('请先选择要删除的商品!');
+			return;
+		}
+		var data = {
+			goodsid: idArr
+		};
+		var confirm = $window.confirm('确认删除这' + idArr.length + '项商品吗？');
+		if (confirm) {
+			$http.post('/user/deletecart.json', data, postCfg)
+			.success(function (data) {
+				if (1 === data.code) {
+					// 删除成功
+					alert('删除成功');
+					for (i = 0; i < indexList.length; i++) {
+						$scope.cartList.splice(indexList[i], 1);
+					}
+				}
+				else if (0 === data.code) {
+					alert(data.reason);
+					return;
+				}
+			})
+			.error(function (data) {
+				alert('数据请求失败，请稍后再试！');
+			});
+		}
 	};
 
 }]);

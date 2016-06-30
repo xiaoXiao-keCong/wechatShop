@@ -7,6 +7,7 @@ index.controller('storeCtrl',
     var isGetStoreInfo = false;
     $scope.areaFilter = '全部区域';
     $scope.filterText = '综合排序';
+    $scope.allArea = true;
     $scope.filterDefault = true;
 
     $scope.page = 1;
@@ -42,7 +43,6 @@ index.controller('storeCtrl',
         };
         $http.post('/store/list.json', data, postCfg)
         .success(function (data) {
-            console.log(data);
             if (1 === data.code) {
                 var starUrl1 = '../../assets/images/star_h.png',
                     starUrl2 = '../../assets/images/star.png',
@@ -100,7 +100,7 @@ index.controller('storeCtrl',
                 }
             })
             .error(function (data) {
-                console.log(data);
+                alert('数据请求失败，请稍后再试！');
             });
         }
         
@@ -108,23 +108,40 @@ index.controller('storeCtrl',
 
     // 选择区域
     $scope.selectCity = function (area, e) {
+        var i;
         e.stopPropagation();
         $scope.showMask = false;
         $scope.showStore = false;
-        $scope.areaId = area.id;
-        $scope.areaFilter = area.name;
-        var index = $scope.areaList.indexOf(area);
-        if (index !== -1 && $scope.areaList[index].selected !== true) {
-            console.log(area);
-            for (var i = 0; i < $scope.areaList.length; i++) {
-                $scope.areaList[i].selected = false;
+        if (area === 'all') {
+            // 点击全部区域
+            if ($scope.allArea) {
+                return;
             }
-            area.selected = true;
-            $scope.page = 1;
-            $scope.loaded = false;
-            $scope.loading = false;
-            $scope.storeList = [];
+            else {
+                $scope.allArea = true;
+                $scope.areaId = '';
+                $scope.areaFilter = '全部区域';
+                for (i = 0; i < $scope.areaList.length; i++) {
+                    $scope.areaList[i].selected = false;
+                }
+            }
         }
+        else {
+            $scope.allArea = false;
+            $scope.areaId = area.id;
+            $scope.areaFilter = area.name;
+            var index = $scope.areaList.indexOf(area);
+            if (index !== -1 && $scope.areaList[index].selected !== true) {
+                for (i = 0; i < $scope.areaList.length; i++) {
+                    $scope.areaList[i].selected = false;
+                }
+                area.selected = true;
+            }
+        }
+        $scope.page = 1;
+        $scope.loaded = false;
+        $scope.loading = false;
+        $scope.storeList = [];
     };
 
     $scope.showFilterItems = function () {
