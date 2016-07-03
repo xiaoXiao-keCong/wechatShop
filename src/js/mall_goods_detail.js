@@ -70,7 +70,7 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.addToCart = function () {
 		if (!sessionStorage.user) {
 			// 未登录，跳转到登录页面，将当前页面url存储到rootScope中
-			$location.path('login');
+			$location.path('login').search({});
 			return;
 		}
 		var user = JSON.parse(sessionStorage.user);
@@ -92,7 +92,7 @@ index.controller('mallGoodsDetailCtrl',
 			}
 			else if (-1 === resp.data.code) {
 				// 用户未登录
-				$location.path('login');
+				$location.path('login').search({});
 			}
 			else if (2 === resp.data.code) {
 
@@ -108,7 +108,7 @@ index.controller('mallGoodsDetailCtrl',
 		// 判断用户是否登录
 		if (!sessionStorage.user) {
 			// 用户未登录，跳转到登录页面
-			$location.path('login');
+			$location.path('login').search({});
 		}
 		else {
 			var user = JSON.parse(sessionStorage.user);
@@ -145,7 +145,7 @@ index.controller('mallGoodsDetailCtrl',
 		$rootScope.goodsArr.push($scope.goods);
 		$rootScope.numArr.push($scope.buyNum);
 		$rootScope.cartFlag = 0;
-		$location.path('order_confirm');
+		$location.path('order_confirm').search({});
 	};
 
 	// 改变购买数量
@@ -172,10 +172,18 @@ index.controller('mallGoodsDetailCtrl',
 		$http.post(postUrl, {goodsid: goodsId}, postCfg)
 		.success(function (data) {
 			if (-1 === data.code) {
-				$location.path('login');
+				$location.path('login').search({});
 			}
 			else if (1 === data.code) {
-				$scope.goods.iskeep = index === 1 ? true : false;
+				// $scope.goods.iskeep = index === 1 ? true : false;
+				if (1 === index) {
+					$scope.goods.praisenum++;
+					$scope.goods.iskeep = true;
+				}
+				else {
+					$scope.goods.praisenum--;
+					$scope.goods.iskeep = false;
+				}
 			}
 		})
 		.error(function (data) {
@@ -185,7 +193,7 @@ index.controller('mallGoodsDetailCtrl',
 
 	// 跳转到购物车界面
 	$scope.toCart = function () {
-		$location.path('cart');
+		$location.path('cart').search({});
 	};
 
 	// 获取热销推荐
@@ -211,16 +219,19 @@ index.controller('mallGoodsDetailCtrl',
 	getHotSaleRecommend();
 
 	$scope.toGoodsDetail = function (goods) {
-		$location.path('mall_goods_detail/' + goods.id);
+		$location.path('mall_goods_detail/' + goods.id).search({});
 	};
 
 	$scope.toGoodsComment = function () {
-		$location.path('goods_comment/' + $scope.goods.id);
+		$location.path('goods_comment/' + $scope.goods.id).search({});
 	};
 
 	// 进入商品详情
-    $scope.goodsDetail = function (goods) {
-        $window.location.href = goods.detailimgurl;
+$scope.goodsDetail = function (goods) {
+        // $window.location.href = goods.detailimgurl;
+        console.log(goods);
+        var url = picBasePath + goods.detailimgurl;
+        $location.path('goods_detail_img').search({url: url});;
     };
 
 }]);

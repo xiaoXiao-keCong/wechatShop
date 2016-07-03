@@ -245,7 +245,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/flash_sale_list.html',
 			controller: 'flashSaleListCtrl'
 		})
-		.when('/pay_service', {
+		.when('/pay_service/:id', {
 			templateUrl: '../html/pay_service.html',
 			controller: 'payServiceCtrl'
 		})
@@ -258,6 +258,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.when('/stylist_life_pics', {
 			templateUrl: '../html/stylist_life_pics.html',
 			controller: 'stylistLifePicsCtrl'
+		})
+		.when('/goods_detail_img', {
+			templateUrl: '../html/goods_detail_img.html',
+			controller: 'goodsDetailImgCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'

@@ -119,13 +119,15 @@
                 <span ng-class="{'text':true,'text-highlight':type=='hottest'}">人气</span>
             </span>
         </div>
-        <div infinite-scroll="getFashionHair()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+        <div infinite-scroll="getFashionHair()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
             <div class="hairstyle-content">
                 <span ng-repeat="hair in fashionHairList" ng-click="showHairInfo(hair)">
                     <img ng-src="{{hair.imgurl}}">
                 </span>
             </div>
-            <div ng-show="loading && !loaded" class="load">正在加载...</div>
+            <div ng-hide="loaded" class="load">
+                <img src="../../assets/images/loading2.gif" class="common-icon">
+                正在加载...</div>
             <div ng-show="loaded" class="load"></i>没有更多了</div>
         </div>
     </div>

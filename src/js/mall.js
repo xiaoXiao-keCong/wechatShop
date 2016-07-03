@@ -22,7 +22,7 @@ index.controller('mallCtrl',
         $scope.deferred.resolve('succeed');
     });
     $scope.$on('flashSaleRepeatFinished', function () {
-        $scope.flashSaleDeferred.resolve('succeed'); 
+        $scope.flashSaleDeferred.resolve('succeed');
     });
 
     (function init() {
@@ -91,8 +91,14 @@ index.controller('mallCtrl',
     };
 
     // 跳转到商品详情
-    $scope.toGoodsDetail = function (goods) {
-        $location.path('mall_goods_detail/' + goods.id);
+    $scope.toGoodsDetail = function (goods, isFlash) {
+        if (isFlash) {
+            $location.path('mall_goods_detail/' + goods.id).search({type: 'flash'});
+        }
+        else {
+            $location.path('mall_goods_detail/' + goods.id);
+        }
+        
     };
 
     // 跳转到购物车

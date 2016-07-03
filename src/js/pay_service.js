@@ -7,9 +7,8 @@ index.controller('payServiceCtrl',
 	function ($scope, $http, $location, $routeParams, $rootScope) {
 
 	// 获取订单id
-	
-	$scope.service = JSON.parse($location.search().service);
-	var orderId = $scope.service.id;
+	// $scope.service = JSON.parse($location.search().service);
+	var orderId = $routeParams.id;
 	// 默认选中余额支付
 	$scope.balancePay = true;
 
@@ -25,8 +24,22 @@ index.controller('payServiceCtrl',
 				$scope.balance = data.data.balance;
 			}
 		});
+		// 通过id获取订单详细信息
+		$http.post('/user/cometoconsumeorrder.json', {orderid: orderId}, postCfg)
+		.success(function (data) {
+			console.log(data);
+			if (1 === data.code) {
+				var service = data.data;
+				service.designer.imgurl = picBasePath + service.designer.imgurl;
+				$scope.service = service;
+				getCoupon();
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
 		// 判断用户是否选择了优惠券
-		getCoupon();
+		
 	})();
 
 	// 选择余额支付
@@ -58,26 +71,6 @@ index.controller('payServiceCtrl',
 	// 确认支付
 	$scope.confirmPwd = function () {
 		if (!$scope.noUsefulCoupon) {
-			// payPassword = $('#pay-password').val();
-			// data = {
-			// 	orderid: orderId,
-			// 	paypassword: payPassword
-			// };
-			// $http.post('/pay/paywithbalance.json', data, postCfg)
-			// .success(function (data) {
-			// 	console.log(data);
-			// 	if (0 === data.code) {
-			// 		alert(data.reason);
-			// 	}
-			// 	else if (1 === data.code) {
-			// 		alert('支付成功！');
-			// 		// 跳转到支付成功界面
-			// 		$location.path('change_tip').search({type: 'pay', orderId: orderId}).replace();
-			// 	}
-			// })
-			// .error(function (data) {
-			// 	alert('数据请求失败，请稍后再试！');
-			// });
 			payByBalance();
 		}
 		else {
@@ -88,7 +81,6 @@ index.controller('payServiceCtrl',
 			};
 			$http.post('/user/confirmconsumerorder.json', data, postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code && 1 === data.data.stateflag) {
 					payByBalance();
 				}
@@ -109,7 +101,6 @@ index.controller('payServiceCtrl',
 		};
 		$http.post('/pay/paywithbalance.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (0 === data.code) {
 				alert(data.reason);
 			}

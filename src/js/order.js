@@ -180,6 +180,7 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/myconsumerorder.json', data, postCfg)
 		.success(function (data) {
+			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -407,7 +408,7 @@ index.controller('orderCtrl',
 
 	// 服务订单支付
 	$scope.payService = function (service) {
-		$location.path('pay_service').search({service: JSON.stringify(service)});
+		$location.path('pay_service/' + service.id);
 	};
 
 	$scope.displayMask = function (e) {

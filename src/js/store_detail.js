@@ -26,12 +26,13 @@ index.controller('storeDetailCtrl',
 	        for (var j = i; j < 5; j++) {
 	            store.starUrl.push({'path': starUrl2});
 	        }
+	        store.priceimgurl = picBasePath + priceimgurl;
 			$scope.store = store;
 			console.log(store);
 		}
 	})
 	.error(function (data) {
-		console.log(data);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 	// 根据id获取店内活动
@@ -46,7 +47,6 @@ index.controller('storeDetailCtrl',
 		}
 	})
 	.error(function (data) {
-		console.log(data);
 		alert('数据请求失败，请稍后再试！');
 	});
 
@@ -62,7 +62,6 @@ index.controller('storeDetailCtrl',
 		}
 	})
 	.error(function (data) {
-		console.log(data);
 		alert('数据请求失败，请稍后再试！');
 	});
 

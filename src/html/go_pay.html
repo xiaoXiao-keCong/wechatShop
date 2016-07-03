@@ -4,6 +4,13 @@
         <span>去买单</span>
     </div>
     <div class="go-pay">
+        <div class="select-designer" ng-click="selectStore()">
+            <span>请选择发型师</span>
+            <span class="designer">
+                <span ng-bind="designerName"></span>
+                <img src="../../assets/images/arrow_r.png" class="arrow-icon">
+            </span>
+        </div>
         <div class="item-container">
             <div class="item" ng-repeat="service in serviceList" ng-click="showService(service)">
             	<img ng-src="{{service.img}}">
@@ -14,13 +21,7 @@
         	<span>总计金额：</span>
         	<span ng-bind="price"></span>
         </div>
-        <div class="select-designer" ng-click="selectStore()">
-	    	<span>请选择发型师</span>
-	    	<span class="designer">
-	    		<span ng-bind="designerName"></span>
-	    		<img src="../../assets/images/arrow_r.png" class="arrow-icon">
-	    	</span>
-	    </div>
+        
 	    <div class="common-activity-container">
 	    	<div class="title">打折和立减活动</div>
 	    	<div class="item" ng-repeat="activity in commonActivityList">

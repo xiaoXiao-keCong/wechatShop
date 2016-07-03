@@ -7,6 +7,7 @@ index.controller('cartCtrl',
 
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
+		console.log(resp.data);
 		var data = resp.data;
 		if (-1 === data.code) {
 			// 用户未登录
@@ -16,7 +17,7 @@ index.controller('cartCtrl',
 			var cartList = data.data.cartlist;
 			for (var i =0, j  = cartList.length; i < j; i++) {
 				cartList[i].goods.imgurl = picBasePath + cartList[i].goods.imgurl1;
-				cartList[i].count = cartList[i].price * cartList[i].num;
+				cartList[i].count = addNum(cartList[i].price, cartList[i].num);
 				cartList[i].selected = false;
 			}
 			$scope.cartList = cartList;
@@ -47,7 +48,8 @@ index.controller('cartCtrl',
 			if (1 === resp.data.code) {
 				var cartList = resp.data.data.cartlist;
 				$scope.cartList[index].num = cartList[index].num;
-				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
+				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
+				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
 			}
 		}, function (resp) {
 			alert('数据请求失败，请稍后再试！');
@@ -68,12 +70,25 @@ index.controller('cartCtrl',
 			if (1 === resp.data.code) {
 				var cartList = resp.data.data.cartlist;
 				$scope.cartList[index].num = cartList[index].num;
-				$scope.cartList[index].count = cartList[index].price * cartList[index].num;
+				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
+				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
 			}
 		}, function (resp) {
 			alert('数据请求失败，请稍后再试！');
 		});
 	};
+
+	function addNum (num, count) {
+		var sq;
+	    try {
+	        sq = num.toString().split(".")[1].length;
+	    }
+	    catch (e) {
+	        sq = 0;
+	    }
+	    var m = Math.pow(10, sq);
+	    return (num * m * count) / m;
+	}
 
 	$scope.selectAll = function () {
 		$scope.isSelectAll = !$scope.isSelectAll;

@@ -33,7 +33,7 @@ index.controller('orderConfirmCtrl',
 		    .then(function (resp) {
 		    	if (-1 === resp.data.code) {
 		    		// 用户未登录
-		    		$location.path('login');
+		    		$location.path('login').search({});
 		    	}
 		    	else if (1 === resp.data.code) {
 		    		// 获取默认收货地址
@@ -106,7 +106,7 @@ index.controller('orderConfirmCtrl',
 			$location.path('address').search({current_id: addr.id});
 		}
 		else {
-			$location.path('address');
+			$location.path('address').search({});
 		}
 		
 	};
@@ -150,14 +150,14 @@ index.controller('orderConfirmCtrl',
 		$http.post('/user/confirmorder.json', data, postCfg)
 		.success(function (data) {
 			if (-1 === data.code) {
-				$location.path('login');
+				$location.path('login').search({});
 			}
 
 			else if (1 === data.code) {
 				// 下单成功
 				$timeout(function () {
 					// 跳转到支付页面
-					$location.path('pay_goods/' + data.data.id).replace();
+					$location.path('pay_goods/' + data.data.id).search({}).replace();
 				}, 0);
 			}
 			else if (0 === data.code) {

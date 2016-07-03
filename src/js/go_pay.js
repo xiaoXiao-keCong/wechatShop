@@ -8,7 +8,7 @@ index.controller('goPayCtrl',
 	var hasDesigner = false;
 	$scope.tabs = [];
 	$scope.selectedItemId = [];
-	$scope.price = '请先选择项目';
+	// $scope.price = '请先选择项目';
 
 	(function init() {
 		if ($rootScope.designer) {
@@ -22,6 +22,7 @@ index.controller('goPayCtrl',
 			// 获取项目列表
 			$http.post('/user/payorder.json', postCfg)
 			.success(function (data) {
+				console.log(data);
 				if (1 === data.code) {
 					var serviceList = data.data.serviceonelist;
 					for (var i = 0; i < serviceList.length; i++) {
@@ -41,7 +42,6 @@ index.controller('goPayCtrl',
 		// 获取打折和立减活动列表
 		$http.post('/user/getactivitylistofcommon.json', postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 				return;
@@ -57,7 +57,6 @@ index.controller('goPayCtrl',
 		// 获取新用户活动列表
 		$http.post('/user/getactivitylistofnewuser.json', postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 				return;
@@ -158,11 +157,11 @@ index.controller('goPayCtrl',
 		};
 		$http.post('/user/generateconsumedorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (1 === data.code) {
-				alert('下单成功!');
+				console.log(data.data);
+				// alert('下单成功!');
 				// 跳转到支付页面
-				// $location.path('');
+				$location.path('pay_service').search({service: JSON.stringify(data.data)});
 			}
 		})
 		.error(function (data) {

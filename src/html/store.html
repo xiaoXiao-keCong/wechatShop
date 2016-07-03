@@ -62,7 +62,10 @@
 					</span>
 				</div>
 				
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+					正在加载...
+				</div>
 	            <div ng-show="loaded" class="load"></i>没有更多了</div>
 			</div>
 		</div>
@@ -85,7 +88,10 @@
 						</span>
 					</span>
 				</div>
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+					正在加载...
+				</div>
 	            <div ng-show="loaded" class="load"></i>没有更多了</div>
 			</div>
 		</div>

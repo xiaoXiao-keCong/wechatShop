@@ -38,7 +38,7 @@
 		<div class="swiper-container flash-sale-content" flashsale>
 			<div class="swiper-wrapper">
 				<div class="swiper-slide item" ng-repeat="item in flashSaleList" 
-				on-flash-sale-render-finished ng-click="toGoodsDetail(item)">
+				on-flash-sale-render-finished ng-click="toGoodsDetail(item, true)">
 					<img ng-src="{{item.imgurl}}">
 					<span ng-bind="item.name" class="name"></span>
 					<span class="bottom-info">

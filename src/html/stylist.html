@@ -65,7 +65,7 @@
 		</span>
 	</div>
 	<div class="grid-container" ng-if="isList">
-		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 			<div class="item-container">
 				<div class="item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
 					<img ng-src="{{designer.imgurl}}">
@@ -80,12 +80,15 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="loading && !loaded" class="load">加载中...</div>
+			<div class="load" ng-hide="loaded">
+				<img src="../../assets/images/loading2.gif" class="common-icon">
+				正在加载...
+			</div>
             <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>
 	<div class="list-container" ng-if="!isList">
-		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 			<div class="list-item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
 				<div class="content">
 					<span class="headpic">
@@ -116,7 +119,10 @@
 					</span>
 				</div>
 			</div>
-			<div ng-show="loading && !loaded" class="load">加载中...</div>
+			<div class="load" ng-hide="loaded">
+				<img src="../../assets/images/loading2.gif" class="common-icon">
+				正在加载...
+			</div>
             <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>
