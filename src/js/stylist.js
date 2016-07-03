@@ -12,6 +12,11 @@ index.controller('stylistCtrl',
 	$scope.page = 1;
 	$scope.isSelfFilter = false;
 	$scope.isList = true;
+	$scope.selectAllArea = true;
+	$scope.sortType = '综合排序';
+	$scope.filterDefault = true;
+	$scope.selectStoreName = '门店查找';
+	$scope.selfFilterName = '自主筛选';
 
 
 	// 获取发型师列表
@@ -27,11 +32,11 @@ index.controller('stylistCtrl',
 				sort: $scope.sort,
 				positionx: localStorage.getItem('positionx'),
 				positiony: localStorage.getItem('positiony'),
-				storeid: $scope.storeId
+				storeid: $scope.storeId,
+				areaid: $scope.areaId
 			};
 			$http.post('/designer/list.json', data, postCfg)
 			.then(function (resp) {
-				console.log(resp);
 				if (1 === resp.data.code) {
 					var starUrl1 = '../../assets/images/star_h.png',
 			            starUrl2 = '../../assets/images/star.png';
@@ -57,7 +62,7 @@ index.controller('stylistCtrl',
 					}
 				}
 			}, function (resp) {
-				console.log(resp);
+				alert('数据请求失败，请稍后再试！');
 			});
 		}
 		else {
@@ -69,7 +74,6 @@ index.controller('stylistCtrl',
 			};
 			$http.post('/designer/searchbystoreandactivity.json', data, postCfg)
 			.success(function (data) {
-				console.log(data);
 				var starUrl1 = '../../assets/images/star_h.png',
 		            starUrl2 = '../../assets/images/star.png';
 				var designerList = data.data.designerlist;
@@ -96,7 +100,6 @@ index.controller('stylistCtrl',
 				
 			})
 			.error(function (data) {
-				console.log(data);
 				alert('数据请求失败，请稍后再试！');
 			});
 		}
@@ -169,7 +172,6 @@ index.controller('stylistCtrl',
 		if (!isGetStoreInfo) {
 			$http.post('/store/all.json', postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code) {
 					var areaList = data.data.arealist;
 					$scope.areaList = areaList;
@@ -177,7 +179,7 @@ index.controller('stylistCtrl',
 				}
 			})
 			.error(function (data) {
-				console.log(data);
+				alert('数据请求失败，请稍后再试！');
 			});
 		}
 		
@@ -186,36 +188,77 @@ index.controller('stylistCtrl',
 	// 选择区域
 	$scope.selectCity = function (area, e) {
 		e.stopPropagation();
-		var index = $scope.areaList.indexOf(area);
-		if (index !== -1 && $scope.areaList[index].citySelected !== true) {
-			console.log(area);
-			for (var i = 0; i < $scope.areaList.length; i++) {
-				$scope.areaList[i].citySelected = false;
+		var i = 0,j = 0;
+		if (area === 'all') {
+			$scope.selectStoreName = '全部';
+			$scope.showStore = false;
+			$scope.showMask = false;
+			if (!$scope.selectAllArea) {
+				$scope.selectAllArea = true;
+				$scope.areaId = 0;
+				$scope.storeId = 0;
+				for (i = 0; i < $scope.areaList.length; i++) {
+					$scope.areaList[i].citySelected = false;
+					$scope.areaList[i].selectAll = false;
+					for (j = 0; j < $scope.areaList[i].storelist.length; j++) {
+						$scope.areaList[i].storelist[j].selected = false;
+					}
+				}
+				$scope.designerList = [];
+				$scope.page = 1;
+				$scope.loading = false;
+				$scope.loaded = false;
+				getDesignerInfo();
+				
 			}
-			$scope.areaList[index].citySelected = true;
+		}
+		else {
+			$scope.selectAllArea = false;
+			var index = $scope.areaList.indexOf(area);
+			if (index !== -1 && $scope.areaList[index].citySelected !== true) {
+				for (i = 0; i < $scope.areaList.length; i++) {
+					$scope.areaList[i].citySelected = false;
+				}
+				$scope.areaList[index].citySelected = true;
+			}
 		}
 	};
 
-	// 选择门店
-	$scope.selectStore = function (store, e) {
+	// 选择门店,当flag为true时为选择全部
+	$scope.selectStore = function (store, e, flag) {
+		var i = 0, j = 0;
 		e.stopPropagation();
+		$scope.selectAllArea = false;
 		$scope.isSelfFilter = false;
-		if (!store.selected) {
-			for (var i = 0; i < $scope.areaList.length; i++) {
-				for (var j = 0; j < $scope.areaList[i].storelist.length; j++) {
+		if (flag) {
+			$scope.areaId = store.id;
+			$scope.storeId = 0;
+			for (i = 0; i < $scope.areaList.length; i++) {
+				$scope.areaList[i].selectAll = false;
+				for (j = 0; j < $scope.areaList[i].storelist.length; j++) {
+					$scope.areaList[i].storelist[j].selected = false;
+				}
+			}
+			store.selectAll = true;
+		}
+		else if (!store.selected) {
+			for (i = 0; i < $scope.areaList.length; i++) {
+				$scope.areaList[i].selectAll = false;
+				for (j = 0; j < $scope.areaList[i].storelist.length; j++) {
 					$scope.areaList[i].storelist[j].selected = false;
 				}
 			}
 			store.selected = true;
 			$scope.storeId = store.id;
-			$scope.designerList = [];
-			$scope.page = 1;
-			$scope.loading = false;
-			$scope.loaded = false;
-			getDesignerInfo();
-			$scope.showStore = false;
-			$scope.showMask = false;
 		}
+		$scope.selectStoreName = store.name;
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerInfo();
+		$scope.showStore = false;
+		$scope.showMask = false;
 	};
 
 	// 显示自助筛选的条目
@@ -226,8 +269,8 @@ index.controller('stylistCtrl',
 		$scope.isShowSort = false;
 	};
 
-	// 自助筛选
-	$scope.filter = function (type, e) {
+	// 排序
+	$scope.filter = function (type, e, typeName) {
 		e.stopPropagation();
 		$scope.isSelfFilter = false;
 		$scope.filterShow = false;
@@ -238,6 +281,7 @@ index.controller('stylistCtrl',
 		$scope.filterNearest = (type === 'nearest') ? true : false;
 		$scope.filterCheapest = (type === 'cheapest') ? true : false;
 		$scope.filterExpensive = (type === 'expensive') ? true : false;
+		$scope.sortType = typeName;
 		if ($scope.sort !== type) {
 			$scope.designerList = [];
 			$scope.page = 1;
@@ -258,27 +302,21 @@ index.controller('stylistCtrl',
 			// 获取优惠活动
 			$http.post('/designer/getactivityofyouhui.json', postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code) {
 					$scope.couponActivity = data.data.activitylist;
-					console.log($scope.couponActivity);
 				}
 			})
 			.error(function (data) {
-				console.log(data);
 				alert('数据请求失败，请稍后再试！');
 			});
 			// 获取新用户活动
 			$http.post('/designer/getactivityofnewuser.json', postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code) {
 					$scope.newUserActivity = data.data.activitylist;
-					console.log($scope.newUserActivity);
 				}
 			})
 			.error(function (data) {
-				console.log(data);
 				alert('数据请求失败，请稍后再试！');
 			});
 			isGetActivity = true;
@@ -290,6 +328,12 @@ index.controller('stylistCtrl',
 		$scope.storeType = type;
 		$scope.isDirectSale = type === 1 ? true : false;
 		$scope.isCooperate = type === 2 ? true : false;
+		$scope.isSelfFilter =  true;
+		$scope.page = 1;
+		$scope.designerList = [];
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerInfo();
 	};
 
 	// 自主筛选中选择优惠活动
@@ -302,6 +346,12 @@ index.controller('stylistCtrl',
 			var index = $scope.vh.indexOf(activity.id);
 			$scope.vh.splice(index, 1);
 		}
+		$scope.isSelfFilter =  true;
+		$scope.page = 1;
+		$scope.designerList = [];
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerInfo();
 	};
 
 	// 自主筛选中选择新用户活动
@@ -314,19 +364,17 @@ index.controller('stylistCtrl',
 			var index = $scope.nu.indexOf(activity.id);
 			$scope.nu.splice(index, 1);
 		}
-		console.log(activity);
-	};
-
-
-	// 自主筛选结束，点击确定
-	$scope.selfFilter = function () {
-		$scope.isShowSort = false;
-		$scope.showMask = false;
 		$scope.isSelfFilter =  true;
 		$scope.page = 1;
 		$scope.designerList = [];
 		$scope.loading = false;
 		$scope.loaded = false;
 		getDesignerInfo();
+	};
+
+	// 自主筛选结束，点击确定
+	$scope.selfFilter = function () {
+		$scope.isShowSort = false;
+		$scope.showMask = false;
 	};
 }]);

@@ -4,7 +4,7 @@
 			<span class="search-box">
 				<img src="../../assets/images/search_1.png" alt="搜索图标" class="common-icon">
 				<form ng-submit="search()">
-					<input type="search" placeholder="请输入发型师姓名/门店名" ng-model="word">
+					<input type="search" placeholder="请输入积分商品名称" ng-model="word">
 				</form>
 				
 			</span>
@@ -12,7 +12,7 @@
 		</div>
 		<!-- 热门商品 -->
 		<div class="item-container" ng-if="goodsList.length > 0">
-			<div class="type-name">热门商品</div>
+			<div class="type-name">搜索积分商品结果</div>
 			<div class="item" ng-repeat="goods in goodsList" ng-click="toGoodsDetail(goods)">
 				<img ng-src="{{goods.img}}" class="goods-pic">
 				<div class="info">

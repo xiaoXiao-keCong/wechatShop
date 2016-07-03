@@ -62,7 +62,6 @@ index.controller('appointmentCtrl',
 	                    }
 	                    $scope.designerList.push(designerList[i]);
 					}
-					console.log($scope.designerList);
 					$scope.loading = false;
 					$scope.page += 1;
 				}
@@ -72,7 +71,6 @@ index.controller('appointmentCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
@@ -154,7 +152,7 @@ index.controller('appointmentCtrl',
 				}
 				else {
 					$scope.serviceArr.splice($scope.serviceArr.indexOf(10), 1);
-					$scope.selectedItems[0] = {'name': ''};	
+					$scope.selectedItems[0] = {'name': ''};
 				}
 			    break;
 			case 'ranfa':
@@ -286,7 +284,6 @@ index.controller('appointmentCtrl',
 	$scope.appoint = function (designer, e) {
 		// 阻止冒泡
 		e.stopPropagation();
-		console.log($scope.dateIndex, $scope.timeIndex, $scope.serviceArr);
 		// 判断是否选择了时间和项目
 		if ($scope.serviceArr.length > 0) {
 			if ($scope.dateIndex > 0 && $scope.timeIndex > 0) {

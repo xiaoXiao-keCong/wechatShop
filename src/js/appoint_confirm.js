@@ -15,7 +15,6 @@ index.controller('appointConfirmCtrl',
 	// 根据id获取发型师详情
 	$http.post('/designer/info.json', {'designerid': $routeParams.id}, postCfg)
 	.then(function (resp) {
-		console.log(resp);
 		if (1 === resp.data.code) {
 			var commentLevel = [],
 				designer = resp.data.data;
@@ -29,17 +28,15 @@ index.controller('appointConfirmCtrl',
 			designer.commentLevel = commentLevel;
 			designer.avatar = picBasePath + designer.avatar;
 			$scope.designer = designer;
-			console.log($scope.designer);
 		}
 	}, function (resp) {
-		console.log(resp);
+		alert('数据请求失败，请稍后再试！');
 	});
 
 
 	// 获取发型师的服务
 	$http.post('/designer/service.json', {'designerid': designerId}, postCfg)
 	.success(function (data) {
-		console.log(data);
 		if (1 === data.code) {
 			var serviceList = data.data.servicelist;
 			for (var i = 0; i < serviceItems.length; i++) {
@@ -55,7 +52,6 @@ index.controller('appointConfirmCtrl',
 		
 	})
 	.error(function (data) {
-		console.log(data);
 		alert('数据请求失败，请稍后再试！');
 	});
 
@@ -68,7 +64,6 @@ index.controller('appointConfirmCtrl',
 		};
 		$http.post('/designer/reserve.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -83,8 +78,13 @@ index.controller('appointConfirmCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
+	};
+
+	$scope.back = function () {
+		$rootScope.dateIndex = 0;
+		$rootScope.timeIndex = 0;
+		$window.history.back();
 	};
 }]);

@@ -98,7 +98,6 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/myreserveorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -123,7 +122,6 @@ index.controller('orderCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
@@ -162,7 +160,6 @@ index.controller('orderCtrl',
 				}
 			})
 			.error(function (data) {
-				console.log(data);
 				alert('数据请求失败，请稍后再试！');
 			});
 		}
@@ -203,7 +200,6 @@ index.controller('orderCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
@@ -229,7 +225,6 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/cancelconsumerorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -248,10 +243,8 @@ index.controller('orderCtrl',
 	};
 
 	$scope.deleteConsumerOrder = function (service) {
-		console.log(service);
 		$http.post('/user/deleteconsumerorder.json', {orderid: service.id}, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -282,7 +275,6 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/mygoodsorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -310,7 +302,7 @@ index.controller('orderCtrl',
 			}
 		})
 		.error(function (data) {
-			console.log(data);
+			alert('数据请求失败，请稍后再试！');
 		});
 	}
 
@@ -348,7 +340,6 @@ index.controller('orderCtrl',
 	};
 	// 取消商城订单
 	$scope.cancelGoodsOrder = function (goods) {
-		console.log(goods);
 		var data = {
 			id: goods.id,
 			flag: 2,
@@ -416,8 +407,16 @@ index.controller('orderCtrl',
 
 	// 服务订单支付
 	$scope.payService = function (service) {
-		console.log(service);
 		$location.path('pay_service').search({service: JSON.stringify(service)});
+	};
+
+	$scope.displayMask = function (e) {
+		e.stopPropagation();
+		$scope.showMask = !$scope.showMask;
+	};
+
+	$scope.hideMask = function (e) {
+		$scope.showMask = false;
 	};
 
 }]);

@@ -58,7 +58,6 @@ index.controller('stylistDetailCtrl',
 			designer.commentLevel = commentLevel;
 			designer.avatar = picBasePath + designer.avatar;
 			$scope.designer = designer;
-			console.log(designer);
 		}
 	}, function (resp) {
 		alert('数据请求失败，请稍后再试！');
@@ -219,7 +218,7 @@ index.controller('stylistDetailCtrl',
 
 	// 作品详情
 	$scope.toWorkDetail = function (work) {
-		$location.path('stylist_work_detail/' + work.id);
+		$location.path('stylist_work_detail/' + work.id).search({name: work.name});
 	};
 
 	// 点击预约按钮
@@ -237,7 +236,6 @@ index.controller('stylistDetailCtrl',
 		}
 		$rootScope.serviceItems = serviceList;
 		if ($rootScope.dateIndex > 0 && $rootScope.timeIndex > 0) {
-			console.log($rootScope.dateIndex, $rootScope.timeIndex);
 			// 选择了时间，则跳转到预约确认的界面
 			$location.path('appoint_confirm/' + designerId);
 		}
@@ -259,8 +257,7 @@ index.controller('stylistDetailCtrl',
 
 	// 点击发型师生活中的图片
 	$scope.showLifeImg = function (life, img) {
-		console.log(life.imgArr.indexOf(img));
-		// console.log(life, img);
+		$location.path('stylist_life_pics').search({imgArr: JSON.stringify(life.imgArr), index: life.imgArr.indexOf(img)});
 	};
 
 }]);

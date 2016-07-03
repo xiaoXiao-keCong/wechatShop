@@ -13,17 +13,18 @@
 <div id="stylist">
 	<div class="top-nav">
 		<span ng-class="{'nav-item':true,'selected':showStore}" ng-click="getStoreInfo()">
-			门店查找<img src="../../assets/images/down.png" class="icon" ng-show="!showStore">
+			<span ng-bind="selectStoreName"></span>
+			<img src="../../assets/images/down.png" class="icon" ng-show="!showStore">
 			<img src="../../assets/images/down_h.png" class="icon" ng-show="showStore">
 			<ul class="city-item-container" ng-show="showStore">
 				<li class="city-item">
-					<span ng-class="{'item-text':true}">全部</span>
+					<span ng-class="{'item-text':true,'text-highlight':selectAllArea}" ng-click="selectCity('all', $event)">全部</span>
 				</li>
 				<li class="city-item" ng-repeat="area in areaList">
 					<span ng-bind="area.name" ng-class="{'item-text':true,'text-highlight':area.citySelected}" ng-click="selectCity(area, $event)"></span>
 					<ul class="store-item-container" ng-show="area.citySelected">
 						<li class="store-item">
-							<span ng-class="{'item-text':true}">全部</span>
+							<span ng-class="{'item-text':true,'text-highlight':area.selectAll}" ng-click="selectStore(area, $event, true)">全部</span>
 						</li>
 						<li class="store-item" ng-repeat="store in area.storelist">
 							<span ng-bind="store.name" ng-class="{'item-text':true,'text-highlight':store.selected}" ng-click="selectStore(store, $event)"></span>
@@ -33,31 +34,33 @@
 			</ul>
 		</span>
 		<span ng-class="{'nav-item':true,'selected':filterShow}" ng-click="showFilterItems()">
-			综合排序<img src="../../assets/images/down.png" class="icon" ng-show="!filterShow">
+			<span ng-bind="sortType"></span>
+			<img src="../../assets/images/down.png" class="icon" ng-show="!filterShow">
 			<img src="../../assets/images/down_h.png" class="icon" ng-show="filterShow">
 			<ul class="filter-container" ng-show="filterShow">
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterDefault}" ng-click="filter('default', $event)">综合排序</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterDefault}" ng-click="filter('default', $event, '综合排序')">综合排序</span>
 				</li>
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterMostReserve}" ng-click="filter('mostreserve', $event)">订单最多</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterMostReserve}" ng-click="filter('mostreserve', $event, '订单最多')">订单最多</span>
 				</li>
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterHighestScore}" ng-click="filter('highestscore', $event)">好评优先</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterHighestScore}" ng-click="filter('highestscore', $event, '好评优先')">好评优先</span>
 				</li>
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterNearest}" ng-click="filter('nearest', $event)">离我最近</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterNearest}" ng-click="filter('nearest', $event, '离我最近')">离我最近</span>
 				</li>
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterCheapest}" ng-click="filter('cheapest', $event)">价格最低</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterCheapest}" ng-click="filter('cheapest', $event, '价格最低')">价格最低</span>
 				</li>
 				<li class="filter-item">
-					<span ng-class="{'item-text':true,'text-highlight':filterExpensive}" ng-click="filter('expensive', $event)">价格最高</span>
+					<span ng-class="{'item-text':true,'text-highlight':filterExpensive}" ng-click="filter('expensive', $event, '价格最高')">价格最高</span>
 				</li>
 			</ul>
 		</span>
 		<span ng-class="{'nav-item':true,'selected':isShowSort}" ng-click="showSort()">
-			自主筛选<img src="../../assets/images/updown1.png" class="icon" ng-show="!isShowSort">
+			<span ng-bind="selfFilterName"></span>
+			<img src="../../assets/images/updown1.png" class="icon" ng-show="!isShowSort">
 			<img src="../../assets/images/updown1_h.png" class="icon" ng-show="isShowSort">
 		</span>
 	</div>

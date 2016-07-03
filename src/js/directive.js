@@ -287,7 +287,6 @@ index.directive('dateSelect', ['$timeout', function ($timeout) {
 		replace: true,
 		link: function (scope, element, attrs) {
 			scope.dateDeferred.promise.then(function (msg) {
-				console.log(msg);
 				scope.dateSwiper = new Swiper(element.get(0), {
 					direction: 'horizontal',
 					slidesPerView: 'auto',
@@ -344,8 +343,7 @@ index.directive('commonSwiper', ['$timeout', function ($timeout) {
 		link: function (scope, element, attrs) {
 			scope.commonSwiper = new Swiper(element.get(0), {
 				observer: true,
-				observerParents: true,
-				direction: 'vertical'
+				observerParents: true
 			});
 		}
 	};

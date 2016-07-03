@@ -255,6 +255,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 		.when('/use_msg', {
 			templateUrl: '../html/use_msg.html',
 		})
+		.when('/stylist_life_pics', {
+			templateUrl: '../html/stylist_life_pics.html',
+			controller: 'stylistLifePicsCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

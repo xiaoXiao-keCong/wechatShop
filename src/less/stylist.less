@@ -16,7 +16,7 @@
 		background-color: #fbf7fd;
 		color: #121212;
 		font-size: 0.346667rem;
-		.display-flex;
+		.flex;
 		justify-content: space-around;
 		align-items: center;
 		.selected {
@@ -32,6 +32,8 @@
 			width: 0.4rem;
 			height: 0.4rem;
 			margin-left: 0.106667rem;
+			position: relative;
+			top: -0.026667rem;
 		}
 		.city-item-container {
 			position: absolute;
@@ -265,13 +267,12 @@
 			padding: 0.266667rem 0;
 		}
 		.item {
-			height: 0.533333rem;
+			padding: 0.133333rem;
 			width: 2.453333rem;
 			border: 0.013333rem solid #3dbfd5;
 			margin-right: 0.933333rem;
 			display: inline-block;
 			text-align: center;
-			line-height: 0.533333rem;
 			margin-bottom: 0.266667rem;
 			overflow: hidden;
 			white-space: nowrap;
