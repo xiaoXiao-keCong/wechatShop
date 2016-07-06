@@ -263,6 +263,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/goods_detail_img.html',
 			controller: 'goodsDetailImgCtrl'
 		})
+		.when('/select_city', {
+			templateUrl: '../html/select_city.html',
+			controller: 'selectCityCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

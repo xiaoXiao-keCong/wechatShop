@@ -1,7 +1,7 @@
 <!-- 首页 -->
 <div class="title-bar">
     <span class="title-bar-left">
-        <span class="text">北京</span>
+        <span class="text ellipsis" ng-click="selectCity()" ng-bind="selectedCity"></span>
     </span>
     <span>ARTISAN HOUSE</span>
     <span class="title-bar-right">
@@ -19,7 +19,7 @@
     </div>
 	<div class="top-nav">
 		<span class="item" ng-click="toMore(5)">
-            <span><img src="../../assets/images/shishangfaxing.png"></span>      
+            <span><img src="../../assets/images/shishangfaxing.png"></span>     
             <span class="text">时尚发型</span>
         </span>
         <span class="item" ng-click="showPrice($event)">

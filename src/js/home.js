@@ -14,7 +14,7 @@ index.controller('homeCtrl',
     $scope.fashionHairList = [];
     // 是否显示过价目表
     var isShowPrice = false;
-
+    $scope.selectedCity = localStorage.getItem('cityName') || '城市';
 
     $scope.$on('flashSaleRepeatFinished', function () {
         $scope.flashSaleDeferred.resolve('succeed');
@@ -90,14 +90,7 @@ index.controller('homeCtrl',
 	// 明星发型师是否加载完毕的promise
 	$scope.designerDeferred = $q.defer();
 
-	// 获取所有城市
-	$http.post('/home/arealist.json', postCfg)
-	.success(function (data) {
-		console.log(data);
-	})
-	.error(function (data) {
-		alert('数据请求失败，请稍后再试！');
-	});
+	
 
 	// 首页轮播图
 	$http.post('/home/homead.json', {'cityid': 1}, postCfg)
@@ -343,6 +336,11 @@ index.controller('homeCtrl',
 	$scope.hideActivity = function () {
 		$scope.activityShow = false;
 		$scope.showMask = false;
+	};
+
+	// 跳转到选择城市页面
+	$scope.selectCity = function () {
+		$location.path('select_city');
 	};
 
 }]);

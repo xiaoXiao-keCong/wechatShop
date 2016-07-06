@@ -7,7 +7,6 @@ index.controller('activityCtrl',
 	// 获取所有活动
 	$http.post('/activity/getallactivity.json', postCfg)
 	.success(function (data) {
-		console.log(data);
 		if (1 === data.code) {
 			var activityList = data.data.activitylist;
 			for (var i =0, j = activityList.length; i < j; i++) {
