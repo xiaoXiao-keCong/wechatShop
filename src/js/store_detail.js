@@ -7,6 +7,8 @@ index.controller('storeDetailCtrl',
 	var storeId = $routeParams.store_id;
 	$scope.deferred = $q.defer();
 	$scope.activityDeferred = $q.defer();
+	$scope.designerList = [];
+	$scope.page = 1;
 
 	// 根据id获取门店信息
 	$http.post('/store/info.json', {storeid: storeId}, postCfg)
@@ -26,9 +28,8 @@ index.controller('storeDetailCtrl',
 	        for (var j = i; j < 5; j++) {
 	            store.starUrl.push({'path': starUrl2});
 	        }
-	        store.priceimgurl = picBasePath + priceimgurl;
+	        store.priceimgurl = picBasePath + store.priceimgurl;
 			$scope.store = store;
-			console.log(store);
 		}
 	})
 	.error(function (data) {
@@ -50,20 +51,43 @@ index.controller('storeDetailCtrl',
 		alert('数据请求失败，请稍后再试！');
 	});
 
-	// 根据id获取店内优秀发型师
-	$http.post('/store/designer.json', {storeid: storeId, page: 1}, postCfg)
-	.success(function (data) {
-		if (1 === data.code) {
-			var designerList = data.data.designerlist;
-			for (var i = 0, j = designerList.length; i < j; i++) {
-				designerList[i].avatar = picBasePath + designerList[i].avatar;	
-			}
-			$scope.designerList = designerList;
+	$scope.getDesignerList = getDesignerList;
+
+	function getDesignerList() {
+		// 根据id获取店内优秀发型师
+		if ($scope.loading) {
+			return;
 		}
-	})
-	.error(function (data) {
-		alert('数据请求失败，请稍后再试！');
-	});
+		$scope.loading = true;
+		var data = {
+			storeid: storeId,
+			page: $scope.page
+		};
+		$http.post('/store/designer.json', data, postCfg)
+		.success(function (data) {
+			if (1 === data.code) {
+				var designerList = data.data.designerlist;
+				if (designerList.length > 0) {
+					for (var i = 0, j = designerList.length; i < j; i++) {
+						designerList[i].avatar = picBasePath + designerList[i].avatar;
+						$scope.designerList.push(designerList[i]);
+					}
+					$scope.loading = false;
+					$scope.page += 1;
+				}
+				else {
+					$scope.loaded = true;
+				}
+				
+				// $scope.designerList = designerList;
+			}
+		})
+		.error(function (data) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
+
+	
 
 	// 接受门店图片加载完的广播
 	$scope.$on('ngRepeatFinished', function () {
@@ -106,6 +130,18 @@ index.controller('storeDetailCtrl',
 
 	$scope.toDesignerDetail = function (designer) {
 		$location.path('stylist_detail/' + designer.id);
+	};
+
+	// 显示价目表
+	// 显示价目表
+	$scope.showPrice = function (e) {
+		e.stopPropagation();
+		$scope.showMask = true;
+		
+	};
+
+	$scope.hideMask = function () {
+		$scope.showMask = false;
 	};
 
 }]);

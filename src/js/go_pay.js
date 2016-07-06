@@ -22,7 +22,6 @@ index.controller('goPayCtrl',
 			// 获取项目列表
 			$http.post('/user/payorder.json', postCfg)
 			.success(function (data) {
-				console.log(data);
 				if (1 === data.code) {
 					var serviceList = data.data.serviceonelist;
 					for (var i = 0; i < serviceList.length; i++) {
@@ -158,10 +157,9 @@ index.controller('goPayCtrl',
 		$http.post('/user/generateconsumedorder.json', data, postCfg)
 		.success(function (data) {
 			if (1 === data.code) {
-				console.log(data.data);
-				// alert('下单成功!');
 				// 跳转到支付页面
-				$location.path('pay_service').search({service: JSON.stringify(data.data)});
+				var orderId = data.data.id;
+				$location.path('pay_service/' + orderId);
 			}
 		})
 		.error(function (data) {

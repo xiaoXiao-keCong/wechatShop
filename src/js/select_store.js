@@ -32,7 +32,6 @@ index.controller('selectStoreCtrl',
         };
         $http.post('/store/list.json', data, postCfg)
         .success(function (data) {
-            console.log(data);
             if (1 === data.code) {
                 var starUrl1 = '../../assets/images/star_h.png',
                     starUrl2 = '../../assets/images/star.png',
@@ -90,7 +89,7 @@ index.controller('selectStoreCtrl',
                 }
             })
             .error(function (data) {
-                console.log(data);
+                alert('数据请求失败，请稍后再试！');
             });
         }
         
@@ -105,7 +104,6 @@ index.controller('selectStoreCtrl',
         $scope.areaFilter = area.name;
         var index = $scope.areaList.indexOf(area);
         if (index !== -1 && $scope.areaList[index].selected !== true) {
-            console.log(area);
             for (var i = 0; i < $scope.areaList.length; i++) {
                 $scope.areaList[i].selected = false;
             }
@@ -114,6 +112,7 @@ index.controller('selectStoreCtrl',
             $scope.loaded = false;
             $scope.loading = false;
             $scope.storeList = [];
+            getStoreList();
         }
     };
 

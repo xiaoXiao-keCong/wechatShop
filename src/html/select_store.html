@@ -41,10 +41,20 @@
 		<div infinite-scroll="getStoreList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
 			<div class="item-container">
 				<span class="grid-item" ng-repeat="store in storeList" ng-click="toSelectDesigner(store)">
-					<img ng-src="{{store.img2}}">
+					<img ng-src="{{store.img2}}" class="store-img">
+					<div class="store-info-mask">
+						<div class="store-name" ng-bind="store.name"></div>
+						<div class="store-address">
+							<img src="../../assets/images/location_4.png" class="common-icon">
+							<span ng-bind="store.location"></span>
+						</div>
+					</div>
 				</span>
 			</div>
-			<div ng-show="loading && !loaded" class="load">加载中...</div>
+			<div ng-hide="loaded" class="load">
+				<img src="../../assets/images/loading2.gif" class="common-icon">
+				正在加载...
+			</div>
             <div ng-show="loaded" class="load"></i>没有更多了</div>
 		</div>
 	</div>

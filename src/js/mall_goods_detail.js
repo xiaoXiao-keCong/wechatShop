@@ -229,9 +229,8 @@ index.controller('mallGoodsDetailCtrl',
 	// 进入商品详情
 $scope.goodsDetail = function (goods) {
         // $window.location.href = goods.detailimgurl;
-        console.log(goods);
         var url = picBasePath + goods.detailimgurl;
-        $location.path('goods_detail_img').search({url: url});;
+        $location.path('goods_detail_img').search({url: url});
     };
 
 }]);
