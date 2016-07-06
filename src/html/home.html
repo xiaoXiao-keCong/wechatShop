@@ -129,7 +129,7 @@
                 <img src="../../assets/images/loading2.gif" class="common-icon">
                 正在加载...
             </div>
-            <div ng-show="loaded" class="load"></i>没有更多了</div>
+            <div ng-show="loaded" class="load"></i>没有更多内容</div>
         </div>
     </div>
 </div>
@@ -166,7 +166,7 @@
     </span>
 </div>
 
-<div class="option" ng-if="showMask" forbid-scroll name="mask" ng-click="hideMask()">
+<div class="option" ng-if="showMask" name="mask" ng-click="hideMask()">
     <div class="price-container" ng-if="!activityShow" ng-click="forbidHide($event)">
         <img ng-src="{{priceImg}}">
         <img src="../../assets/images/cancel.png" class="cancel common-icon" ng-click="hideMask()">

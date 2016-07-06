@@ -29,32 +29,50 @@
 						</div>
 						<div class="order-detail">
 							<span class="left"><img ng-src="{{reserve.designer.imgurl}}"></span>
-							<span class="right whole-width">
+							<span class="right">
 								<div class="right-row flex-between whole-width">
 									<span class="name" ng-bind="reserve.designer.name"></span>
-									<span class="right-cell-right phone" ng-bind="reserve.designer.telephone"></span>
+									<span class="right-cell-right phone text-right" ng-bind="reserve.designer.telephone"></span>
 								</div>
 								<div class="right-row">
-									<span class="right-cell-left">项&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目:</span>
-									<span class="right-cell-right whole-width">
+									<span class="right-cell-left flex-between">
+											<span>项</span>
+											<span>目:</span>
+									</span>
+									<span class="right-cell-right">
 										<span ng-repeat="item in reserve.servicelist" class="whole-width flex-between">
 											<span ng-bind="item.name"></span>
 											<span class="item-time">
-												<span ng-bind="item.length * 30"></span>min
+												<span ng-bind="item.length"></span>min
 											</span>
 										</span>
 									</span>
 								</div>
 								<div class="right-row">
-									<span class="right-cell-left">服务时间:</span>
+									<span class="right-cell-left flex-between">
+										<span>服</span>
+										<span>务</span>
+										<span>时</span>
+										<span>间:</span>
+									</span>
 									<span class="right-cell-right" ng-bind="reserve.servicetime"></span>
 								</div>
 								<div class="right-row">
-									<span class="right-cell-left">服务门店:</span>
+									<span class="right-cell-left flex-between">
+										<span>服</span>
+										<span>务</span>
+										<span>门</span>
+										<span>店:</span>
+									</span>
 									<span class="right-cell-right" ng-bind="reserve.store.name"></span>
 								</div>
 								<div class="right-row">
-									<span class="right-cell-left">预约时间:</span>
+									<span class="right-cell-left flex-between">
+										<span>预</span>
+										<span>约</span>
+										<span>时</span>
+										<span>间:</span>
+									</span>
 									<span class="right-cell-right" ng-bind="reserve.duetime"></span>
 								</div>
 							</span>
@@ -268,7 +286,7 @@
 			</span>
 			<span ng-class="{'item': true, 'highlight': isServiceOrder}" ng-click="orderNav(2)">服务记录</span>
 			<span ng-class="{'item': true, 'highlight': isMallOrder}" ng-click="orderNav(3)">商城订单</span>
-			<span ng-class="{'item': true, 'highlight': isPointOrder}" ng-click="orderNav(4)">积分商城订单</span>
+			<!-- <span ng-class="{'item': true, 'highlight': isPointOrder}" ng-click="orderNav(4)">积分商城订单</span> -->
 		</div>
 	</div>
 </div>

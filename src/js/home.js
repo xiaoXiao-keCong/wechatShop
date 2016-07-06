@@ -308,7 +308,8 @@ index.controller('homeCtrl',
 		// 首页弹窗最新活动
 		$http.post('/home/newactivity.json', postCfg)
 		.success(function (data) {
-			if (1 === data.code) {
+			console.log(data);
+			if (1 === data.code && data.imgurl && data.imgurl !== '') {
 				sessionStorage.setItem('hasShowActivity', 'true');
 				$scope.showMask = true;
 				$scope.activityShow = true;

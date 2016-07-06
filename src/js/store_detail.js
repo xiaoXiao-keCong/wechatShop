@@ -13,6 +13,7 @@ index.controller('storeDetailCtrl',
 	// 根据id获取门店信息
 	$http.post('/store/info.json', {storeid: storeId}, postCfg)
 	.success(function (data) {
+		console.log(data);
 		if (1 === data.code) {
 			var store = data.data,
 				starUrl1 = '../../assets/images/star_h.png',
@@ -133,7 +134,6 @@ index.controller('storeDetailCtrl',
 	};
 
 	// 显示价目表
-	// 显示价目表
 	$scope.showPrice = function (e) {
 		e.stopPropagation();
 		$scope.showMask = true;
@@ -142,6 +142,10 @@ index.controller('storeDetailCtrl',
 
 	$scope.hideMask = function () {
 		$scope.showMask = false;
+	};
+
+	$scope.forbidHide = function (e) {
+		e.stopPropagation();
 	};
 
 }]);

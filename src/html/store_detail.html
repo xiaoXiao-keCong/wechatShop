@@ -41,7 +41,10 @@
                         <img src="../../assets/images/location.png" class="location-icon">
                         <span ng-bind="store.location"></span>
                     </span>
-                    <img src="../../assets/images/phone_2.png" class="common-icon" name="phone-icon">
+                    <a ng-href="tel:{{store.telephone}}">
+                        <img src="../../assets/images/phone_2.png" class="common-icon" name="phone-icon">
+                    </a>
+                    
                 </div>
             </div>
             <div id="store-activity">
@@ -87,13 +90,13 @@
                         <img src="../../assets/images/loading2.gif" class="common-icon">
                         正在加载...
                     </div>
-                    <div ng-show="loaded" class="load"></i>没有更多了</div>
+                    <div ng-show="loaded" class="load"></i>没有更多内容</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="option" ng-if="showMask" forbid-scroll name="mask" ng-click="hideMask()">
+<div class="option" ng-if="showMask" name="mask" ng-click="hideMask()">
     <div class="price-container" ng-click="forbidHide($event)">
         <img ng-src="{{store.priceimgurl}}">
         <img src="../../assets/images/cancel.png" class="cancel common-icon" ng-click="hideMask()">

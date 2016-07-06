@@ -143,9 +143,9 @@ index.controller('myCtrl',
 	};
 
 	// 点击积分跳转到积分商城
-	$scope.toPointMall = function () {
-		$location.path('point_mall');
-	};
+	// $scope.toPointMall = function () {
+	// 	$location.path('point_mall');
+	// };
 
 	// 点击余额跳转到我的余额
 	$scope.toBalance = function () {

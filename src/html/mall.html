@@ -5,8 +5,9 @@
 	    </span>
 	    <span>悦商城</span>
 	    <span class="title-bar-right">
-	        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="searchGoods()">
-	        <img src="../../assets/images/cart.png" class="cart-icon" ng-click="toCart()">
+		    <img src="../../assets/images/cart.png"  ng-click="toCart()">
+	        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="searchGoods()" class="cart-icon">
+	        
 	    </span>
 	</div>
 	<div advertise class="swiper-container advertise">
@@ -101,7 +102,7 @@
 			<span class="highlight">价格</span>
 		</span>
 	</div>
-	<div infinite-scroll="getGoods()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+	<div infinite-scroll="getGoods()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 		<div class="goods-container">
 			<span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
 				<span><img ng-src="{{item.imgurl}}" class="goods-img"></span>
@@ -115,7 +116,10 @@
 				</span>
 			</span>
 		</div>
-		<div ng-show="loading && !loaded" class="load">加载中...</div>
-        <div ng-show="loaded" class="load"></i>没有更多了</div>
+		<div ng-hide="loaded" class="load">
+			<img src="../../assets/images/loading2.gif" class="common-icon">
+            正在加载...
+		</div>
+        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 	</div>
 </div>

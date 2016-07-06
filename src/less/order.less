@@ -51,7 +51,9 @@
 			.order-detail {
 				.display-flex;
 				align-items: center;
+				justify-content: space-between;
 				.left {
+					margin-right: 0.666667rem;
 					img {
 						height: 2.666667rem;
 						width: 2.666667rem;
@@ -59,9 +61,10 @@
 					}
 				}
 				.right {
-					margin-left: 0.666667rem;
+					// padding-left: 0.666667rem;
 					color: #666666;
 					font-size: 0.346667rem;
+					flex: 1;
 					.right-row {
 						.display-flex;
 						margin-top: 0.32rem;
@@ -72,6 +75,7 @@
 						.right-cell-right {
 							padding-left: 0.2rem;
 							.flex-column;
+							flex: 1;
 						}
 						.name {
 
