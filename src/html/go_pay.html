@@ -41,15 +41,14 @@
     </div>
 </div>
 <div class="option" ng-if="showMask" forbid-scroll name="mask">
-    <div class="service-item-container">
+    <div class="service-item-container" ng-repeat="service in usefulServiceList" ng-show="service.clicking">
 		<div class="selected-img-container">
-			<img ng-src="{{selectedImg}}" class="selected-img">
+			<img ng-src="{{service.clickimgurl}}" class="selected-img">
 		</div>
-    	
-    	<div class="item-tab" ng-show="hasTab">
-    		<span ng-repeat="tab in tabs" ng-bind="tab.tabName" ng-click="selectTab(tab)" ng-class="{'text-highlight':tab.selected}"></span>
+    	<div class="item-tab" ng-show="service.hasTab">
+    		<span ng-repeat="tab in service.tabs" ng-bind="tab.tabName" ng-click="selectTab(service, tab)" ng-class="{'text-highlight':tab.selected}"></span>
     	</div>
-    	<div class="service-item" ng-repeat="item in serviceItemList">
+    	<div class="service-item" ng-repeat="item in service.serviceItemList">
     		<div class="left">
     			<img src="../../assets/images/common_unselected.png" ng-hide="item.selected" class="common-icon" ng-click="selectItem(item)">
     			<img src="../../assets/images/common_selected.png" ng-show="item.selected" class="common-icon" ng-click="selectItem(item)">
@@ -60,7 +59,7 @@
     			<span ng-bind="item.actualprice"></span>
     		</div>
     	</div>
-    	<div class="ok-btn" ng-click="confirmSelectItem()">
+    	<div class="ok-btn" ng-click="confirmSelectItem(service)">
     		<button>OK</button>
     	</div>
     	<img src="../../assets/images/cancel.png" class="cancel-icon" ng-click="hideMask()">

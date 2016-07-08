@@ -284,6 +284,7 @@ index.controller('homeCtrl',
 
 		if (!sessionStorage.user) {
 			$location.path('login');
+			return;
 		}
 		var user = JSON.parse(sessionStorage.user);
 		if (user.nickname === '') {

@@ -7,7 +7,7 @@
 </div>
 <div id="stylist">
 	<div class="grid-container">
-		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+		<div infinite-scroll="getDesignerInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 			<div class="item-container">
 				<div class="item" ng-repeat="designer in designerList" ng-click="selectDesigner(designer)">
 					<img ng-src="{{designer.imgurl}}">
@@ -22,8 +22,11 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show="loading && !loaded" class="load">加载中...</div>
-            <div ng-show="loaded" class="load"></i>没有更多了</div>
+			<div ng-hide="loaded" class="load">
+				<img src="../../assets/images/loading2.gif" class="common-icon">
+				正在加载...
+			</div>
+            <div ng-show="loaded" class="load"></i>没有更多内容</div>
 		</div>
 	</div>
 </div>
