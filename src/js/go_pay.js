@@ -9,7 +9,7 @@ index.controller('goPayCtrl',
 	$scope.tabs = [];
 	$scope.selectedItemId = [];
 	$scope.usefulServiceList = [];
-	// $scope.price = '请先选择项目';
+	$scope.price = 0;
 
 	(function init() {
 		if ($rootScope.designer) {
@@ -188,28 +188,16 @@ index.controller('goPayCtrl',
 		};
 		$http.post('/user/getserviceitem.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (1 === data.code) {
 				var itemData = data.data,
 				    tab = itemData.tab;
 				if (1 === tab.length && tab[0] === 'serviceitem') {
 					// 此时没有tab选项，直接显示第三级的项目
-					// $scope.hasTab = false;
 					var serviceItemList = itemData.serviceitem;
-					// $scope.serviceItemList = serviceItemList;
 					service.hasTab = false;
 					service.serviceItemList = serviceItemList;
 				}
 				else {
-					// 显示tab并且显示每一个tab中对应的项目
-					// $scope.hasTab = true;
-					// $scope.tabs = [];
-					// $scope.itemData = itemData;
-					// for (var i = 0; i < tab.length; i++) {
-					// 	$scope.tabs.push({tabName: tab[i], selected: false});
-					// }
-					// $scope.tabs[0].selected = true;
-					// $scope.serviceItemList = $scope.itemData[tab[0]];
 					service.hasTab = true;
 					service.tabs = [];
 					service.itemData = itemData;
@@ -217,6 +205,7 @@ index.controller('goPayCtrl',
 					    service.tabs.push({tabName: tab[i], selected: false});
 					}
 					service.tabs[0].selected = true;
+					service.curTab = tab[0];
 					service.serviceItemList = service.itemData[tab[0]];
 				}
 			}
@@ -225,51 +214,6 @@ index.controller('goPayCtrl',
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
-
-	// 点击一级服务项目，请求子服务项目
-	// $scope.showService = function (service) {
-	// 	console.log(service);
-	// 	if (!hasDesigner) {
-	// 		alert('请选择发型师!');
-	// 		return;
-	// 	}
-	// 	if (service.disable === 1) {
-	// 		return;
-	// 	}
-	// 	$scope.showMask = true;
-	// 	$scope.selectedImg = service.clickimgurl;
-	// 	var data = {
-	// 		serviceoneid: service.id,
-	// 		designerid: $scope.designer.id
-	// 	};
-	// 	$http.post('/user/getserviceitem.json', data, postCfg)
-	// 	.success(function (data) {
-	// 		if (1 === data.code) {
-	// 			var itemData = data.data,
-	// 			    tab = itemData.tab;
-	// 			if (1 === tab.length && tab[0] === 'serviceitem') {
-	// 				// 此时没有tab选项，直接显示第三级的项目
-	// 				$scope.hasTab = false;
-	// 				var serviceItemList = itemData.serviceitem;
-	// 				$scope.serviceItemList = serviceItemList;
-	// 			}
-	// 			else {
-	// 				// 显示tab并且显示每一个tab中对应的项目
-	// 				$scope.hasTab = true;
-	// 				$scope.tabs = [];
-	// 				$scope.itemData = itemData;
-	// 				for (var i = 0; i < tab.length; i++) {
-	// 					$scope.tabs.push({tabName: tab[i], selected: false});
-	// 				}
-	// 				$scope.tabs[0].selected = true;
-	// 				$scope.serviceItemList = $scope.itemData[tab[0]];
-	// 			}
-	// 		}
-	// 	})
-	// 	.error(function (data) {
-	// 		alert('数据请求失败，请稍后再试！');
-	// 	});
-	// };
 
 	$scope.showService = function (service) {
 		if (!hasDesigner) {
@@ -305,26 +249,31 @@ index.controller('goPayCtrl',
 			service.tabs[i].selected = false;
 		}
 		tab.selected = true;
+		service.curTab = tab.tabName;
 		service.serviceItemList = service.itemData[tab.tabName];
+		console.log(service);
 	};
 
 	// 确认选中项目
 	$scope.confirmSelectItem = function (service) {
-		// var selectFlag = false;
-		
-		// for (var i = 0; i < $scope.serviceItemList.length; i++) {
-		// 	if ($scope.serviceItemList[i].selected) {
-		// 		$scope.selectedItemId.push($scope.serviceItemList[i].id);
-		// 		selectFlag = true;
-		// 	}
-		// }
-		// if (!selectFlag) {
-		// 	alert('请选择项目!');
-		// 	return;
-		// }
-		console.log(service);
-		var selectFlag = false;
-		for (var i = 0; i < service.serviceItemList.length; i++) {
+		var selectFlag = false,
+		    itemData = service.itemData,
+		    i, j, tabs;
+		if (service.hasTab) {
+			tabs = service.itemData.tab;
+			for (i = 0; i < tabs.length; i++) {
+				if (tabs[i] == service.curTab) {
+					continue;
+				}
+				for (j = 0; j < itemData[tabs[i]].length; j++) {
+					itemData[tabs[i]][j].selected = false;
+					if ($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id) != -1) {
+						$scope.selectedItemId.splice($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id), 1);
+					}
+				}
+			}
+		}
+		for (i = 0; i < service.serviceItemList.length; i++) {
 			if (service.serviceItemList[i].selected) {
 				service.hasItemSelected = true;
 				selectFlag = true;
@@ -346,6 +295,10 @@ index.controller('goPayCtrl',
 
 	// 计算总计金额
 	function getConsumerSumPrice() {
+		if (0 === $scope.selectedItemId.length) {
+			$scope.price = 0;
+			return;
+		}
 		var data = {
 			designerservicethreeid: $scope.selectedItemId,
 			discountflag: $scope.discountFlag,
