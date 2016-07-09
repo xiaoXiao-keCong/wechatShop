@@ -17,8 +17,7 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$root
         };
         var loginPromise = $http.post('/user/login.json', data, postCfg);
         loginPromise.then(function (resp) {
-            
-            if (1 === resp.data.code) {
+            if (1 === resp.data.code || 3 === resp.data.code) {
                 // 存储用户信息到sessionStorage
                 var user = resp.data.data;
                 sessionStorage.setItem('user', JSON.stringify(user));
@@ -31,7 +30,7 @@ index.controller('loginCtrl', ['$scope', '$http', '$window', '$location', '$root
                     $window.history.back();
                 });
             }
-            else {
+            else if (0 === resp.data.code) {
                 alert(resp.data.reason);
             }
         }, function (resp) {

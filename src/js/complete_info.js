@@ -10,9 +10,11 @@ index.controller('completeInfoCtrl',
 			// 修改信息，不是完善信息
 			$scope.modify = true;
 			var user = JSON.parse(sessionStorage.user);
-			$scope.avatar = picBasePath + user.imgurl;
+			if (user.imgurl != '') {
+				$scope.avatar = picBasePath + user.imgurl;
+			}
 			$scope.nickname = user.nickname;
-			$scope.sexFlag = parseInt(user.sexflag);
+			$scope.sexFlag = parseInt(user.sexflag) === 2 ? 0 : parseInt(user.sexflag);
 			$scope.birthday = new Date(user.birthday);
 		}
 		else {
@@ -37,6 +39,7 @@ index.controller('completeInfoCtrl',
 			sexflag: $scope.sexFlag,
 			birthday: $scope.birthday
 		};
+		console.log(data);
 		Upload.upload({
 			url: '/user/edit.json',
 			data: data

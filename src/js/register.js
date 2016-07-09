@@ -2,8 +2,8 @@
  * Created by hugotan on 2016/4/9.
  */
 index.controller('registerCtrl',
-    ['$scope', '$http', '$window', '$interval',
-    function ($scope, $http, $window, $interval) {
+    ['$scope', '$http', '$window', '$interval', '$location',
+    function ($scope, $http, $window, $interval, $location) {
     
     var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
     var codeRe = /^\d{4}$/;
@@ -87,6 +87,7 @@ index.controller('registerCtrl',
     	registerPromise.then(function (resp) {
     		if (1 === resp.data.code) {
     			alert('注册成功');
+                sessionStorage.setItem('user', JSON.stringify(resp.data.data));
     			// 跳转到完善信息界面
     			$location.path('complete_info').replace();
     		}

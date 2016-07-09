@@ -10,7 +10,6 @@ index.controller('payRechargeCtrl',['$scope', '$http', '$location',
 	$scope.recommendBy = order.recommendBy;
 	$scope.time = order.time;
 	$scope.price = order.price;
-
-	
+		
 
 }]);

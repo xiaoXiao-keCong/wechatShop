@@ -48,18 +48,23 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
     	};
     	$http.post('/user/quicklogin.json', data, postCfg)
     	.then(function (resp) {
-    		console.log(resp);
             if (1 === resp.data.code) {
                 // 登录成功，将登录用户信息写到sessionStorage
-                sessionStorage.setItem('user', JSON.stringify(resp.data.data));
-                alert('登录成功，即将返回首页！');
-                $location.path('/');
+                var user = resp.data.data;
+                sessionStorage.setItem('user', JSON.stringify(user));
+                if (user.nickname === '') {
+                    // 昵称为空，跳转到完善信息页面
+                    $location.path('complete_info').search({type: 'modify'}).replace();
+                    return;
+                }
+                $timeout(function () {
+                    $window.history.back();
+                });
             }
             else if (0 === resp.data.code) {
                 alert(resp.data.reason);
             }
     	}, function (resp) {
-    		console.log(resp);
             alert('数据请求失败，请稍后再试！');
     	});
     };

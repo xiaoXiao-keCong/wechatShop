@@ -86,8 +86,9 @@ index.controller('payGoodsCtrl',
 			}
 			else if (1 === data.code) {
 				alert('支付成功！');
+				$location.path('order').search({});
 				// 跳转到支付成功界面
-				$location.path('change_tip').search({type: 'pay', orderId: orderId, origin: origin}).replace();
+				// $location.path('change_tip').search({type: 'pay', orderId: orderId, origin: origin}).replace();
 			}
 		})
 		.error(function (data) {
