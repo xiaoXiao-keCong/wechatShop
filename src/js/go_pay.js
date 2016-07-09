@@ -8,6 +8,7 @@ index.controller('goPayCtrl',
 	var hasDesigner = false;
 	$scope.tabs = [];
 	$scope.selectedItemId = [];
+	$scope.selectedItem = [];
 	$scope.usefulServiceList = [];
 	$scope.price = 0;
 
@@ -216,6 +217,10 @@ index.controller('goPayCtrl',
 	}
 
 	$scope.showService = function (service) {
+		console.log(service);
+		var i = 0, j = 0,
+		    itemData = service.itemData,
+		    itemList = [], tabs;
 		if (!hasDesigner) {
 			alert('请选择发型师!');
 			return;
@@ -223,8 +228,23 @@ index.controller('goPayCtrl',
 		if (service.disable === 1) {
 			return;
 		}
-		for (var i = 0; i < $scope.usefulServiceList.length; i++) {
+		for (i = 0; i < $scope.usefulServiceList.length; i++) {
 			$scope.usefulServiceList[i].clicking = false;
+		}
+		if (service.hasTab) {
+			tabs = service.itemData.tab;
+			for (i = 0; i < tabs.length; i++) {
+				for (j = 0; j < itemData[tabs[i]].length; j++) {
+					itemData[tabs[i]][j].selected =
+					    $scope.selectedItemId.indexOf(itemData[tabs[i]][j].id) != -1 ? true : false;
+				}
+			}
+		}
+		else {
+			for (i = 0; i < service.serviceItemList.length; i++) {
+				service.serviceItemList[i].selected =
+				    $scope.selectedItemId.indexOf(service.serviceItemList[i].id) != -1 ? true: false;
+			}
 		}
 		$scope.showMask = true;
 		service.clicking = true;
@@ -251,37 +271,57 @@ index.controller('goPayCtrl',
 		tab.selected = true;
 		service.curTab = tab.tabName;
 		service.serviceItemList = service.itemData[tab.tabName];
-		console.log(service);
 	};
 
 	// 确认选中项目
 	$scope.confirmSelectItem = function (service) {
+		console.log(service);
 		var selectFlag = false,
-		    itemData = service.itemData,
 		    i, j, tabs;
 		if (service.hasTab) {
 			tabs = service.itemData.tab;
+			var itemData = service.itemData
 			for (i = 0; i < tabs.length; i++) {
-				if (tabs[i] == service.curTab) {
-					continue;
-				}
 				for (j = 0; j < itemData[tabs[i]].length; j++) {
-					itemData[tabs[i]][j].selected = false;
-					if ($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id) != -1) {
-						$scope.selectedItemId.splice($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id), 1);
+					if (itemData[tabs[i]][j].selected) {
+						service.hasItemSelected = true;
+						selectFlag = true;
+						service.img = service.clickimgurl;
+						if ($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id) === -1) {
+							$scope.selectedItemId.push(itemData[tabs[i]][j].id);
+							$scope.selectedItem.push({
+								name: service.name + '-' + tabs[i] + '-' + itemData[tabs[i]][j].name,
+								price: itemData[tabs[i]][j].price
+							});
+						}
+					}
+					else if ($scope.selectedItemId.indexOf(itemData[tabs[i]][j].id) != -1) {
+						$scope.selectedItemId.splice(
+							$scope.selectedItemId.indexOf(itemData[tabs[i]][j].id), 1);
+						$scope.selectedItem.splice(
+							$scope.selectedItemId.indexOf(itemData[tabs[i]][j].id), 1);
 					}
 				}
 			}
 		}
-		for (i = 0; i < service.serviceItemList.length; i++) {
-			if (service.serviceItemList[i].selected) {
-				service.hasItemSelected = true;
-				selectFlag = true;
-				service.img = service.clickimgurl;
-				$scope.selectedItemId.push(service.serviceItemList[i].id);
-			}
-			else if ($scope.selectedItemId.indexOf(service.serviceItemList[i].id) != -1) {
-				$scope.selectedItemId.splice($scope.selectedItemId.indexOf(service.serviceItemList[i].id), 1);
+		else {
+			for (i = 0; i < service.serviceItemList.length; i++) {
+				if (service.serviceItemList[i].selected) {
+					service.hasItemSelected = true;
+					selectFlag = true;
+					service.img = service.clickimgurl;
+					$scope.selectedItemId.push(service.serviceItemList[i].id);
+					$scope.selectedItem.push({
+						name: service.name + '-' + service.serviceItemList[i].name,
+						price: service.serviceItemList[i].price
+					});
+				}
+				else if ($scope.selectedItemId.indexOf(service.serviceItemList[i].id) != -1) {
+					$scope.selectedItemId.splice(
+						$scope.selectedItemId.indexOf(service.serviceItemList[i].id), 1);
+					$scope.selectedItem.splice(
+						$scope.selectedItemId.indexOf(service.serviceItemList[i].id), 1);
+				}
 			}
 		}
 		if (!selectFlag) {

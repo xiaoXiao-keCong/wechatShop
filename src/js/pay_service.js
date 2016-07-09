@@ -9,6 +9,7 @@ index.controller('payServiceCtrl',
 	// 获取订单id
 	// $scope.service = JSON.parse($location.search().service);
 	var orderId = $routeParams.id;
+	$scope.orderId = orderId;
 	// 默认选中余额支付
 	$scope.balancePay = true;
 
@@ -38,8 +39,6 @@ index.controller('payServiceCtrl',
 		.error(function (data) {
 			alert('数据请求失败，请稍后再试！');
 		});
-		// 判断用户是否选择了优惠券
-		
 	})();
 
 	// 选择余额支付

@@ -17,6 +17,13 @@
             	<span ng-bind="service.name" class="service-name"></span>
             </div>
         </div>
+        <div class="selected-items-container">
+            <span>已选择项目</span>
+            <div class="selected-items" ng-repeat="item in selectedItem">
+                <span ng-bind="item.name"></span>
+                <span>价格:<span ng-bind="item.price"></span></span>
+            </div>
+        </div>
         <div class="price">
         	<span>总计金额：</span>
         	<span ng-bind="price"></span>
