@@ -34,7 +34,7 @@
 			商品清单
 		</div>
 		<div class="item-container">
-			<div class="item" ng-repeat="goods in order.goodslist">
+			<div class="item" ng-repeat="goods in order.goodslist" ng-click="toGoodsDetail(goods)">
 				<img ng-src="{{goods.imgurl}}" class="goods-icon">
 				<span class="goods-info">
 					<span class="intro">

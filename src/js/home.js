@@ -195,7 +195,7 @@ index.controller('homeCtrl',
 			alert('数据请求失败，请稍后再试！');
 		});
 	}
-	// getFashionHair();
+	getFashionHair();
 	$scope.getFashionHair = getFashionHair;
 	
 	// 时尚发型按类型排序

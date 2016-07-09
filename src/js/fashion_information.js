@@ -25,11 +25,12 @@ index.controller('fashionInformationCtrl',
 		// 时尚发型列表
 		$http.post('/home/fashionnews.json', {'page': $scope.page, sort: $scope.type}, postCfg)
 		.then(function (resp) {
+			console.log(resp);
 			if (1 === resp.data.code) {
 				var fashionInfoList = resp.data.data.fashionnewslist;
 				if (fashionInfoList.length > 0) {
 					for (var i = 0, j = fashionInfoList.length; i < j; i++) {
-						fashionInfoList[i].imgurl = picBasePath + fashionInfoList[i].imgurl;
+						fashionInfoList[i].bigimg = picBasePath + fashionInfoList[i].bigimg;
 						$scope.fashionInfoList.push(fashionInfoList[i]);
 					}
 					$scope.loading = false;

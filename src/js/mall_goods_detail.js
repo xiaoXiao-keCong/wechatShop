@@ -10,15 +10,18 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.deferred = $q.defer();
 	$scope.hotSaleDeferred = $q.defer();
 	$scope.hotSaleGoods = [];
-
 	$scope.hotSalePage = 1;
-
 	var goodsId = parseInt($routeParams.id);
 
 	(function init() {
+		// 判断是否为限时抢购的商品
+		if ($location.search().type && $location.search().type === 'flash') {
+			$scope.isFlash = true;
+		}
 		// 获取商品详情
 		$http.post('/shop/getgoodsbyid.json', {id: goodsId}, postCfg)
 		.then(function (resp) {
+			console.log(resp);
 			if (1 === resp.data.code) {
 				var goods = resp.data.data;
 				for (var i = 0, j = goods.imgarray.length; i < j; i++) {

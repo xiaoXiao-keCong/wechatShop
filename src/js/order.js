@@ -98,6 +98,7 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/myreserveorder.json', data, postCfg)
 		.success(function (data) {
+			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -155,8 +156,10 @@ index.controller('orderCtrl',
 				}
 				else if (1 === data.code) {
 					alert('订单取消成功!');
-					reserve.state = '已取消';
-					reserve.stateflag = 3;
+					$scope.reserveOrderList = [];
+					$scope.page = 1;
+					$scope.loading = false;
+					$scope.loaded = false;
 				}
 			})
 			.error(function (data) {
@@ -180,7 +183,6 @@ index.controller('orderCtrl',
 		};
 		$http.post('/user/myconsumerorder.json', data, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (-1 === data.code) {
 				$location.path('login');
 			}
@@ -222,7 +224,8 @@ index.controller('orderCtrl',
 	$scope.cancelConsumerOrder = function (service) {
 		var data = {
 			id: service.id,
-			page: 1
+			page: 1,
+			flag: $scope.serviceType
 		};
 		$http.post('/user/cancelconsumerorder.json', data, postCfg)
 		.success(function (data) {
@@ -234,8 +237,13 @@ index.controller('orderCtrl',
 			}
 			else if (1 === data.code) {
 				alert('订单取消成功！');
-				$scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].state = '已取消';
-				$scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].stateflag = 2;
+				// $scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].state = '已取消';
+				// $scope.consumerOrderList[$scope.consumerOrderList.indexOf(service)].stateflag = 2;
+				$scope.consumerOrderList = [];
+				$scope.page = 1;
+				$scope.loading = false;
+				$scope.loaded = false;
+				getServiceRecord();
 			}
 		})
 		.error(function (data) {
@@ -320,7 +328,8 @@ index.controller('orderCtrl',
 	};
 
 	// 删除商城订单
-	$scope.deleteGoodsOrder = function (goods) {
+	$scope.deleteGoodsOrder = function (goods, e) {
+		e.stopPropagation();
 		$http.post('/user/deletegoodsorder.json', {orderid: goods.id}, postCfg)
 		.success(function (data) {
 			if (-1 === data.code) {
@@ -357,8 +366,13 @@ index.controller('orderCtrl',
 			else if (1 === data.code) {
 				// 订单取消成功
 				alert('订单取消成功！');
-				$scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].state = '已取消';
-				$scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].stateflag = 2;
+				// $scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].state = '已取消';
+				// $scope.goodsOrderList[$scope.goodsOrderList.indexOf(goods)].stateflag = 2;
+				$scope.goodsOrderList = [];
+				$scope.loading = false;
+				$scope.loaded = false;
+				$scope.page = 1;
+				getMallOrder();
 			}
 		})
 		.error(function (data) {
@@ -418,6 +432,24 @@ index.controller('orderCtrl',
 
 	$scope.hideMask = function (e) {
 		$scope.showMask = false;
+	};
+
+	$scope.refresh = function () {
+		$scope.loading = false;
+		$scope.loaded = false;
+		$scope.page = 1;
+		if ($scope.isAppointOrder) {
+			$scope.reserveOrderList = [];
+			getAppointOrder();
+		}
+		else if ($scope.isServiceOrder) {
+			$scope.consumerOrderList = [];
+			getServiceRecord();
+		}
+		else {
+			$scope.goodsOrderList = [];
+			getMallOrder();
+		}
 	};
 
 }]);

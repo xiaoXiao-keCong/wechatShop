@@ -6,20 +6,11 @@
         <img src="../../assets/images/back.png">
     </span>
     <span ng-bind="designer.name"></span>
-    <!-- <span class="title-bar-right">
-        <img src="../../assets/images/share.png">
-    </span> -->
 </div>
 <div class="head">
 	<span><img ng-src="{{designer.avatar}}" class="head-pic"></span>
-	<!-- <span class="name" ng-bind="designer.name"></span> -->
-	<!-- <span class="intro" ng-bind="designer.describe"></span> -->
 	<span class="intro" ng-bind="designer.simpleinfo"></span>
 	<span class="operation">
-		<!-- <span class="btn-operation" ng-click="keepDesigner(designer)">
-			<span ng-if="!designer.iskeep">+关注</span>
-			<span ng-if="designer.iskeep">取消关注</span>
-		</span> -->
 		<span class="btn-operation" ng-click="designerIntro(designer)">
 			<span>更多介绍</span>
 		</span>
@@ -40,9 +31,6 @@
 			</span>
 		</span>
 		<span class="item">
-			<!-- <span>
-				<img src="../../assets/images/zan.png" class="zan-icon">
-			</span> -->
 			<span class="glyphicon glyphicon-heart-empty praise-icon" 
 			ng-if="!designer.iskeep" ng-click="keepDesigner(designer)"></span>
 			<span class="glyphicon glyphicon-heart praise-icon praised" 
@@ -134,8 +122,11 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="lifeLoading && !lifeLoaded" class="load">加载中...</div>
-    <div ng-show="lifeLoaded" class="load"></i>没有更多了</div>
+	<div ng-hide="lifeLoaded" class="load">
+		<img src="../../assets/images/loading2.gif" class="common-icon">
+        正在加载...
+	</div>
+    <div ng-show="lifeLoaded" class="load"></i>没有更多内容</div>
 </div>
 <!-- 发型师作品 -->
 <div class="stylist-work-container" ng-if="work">
@@ -149,8 +140,11 @@
 				</div>
 			</span>
 		</div>
-		<div ng-show="workLoading && !workLoaded" class="load">正在加载...</div>
-	    <div ng-show="workLoaded" class="load"></i>没有更多了</div>	
+		<div ng-hide="workLoaded" class="load">
+			<img src="../../assets/images/loading2.gif" class="common-icon">
+            正在加载...
+		</div>
+	    <div ng-show="workLoaded" class="load"></i>没有更多内容</div>	
 	</div>
 </div>
 </div>

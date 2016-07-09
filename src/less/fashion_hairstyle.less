@@ -34,4 +34,39 @@
 			margin-left: 0.266667rem;
 		}
 	}
+	.item-container {
+		.flex-column;
+		justify-content: center;
+		align-items: center;
+		padding-top: 0.266667rem;
+		background-color: #ffffff;
+		.grid-item:not(:last-child) {
+			margin-bottom: 0.266667rem;
+			position: relative;
+		}
+		.grid-item {
+			margin-bottom: 0.266667rem;
+			position: relative;
+			.store-img {
+				height: auto;
+				width: 9.466667rem;
+				border-radius: 0.133333rem;
+			}
+			.store-info-mask {
+				position: absolute;
+				background: rgba(0, 0, 0, 0.1);
+				height: 100%;
+				width: 100%;
+				top: 0;
+				left: 0;
+				border-radius: 0.133333rem;
+				.flex-center;
+				.store-name {
+					font-size: 0.48rem;
+					color: #f6f9f9;
+					text-align: center;
+				}
+			}
+		}
+	}
 }

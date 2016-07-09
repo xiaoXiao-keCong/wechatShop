@@ -7,6 +7,9 @@
 			    <img src="../../assets/images/down_2.png" class="common-icon">
 			</span>
 		</span>
+		<span class="title-bar-right">
+		    <span class="glyphicon glyphicon-refresh refresh-icon" ng-click="refresh()"></span>
+	    </span>
 	</div>
 	<div id="order">
 		<div ng-if="isAppointOrder">
@@ -28,7 +31,9 @@
 							<span class="order-state" ng-bind="reserve.state"></span>
 						</div>
 						<div class="order-detail">
-							<span class="left"><img ng-src="{{reserve.designer.imgurl}}"></span>
+							<span class="left" ng-style="{'background-image': 'url({{reserve.designer.imgurl}})'}">
+								<!-- <img ng-src="{{reserve.designer.imgurl}}"> -->
+							</span>
 							<span class="right">
 								<div class="right-row flex-between whole-width">
 									<span class="name" ng-bind="reserve.designer.name"></span>
@@ -89,8 +94,11 @@
 						</div>
 					</div>
 				</div>
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
-		        <div ng-show="loaded" class="load"></i>没有更多了</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+		            正在加载...
+				</div>
+		        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 			</div>
 		</div>
 		<!-- 服务记录 -->
@@ -117,7 +125,7 @@
 							</span>
 						</div>
 						<div class="order-info">
-							<img ng-src="{{service.designer.imgurl}}" class="record-icon">
+							<span ng-style="{'background-image': 'url({{service.designer.imgurl}})'}" class="record-icon"></span>
 							<span class="text-info">
 								<span class="user-info">
 									<span class="name" ng-bind="service.designer.name"></span>
@@ -155,8 +163,11 @@
 						</div>
 					</div>
 				</div>
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
-		        <div ng-show="loaded" class="load"></i>没有更多了</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+		            正在加载...
+				</div>
+		        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 			</div>
 		</div>
 		<!-- 商城订单 -->
@@ -179,7 +190,7 @@
 							<span>订单号：<span ng-bind="goods.id"></span></span>
 							<span class="right">
 								<span ng-bind="goods.state"></span>
-								<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods)">
+								<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods, $event)">
 							</span>
 						</div>
 						<div class="pic-panel" ng-click="toOrderDetail(goods)">
@@ -198,11 +209,14 @@
 						</div>
 					</div>
 				</div>
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
-		        <div ng-show="loaded" class="load"></i>没有更多了</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+		            正在加载...
+				</div>
+		        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 			</div>
 		</div>
-		<!-- 商城订单 -->
+		<!-- 积分商城订单 -->
 		<div ng-if="isPointOrder">
 			<div class="top-nav">
 				<span ng-class="{'item':true,'selected':mallFlag==2}" ng-click="setMallFlag(2)">
@@ -222,7 +236,7 @@
 							<span>订单号：<span ng-bind="goods.id"></span></span>
 							<span class="right">
 								<span ng-bind="goods.state"></span>
-								<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods)">
+								<img src="../../assets/images/rubbish.png" class="common-icon" ng-if="goods.stateflag==2||goods.stateflag==4||goods.stateflag==6||goods.stateflag==7" ng-click="deleteGoodsOrder(goods, $event)">
 							</span>
 						</div>
 						<div class="pic-panel" ng-click="toOrderDetail(goods)">
@@ -241,8 +255,11 @@
 						</div>
 					</div>
 				</div>
-				<div ng-show="loading && !loaded" class="load">加载中...</div>
-		        <div ng-show="loaded" class="load"></i>没有更多了</div>
+				<div ng-hide="loaded" class="load">
+					<img src="../../assets/images/loading2.gif" class="common-icon">
+		            正在加载...
+				</div>
+		        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 			</div>
 		</div>
 	</div>

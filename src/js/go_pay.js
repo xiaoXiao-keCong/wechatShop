@@ -280,7 +280,7 @@ index.controller('goPayCtrl',
 		    i, j, tabs;
 		if (service.hasTab) {
 			tabs = service.itemData.tab;
-			var itemData = service.itemData
+			var itemData = service.itemData;
 			for (i = 0; i < tabs.length; i++) {
 				for (j = 0; j < itemData[tabs[i]].length; j++) {
 					if (itemData[tabs[i]][j].selected) {

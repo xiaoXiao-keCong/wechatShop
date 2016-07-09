@@ -28,9 +28,10 @@
 			</span>
 			<span class="item price">
 				<span class="highlight">￥<span ng-bind="goods.realprice"></span></span>
-				<span>会员价：<span class="highlight">￥<span ng-bind="goods.vipprice"></span></span></span>
+				<span ng-if="!isFlash">会员价：<span class="highlight">￥<span ng-bind="goods.vipprice"></span></span></span>
+				<del ng-if="isFlash">￥<span ng-bind="goods.originalprice"></span></del>
 			</span>
-			<del class="item original-price">
+			<del class="item original-price" ng-if="!isFlash">
 				￥<span ng-bind="goods.originalprice"></span>
 			</del>
 			<span class="item rate">

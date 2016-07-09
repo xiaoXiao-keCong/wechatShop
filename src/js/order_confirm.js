@@ -120,6 +120,8 @@ index.controller('orderConfirmCtrl',
 			    break;
 			case 2:
 				$scope.type = 'score';
+				// 跳转去选择门店
+				$location.path('select_store');
 				break;
 		}
 	};

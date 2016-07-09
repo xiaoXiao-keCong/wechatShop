@@ -24,16 +24,15 @@
 		</span>
 	</div>
 	<div class="item-container">
-		<!-- <img src="../../assets/images/more.png" class="more-icon" ng-click="moreFlashSale()"> -->
 		<div class="title">
 			<span class="cn">限时抢购</span>
 			<span class="en">FLASH SALE</span>
-			<span class=time-tips>
-				<span>每日</span>
+			<span class="time-tips" ng-bind="flashTips">
+				<!-- <span>每日</span>
 				<span class="time" ng-bind="limitStartTime"></span>
 				<span>开始-</span>
 				<span class="time" ng-bind="limitEndTime"></span>
-				<span>截止</span>
+				<span>截止</span> -->
 			</span>
 		</div>
 		<div class="swiper-container flash-sale-content" flashsale>
@@ -110,8 +109,10 @@
 				<span class="goods-info">
 					<span>￥<span ng-bind="item.realprice"></span></span>
 					<span class="praise" ng-click="praise(item, $event)">
-						<span><img src="../../assets/images/zan.png"></span>
-						<span ng-bind="item.praisenum"></span>
+						<!-- <span><img src="../../assets/images/zan.png"></span> -->
+						<span class="glyphicon glyphicon-heart-empty" ng-if="!item.iskeep" name="praise-icon"></span>
+						<span class="glyphicon glyphicon-heart highlight" ng-if="item.iskeep" name="praise-icon"></span>
+						<span ng-bind="item.praisenum" name="praise-num"></span>
 					</span>
 				</span>
 			</span>

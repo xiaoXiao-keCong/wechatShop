@@ -58,6 +58,7 @@ index.controller('stylistDetailCtrl',
 			designer.commentLevel = commentLevel;
 			designer.avatar = picBasePath + designer.avatar;
 			$scope.designer = designer;
+			console.log(designer);
 		}
 	}, function (resp) {
 		alert('数据请求失败，请稍后再试！');
@@ -199,6 +200,12 @@ index.controller('stylistDetailCtrl',
 			}
 			else if (1 === data.code) {
 				$scope.designer.iskeep = !$scope.designer.iskeep;
+				if ($scope.designer.iskeep) {
+					$scope.designer.praisenum++;
+				}
+				else {
+					$scope.designer.praisenum--;
+				}
 			}
 		})
 		.error(function (data) {

@@ -377,4 +377,12 @@ index.controller('stylistCtrl',
 		$scope.isShowSort = false;
 		$scope.showMask = false;
 	};
+
+	$scope.refresh = function () {
+		$scope.page = 1;
+		$scope.designerList = [];
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerInfo();
+	};
 }]);

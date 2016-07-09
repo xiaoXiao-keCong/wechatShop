@@ -10,7 +10,7 @@
 				<span class="order-num">订单号：<span ng-bind="orderId"></span></span>
 			</div>
 			<div class="order-info">
-				<img ng-src="{{service.designer.imgurl}}" class="record-icon">
+				<span ng-style="{'background-image': 'url({{service.designer.imgurl}})'}" class="record-icon"></span>
 				<span class="text-info">
 					<span class="user-info">
 						<span class="name" ng-bind="service.designer.name"></span>

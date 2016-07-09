@@ -80,4 +80,30 @@ index.controller('menuDetailCtrl',
         $location.path('mall_goods_detail/' + goods.id).search({});
     };
 
+    // 点赞商品
+    $scope.praise = function (goods, e) {
+        e.stopPropagation();
+        var url = goods.iskeep ? '/user/unkeepgoods.json' : '/user/keepgoods.json';
+        $http.post(url, {goodsid: goods.id}, postCfg)
+        .success(function (data) {
+            if (-1 === data.code) {
+                $location.path('login').search({});
+            }
+            else if (1 === data.code) {
+                // $scope.goods.iskeep = index === 1 ? true : false;
+                if (!goods.iskeep) {
+                    goods.praisenum++;
+                    goods.iskeep = true;
+                }
+                else {
+                    goods.praisenum--;
+                    goods.iskeep = false;
+                }
+            }
+        })
+        .error(function (data) {
+            alert('数据请求失败，请稍后再试！');
+        });
+    };
+
 }]);

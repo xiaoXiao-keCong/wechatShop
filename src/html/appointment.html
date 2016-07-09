@@ -17,7 +17,7 @@
 	<div class="option-container">
 		<div class="tips">
 			<span class="title">服务项目</span>
-			<span>
+			<span id="item-str">
 				<span ng-repeat="item in selectedItems" ng-bind="item.name">
 				</span>
 			</span>
@@ -52,6 +52,7 @@
 		    </div>
 		    <div class="swiper-container" time id="time-select">
 		        <div class="swiper-wrapper">
+		        	<div class="swiper-slide">不限</div>
 		            <div class="swiper-slide">10:00</div>
 		            <div class="swiper-slide">10:30</div>
 		            <div class="swiper-slide">11:00</div>
@@ -100,6 +101,7 @@
 		</div>
 		<div class="swiper-container select-only" time-select id="time-select-only">
 	        <div class="swiper-wrapper">
+	        	<div class="swiper-slide">不限</div>
 	            <div class="swiper-slide">10:00</div>
 	            <div class="swiper-slide">10:30</div>
 	            <div class="swiper-slide">11:00</div>
@@ -146,6 +148,9 @@
 </div>
 <div class="title-bar">
     <span>一键预约</span>
+    <span class="title-bar-right">
+	    <span class="glyphicon glyphicon-refresh refresh-icon" ng-click="refresh()"></span>
+    </span>
 </div>
 <div id="appointment">
 	<div class="top-nav">
@@ -162,7 +167,7 @@
 			<span><img src="../../assets/images/down_2.png" class="icon" ng-click="itemSelect()"></span>
 		</span>
 	</div>
-	<div infinite-scroll="getDesignerList()" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+	<div infinite-scroll="getDesignerList()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 		<div class="list-item" ng-repeat="designer in designerList" ng-click="toDetail(designer)">
 			<div class="content">
 				<span class="headpic">
@@ -193,8 +198,11 @@
 				</span>
 			</div>
 		</div>
-		<div ng-show="loading && !loaded" class="load">加载中...</div>
-        <div ng-show="loaded" class="load"></i>没有更多了</div>
+		<div ng-hide="loaded" class="load">
+			<img src="../../assets/images/loading2.gif" class="common-icon">
+            正在加载...
+		</div>
+        <div ng-show="loaded" class="load"></i>没有更多内容</div>
 	</div>
 </div>
 <div class="bottom-nav">

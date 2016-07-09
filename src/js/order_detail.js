@@ -9,13 +9,15 @@ index.controller('orderDetailCtrl',
 	// 获取订单详情
 	$http.post('/user/goodsorderdetail.json', {id: orderId}, postCfg)
 	.success(function (data) {
-		console.log(data);
 		if (1 === data.code) {
 			var order = data.data;
 			for (var i = 0; i < order.goodslist.length; i++) {
 				order.goodslist[i].imgurl = picBasePath + order.goodslist[i].imgurl;
 			}
 			$scope.order = order;
+		}
+		else if (-1 === data.code) {
+			$location.path('login');
 		}
 	})
 	.error(function (data) {
@@ -29,7 +31,6 @@ index.controller('orderDetailCtrl',
 
 	// 去评论商品订单
 	$scope.toRemarkGoods = function (order) {
-		console.log(order);
 		$location.path('order_comment/' + order.id);
 	};
 
@@ -37,7 +38,6 @@ index.controller('orderDetailCtrl',
 	$scope.confirmReceipt = function (order) {
 		$http.post('/user/confirmreceipt.json', {orderid: order.id}, postCfg)
 		.success(function (data) {
-			console.log(data);
 			if (1 === data.code) {
 				alert('确认收货成功！');
 			}
@@ -58,7 +58,6 @@ index.controller('orderDetailCtrl',
 
 	// 取消商城订单
 	$scope.cancelGoodsOrder = function (goods) {
-		console.log(goods);
 		var data = {
 			id: goods.id,
 			flag: 2,
@@ -98,5 +97,9 @@ index.controller('orderDetailCtrl',
 		.error(function (data) {
 			alert('数据请求失败，请稍后再试！');
 		});
+	};
+
+	$scope.toGoodsDetail = function (goods) {
+		$location.path('mall_goods_detail/' + goods.id).search({});
 	};
 }]);

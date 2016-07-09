@@ -5,7 +5,7 @@ index.controller('appointmentCtrl',
 	['$scope', '$http', '$window', '$location', '$q', '$rootScope',
 	function ($scope, $http, $window, $location, $q, $rootScope) {
 
-	$scope.showMask = true;
+	
 	$scope.selectedItems = [{}, {}, {}, {}, {}, {}];
 	$scope.jianfa = false;
 	$scope.ranfa = false;
@@ -33,6 +33,16 @@ index.controller('appointmentCtrl',
         starUrl2 = '../../assets/images/star.png';
 
 	$scope.page = 1;
+
+	(function init() {
+		if (sessionStorage.getItem('hasShowAppoint')) {
+			$scope.showMask = false;
+		}
+		else {
+			sessionStorage.setItem('hasShowAppoint', 'true');
+			$scope.showMask = true;
+		}
+	})();
 
 	function getDesignerList() {
 		if ($scope.loading) {
@@ -80,13 +90,31 @@ index.controller('appointmentCtrl',
 
 	// 智能推荐
 	$scope.recommend = function () {
-		var day = $('#date-select .swiper-slide').index($('#date-select .swiper-slide-active')) + 1,
-		    time = $('#time-select .swiper-slide').index($('#time-select .swiper-slide-active')) + 1;
+		var day = $('#date-select .swiper-slide')
+		    .index($('#date-select .swiper-slide-active')),
+		    time = $('#time-select .swiper-slide')
+		        .index($('#time-select .swiper-slide-active')),
+		    selectedItemArr = [], i = 0;
 		$scope.showMask = false;
         $scope.dateIndex = day;
         $scope.timeIndex = time;
         $scope.day = $('#date-select .swiper-slide-active').text();
 		$scope.time = $('#time-select .swiper-slide-active').text();
+		console.log($scope.selectedItems);
+		for (i = 0; i < $scope.selectedItems.length; i++) {
+			if ($scope.selectedItems[i].name &&
+				$scope.selectedItems[i].name.length > 0) {
+				selectedItemArr.push($scope.selectedItems[i].name);
+			}
+		}
+		if (selectedItemArr.length > 0) {
+			if (selectedItemArr.length === 1) {
+				$scope.itemName = selectedItemArr[0];
+			}
+			else {
+				$scope.itemName = selectedItemArr[1] + '...';
+			}
+		}
 		$scope.designerList = [];
 		$scope.page = 1;
 		$scope.loading = false;
@@ -221,6 +249,7 @@ index.controller('appointmentCtrl',
 		var month = date.getMonth() + 1;
 		var day = date.getDate();
 		var week = date.getDay();
+		$scope.timeArr.push({'date': '不限'});
 		$scope.timeArr.push({'date': setTime(month, day)});
 		for (var i = 1; i < 7; i++) {
 			$scope.timeArr.push({'date': addDays(i)});
@@ -316,7 +345,7 @@ index.controller('appointmentCtrl',
 		$scope.appointMaskShow = false;
 		$scope.timeShow = false;
 		var timeIndex = $('#time-select-only .swiper-slide')
-		.index($('#time-select-only .swiper-slide-active')) + 1;
+		.index($('#time-select-only .swiper-slide-active'));
 		if (timeIndex == $scope.timeIndex) {
 			return;
 		}
@@ -332,7 +361,7 @@ index.controller('appointmentCtrl',
 
 	$scope.selectDate = function () {
 		var dateIndex = $('#date-select-only .swiper-slide')
-		.index($('#date-select-only .swiper-slide-active')) + 1;
+		.index($('#date-select-only .swiper-slide-active'));
 		$scope.appointMaskShow = false;
 		$scope.dateShow = false;
 		if (dateIndex == $scope.dateIndex) {
@@ -403,5 +432,13 @@ index.controller('appointmentCtrl',
 	// 点击列表，进入设计师详情
 	$scope.toDetail = function (designer) {
 		$location.path('stylist_detail/' + designer.id);
+	};
+
+	$scope.refresh = function () {
+		$scope.designerList = [];
+		$scope.page = 1;
+		$scope.loading = false;
+		$scope.loaded = false;
+		getDesignerList();
 	};
 }]);
