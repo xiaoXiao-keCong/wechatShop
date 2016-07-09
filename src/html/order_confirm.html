@@ -10,7 +10,7 @@
 				<div class="item" >
 					<span class="left" ng-click="chooseReceiveType(1)">
 						<img src="../../assets/images/common_selected.png" class="common-icon" ng-click="" ng-if="type=='address'">
-						<img src="../../assets/images/common_unselected.png" class="common-icon" ng-click="" ng-if="type=='score'">
+						<img src="../../assets/images/common_unselected.png" class="common-icon" ng-click="" ng-if="type=='store'">
 					</span>
 					<span class="right" ng-if="hasSite" ng-click="selectAddress(site)">
 						<span class="select-site">
@@ -27,13 +27,17 @@
 						<img src="../../assets/images/arrow_r_big.png" class="common-icon">
 					</span>
 				</div>
-				<div class="item" ng-click="chooseReceiveType(2)">
+				<div class="item">
 					<span class="left">
-						<img src="../../assets/images/common_selected.png" class="common-icon" ng-click="" ng-if="type=='score'">
-						<img src="../../assets/images/common_unselected.png" class="common-icon" ng-click="" ng-if="type=='address'">
+						<img src="../../assets/images/common_selected.png" class="common-icon" ng-click="chooseReceiveType(2)" ng-if="type=='store'">
+						<img src="../../assets/images/common_unselected.png" class="common-icon" ng-click="chooseReceiveType(2)" ng-if="type=='address'">
 					</span>
-					<span class="right">
+					<span class="right" ng-click="selectStore()">
 						<span class="tips">门店自取</span>
+						<span >
+							<span ng-bind="selectedStore.name"></span>
+							<img src="../../assets/images/arrow_r_big.png" class="common-icon">
+						</span>
 					</span>
 				</div>
 			</div>

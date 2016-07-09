@@ -153,7 +153,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/fashion_information.html',
 			controller: 'fashionInformationCtrl'
 		})
-		.when('/fashion_hair_info/:hairId', {
+		.when('/fashion_hair_info', {
 			templateUrl: '../html/fashion_hair_info.html',
 			controller: 'fashionHairInfoCtrl'
 		})

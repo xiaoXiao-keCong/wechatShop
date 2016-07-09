@@ -10,7 +10,7 @@ index.controller('completeInfoCtrl',
 			// 修改信息，不是完善信息
 			$scope.modify = true;
 			var user = JSON.parse(sessionStorage.user);
-			if (user.imgurl != '') {
+			if (user.imgurl !== '') {
 				$scope.avatar = picBasePath + user.imgurl;
 			}
 			$scope.nickname = user.nickname;

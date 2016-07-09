@@ -9,7 +9,10 @@
 			<span>订单号：<span ng-bind="orderInfo.id"></span></span>
 		</div>
 		<div class="item" ng-repeat="goods in orderInfo.goodslist">
-			<span>商品名称：<span ng-bind="goods.name"></span></span>
+			<span class="flex">
+				<span>商品名称：</span>
+				<span ng-bind="goods.name" class="ellipsis goods-name"></span>
+			</span>
 		</div>
 		<div class="item">
 			<span>下单时间：<span ng-bind="orderInfo.time"></span></span>

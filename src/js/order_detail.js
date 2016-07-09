@@ -9,6 +9,7 @@ index.controller('orderDetailCtrl',
 	// 获取订单详情
 	$http.post('/user/goodsorderdetail.json', {id: orderId}, postCfg)
 	.success(function (data) {
+		console.log(data);
 		if (1 === data.code) {
 			var order = data.data;
 			for (var i = 0; i < order.goodslist.length; i++) {

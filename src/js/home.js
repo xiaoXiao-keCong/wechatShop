@@ -179,6 +179,8 @@ index.controller('homeCtrl',
 				var fashionHairList = resp.data.data.fashionhairlist;
 				if (fashionHairList.length > 0) {
 					for (var i = 0, j = fashionHairList.length; i < j; i++) {
+						fashionHairList[i].page = $scope.page;
+						fashionHairList[i].index = i;
 						fashionHairList[i].imgurl = picBasePath + fashionHairList[i].imgurl;
 						$scope.fashionHairList.push(fashionHairList[i]);
 					}
@@ -212,7 +214,7 @@ index.controller('homeCtrl',
 	
 	// 跳转到时尚发型详情
 	$scope.showHairInfo = function (hair) {
-		$location.path('fashion_hair_info/' + hair.id);
+		$location.path('fashion_hair_info').search({page: hair.page, index: hair.index});
 	};
 
 	$scope.$on('ngRepeatFinished', function () {

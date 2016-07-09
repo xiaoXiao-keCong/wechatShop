@@ -2,7 +2,8 @@
  * Created by hugotan on 2016/4/16.
  */
 index.controller('selectStoreCtrl',
-    ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    ['$scope', '$http', '$location', '$window', '$rootScope',
+    function ($scope, $http, $location, $window, $rootScope) {
 	
     var isGetStoreInfo = false;
     $scope.areaFilter = '全部区域';
@@ -13,8 +14,6 @@ index.controller('selectStoreCtrl',
     $scope.loading = false;
     $scope.loaded = false;
     $scope.storeList = [];
-
-
     $scope.getStoreList = getStoreList;
 
     // 获取门店列表
@@ -148,6 +147,11 @@ index.controller('selectStoreCtrl',
 
     // 点击门店项进入选择发型师界面
     $scope.toSelectDesigner = function (store) {
+        if ($location.search().from && $location.search().from === 'order_confirm') {
+            $rootScope.selectedStore = store;
+            $window.history.back();
+            return;
+        }
         $location.path('select_designer/' + store.id);
     };
 }]);

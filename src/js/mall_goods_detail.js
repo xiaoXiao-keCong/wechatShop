@@ -148,6 +148,7 @@ index.controller('mallGoodsDetailCtrl',
 		$rootScope.goodsArr.push($scope.goods);
 		$rootScope.numArr.push($scope.buyNum);
 		$rootScope.cartFlag = 0;
+		// $rootScope.selectedStore = null;
 		$location.path('order_confirm').search({});
 	};
 

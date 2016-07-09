@@ -48,6 +48,9 @@ index.controller('orderConfirmCtrl',
 		    	}
 		    });
 		}
+		if ($rootScope.selectedStore) {
+			$scope.selectedStore = $rootScope.selectedStore;
+		}
 	}
 
 	// 计算总价
@@ -119,9 +122,9 @@ index.controller('orderConfirmCtrl',
 			    $scope.type = "address";
 			    break;
 			case 2:
-				$scope.type = 'score';
+				$scope.type = 'store';
 				// 跳转去选择门店
-				$location.path('select_store');
+				// $location.path('select_store');
 				break;
 		}
 	};
@@ -135,15 +138,31 @@ index.controller('orderConfirmCtrl',
 
 	// 提交订单事件
 	$scope.orderConfirm = function () {
-		var goodsIdArr = [];
+		var goodsIdArr = [], addressId;
 		for (var i = 0; i < $scope.goodsArr.length; i++) {
 			goodsIdArr.push($scope.goodsArr[i].id);
+		}
+		switch ($scope.type) {
+			case 'address':
+				if (!$scope.site || !$scope.site.id) {
+					alert('请选择收货地址！');
+					return;
+				}
+				addressId = $scope.site.id;
+			    break;
+			case 'store':
+			    if (!$scope.selectedStore || !$scope.selectedStore.id) {
+			    	alert('请选择自取门店！');
+			    	return;
+			    }
+			    addressId = $scope.selectedStore.id;
+			    break;
 		}
 		var data = {
 			goodsid: goodsIdArr,
 			num: $scope.numArr,
 			type: $scope.type,
-			addressid: $scope.site.id || 0,
+			addressid: addressId,
 			cartflag: cartFlag,
 			couponid: parseInt($scope.couponId) || 0,
 			remark: $scope.remark,
@@ -169,6 +188,10 @@ index.controller('orderConfirmCtrl',
 		.error(function (data) {
 			alert('数据请求失败!请稍后再试！');
 		});
+	};
+
+	$scope.selectStore = function () {
+		$location.path('select_store').search({from: 'order_confirm'});
 	};
 
 }]);
