@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     minifycss = require('gulp-minify-css'),
     minifyHtml = require('gulp-minify-html'),
-    rename = require('gulp-rename')
+    rename = require('gulp-rename'),
     del = require('del'),
     rev = require('gulp-rev'),
     revCollector = require('gulp-rev-collector'),
@@ -25,7 +25,7 @@ gulp.task('buildJs', function () {
 	    .pipe(jshint())
 	    .pipe(jshint.reporter('default'))
         .pipe(plumber())
-	    // .pipe(uglify())
+	    .pipe(uglify())
 	    .pipe(concat('app.min.js'))
         .pipe(rev())
 	    .pipe(gulp.dest('build/js'))

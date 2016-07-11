@@ -4,7 +4,6 @@
 index.controller('collectionCtrl',
     ['$scope', '$http', '$rootScope', '$location',
     function ($scope, $http, $rootScope, $location) {
-
     
 
     // 优秀造型师
@@ -15,11 +14,17 @@ index.controller('collectionCtrl',
         $scope.isGoods = false;
         $http.post('/user/mykeepdesigner.json', postCfg)
         .then(function (resp) {
+            console.log(resp);
             if (-1 === resp.data.code) {
                 $location.path('login');
             }
             else if (1 === resp.data.code) {
                 var designerList = resp.data.data.designerlist;
+                if (0 === designerList.length) {
+                    $scope.hasDesigner = false;
+                    return;
+                }
+                $scope.hasDesigner = true;
                 // 对图片地址添加前缀
                 for (var i = 0, j = designerList.length; i < j; i++) {
                     designerList[i].imgurl = picBasePath + designerList[i].imgurl;
@@ -27,7 +32,7 @@ index.controller('collectionCtrl',
                 $scope.designerList = designerList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
     };
     // 初始化执行获取优秀造型师
@@ -43,13 +48,18 @@ index.controller('collectionCtrl',
         .then(function (resp) {
             if (1 === resp.data.code) {
                 var hairList = resp.data.data.fashionhairlist;
+                if (0 === hairList.length) {
+                    $scope.hasHair = false;
+                    return;
+                }
+                $scope.hasHair = true;
                 for (var i = 0, j = hairList.length; i < j; i++) {
                     hairList[i].imgurl = picBasePath + hairList[i].imgurl;
                 }
                 $scope.hairList = hairList;
             }
         }, function (resp) {
-            console.log(resp);
+            alert('数据请求失败，请稍后再试！');
         });
     };
 
@@ -61,12 +71,16 @@ index.controller('collectionCtrl',
         $scope.isGoods = false;
         $http.post('/user/mykeepstore.json')
         .success(function (data) {
-            console.log(data);
             if (1 === data.code) {
                 var storeList = data.data.storelist,
                     starUrl1 = '../../assets/images/star_h.png',
                     starUrl2 = '../../assets/images/star.png',
                     k, l, n, store;
+                if (0 === storeList.length) {
+                    $scope.hasStore = false;
+                    return;
+                }
+                $scope.hasStore = true;
                 for (k = 0; k < storeList.length; k++) {
                     storeList[k].img1 = picBasePath + storeList[k].imgurl[0];    // 正方形
                     storeList[k].starUrl = [];
@@ -78,11 +92,9 @@ index.controller('collectionCtrl',
                     }
                 }
                 $scope.storeList = storeList;
-                console.log($scope.storeList);
             }
         })
         .error(function (data) {
-            console.log(data);
             alert('数据请求失败，请稍后再试！');
         });
     };
@@ -95,18 +107,19 @@ index.controller('collectionCtrl',
         $scope.isGoods = true;
         $http.post('/user/mykeepgoods.json')
         .success(function (data) {
-            console.log(data);
             if (1 === data.code) {
                 var goodsList = data.data.goodslist;
+                if (0 === goodsList.length) {
+                    $scope.hasGoods = false;
+                }
+                $scope.hasGoods = true;
                 for (var i = 0, j = goodsList.length; i < j; i++) {
                     goodsList[i].detailimgurl = picBasePath + goodsList[i].imgurl1;
                 }
                 $scope.goodsList = goodsList;
-                console.log($scope.goodsList);
             }
         })
         .error(function (data) {
-            console.log(data);
             alert('数据请求失败，请稍后再试！');
         });
     };
