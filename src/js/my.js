@@ -74,9 +74,9 @@ index.controller('myCtrl',
 				break;
 			case 8:
 				// 积分商城
-				$timeout(function () {
-					$location.path('point_mall');
-				}, 0);
+				// $timeout(function () {
+				// 	$location.path('point_mall');
+				// }, 0);
 				break;
 			case 9:
 				// 设置

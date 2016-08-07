@@ -18,6 +18,6 @@ index.controller('inviteCtrl',
 	});
 
 	$scope.invite = function () {
-		console.log('invite is trigger');
+		$location.path('get_invitation').search({recCode: $scope.recCode});
 	};
 }]);

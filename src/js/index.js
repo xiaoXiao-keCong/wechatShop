@@ -271,6 +271,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/invite.html',
 			controller: 'inviteCtrl'
 		})
+		.when('/get_invitation', {
+			templateUrl: '../html/get_invitation.html',
+			controller: 'getInvitationCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
