@@ -150,4 +150,9 @@ index.controller('myCtrl',
 	$scope.toBalance = function () {
 		$location.path('balance');
 	};
+
+	// 点击邀请好友即送500悦币
+	$scope.toInvite = function () {
+		$location.path('invite');
+	};
 }]);

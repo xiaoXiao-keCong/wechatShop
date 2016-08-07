@@ -1,6 +1,7 @@
 #my-container {
 	background-color: #f1f1f1;
 	padding-bottom: 0.266667rem;
+	margin-bottom: 1.306667rem;
 	.info-panel {
 		width: 100%;
 		height: 4.0rem;
@@ -59,7 +60,7 @@
 
 	.item-container {
 		margin-top: 0.266667rem;
-		margin-bottom: 1.306667rem;
+		margin-bottom: 0.266667rem;
 		background-color: #ffffff;
 		.item {
 			float: left;
@@ -93,27 +94,25 @@
 			border-bottom: 0.026667rem solid #cccccc;
 		}
 	}
-	.bottom-nav {
-		position: fixed;
-		bottom: 0;
-		height: 1.4rem;
-		border-top: 0.013333rem solid #d8d8d8;
-		width: 10.0rem;
-		background: #f7f7f7;
-		.nav-item {
-			float: left;
-			width: 2.0rem;
-			height: 1.4rem;
-			text-align: center;
-			img {
-				margin-top: 0.16rem;
-				width: 0.586667rem;
-				height: 0.586667rem;
-			}
-			span {
-				display: block;
-				font-size: 0.346667rem;
+	.invite {
+		height: 1.2rem;
+		display: flex;
+		display: -webkit-flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: #fff;
+		padding: 0 0.333333rem;
+		font-size: 0.4rem;
+		color: #333333;
+		.tips {
+			height: 100%;
+			display: flex;
+			display: -webkit-flex;
+			align-items: center;
+			.tips-text {
+				margin-left: 0.16rem;
 			}
 		}
 	}
+
 }
