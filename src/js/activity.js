@@ -16,7 +16,6 @@ index.controller('activityCtrl',
 		}
 	})
 	.error(function (resp) {
-		console.log(resp);
 		alert('数据请求失败，请稍后再试！');
 	});
 
