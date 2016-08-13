@@ -27,5 +27,53 @@
 		border-top: 0.066667rem solid #ebebeb;
 		border-bottom: 0.066667rem solid #ebebeb;
 		padding: 0.266667rem 0;
+		.flex;
+		align-items: center;
+		.tab-item {
+			flex: 1;
+			text-align: center;
+			color: #333333;
+			font-size: 0.48rem;
+			border-right: 0.026667rem solid #ebebeb;
+			&:last-child {
+				border-right: none;
+			}
+		}
+	}
+	.list-item {
+		padding: 0.173333rem 0.266667rem;
+		height: 2.6rem;
+		.flex;
+		align-items: center;
+		border-bottom: 0.066667rem solid #ebebeb;
+		.info-img {
+			height: 2.266667rem;
+			width: 2.266667rem;
+			border-radius: 0.133333rem;
+		}
+		.text-content {
+			flex: 1;
+			.flex-column;
+			justify-content: center;
+			margin-left: 0.266667rem;
+			.title {
+				color: #333333;
+				font-size: 0.426667rem;
+				overflow : hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+			}
+			.content {
+				font-size: 0.346667rem;
+				color: #aaaaaa;
+				overflow : hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+			}
+		}
 	}
 }

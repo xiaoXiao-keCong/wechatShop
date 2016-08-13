@@ -13,7 +13,7 @@
             
         </div>
     </div>
-    <div class="headline">
+    <div class="headline" ng-click="toHeadline()">
         <div class="font-size-32">悦艺术家头条</div>
         <div class="headline-text">
             <span class="font-size-28 title ellipsis" ng-bind="headline.title"></span>
@@ -21,6 +21,27 @@
         </div>
     </div>
     <div class="select-tab">
-        
+        <div ng-class="{'tab-item':true,'highlight':type==1}" ng-click="selectTab(1)">
+            悦 | 人物
+        </div>
+        <div ng-class="{'tab-item':true,'highlight':type==2}" ng-click="selectTab(2)">
+            悦 | 时尚
+        </div>
+    </div>
+    <div infinite-scroll="getFashionInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
+        <div class="list-item" ng-repeat="item in fashionInfoList" ng-click="toFashionInfo(item)">
+            <img ng-src="{{item.imgurl}}" class="info-img">
+            <div class="text-content">
+                <div class="title" ng-bind="item.title"></div>
+                <div class="content" ng-bind="item.remark">
+
+                </div>
+            </div>
+        </div>
+        <div class="load" ng-hide="loaded">
+            <img src="../../assets/images/loading2.gif" class="common-icon">
+            正在加载...
+        </div>
+        <div ng-show="loaded" class="load"></i>没有更多内容</div>
     </div>
 </div>

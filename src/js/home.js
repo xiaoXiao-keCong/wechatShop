@@ -32,7 +32,7 @@ index.controller('homeCtrl',
 				break;
 			case 3:
 				// 时尚资讯
-				$location.path('fashion_information');
+				$location.path('fashion_info');
 				break;
 			case 4:
 				// 悦尚城
