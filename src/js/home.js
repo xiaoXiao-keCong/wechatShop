@@ -90,12 +90,9 @@ index.controller('homeCtrl',
 	// 明星发型师是否加载完毕的promise
 	$scope.designerDeferred = $q.defer();
 
-	
-
 	// 首页轮播图
 	$http.post('/home/homead.json', {'cityid': 1}, postCfg)
 	.then(function (resp) {
-		
 		if (1 === resp.data.code) {
 			var homeAdList = resp.data.data.homeadlist;
 			for (var i = 0; i < homeAdList.length; i++) {

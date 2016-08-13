@@ -279,6 +279,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/coin_mall.html',
 			controller: 'coinMallCtrl'
 		})
+		.when('/fashion_info', {
+			templateUrl: '../html/fashion_info.html',
+			controller: 'fashionInfoCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

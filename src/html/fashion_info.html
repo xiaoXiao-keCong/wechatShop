@@ -1,0 +1,26 @@
+<div id="fashion-info-container">
+    <div class="title-bar">
+        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+        <span>悦艺术家</span>
+    </div>
+    <div advertise class="swiper-container slider-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="item in fashionNewsList" on-finish-render-filters>
+                <img ng-src="{{item.imgurl}}" ng-click="jump(item)">
+            </div>
+        </div>
+        <div class="swiper-pagination">
+            
+        </div>
+    </div>
+    <div class="headline">
+        <div class="font-size-32">悦艺术家头条</div>
+        <div class="headline-text">
+            <span class="font-size-28 title ellipsis" ng-bind="headline.title"></span>
+            <img src="../../assets/images/arrow_r_big.png" class="common-icon">
+        </div>
+    </div>
+    <div class="select-tab">
+        
+    </div>
+</div>
