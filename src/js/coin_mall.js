@@ -40,4 +40,9 @@ index.controller('coinMallCtrl',
 	}
 
 	$scope.getGoods = getGoods;
+
+	// 跳转到兑换记录
+	$scope.toChangeRecord = function () {
+		$location.path('change_record');
+	};
 }]);

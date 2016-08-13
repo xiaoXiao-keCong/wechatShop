@@ -283,6 +283,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/fashion_info.html',
 			controller: 'fashionInfoCtrl'
 		})
+		.when('/change_record', {
+			templateUrl: '../html/change_record.html',
+			controller: 'changeRecordCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
