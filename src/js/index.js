@@ -291,6 +291,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/coin_goods.html',
 			controller: 'coinGoodsCtrl'
 		})
+		.when('/change_record_deatil/:id', {
+			templateUrl: 'change_record_deatil',
+			controller: 'changeRecordDetailCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

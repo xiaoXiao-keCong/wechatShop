@@ -26,6 +26,6 @@ index.controller('changeRecordCtrl',
 
 	// 立即兑换
 	$scope.toChange = function () {
-		console.log('to change');
+		$window.history.back();
 	};
 }]);
