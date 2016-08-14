@@ -6,12 +6,12 @@
     </div>
     <div class="coin-num">
         <img src="../../assets/images/coin_2.png" class="common-icon">
-        <span>9000</span>
+        <span ng-bind="coin + ' 悦币'"></span>
     </div>
     <div id="goods-container">
         <div infinite-scroll="getGoods()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
             <div class="item-container">
-                <div class="item" ng-repeat="goods in goodsList">
+                <div class="item" ng-repeat="goods in goodsList" ng-click="toGoods(goods)">
                     <img ng-src="{{goods.imgurl}}">
                 </div>
             </div>
