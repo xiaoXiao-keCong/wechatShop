@@ -29,7 +29,6 @@ index.controller('coinGoodsCtrl',
 					goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
 				}
 				$scope.goods = goods;
-				console.log(goods);
 			}
 			else if (0 === resp.code) {
 				alert(resp.reason);

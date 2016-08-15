@@ -6,7 +6,7 @@
     </div>
     <div advertise class="swiper-container slider-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="item in goods.imgarray" on-finish-render-filters>
+            <div class="swiper-slide" ng-repeat="item in goods.imglist" on-finish-render-filters>
                 <img ng-src="{{item.imgurl}}">
             </div>
         </div>
@@ -22,19 +22,19 @@
             </div>
         </div>
         <div class="common-height item" ng-click="selectAddress(site)">
-            <div>请选择地址</div>
-            <div>
-                <span ng-bind="site.address"></span>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
-            </div>
-            
+            <div>订单编号：<span ng-bind="goods.id"></span></div>
         </div>
         <div class="goods-detail">
-            <p>订单状态：<span></span></p>
-            <p ng-bind="goods.info" class="goods-info"></p>
+            <p>订单状态：<span ng-bind="goods.state" class="text-orange"></span></p>
+            <p>
+                快递单号：<span ng-bind="goods.expressnum"></span>
+            </p>
+            <p>
+                配送至：<span ng-bind="goods.address"></span>
+            </p>
         </div>
     </div>
-    <!-- <div ng-if="goods.type == 4" class="content-container">
+    <div ng-if="goods.type == 4" class="content-container">
         <div class="goods-price common-height item">
             <div ng-bind="goods.name" class="goods-name ellipsis"></div>
             <div class="price-text">
@@ -42,15 +42,14 @@
                 <span ng-bind="goods.integral + '悦币'"></span>
             </div>
         </div>
+        <div class="common-height item" ng-click="selectAddress(site)">
+            <div>订单编号：<span ng-bind="goods.id"></span></div>
+        </div>
         <div class="goods-detail">
-            <p>商品详情:</p>
-            <p ng-bind="goods.info" class="goods-info"></p>
-        </div>
-        <div class="change-btn" ng-click="change()" ng-if="canChange">
-            立即兑换
-        </div>
-        <div class="change-btn disabled" ng-if="!canChange">
-            悦币不足
+            <p>订单状态：<span ng-bind="goods.state" class="text-orange"></span></p>
+            <p>
+                兑换码：<span ng-bind="goods.code"></span>
+            </p>
         </div>
     </div>
     <div ng-if="goods.type == 5" class="content-container">
@@ -61,23 +60,14 @@
                 <span ng-bind="goods.integral + '悦币'"></span>
             </div>
         </div>
-        <div class="common-height item" ng-click="selectStore()" ng-click="selectStore()">
-            <div>请选择门店</div>
-            <div>
-                <span ng-bind="selectedStore.name"></span>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
-            </div>
-            
+        <div class="common-height item" ng-click="selectAddress(site)">
+            <div>订单编号：<span ng-bind="goods.id"></span></div>
         </div>
         <div class="goods-detail">
-            <p>商品详情:</p>
-            <p ng-bind="goods.info" class="goods-info"></p>
+            <p>订单状态：<span ng-bind="goods.state" class="text-orange"></span></p>
+            <p>
+                服务门店：<span ng-bind="goods.store"></span>
+            </p>
         </div>
-        <div class="change-btn" ng-click="change()" ng-if="canChange">
-            立即兑换
-        </div>
-        <div class="change-btn disabled" ng-if="!canChange">
-            悦币不足
-        </div>
-    </div> -->
+    </div>
 </div>

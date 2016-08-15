@@ -38,6 +38,6 @@ index.controller('changeRecordCtrl',
 
 	// 兑换详情
 	$scope.recordDetail = function (record) {
-		$location.path('change_record_detial/' + record.id);
+		$location.path('change_record_detail').search({id: record.id, type: record.type});
 	};
 }]);

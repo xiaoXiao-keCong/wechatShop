@@ -291,8 +291,8 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: '../html/coin_goods.html',
 			controller: 'coinGoodsCtrl'
 		})
-		.when('/change_record_deatil/:id', {
-			templateUrl: 'change_record_deatil',
+		.when('/change_record_detail', {
+			templateUrl: 'change_record_detail.html',
 			controller: 'changeRecordDetailCtrl'
 		})
 		.otherwise({
