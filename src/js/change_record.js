@@ -35,4 +35,9 @@ index.controller('changeRecordCtrl',
 	$scope.toChange = function () {
 		$window.history.back();
 	};
+
+	// 兑换详情
+	$scope.recordDetail = function (record) {
+		$location.path('change_record_detial/' + record.id);
+	};
 }]);

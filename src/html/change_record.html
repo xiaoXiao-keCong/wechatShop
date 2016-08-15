@@ -11,7 +11,7 @@
     	</div>
     </div>
     <div ng-if="!noRecord" id="record-list-container">
-        <div class="item" ng-repeat="item in recordList">
+        <div class="item" ng-repeat="item in recordList" ng-click="recordDetail(item)">
             <div class="goods-info">
                 <img ng-src="{{item.imgurl}}" class="goods-pic">
                 <div class="goods-state">

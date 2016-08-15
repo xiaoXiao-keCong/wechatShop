@@ -39,7 +39,6 @@ index.controller('completeInfoCtrl',
 			sexflag: $scope.sexFlag,
 			birthday: $scope.birthday
 		};
-		console.log(data);
 		Upload.upload({
 			url: '/user/edit.json',
 			data: data
