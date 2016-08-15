@@ -6,6 +6,7 @@ index.controller('changeRecordCtrl',
 	function ($scope, $http, $location, $window) {
 	
 	$scope.noRecord = false;
+	$scope.recordList = [];
 
 	// 获取兑换记录列表
 	$http.post('/integralshop/integral/recordlist.json', postCfg)
@@ -13,9 +14,15 @@ index.controller('changeRecordCtrl',
 		console.log(resp);
 		if (1 === resp.code) {
 			var recordList = resp.data.goodsorderlist;
-			if (0 === recordList.length) {
+			if (0 >= recordList.length) {
 				$scope.noRecord = true;
 				return;
+			}
+			else {
+				for (var i = 0; i < recordList.length; i++) {
+					recordList[i].imgurl = picBasePath + recordList[i].imgurl;
+				}
+				$scope.recordList = recordList;
 			}
 
 		}

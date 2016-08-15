@@ -10,4 +10,16 @@
     		陛下还没有兑换过任何商品，<span class="change-text" ng-click="toChange()">立即兑换</span>
     	</div>
     </div>
+    <div ng-if="!noRecord" id="record-list-container">
+        <div class="item" ng-repeat="item in recordList">
+            <div class="goods-info">
+                <img ng-src="{{item.imgurl}}" class="goods-pic">
+                <div class="goods-state">
+                    <span ng-bind="item.name"></span>
+                    <span ng-bind="item.state" class="state"></span>
+                </div>
+            </div>
+            <img src="../../assets/images/arrow_grey.png" class="common-icon">
+        </div>
+    </div>
 </div>

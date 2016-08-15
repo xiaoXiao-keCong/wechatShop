@@ -25,7 +25,7 @@ gulp.task('buildJs', function () {
 	    .pipe(jshint())
 	    .pipe(jshint.reporter('default'))
         .pipe(plumber())
-	    // .pipe(uglify())
+	    .pipe(uglify())
 	    .pipe(concat('app.min.js'))
         .pipe(rev())
 	    .pipe(gulp.dest('build/js'))

@@ -21,7 +21,8 @@ index.controller('coinGoodsCtrl',
 			if (1 === resp.code) {
 				var goods = resp.data,
 				    user = JSON.parse(sessionStorage.user);
-				if (goods.integral < user.store) {
+
+				if (goods.integral < user.score) {
 					$scope.canChange = true;
 				}
 				for (var i = 0; i < goods.imgarray.length; i++) {
@@ -110,7 +111,7 @@ index.controller('coinGoodsCtrl',
 			console.log(resp);
 			if (1 === resp.code) {
 				// 兑换成功
-				alert('兑换成功');
+				alert('兑换成功,可在兑换记录中查看兑换信息！');
 			}
 			else if (0 === resp.code) {
 				alert(resp.reason);
