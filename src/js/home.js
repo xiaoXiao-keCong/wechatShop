@@ -80,7 +80,8 @@ index.controller('homeCtrl',
 			    		return;
 			    	}
 			    }
-				$location.path('my');
+				// $location.path('my');
+				$window.location.href = '/webapp/src/xiaoyue/home.html';
 				break;
 		}
 	};

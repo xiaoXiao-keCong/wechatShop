@@ -1,8 +1,8 @@
 <div id="fashion-info-container">
-    <div class="title-bar">
+    <!-- <div class="title-bar">
         <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
         <span>悦艺术家</span>
-    </div>
+    </div> -->
     <div advertise class="swiper-container slider-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="item in fashionNewsList" on-finish-render-filters>
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="headline" ng-click="toHeadline()">
-        <div class="font-size-32">悦艺术家头条</div>
+        <div class="font-size-36">头条|公告</div>
         <div class="headline-text">
             <span class="font-size-28 title ellipsis" ng-bind="headline.title"></span>
             <img src="../../assets/images/arrow_r_big.png" class="common-icon">
@@ -22,10 +22,10 @@
     </div>
     <div class="select-tab">
         <div ng-class="{'tab-item':true,'highlight':type==1}" ng-click="selectTab(1)">
-            悦 | 人物
+            悦人物
         </div>
         <div ng-class="{'tab-item':true,'highlight':type==2}" ng-click="selectTab(2)">
-            悦 | 时尚
+            悦资讯
         </div>
     </div>
     <div infinite-scroll="getFashionInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
@@ -34,7 +34,6 @@
             <div class="text-content">
                 <div class="title" ng-bind="item.title"></div>
                 <div class="content" ng-bind="item.remark">
-
                 </div>
             </div>
         </div>
