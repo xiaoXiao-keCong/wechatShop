@@ -20,7 +20,8 @@ index.controller('getInvitationCtrl',
 		$http.post('/invite/register.json', data, postCfg)
 		.success(function (resp) {
 			if (1 === resp.code) {
-				alert('注册成功！');
+				alert('恭喜陛下领取成功！');
+				$location.path('download_page').search({phone: $scope.phone});
 			}
 			else if (0 === resp.code) {
 				alert(resp.reason);

@@ -295,6 +295,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'change_record_detail.html',
 			controller: 'changeRecordDetailCtrl'
 		})
+		.when('/download_page', {
+			templateUrl: 'download_page.html',
+			controller: 'downloadCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

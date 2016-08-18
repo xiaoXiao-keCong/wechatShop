@@ -26,10 +26,12 @@
         <div infinite-scroll="getFashionInfo()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
             <div class="item-container">
                 <span class="grid-item" ng-repeat="news in fashionInfoList" ng-click="toFashionNews(news)">
-                    <img ng-src="{{news.bigimg}}" class="store-img">
-                    <div class="store-info-mask">
-                        <div class="store-name" ng-bind="news.title"></div>
-                    </div>
+                    <a ng-href="{{news.jumpurl}}">
+                        <img ng-src="{{news.bigimg}}" class="store-img">
+                        <div class="store-info-mask">
+                            <div class="store-name" ng-bind="news.title"></div>
+                        </div>
+                    </a>
                 </span>
             </div>
             <div ng-hide="loaded" class="load">

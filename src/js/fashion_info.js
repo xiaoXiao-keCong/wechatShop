@@ -90,6 +90,7 @@ index.controller('fashionInfoCtrl',
 	    $window.location.href = item.jumpurl;
 	};
 
+	// 点击悦人物或悦资讯
 	$scope.selectTab = function (type) {
 		if (type == $scope.type) {
 			return;
