@@ -5,8 +5,8 @@ index.controller('getInvitationCtrl',
 	['$scope', '$http', '$location', '$window',
 	function ($scope, $http, $location, $window) {
 
-	var code = $location.search().code;
-	$scope.register = function () {
+	var code = $location.search().recCode;
+	$scope.get = function () {
 		// 校验电话号码
 		var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
 		if (!phoneRe.test($scope.phone)) {
