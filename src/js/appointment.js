@@ -164,8 +164,8 @@ index.controller('appointmentCtrl',
 			    		return;
 			    	}
 			    }
-				// $location.path('my');
-				$window.location.href = '/webapp/src/xiaoyue/home.html';
+				$location.path('my');
+				// $window.location.href = '/webapp/src/xiaoyue/home.html';
 				break;
 		}
 	};

@@ -80,8 +80,8 @@ index.controller('orderCtrl',
 				$location.path('order');
 				break;
 			case 5:
-				// $location.path('my');
-				$window.location.href = '/webapp/src/xiaoyue/home.html';
+				$location.path('my');
+				// $window.location.href = '/webapp/src/xiaoyue/home.html';
 				break;
 		}
 	};

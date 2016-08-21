@@ -32,7 +32,7 @@ index.controller('homeCtrl',
 				break;
 			case 3:
 				// 时尚资讯
-				$location.path('fashion_info');
+				$location.path('fashion_information');
 				break;
 			case 4:
 				// 悦尚城
@@ -80,8 +80,8 @@ index.controller('homeCtrl',
 			    		return;
 			    	}
 			    }
-				// $location.path('my');
-				$window.location.href = '/webapp/src/xiaoyue/home.html';
+				$location.path('my');
+				// $window.location.href = '/webapp/src/xiaoyue/home.html';
 				break;
 		}
 	};

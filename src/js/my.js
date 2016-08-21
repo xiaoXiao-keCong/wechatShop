@@ -5,92 +5,27 @@ index.controller('myCtrl',
 	['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
 
 	(function init() {
-		if (sessionStorage.user) {
-			$scope.isLogin = true;
-			var user = JSON.parse(sessionStorage.user);
-			$scope.userPic = user.imgurl === '' ? '../../assets/images/head-none.png' : picBasePath + user.imgurl;
-			$scope.name = user.nickname;
-			$scope.type = user.vip.name;
-			$scope.typeImg = picBasePath + user.vip.smallimgurl;
-			$scope.balance = user.balance;
-			$scope.score = user.score;
-		}
-		else {
-			$scope.userPic = '../../assets/images/head-none.png';
-			$scope.balance = '--';
-			$scope.score = '--';
-		}
+		// 请求用户信息
+		$http.post('/user/mine.json', postCfg)
+		.success(function (resp) {
+			console.log(resp);
+			if (-1 === resp.code) {
+				// 用户未登录
+				$scope.isLogin = false;
+			}
+			else if (1 === resp.code) {
+				$scope.isLogin = true;
+				var user = resp.data;
+				user.imgurl = picBasePath + user.imgurl;
+				user.vip.smallimgurl = picBasePath + user.vip.smallimgurl;
+				$scope.user = user;
+			}
+		})
+		.error(function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
 	})();
 
-	$scope.navTo = function (index) {
-		switch (index) {
-			case 1:
-				// 我的余额
-				checkLogin();
-				$timeout(function () {
-					$location.path('balance');
-				}, 0);
-				break;
-			case 2:
-				// 充值
-				checkLogin();
-				$timeout(function () {
-					$location.path('recharge');
-				}, 0);
-				break;
-			case 3:
-				// 优惠券
-				checkLogin();
-				$timeout(function () {
-					$location.path('coupon');
-				}, 0);
-				break;
-			case 4:
-				// 我的收藏
-				checkLogin();
-				$timeout(function () {
-					$location.path('collection');
-				}, 0);
-				break;
-			case 5:
-				// 最新活动
-				$timeout(function () {
-					$location.path('activity');
-				}, 0);
-				break;
-			case 6:
-				// 购物车
-				checkLogin();
-				$timeout(function () {
-					$location.path('cart');
-				}, 0);
-				break;
-			case 7:
-				// 地址管理
-				checkLogin();
-				$timeout(function () {
-					$location.path('addr_manage');
-				}, 0);
-				break;
-			case 8:
-				// 积分商城
-				// $timeout(function () {
-				// 	$location.path('point_mall');
-				// }, 0);
-				// 悦币商城
-				$timeout(function () {
-					$location.path('coin_mall');
-				}, 0);
-				break;
-			case 9:
-				// 设置
-				checkLogin();
-				$timeout(function () {
-					$location.path('setting');
-				}, 0);
-				break;
-		}
-	};
 
 	function checkLogin() {
 		if (!sessionStorage.user) {

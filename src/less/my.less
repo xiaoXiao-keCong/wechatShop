@@ -1,118 +1,87 @@
+@import "display";
 #my-container {
 	background-color: #f1f1f1;
-	padding-bottom: 0.266667rem;
-	margin-bottom: 1.306667rem;
-	.info-panel {
-		width: 100%;
-		height: 4.0rem;
-		background-color: #3dc0d9;
-		color: #fff;
-		#head-pic {
-			margin: 0.746667rem 0.373333rem 0 0.373333rem;
-			height: 2.453333rem;
-			width: 2.426667rem;
-			border-radius: 50%;
-		}
-		.operation {
-			position: absolute;
-			color: #fff;
-			height: 4.0rem;
-			line-height: 4.0rem;
-			font-size: 0.453333rem;
-			a {
-				color: #ffffff;
-			}
-			#login-btn {
-				margin-right: 0.133333rem;
-			}
-			#register-btn {
-				margin-left: 0.133333rem;
-			}
-		}
-		.account-info-container {
-			display: table;
-			height: 4.0rem;
-			float: right;
-			margin-right: 0.266667rem;
-			width: 3.0rem;
-			.type-img {
-				height: 0.32rem;
-				width: 0.533333rem;
-			}
-			.account-info {
-				display: table-cell;
-				vertical-align: middle;
-				span {
-					font-size: 0.4rem;
-				}
-				div {
-					height: 0.6rem;
-					line-height: 0.6rem;
-					border-bottom: 0.013333rem solid #ffffff;
-					padding-left: 0.133333rem;
-				}
-				.account-val {
-					float: right;
-				}
-			}
-		}
-	}
-
-	.item-container {
-		margin-top: 0.266667rem;
+	padding-bottom: 1.306667rem;
+	.margin-bottom-20 {
 		margin-bottom: 0.266667rem;
-		background-color: #ffffff;
-		.item {
-			float: left;
-			width: 3.333333rem;
-			height: 3.333333rem;
-			text-align: center;
-			// &:hover {
-			// 	background-color: #eeeeee;
-			// }
-			.item-icon {
-				margin-top: 1.266667rem;
-				margin-bottom: 0.373333rem;
-				text-align: center;
+	}
+	.user-info {
+		height: 5.866667rem;
+		width: 10.0rem;
+		background-image: url("../../assets/images/wdbj.png");
+		background-size: 100% 100%;
+		position: relative;
+		.flex-column;
+		align-items: center;
+		.head-img {
+			width: 2.0rem;
+			height: 2.0rem;
+			margin-top: 1.0rem;
+			border: 0.04rem solid #fff;
+			border-radius: 100%;
+		}
+		.vip-img {
+			margin-top: 0.2rem;
+			width: 0.426667rem;
+			height: 0.28rem;
+		}
+		.login {
+			margin-top: 0.2rem;
+			color: #fff;
+			a {
+				color: #fff;
+				font-size: 0.32rem;
+			}
+		}
+		.account-text {
+			color: #fff;
+			font-size: 0.32rem;
+			margin-top: 0.2rem;
+		}
+		.bottom-info {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 1.2rem;
+			background: rgba(0, 0, 0, 0.5);
+			color: #d1b984;
+			width: 100%;
+			.flex;
+			align-items: center;
+			padding: 0.266667rem 0;
+			.item {
+				flex: 1;
+				.flex-center;
+				border-right: 0.013333rem solid #fff;
+				&:last-child {
+					border-right: none !important;
+				}
 				img {
-					width: 0.64rem;
-					height: 0.64rem;
+					height: 0.586667rem;
+					width: 0.586667rem;
+					margin-right: 0.2rem;
 				}
 			}
-			.item-text {
-			    color: #121212;
-			    font-size: 0.4rem;
-			}
-		}
-		.left-item,
-		.right-item {
-			border-bottom: 0.026667rem solid #cccccc;
-		}
-		.middle-item {
-			border-left: 0.026667rem solid #cccccc;
-			border-right: 0.026667rem solid #cccccc;
-			border-bottom: 0.026667rem solid #cccccc;
 		}
 	}
-	.invite {
+	.nav-item {
 		height: 1.2rem;
-		display: flex;
-		display: -webkit-flex;
+		border-bottom: 0.013333rem solid #eee;
+		width: 100%;
+		.flex;
 		align-items: center;
 		justify-content: space-between;
 		background-color: #fff;
 		padding: 0 0.333333rem;
-		font-size: 0.4rem;
-		color: #333333;
-		.tips {
+		.left-content {
 			height: 100%;
-			display: flex;
-			display: -webkit-flex;
+			.flex;
 			align-items: center;
-			.tips-text {
-				margin-left: 0.16rem;
+			.item-name {
+				margin-left: 0.266667rem;
+				color: #666;
+				font-size: 0.4rem;
 			}
 		}
 	}
-
 }
