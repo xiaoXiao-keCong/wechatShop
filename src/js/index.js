@@ -299,14 +299,46 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'download_page.html',
 			controller: 'downloadCtrl'
 		})
+		.when('/my_balance', {
+			templateUrl: 'my_balance.html',
+			controller: 'myBalanceCtrl'
+		})
+		.when('/complete_info_wx', {
+			templateUrl: 'complete_info_wx.html',
+			controller: 'completeInfoWxCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
 }]);
 
 
-// 获取地理位置并设置到localStorage中
-(function getLocation() {
+// 获取地理位置并设置到localStorage中，通过code进行登录
+(function init() {
+	var wxCode = getUrlParam('code');
+	if (!sessionStorage.getItem('login') || sessionStorage.getItem('wxCode') != wxCode) {
+		$.ajax({
+			url: '/user/wxpublogin.json',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {code: wxCode},
+			success: function (resp) {
+				if (1 === resp.code) {
+					sessionStorage.setItem('login', '1');
+					sessionStorage.setItem('wxCode', wxCode);
+					var user = resp.data;
+					if (user.telephone === '') {
+						// 跳转到完善手机信息页面
+						window.location.href = 'index.html#/complete_info_wx';
+					}
+				}
+			},
+			error: function (resp) {
+				alert('数据请求失败，请稍后再试！');
+			}
+		});
+	}
+	
 	if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(showPosition);
     }
@@ -321,3 +353,14 @@ function showPosition(position) {
 	localStorage.setItem('positionx', positionx);
 	localStorage.setItem('positiony', positiony);
 }
+
+// 获取url参数
+function getUrlParam(name){  
+    //构造一个含有目标参数的正则表达式对象  
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");  
+    //匹配目标参数  
+    var r = window.location.search.substr(1).match(reg);  
+    //返回参数值  
+    if (r !== null) return unescape(r[2]);  
+    return null;  
+} 

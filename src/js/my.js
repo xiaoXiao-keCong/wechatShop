@@ -80,18 +80,14 @@ index.controller('myCtrl',
 		$location.path('edit_info');
 	};
 
-	// 点击积分跳转到积分商城
-	// $scope.toPointMall = function () {
-	// 	$location.path('point_mall');
-	// };
+	// 点击悦币跳转到悦币商城
+	$scope.toCoinMall = function () {
+		$location.path('coin_mall');
+	};
 
 	// 点击余额跳转到我的余额
 	$scope.toBalance = function () {
-		$location.path('balance');
+		$location.path('my_balance');
 	};
 
-	// 点击邀请好友即送500悦币
-	$scope.toInvite = function () {
-		$location.path('invite');
-	};
 }]);

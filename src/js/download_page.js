@@ -8,7 +8,6 @@ index.controller('downloadCtrl',
 	// 初始化
 	(function init() {
 		$scope.phone = $location.search().phone || '';
-
 	})();
 
 	// 点击下载客户端
