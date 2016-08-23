@@ -57,6 +57,11 @@ index.controller('payGoodsCtrl',
 		$http.post('/pay/getpingcharge.json', data, postCfg)
 		.success(function (resp) {
 			console.log(resp);
+			if (1 === resp.code) {
+				pingpp.createPayment(JSON.stringify(resp.data), function (result, err) {
+					console.log(result, err);
+				});
+			}
 		})
 		.error(function (resp) {
 			alert('数据请求失败，请稍后再试！');
