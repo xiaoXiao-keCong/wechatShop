@@ -307,6 +307,10 @@ index.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'complete_info_wx.html',
 			controller: 'completeInfoWxCtrl'
 		})
+		.when('/balance_record', {
+			templateUrl: 'balance_record.html',
+			controller: 'balanceRecordCtrl'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

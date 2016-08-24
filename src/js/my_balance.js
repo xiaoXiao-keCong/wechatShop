@@ -45,4 +45,8 @@ index.controller('myBalanceCtrl',
 			alert('数据请求失败，请稍后再试！');
 		});
 	})();
+
+	$scope.recharge = function (item) {
+		console.log(item);
+	};
 }]);

@@ -3,7 +3,9 @@
         <img src="../../assets/images/back.png">
     </span>
     <span>我的余额</span>
-    <span class="title-bar-right font-size-24">余额纪录</span>
+    <a href="index.html#/balance_record">
+	    <span class="title-bar-right font-size-24">余额纪录</span>
+    </a>
 </div>
 <div id="my-balance">
 	<div class="balance-text">
@@ -22,7 +24,7 @@
 				<span  ng-bind="item.servicediscount * 10"></span>折	
 			</span>
 		</div>
-		<div class="recharge-btn">
+		<div class="recharge-btn" ng-click="recharge(item)">
 			立即充值
 		</div>
 	</div>
