@@ -47,25 +47,25 @@ index.controller('payGoodsCtrl',
 
 	// 点击立即支付弹出输入密码对话框
 	$scope.pay = function () {
-		$scope.showMask = true;
+		// $scope.showMask = true;
 		// 微信支付
-		// var data = {
-		// 	orderid: orderId,
-		// 	channel: 'wx_pub',
-		// 	code: sessionStorage.getItem('wxCode')
-		// };
-		// $http.post('/pay/getpingcharge.json', data, postCfg)
-		// .success(function (resp) {
-		// 	console.log(resp);
-		// 	if (1 === resp.code) {
-		// 		pingpp.createPayment(JSON.stringify(resp.data), function (result, err) {
-		// 			console.log(result, err);
-		// 		});
-		// 	}
-		// })
-		// .error(function (resp) {
-		// 	alert('数据请求失败，请稍后再试！');
-		// });
+		var data = {
+			orderid: orderId,
+			channel: 'wx_pub',
+			code: sessionStorage.getItem('wxCode')
+		};
+		$http.post('/pay/getpingcharge.json', data, postCfg)
+		.success(function (resp) {
+			console.log(resp);
+			if (1 === resp.code) {
+				pingpp.createPayment(JSON.stringify(resp.data), function (result, err) {
+					console.log(result, err);
+				});
+			}
+		})
+		.error(function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
 	};
 
 	// 点击空白处隐藏遮罩并清除密码

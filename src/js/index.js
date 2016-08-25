@@ -331,6 +331,7 @@ index.config(['$routeProvider', function ($routeProvider) {
 					sessionStorage.setItem('login', '1');
 					sessionStorage.setItem('wxCode', wxCode);
 					var user = resp.data;
+					sessionStorage.setItem('user', JSON.stringify(user));
 					if (user.telephone === '') {
 						// 跳转到完善手机信息页面
 						window.location.href = 'index.html#/complete_info_wx';

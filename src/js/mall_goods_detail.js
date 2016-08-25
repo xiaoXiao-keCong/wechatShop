@@ -21,7 +21,6 @@ index.controller('mallGoodsDetailCtrl',
 		// 获取商品详情
 		$http.post('/shop/getgoodsbyid.json', {id: goodsId}, postCfg)
 		.then(function (resp) {
-			console.log(resp);
 			if (1 === resp.data.code) {
 				var goods = resp.data.data;
 				for (var i = 0, j = goods.imgarray.length; i < j; i++) {
@@ -97,11 +96,9 @@ index.controller('mallGoodsDetailCtrl',
 				// 用户未登录
 				$location.path('login').search({});
 			}
-			else if (2 === resp.data.code) {
-
-			}
+			
 		}, function (resp) {
-			console.log(resp);
+			alert('数据请求失败，请稍后再试！');
 		});
 
 	};
