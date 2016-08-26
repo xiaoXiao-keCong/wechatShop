@@ -112,7 +112,6 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
         };
         $http.post('/user/buyvipsecondstep.json', data, postCfg)
         .success(function (data) {
-            console.log(data);
             if (-1 === data.code) {
                 $location.path('login');
                 return;

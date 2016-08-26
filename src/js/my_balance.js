@@ -38,7 +38,6 @@ index.controller('myBalanceCtrl',
 					};
 				}
 				$scope.vipList = vipList;
-				console.log(vipList);
 			}
 		})
 		.error(function (resp) {
@@ -46,7 +45,52 @@ index.controller('myBalanceCtrl',
 		});
 	})();
 
+	// 立即充值
 	$scope.recharge = function (item) {
-		console.log(item);
+		$scope.payMoney = item.price;
+		var data = {
+			paymoney: item.price
+		};
+		$http.post('/user/buyvipfirststep.json', data, postCfg)
+		.success(function (resp) {
+			console.log(resp);
+			var vipList;
+			if (1 === resp.code) {
+				vipList = resp.data.viplist;
+				$scope.vipId = vipList[0].id;
+				buyVipSecondStep();
+			}
+		})
+		.error(function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
 	};
+
+	function buyVipSecondStep() {
+		var data = {
+			vipid: $scope.vipId,
+			paymoney: $scope.payMoney,
+		};
+		$http.post('/user/buyvipsecondstep.json', data, postCfg)
+		.success(function (resp) {
+			console.log(resp);
+			if (1 === resp.code) {
+				// 下单成功，跳转到充值支付页面
+				var order = resp.data;
+				$location.path('pay_recharge').search({
+					id: order.id,
+					time: order.time,
+					price: order.price,
+					type: order.type
+				});
+				return;
+			}
+			else if (0 === resp.code) {
+				alert(resp.reason);
+			}
+		})
+		.error(function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
 }]);
