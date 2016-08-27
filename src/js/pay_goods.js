@@ -48,7 +48,7 @@ index.controller('payGoodsCtrl',
 	// 点击立即支付弹出输入密码对话框
 	$scope.pay = function () {
 		// 当勾选了余额支付并且余额大于0
-		if ($scope.balancePay) {
+		if ($scope.balancePay && $scope.balance > 0) {
 			$scope.showMask = true;
 		}
 		else {

@@ -43,7 +43,6 @@ index.controller('payRechargeCtrl',['$scope', '$http', '$location', '$rootScope'
 				alert('数据请求失败，请稍后再试！');
 			});
 		}
-		
 	};
 
 	function wxPay() {

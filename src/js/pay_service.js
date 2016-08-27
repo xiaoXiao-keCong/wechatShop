@@ -32,6 +32,9 @@ index.controller('payServiceCtrl',
 			if (1 === data.code) {
 				var service = data.data;
 				service.designer.imgurl = picBasePath + service.designer.imgurl;
+				service.style = {
+					'background-image': 'url(' + service.designer.imgurl + ')'
+				};
 				$scope.service = service;
 				getCoupon();
 			}
@@ -48,7 +51,12 @@ index.controller('payServiceCtrl',
 
 	// 点击立即支付弹出输入密码对话框
 	$scope.pay = function () {
-		$scope.showMask = true;
+		if ($scope.balancePay && $scope.balance > 0) {
+			$scope.showMask = true;
+		}
+		else {
+			wxPay();
+		}
 	};
 
 	// 点击空白处隐藏遮罩并清除密码
@@ -92,8 +100,13 @@ index.controller('payServiceCtrl',
 		
 	};
 
+	// 请求余额支付
 	function payByBalance() {
 		var payPassword = $('#pay-password').val();
+		if ($.trim(payPassword) === '') {
+			alert('请输入支付密码！');
+			return;
+		}
 		var data = {
 			orderid: orderId,
 			paypassword: payPassword
@@ -104,10 +117,12 @@ index.controller('payServiceCtrl',
 				alert(data.reason);
 			}
 			else if (1 === data.code) {
-				alert('支付成功！');
-				$location.path('order').search({});
+				// alert('支付成功！');
+				// $location.path('order').search({});
 				// 跳转到支付成功界面
 				// $location.path('change_tip').search({type: 'pay', orderId: orderId}).replace();
+				// 余额支付成功，开始微信支付
+				wxPay();
 			}
 		})
 		.error(function (data) {
@@ -115,8 +130,41 @@ index.controller('payServiceCtrl',
 		});
 	}
 
-	// 去选择优惠券
-	// 获取可用的优惠券
+	function wxPay() {
+		var data = {
+			orderid: orderId,
+			channel: 'wx_pub',
+			code: sessionStorage.getItem('wxCode')
+		};
+		$http.post('/pay/getpingcharge.json', data, postCfg)
+		.success(function (resp) {
+			console.log(resp);
+			if (1 === resp.code) {
+				pingpp.createPayment(JSON.stringify(resp.data), function (ret, err) {
+					if (ret && ret.result) {
+						switch (ret.result) {
+							case 'success':
+							    alert('支付成功');
+							    break;
+							case 'fail':
+							    alert('支付失败');
+							    break;
+							default:
+							    break;
+						}
+					}
+					if (err && 0 === err.code) {
+						alert(err.msg);
+					}
+				});
+			}
+		})
+		.error(function (resp) {
+			alert('数据请求失败，请稍后再试！');
+		});
+	}
+
+	// 去选择优惠券，获取可用的优惠券
 	function getCoupon() {
 		if (!$rootScope.serviceCoupon) {
 			$http.post('/user/mycouponwithprice.json',
