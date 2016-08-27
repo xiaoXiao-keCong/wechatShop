@@ -47,8 +47,17 @@ index.controller('payGoodsCtrl',
 
 	// 点击立即支付弹出输入密码对话框
 	$scope.pay = function () {
-		// $scope.showMask = true;
-		// 微信支付
+		// 当勾选了余额支付并且余额大于0
+		if ($scope.balancePay) {
+			$scope.showMask = true;
+		}
+		else {
+			wxPay();
+		}
+	};
+
+	// 微信支付
+	function wxPay() {
 		var data = {
 			orderid: orderId,
 			channel: 'wx_pub',
@@ -58,15 +67,29 @@ index.controller('payGoodsCtrl',
 		.success(function (resp) {
 			console.log(resp);
 			if (1 === resp.code) {
-				pingpp.createPayment(JSON.stringify(resp.data), function (result, err) {
-					console.log(result, err);
+				pingpp.createPayment(JSON.stringify(resp.data), function (ret, err) {
+					if (ret && ret.result) {
+						switch (ret.result) {
+							case 'success':
+							    alert('支付成功');
+							    break;
+							case 'fail':
+							    alert('支付失败');
+							    break;
+							default:
+							    break;
+						}
+					}
+					if (err && 0 === err.code) {
+						alert(err.msg);
+					}
 				});
 			}
 		})
 		.error(function (resp) {
 			alert('数据请求失败，请稍后再试！');
 		});
-	};
+	}
 
 	// 点击空白处隐藏遮罩并清除密码
 	$scope.hideMask = function () {
@@ -87,6 +110,10 @@ index.controller('payGoodsCtrl',
 	// 确认支付
 	$scope.confirmPwd = function () {
 		var payPassword = $('#pay-password').val();
+		if ($.trim(payPassword) === '') {
+			alert('请输入支付密码！');
+			return;
+		}
 		var data = {
 			orderid: orderId,
 			paypassword: payPassword
@@ -98,10 +125,11 @@ index.controller('payGoodsCtrl',
 				return;
 			}
 			if (1 === data.code) {
-				alert('支付成功！');
-				$location.path('order').search({});
+				// alert('支付成功！');
+				// $location.path('order').search({});
 				// 跳转到支付成功界面
-				$location.path('change_tip').search({type: 'pay', orderId: orderId, origin: origin}).replace();
+				// $location.path('change_tip').search({type: 'pay', orderId: orderId, origin: origin}).replace();
+				wxPay();
 			}
 			else {
 				alert(data.reason);

@@ -53,7 +53,6 @@ index.controller('myBalanceCtrl',
 		};
 		$http.post('/user/buyvipfirststep.json', data, postCfg)
 		.success(function (resp) {
-			console.log(resp);
 			var vipList;
 			if (1 === resp.code) {
 				vipList = resp.data.viplist;

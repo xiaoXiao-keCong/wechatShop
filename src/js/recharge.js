@@ -98,7 +98,6 @@ index.controller('rechargeCtrl', ['$scope', '$http', '$location', '$rootScope',
             }
         })
         .error(function (data) {
-            console.log(data);
             alert('数据请求失败，请稍后再试！');
         });
     };
