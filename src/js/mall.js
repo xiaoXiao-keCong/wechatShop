@@ -1,6 +1,3 @@
-/**
- * Created by hugotan on 2016/4/16.
- */
 index.controller('mallCtrl',
     ['$scope', '$http', '$location', '$q', '$window',
     function ($scope, $http, $location, $q, $window) {
@@ -27,60 +24,48 @@ index.controller('mallCtrl',
 
     (function init() {
         // 获取商城广告
-        $http.post('/shop/getshopad.json', postCfg)
+        $http.post('/home/homead.json', postCfg)
         .then(function (resp) {
+            // console.log(resp);
             if (1 === resp.data.code) {
-                var adList = resp.data.data.shopadvertisementlist;
+                var adList = resp.data.data.homeadlist;
                 for (var i = 0, j = adList.length; i < j; i++) {
                     adList[i].imgurl = picBasePath + adList[i].imgurl;
                 }
                 $scope.adList = adList;
+
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！');
+            // alert('数据请求失败，请稍后再试！');
         });
-        // 获取首页目录
-        $http.post('/shop/getshopmenu.json', postCfg)
-        .success(function (data) {
-            if (1 === data.code) {
-                var menuList = data.data.menulist;
-                for (var i = 0; i < menuList.length; i++) {
-                    menuList[i].imgurl = picBasePath + '/' + menuList[i].imgurl;
-                }
-                $scope.menuList = menuList;
-            }
-        })
-        .error(function (data) {
-            alert('数据请求失败，请稍后再试！');
-        });
-        // 限时抢购
-        $http.post('/shop/getflashsale.json', {'page': 1}, postCfg)
+        // 热门主题
+        $http.post('/home/hottheme.json', postCfg)
         .then(function (resp) {
+            // console.log(resp);
             if (1 === resp.data.code) {
-                var flashSaleList = resp.data.data.goodslist;
-                $scope.limitStartTime = resp.data.data.starttime;
-                $scope.limitEndTime = resp.data.data.endtime;
-                $scope.flashTips = resp.data.data.content;
+                var flashSaleList = resp.data.data.themelist;
+                $scope.remark=resp.data.data.remark;
                 for (var i = 0, j = flashSaleList.length; i < j; i++) {
-                    flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl1;
+                    flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl;
                 }
                 $scope.flashSaleList = flashSaleList;
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！');
+            // alert('数据请求失败，请稍后再试！');
         });
-        // 品牌专区
-        $http.post('/shop/getshopbrand.json', postCfg)
+        // 专题精选
+        $http.post('/home/specialtheme.json', postCfg)
         .then(function (resp) {
+            // console.log(resp);
             if (1 === resp.data.code) {
-                var brandList = resp.data.data.goodskindlist;
+                var brandList = resp.data.data.specialthemelist;
                 for (var i = 0, j = brandList.length; i < j; i++) {
                     brandList[i].imgurl = picBasePath + brandList[i].imgurl;
                 }
                 $scope.brandList = brandList;
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！');
+            // alert('数据请求失败，请稍后再试！');
         });
         getGoods();
     })();
@@ -106,7 +91,10 @@ index.controller('mallCtrl',
     $scope.toCart = function () {
         $location.path('cart');
     };
-
+    // 客服
+    $scope.kefu = function () {
+        alert('详情请致电-85611588');
+    };
     // 跳转到商品搜索页面
     $scope.searchGoods = function () {
         $location.path('mall_search');
@@ -119,16 +107,16 @@ index.controller('mallCtrl',
         }
         $scope.loading = true;
         var data = {
-            page: $scope.page,
-            sort: $scope.type
+            page: $scope.page
         };
-        $http.post('/shop/searchgoodsbycondition.json',data, postCfg)
+        $http.post('/home/scenetheme.json',data, postCfg)
         .then(function (resp) {
+            console.log(resp);
             if (1 === resp.data.code) {
-                var goodsList = resp.data.data.goodslist;
+                var goodsList = resp.data.data.scenethemelist;
                 if (goodsList.length > 0) {
                     for (var i = 0, j = goodsList.length; i < j; i++) {
-                        goodsList[i].imgurl = picBasePath + goodsList[i].imgurl1;
+                        goodsList[i].imgurl = picBasePath + goodsList[i].imgurl;
                         $scope.goodsList.push(goodsList[i]);
                     }
                     $scope.page += 1;
@@ -139,7 +127,7 @@ index.controller('mallCtrl',
                 }
             }
         }, function (resp) {
-            alert('数据请求失败，请稍后再试！');
+            // alert('数据请求失败，请稍后再试！');
         });
     }
 
@@ -196,8 +184,33 @@ index.controller('mallCtrl',
             }
         })
         .error(function (data) {
-            alert('数据请求失败，请稍后再试！');
+            // alert('数据请求失败，请稍后再试！');
         });
     };
-
+    $scope.navigate = function (index) {
+        var user;
+        switch (index) {
+            case 1:
+                $location.path('/');
+                break;
+            case 2:
+                $location.path('stylist');
+                break;
+            case 3:
+                $location.path('cart');
+                break;
+            case 4:
+                if (sessionStorage.user) {
+                    user = JSON.parse(sessionStorage.user);
+                    if (user.nickname === '') {
+                        alert('请填写您的昵称!');
+                        $location.path('complete_info').search({type: 'modify'});
+                        return;
+                    }
+                }
+                $location.path('my');
+                // $window.location.href = '/webapp/src/xiaoyue/home.html';
+                break;
+        }
+    };
 }]);

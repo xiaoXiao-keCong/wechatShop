@@ -3,11 +3,11 @@
     	<span>我的</span>
     </div> -->
     <div id="my-container">
-        <div class="user-info" ng-if="!isLogin">
+        <!-- <div class="user-info" ng-if="!isLogin">
             <img src="../../assets/images/head-none.png" class="head-img">
             <div class="login">
-                <a href="index.html#/login">登录</a>  /  
-                <a href="index.html#/register">注册</a>
+                <a href="/webapp/build/html/login">登录</a>  /  
+                <a href="/webapp/build/html/login">注册</a>
             </div>
             <div class="bottom-info">
                 <div class="item">
@@ -23,96 +23,81 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="user-info" ng-if="isLogin">
+        </div> -->
+        <div class="user-info margin-bottom-20">
             <img ng-src="{{user.imgurl}}" class="head-img head-img-border">
-            <img ng-src="{{user.vip.smallimgurl}}" class="vip-img">
-            <span ng-bind="user.nickname" class="account-text"></span>
-            <div class="bottom-info">
-                <div class="item" ng-click="toBalance()">
-                    <img src="../../assets/images/wdye.png" class="common-icon">
-                    <div>
-                        余额：<span ng-bind="user.balance"></span>元
-                    </div>
-                </div>
-                <div class="item" ng-click="toCoinMall()">
-                    <img src="../../assets/images/wdyb.png">
-                    <div>
-                        悦币：<span ng-bind="user.score"></span>元
-                    </div>
-                </div>
-            </div>
+            <span  class="account-text">舟可</span>
         </div>
-        <a href="index.html#/coupon">
-            <div class="nav-item">
+        <a href="/webapp/build/html/order">
+            <div class="nav-item nav-item-order">
                 <div class="left-content">
-                    <img src="../../assets/images/wd-yhq.png" class="common-icon">
-                    <span class="item-name">我的优惠券</span>
+                    <span class="item-name my-order">我的订单</span>
                 </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
+                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="index.html#/collection">
+        <div class="order-nav margin-bottom-20">
+            <span class="item">
+                <span class="item-img">
+                    <span class="tsNum">5</span>
+                    <img src="../../assets/images/daifukuan.png">
+                </span>      
+                <span class="text highlight">待付款</span>
+            </span>
+            <span class="item">
+                <span class="item-img">
+                    <span class="tsNum">9+</span>
+                    <img src="../../assets/images/daishouhuo.png">
+                </span>
+                <span class="text">待收货</span>
+            </span>
+            <span class="item">
+                <span>
+                    <img src="../../assets/images/yiwancheng.png">
+                </span>
+                <span class="text">已完成</span>
+            </span>
+            <span class="item">
+                <span>
+                    <img src="../../assets/images/shouhou.png">
+                </span>
+                <span class="text">售后</span>   
+            </span>
+        </div>
+        <a href="/webapp/build/html/coin_mall">
             <div class="nav-item">
                 <div class="left-content">
-                    <img src="../../assets/images/wd-sc.png" class="common-icon">
+                    <span class="h-icon"></span>
                     <span class="item-name">我的收藏</span>
                 </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
+                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="index.html#/coin_mall">
-            <div class="nav-item margin-bottom-20">
-                <div class="left-content">
-                    <img src="../../assets/images/wd-ybsc.png" class="common-icon">
-                    <span class="item-name">我的悦币商城</span>
-                </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
-            </div>
-        </a>
-        <a href="index.html#/invite">
+        <a href="/webapp/build/html/coupon">
             <div class="nav-item">
                 <div class="left-content">
-                    <img src="../../assets/images/wd-tjhy.png" class="common-icon">
-                    <span class="item-name">邀请好友即送500悦币</span>
+                    <span class="h-icon"></span>
+                    <span class="item-name">地址管理</span>
                 </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
+                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="index.html#/activity">
+        <a href="/webapp/build/html/collection">
             <div class="nav-item">
                 <div class="left-content">
-                    <img src="../../assets/images/wd-hd.png" class="common-icon">
-                    <span class="item-name">我的活动</span>
+                    <span class="h-icon"></span>
+                    <span class="item-name">帮助中心</span>
                 </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
+                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="index.html#/cart">
+        <a href="/webapp/build/html/collection">
             <div class="nav-item">
                 <div class="left-content">
-                    <img src="../../assets/images/wd-gwc.png" class="common-icon">
-                    <span class="item-name">我的购物车</span>
+                    <span class="h-icon"></span>
+                    <span class="item-name">关于我们</span>
                 </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
-            </div>
-        </a>
-        <a href="index.html#/addr_manage">
-            <div class="nav-item">
-                <div class="left-content">
-                    <img src="../../assets/images/wd-dz.png" class="common-icon">
-                    <span class="item-name">我的地址</span>
-                </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
-            </div>
-        </a>
-        <a href="index.html#/setting">
-            <div class="nav-item">
-                <div class="left-content">
-                    <img src="../../assets/images/wd-sz.png" class="common-icon">
-                    <span class="item-name">设置</span>
-                </div>
-                <img src="../../assets/images/arrow_grey.png" class="common-icon">
+                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
     </div>
@@ -121,31 +106,25 @@
             <span>
                 <img src="../../assets/images/shouye.png">
             </span>      
-            <span class="text">首页</span>
+            <span class="text highlight">首页</span>
         </span>
         <span class="item" ng-click="navigate(2)">
             <span>
-                <img src="../../assets/images/faxingshi.png">
+                <img src="../../assets/images/fenlei.png">
             </span>
-            <span class="text">发型师</span>
+            <span class="text">分类</span>
         </span>
         <span class="item" ng-click="navigate(3)">
             <span>
-                <img src="../../assets/images/yuyue.png">
+                <img src="../../assets/images/gouwuche.png">
             </span>
-            <span class="text">一键预约</span>
+            <span class="text">购物车</span>
         </span>
         <span class="item" ng-click="navigate(4)">
             <span>
-                <img src="../../assets/images/dingdan.png">
-            </span>
-            <span class="text">订单</span>   
-        </span>
-        <span class="item" ng-click="navigate(5)">
-            <span>
                 <img src="../../assets/images/me_h.png">
             </span>
-            <span class="text highlight">我的</span>
+            <span class="text">我的</span>   
         </span>
     </div>
 </div>

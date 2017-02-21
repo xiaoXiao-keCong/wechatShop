@@ -1,6 +1,3 @@
-/**
- * Created by hugotan on 2016/5/4.
- */
 index.controller('mallSearchCtrl',
 	['$scope', '$http', '$location', '$window',
 	function ($scope, $http, $location, $window) {
@@ -45,5 +42,8 @@ index.controller('mallSearchCtrl',
 	// 跳转到商品详情
 	$scope.toGoodsDetail = function (goods) {
 		$location.path('mall_goods_detail/' + goods.id);
+	};
+	$scope.tback = function(){
+		$location.path('mall');
 	};
 }]);

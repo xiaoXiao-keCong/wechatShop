@@ -1,8 +1,5 @@
-/**
- * Created by hugotan on 2016/4/11.
- */
 index.controller('myCtrl',
-	['$scope', '$http', '$location', '$timeout', function ($scope, $http, $location, $timeout) {
+	['$scope', '$http', '$location', '$rootScope', '$timeout', function ($scope, $http, $location, $rootScope, $timeout) {
 
 	(function init() {
 		// 请求用户信息
@@ -22,11 +19,11 @@ index.controller('myCtrl',
 			}
 		})
 		.error(function (resp) {
-			alert('数据请求失败，请稍后再试！');
+			// alert('数据请求失败，请稍后再试！');
 		});
 	})();
 
-
+	$rootScope.desingopay = 0;
 	function checkLogin() {
 		if (!sessionStorage.user) {
 			// 用户未登录，跳转到登录页面
@@ -56,15 +53,10 @@ index.controller('myCtrl',
 				break;
 			case 3:
 				$timeout(function () {
-					$location.path('appointment');
+					$location.path('go_pay');
 				}, 0);
 				break;
 			case 4:
-				$timeout(function () {
-					$location.path('order');
-				}, 0);
-				break;
-			case 5:
 				$timeout(function () {
 					$location.path('my');
 				}, 0);

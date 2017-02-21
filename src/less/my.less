@@ -1,26 +1,30 @@
 @import "display";
 #my-container {
-	background-color: #f1f1f1;
-	padding-bottom: 1.306667rem;
+	background-color: #f4f4f4;
+	padding-bottom: 1.466667rem;
 	.margin-bottom-20 {
-		margin-bottom: 0.266667rem;
+		margin-bottom: 0.213333rem;
 	}
 	.user-info {
-		height: 5.866667rem;
+		height: 6.133333rem;
 		width: 10.0rem;
-		background-image: url("../../assets/images/wdbj.png");
+		background: #fff;
 		background-size: 100% 100%;
 		position: relative;
 		.flex-column;
-		align-items: center;
+		-moz-align-items:center;
+		-ms-align-items:center;
+		-o-align-items:center;
+		align-items:center;
+		-webkit-align-items:center;
 		.head-img {
-			width: 2.0rem;
-			height: 2.0rem;
-			margin-top: 1.0rem;
+			width: 2.133333rem;
+			height: 2.133333rem;
+			margin-top: 1.573333rem;
 			border-radius: 100%;
 		}
 		.head-img-border {
-			border: 0.04rem solid #fff;
+			border: 0.013333rem solid #333;
 		}
 		.vip-img {
 			margin-top: 0.2rem;
@@ -36,9 +40,9 @@
 			}
 		}
 		.account-text {
-			color: #fff;
-			font-size: 0.32rem;
-			margin-top: 0.2rem;
+			color: #333;
+			font-size: 0.4rem;
+			margin-top: 0.453333rem;
 		}
 		.bottom-info {
 			position: absolute;
@@ -49,10 +53,18 @@
 			color: #d1b984;
 			width: 100%;
 			.flex;
-			align-items: center;
+			-moz-align-items:center;
+			-ms-align-items:center;
+			-o-align-items:center;
+			align-items:center;
+			-webkit-align-items:center;
 			padding: 0.266667rem 0;
 			.item {
+				-moz-box-flex: 1;        
+				-ms-flex: 1; 
+				-webkit-box-flex: 1 ;           
 				flex: 1;
+				-webkit-flex: 1;
 				.flex-center;
 				border-right: 0.013333rem solid #fff;
 				&:last-child {
@@ -66,24 +78,116 @@
 			}
 		}
 	}
+	.nav-item-order{
+		height:1.173333rem !important;
+	}
 	.nav-item {
-		height: 1.2rem;
-		border-bottom: 0.013333rem solid #eee;
+		height: 1.466667rem;
+		border-bottom: 0.013333rem solid #ccc;
 		width: 100%;
 		.flex;
-		align-items: center;
+		-moz-align-items:center;
+		-ms-align-items:center;
+		-o-align-items:center;
+		align-items:center;
+		-webkit-align-items:center;
+		-moz-justify-content: space-between;
+		-ms-justify-content: space-between;
+		-o-justify-content: space-between;
 		justify-content: space-between;
+		-webkit-justify-content: space-between;
 		background-color: #fff;
-		padding: 0 0.333333rem;
 		.left-content {
 			height: 100%;
 			.flex;
-			align-items: center;
+			-moz-align-items:center;
+			-ms-align-items:center;
+			-o-align-items:center;
+			align-items:center;
+			-webkit-align-items:center;
+			.h-icon{
+				display:inline-block;
+				width:0.066667rem;
+				height:0.32rem;
+				background:#333;
+				margin:0 0.16rem 0 0.426667rem;
+			}
+			.my-order{
+				margin-left:0.4rem;
+				color:#666 !important;
+			}
 			.item-name {
-				margin-left: 0.266667rem;
-				color: #666;
-				font-size: 0.4rem;
+				color: #333;
+				font-size: 0.346667rem;
 			}
 		}
 	}
+	// 订单部分
+.order-nav {
+    z-index: 100;
+    background-color: #fff;
+    width: 100%;
+    height: 1.946667rem;
+    display: -moz-box; 
+    display: -ms-flexbox;
+    display:box;
+    display: -webkit-box;
+    display: flex;
+    display: -webkit-flex;
+    -moz-align-items:center;
+    -ms-align-items:center;
+    -o-align-items:center;
+    align-items:center;
+    -webkit-align-items:center;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    -o-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    .item {
+      display: -moz-box; 
+        display: -ms-flexbox;
+        display:box;
+        display: -webkit-box;
+        display: flex;
+        display: -webkit-flex;
+        -moz-align-items:center;
+        -ms-align-items:center;
+        -o-align-items:center;
+        align-items:center;
+        -webkit-align-items:center;
+        -moz-flex-direction:column;
+        -ms-flex-direction:column;
+        -o-flex-direction:column; 
+        flex-direction:column; 
+        -webkit-flex-direction:column;
+      img {
+        height: 0.8rem;
+        width: 0.8rem;
+      }
+      .text {
+        font-size: 0.32rem;
+        color: #333;
+      }
+      .item-img{
+      	position:relative;
+      	.tsNum{
+      		position:absolute;
+      		display:block;
+      		top:-0.133333rem;
+      		right:-0.133333rem;
+      		width:0.466667rem;
+      		height:0.466667rem;
+      		background:red;
+      		border-radius:100%;
+      		color:#fff;
+      		font-size:0.266667rem;
+      		text-align:center;
+      		line-height:0.466667rem;
+      		overflow:hidden;
+      		font-weight:bold;
+      	}
+      }
+    }
+  }
 }
