@@ -1,0 +1,29 @@
+<div class="parent-container">
+    <div class="title-bar">
+        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+        <span ng-bind="theme.name"></span>
+    </div>
+    <div id="theme-detail">
+        <!-- 商品列表 -->
+        <div class="goods-container">
+            <img ng-src="{{theme.imgurl}}" alt="" class="themepic">
+            <span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
+                <span class="goods-img-cont">
+                    <img ng-src="{{item.imgurl}}" class="goods-img">
+                    <span class="praise" ng-click="praise(item, $event)">
+                        <span ng-if="!item.keep" name="praise-icon"><img src="../../assets/images/unkeep.png" alt=""></span>
+                        <span ng-if="item.keep" name="praise-icon"><img src="../../assets/images/keep.png" alt=""></span>
+                    </span>
+                    <span class="salestate" ng-bind="item.salestate" ng-if="item.salestateflag == 1"></span>
+                    <span class="salestate salestate-xj" ng-bind="item.salestate" ng-if="item.salestateflag == 0"></span>
+                    <span class="salestate salestate-sq" ng-bind="item.salestate" ng-if="item.salestateflag == 2"></span>
+                </span>
+                <span class="goods-name" ng-bind="item.name"></span>
+                <span class="goods-info">
+                    <span class="realprice">￥<span ng-bind="item.realprice"></span></span>
+                    <span class="originalprice">￥<span ng-bind="item.originalprice"></span></span>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>

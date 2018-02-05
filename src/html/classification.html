@@ -1,0 +1,57 @@
+<!-- 分类 -->
+<div class="parent-container">
+    <div id="theme-detail" class="vip-detail">
+        <!-- 商品列表 -->
+        <div class="goods-container ">
+            <img ng-src="{{topimg}}" alt="" class="vip-pic">
+            <div class="ktvip-btn">立即开通会员</div>
+            <div class="title">
+                <img src="../../assets/images/zqjx.png" alt="" class="title-icon">
+                <span class="cn">会员专享</span>
+            </div>
+            <span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
+                <span class="goods-img-cont">
+                    <img ng-src="{{item.imgurl}}" class="goods-img">
+                    <span class="praise" ng-click="praise(item, $event)">
+                        <span ng-if="!item.keep" name="praise-icon"><img src="../../assets/images/unkeep.png" alt=""></span>
+                        <span ng-if="item.keep" name="praise-icon"><img src="../../assets/images/keep.png" alt=""></span>
+                    </span>
+                    <span class="salestate" ng-bind="item.salestate" ng-if="item.salestateflag == 1"></span>
+                    <span class="salestate salestate-xj" ng-bind="item.salestate" ng-if="item.salestateflag == 0"></span>
+                    <span class="salestate salestate-sq" ng-bind="item.salestate" ng-if="item.salestateflag == 2"></span>
+                </span>
+                <span class="goods-name" ng-bind="item.name"></span>
+                <span class="goods-info">
+                    <span class="realprice">￥<span ng-bind="item.realprice"></span></span>
+                    <span class="originalprice">￥<span ng-bind="item.originalprice"></span></span>
+                </span>
+            </span>
+        </div>
+    </div>
+</div>   
+<div class="bottom-nav">
+    <span class="item" ng-click="navigate(1)">
+        <span>
+            <img src="../../assets/images/shouye.png">
+        </span>      
+        <span class="text highlight">首页</span>
+    </span>
+    <span class="item" ng-click="navigate(2)">
+        <span>
+            <img src="../../assets/images/fenlei_h.png">
+        </span>
+        <span class="text">分类</span>
+    </span>
+    <span class="item" ng-click="navigate(3)">
+        <span>
+            <img src="../../assets/images/gouwuche.png">
+        </span>
+        <span class="text">购物车</span>
+    </span>
+    <span class="item" ng-click="navigate(4)">
+        <span>
+            <img src="../../assets/images/me.png">
+        </span>
+        <span class="text">我的</span>   
+    </span>
+</div>

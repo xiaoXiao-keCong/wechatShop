@@ -29,12 +29,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/trhuo/webapp.git"
+    "url": "git+https://github.com/yanglei0323/wechatshop.git"
   },
   "author": "hugotan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/trhuo/webapp/issues"
+    "url": "https://github.com/yanglei0323/wechatshop/issues"
   },
-  "homepage": "https://github.com/trhuo/webapp#readme"
+  "homepage": "https://github.com/yanglei0323/wechatshop#readme"
 }

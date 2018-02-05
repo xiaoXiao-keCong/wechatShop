@@ -1,0 +1,113 @@
+
+<div id="mall-goods-detail">
+	<div class="title-bar">
+	    <span class="title-bar-left">
+	        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	    </span>
+	    <span ng-bind="goods.name"></span>
+	    <span class="title-bar-right">
+	        <span ng-if="!goods.keep" class="praise-icon"><img src="../../assets/images/unkeep.png" alt="" ng-click="praiseOperation(goods.keep)"></span>
+            <span ng-if="goods.keep" class="praise-icon"><img src="../../assets/images/keep.png" alt="" ng-click="praiseOperation(goods.keep)"></span>
+	    </span>
+	</div>
+	<div advertise class="swiper-container advertise goodsBanner">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" ng-repeat="item in goodsImg" on-finish-render-filters>
+				<img ng-src="{{item.imgurl}}">
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="goodsPrice">
+		<span class="goodRealPrice">￥<span ng-bind="goods.realprice"></span></span>
+		<span class="goodOriginalPrice">￥<span ng-bind="goods.originalprice"></span></span>
+	</div>
+
+	<!-- 商品颜色 -->
+	<!-- <div class="goods-attribute marginTop20">
+		<span class="attribute-title">颜色</span>
+		<span class="attribute-icon"><img src="../../assets/images/arrow_down.png" alt=""></span>
+	</div>
+	<div class="order-nav">
+        <span class="item" ng-repeat="item in goodsColors">
+            <span ng-click="selectColor(item)" ng-class="{active: selectedColorId == item.id}">
+                <img ng-src="{{item.imgurl}}" ng-if="item.saleflag == true">
+                <img ng-src="{{item.imgunenabled}}" ng-if="item.saleflag == false">
+                <img src="../../assets/images/mask_bottom.png" alt="" class="mask_bottom" ng-if="selectedColorId == item.id">
+            </span>      
+        </span>
+    </div>
+    <div class="dashed-contaner">
+    	<div class="borderDashed"></div>
+    </div>
+
+    商品尺寸
+	<div class="goods-attribute">
+		<span class="attribute-title">尺寸</span>
+		<span class="attribute-icon"><img src="../../assets/images/arrow_down.png" alt=""></span>
+	</div>
+	<div class="order-size">
+        <span class="item" ng-repeat="item in sizeList">
+            <span ng-click="selectSize(item)">
+                <span ng-bind="item.name" class="sizeName"></span>
+                <img src="../../assets/images/mask_bottom.png" alt="" class="mask_bottom" ng-if="selectedSizeId == item.id">
+            </span>      
+        </span>
+        <div class="inventory">
+            <span ng-if="inventory >= 10">商品剩余<span ng-bind="inventory" class="num"></span>件</span>
+            <span ng-if="inventory <= 9">商品仅剩<span ng-bind="inventory" class="num"></span>件!</span>
+        </div>
+    </div> -->
+
+    <!-- 搭配推荐模块 -->
+    <div class="collocation-contaner marginTop20">
+    	<div class="collocation-title">搭 配 推 荐</div>
+    	<div class="swiper-container flash-sale-content" flashsale>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide item" ng-repeat="item in collocationList" 
+				on-flash-sale-render-finished ng-click="toGoodsDetail(item)">
+					<img ng-src="{{item.imgurl}}">
+				</div>
+			</div>
+		</div>
+    </div>
+    <!-- 相似推荐模块 -->
+    <div class="collocation-contaner marginTop20">
+    	<div class="collocation-title">相 似 推 荐</div>
+    	<div class="swiper-container flash-sale-content" flashsale>
+			<div class="swiper-wrapper">
+				<div class="swiper-slide item" ng-repeat="item in similarList" 
+				on-flash-sale-render-finished ng-click="toGoodsDetail(item)">
+					<img ng-src="{{item.imgurl}}">
+				</div>
+			</div>
+		</div>
+    </div>
+    <!-- 底部购买相关 -->
+    <div class="buy-container">
+        <div class="item" data-toggle="modal" data-target="#myModal"><img src="../../assets/images/kefu.png" alt=""></div>
+        <div class="item heightLine"></div>
+        <div class="item" ng-click="toCart()"><img src="../../assets/images/shoppingcart.png" alt=""></div>
+        <div class="item goBuy" ng-click="confirmBuy()" ng-if="inventory != 0">立即购买</div>
+        <div class="item goBuy goBuyUnable" ng-if="inventory == 0">立即购买</div>
+        <div class="item joinCart" ng-click="addToCart()" ng-if="inventory != 0">加入购物车</div>
+        <div class="item joinCart joinCartUnable" ng-if="inventory == 0">加入购物车</div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="new-modal-dialog">
+        <div class="new-modal-title">
+            联系客服
+        </div>
+        <div class="new-modal-body">
+            详情请致电：<a href="tel:85611588">85611588</a>
+        </div>
+    </div><!-- /.modal -->
+</div>
+<!-- 操作提示 -->
+<div class="goods-prompt">
+    <div class="imgContainer">
+        <img ng-src="{{promptImgurl}}" alt="">
+    </div>
+</div>

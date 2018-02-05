@@ -1,0 +1,109 @@
+<!-- 订单 -->
+<div class="parent-container">
+	<div class="title-bar">
+	    <span class="title-bar-left">
+	        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	    </span>
+		<span>
+			<span >订单详情</span>
+		</span>
+	</div>
+	<div id="order-detail">
+        <div class="order-adress">
+            <span class="adress-name">姓名</span>
+            <span class="adress-tel" ng-bind="order.telephone"></span>
+            <div class="adress-city" ng-bind="order.address"></div>
+        </div>
+        <div class="order-time" ng-if="order.stateflag == 0">
+            <div class="order-time-container">
+                <span>下单时间：<span ng-bind="order.time"></span></span>
+                <div class="remaining-time">剩余付款时间：<span ng-bind="remainingTime"></span></div>
+            </div>
+            <div class="customerService" data-toggle="modal" data-target="#myModal">
+                <span>
+                    <img src="../../assets/images/kefu.png" alt="">
+                    <span>联系客服</span>
+                </span>
+            </div>
+        </div>
+        <div class="order-time-other" ng-if="order.stateflag != 0">
+            <div class="order-time-container">
+                <span>下单时间：<span ng-bind="order.time"></span></span>
+            </div>
+            <div class="customerService" data-toggle="modal" data-target="#myModal">
+                <span>
+                    <img src="../../assets/images/kefu.png" alt="">
+                    <span>联系客服</span>
+                </span>
+            </div>
+        </div>
+        <div class="order-item-title">
+            <span>订单编号：<span ng-bind="order.id"></span></span>
+            <span ng-bind="order.state"></span>
+        </div>
+        <div class="order-info" ng-repeat="goods in goodslist">
+            <div class="goods-info">
+                <span class="left">
+                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                </span>
+                <span class="right">
+                    <span class="goodsinfo">
+                        <span class="name" ng-bind="goods.name"></span>
+                        <span class="number">x<span ng-bind="goods.num"></span></span>
+                    </span>
+                    <!-- <span class="size">
+                        <span ng-bind="goods.colorandsize"></span>
+                    </span> -->
+                    <span class="price">
+                        <span>￥<span ng-bind="goods.price"></span></span>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="order-item">
+            <span class="order-item-left">
+                实付<span class="order-originalprice">￥<span ng-bind="order.actualprice"></span></span>
+            </span>
+            <span class="order-item-right" ng-if="order.stateflag == 0">
+                <div class="order-btn" ng-click="orderConfirm()">
+                     <span>付款</span>
+                </div>
+                <div class="order-btn" ng-click="cancelOrder()">
+                     <span>取消订单</span>
+                </div>
+            </span>
+            <span class="order-item-right" ng-if="order.stateflag == 2">
+                <div class="order-btn" ng-click="logistics()">
+                     <span>追踪物流</span>
+                </div>
+            </span>
+        </div>
+        <div class="order-item short">
+            <span class="order-item-left">
+                运费
+            </span>
+            <span class="order-item-right">
+                <span>￥<span ng-bind="order.freightcharges"></span>.00</span>
+            </span>
+        </div>
+        <div class="order-item short">
+            <span class="order-item-left">
+                优惠
+            </span>
+            <span class="order-item-right">
+                <span class="text-highlight">-￥<span ng-bind="{{order.originalprice-order.actualprice}}"></span>.00</span>
+            </span>
+        </div>
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="new-modal-dialog">
+        <div class="new-modal-title">
+            联系客服
+        </div>
+        <div class="new-modal-body">
+            详情请致电：<a href="tel:85611588">85611588</a>
+        </div>
+    </div><!-- /.modal -->
+</div>

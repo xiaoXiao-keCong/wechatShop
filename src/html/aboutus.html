@@ -1,0 +1,23 @@
+<!-- 订单 -->
+<div class="parent-container">
+    <div class="title-bar">
+        <span class="title-bar-left">
+            <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+        </span>
+        <span>
+            <span >关于我们</span>
+        </span>
+        <!-- <span class="title-bar-right">
+            <span class="glyphicon glyphicon-refresh refresh-icon" ng-click="refresh()"></span>
+        </span> -->
+    </div>
+    <div id="aboutus-container">
+        <div class="nav-item" ng-repeat="item in baseinfoList" ng-click="jump(item)">
+            <div class="left-content">
+                <img ng-src="{{item.imgurl}}" alt="" class="navitem-icon">
+                <span class="item-name" ng-bind="item.name"></span>
+            </div>
+            <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
+        </div>
+    </div>
+</div>

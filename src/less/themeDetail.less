@@ -1,0 +1,108 @@
+@import "display";
+#theme-detail {
+	padding-top:1.066667rem;
+	.display-flex {
+		display: -moz-box; 
+		display: -ms-flexbox;
+		display:box;
+		display: -webkit-box;
+		display: flex;
+		display: -webkit-flex;
+	}
+	.display-flex-column {
+		display: -moz-box; 
+		display: -ms-flexbox;
+		display:box;
+		display: -webkit-box;
+		display: flex;
+		display: -webkit-flex;
+		-moz-flex-direction:column;
+		-ms-flex-direction:column;
+		-o-flex-direction:column; 
+		flex-direction:column; 
+		-webkit-flex-direction:column;
+	}
+	.goods-container {
+		min-height:0;
+		padding-bottom:0.453333rem;
+		.display-flex;
+		-moz-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		-o-flex-wrap: wrap;
+		flex-wrap:wrap;
+		-webkit-flex-wrap: wrap;
+		.themepic{
+			width:10.0rem;
+			height:7.493333rem;
+			margin:0 auto;
+		}
+		.item {
+			width: 5rem;
+			.display-flex-column;
+			-moz-align-items:center;
+			-ms-align-items:center;
+			-o-align-items:center;
+			align-items:center;
+			-webkit-align-items:center;
+			margin:0.4rem 0 0.133333rem;
+			.goods-img-cont{
+				position:relative;
+				.praise{
+					position:absolute;
+					top:0.24rem;
+					right:0.24rem;
+					img{
+						width:0.48rem;
+						height:0.48rem;
+					}
+				}
+				.salestate{
+					position:absolute;
+					width:4.4rem;
+					height:0.8rem;
+					background:rgba(255, 255, 255, 0.8);
+					left:0;
+					bottom:0;
+					color:#666;
+					font-size:0.346667rem;
+					text-align:center;
+					line-height:0.8rem;
+				}
+				.salestate-xj{
+					color: #ffffff;
+					background-color: rgba(255, 123, 172, 0.6);
+				}
+				.salestate-sq{
+					color: #ffffff;
+					background-color: rgba(0, 0, 0, 0.5);
+				}
+			}
+			.goods-img {
+				width: 4.4rem;
+				height: 5.173333rem;
+				border-radius:0.026667rem;
+			}
+			.goods-name{
+				font-size:0.32rem;
+				color:#333;
+				margin:0.213333rem auto 0.133333rem;
+				display:block;
+				max-width:4.4rem;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+			.realprice{
+				font-size:0.293333rem;
+				color:#903939;
+			}
+			.originalprice{
+				font-size:0.293333rem;
+				color:#999;
+				margin-left:0.213333rem;
+				text-decoration:line-through;
+			}
+		}
+	}
+
+}

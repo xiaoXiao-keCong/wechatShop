@@ -1,6 +1,6 @@
 index.controller('mallCtrl',
-    ['$scope', '$http', '$location', '$q', '$window',
-    function ($scope, $http, $location, $q, $window) {
+    ['$scope', '$http', '$location', '$q', '$window','$interval',
+    function ($scope, $http, $location, $q, $window,$interval) {
 	
 	
     // 广告promise
@@ -13,6 +13,10 @@ index.controller('mallCtrl',
     $scope.loading = false;
     $scope.loaded = false;
     $scope.type = 'hot';
+    $scope.dd = '00';  
+    $scope.hh = '00';  
+    $scope.mm = '00';  
+    $scope.ss = '00';
 
 
     $scope.$on('ngRepeatFinished', function () {
@@ -38,13 +42,12 @@ index.controller('mallCtrl',
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
         });
-        // 热门主题
-        $http.post('/home/hottheme.json', postCfg)
+        // 团购特惠
+        $http.post('/home/groupbuygoods.json', postCfg)
         .then(function (resp) {
             // console.log(resp);
             if (1 === resp.data.code) {
-                var flashSaleList = resp.data.data.themelist;
-                $scope.remark=resp.data.data.remark;
+                var flashSaleList = resp.data.data.goodslist;
                 for (var i = 0, j = flashSaleList.length; i < j; i++) {
                     flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl;
                 }
@@ -56,7 +59,7 @@ index.controller('mallCtrl',
         // 专题精选
         $http.post('/home/specialtheme.json', postCfg)
         .then(function (resp) {
-            // console.log(resp);
+            console.log(resp);
             if (1 === resp.data.code) {
                 var brandList = resp.data.data.specialthemelist;
                 for (var i = 0, j = brandList.length; i < j; i++) {
@@ -68,6 +71,8 @@ index.controller('mallCtrl',
             // alert('数据请求失败，请稍后再试！');
         });
         getGoods();
+
+        
     })();
 
 
@@ -76,31 +81,28 @@ index.controller('mallCtrl',
         $window.location.href = ad.jumpurl;
     };
 
-    // 跳转到商品详情
-    $scope.toGoodsDetail = function (goods, isFlash) {
-        if (isFlash) {
-            $location.path('mall_goods_detail/' + goods.id).search({type: 'flash'});
-        }
-        else {
-            $location.path('mall_goods_detail/' + goods.id);
-        }
-        
+    // 跳转主题详情
+    $scope.toThemeDetail = function (theme) {
+        $location.path('themeDetail/' + theme.theme.id);
     };
 
-    // 跳转到购物车
-    $scope.toCart = function () {
-        $location.path('cart');
+    // 跳转主题详情
+    $scope.totgDetail = function () {
+        $location.path('themeDetail/1');
     };
-    // 客服
-    $scope.kefu = function () {
-        alert('详情请致电-85611588');
-    };
+
+    
     // 跳转到商品搜索页面
     $scope.searchGoods = function () {
         $location.path('mall_search');
     };
 
-    // 获取商品列表
+    $scope.toGoodsDetail = function (goods) {
+        $location.path('mall_goods_detail/' + goods.id);
+        
+    };
+
+    // 获取主题列表
     function getGoods() {
         if ($scope.loading) {
             return;
@@ -111,7 +113,7 @@ index.controller('mallCtrl',
         };
         $http.post('/home/scenetheme.json',data, postCfg)
         .then(function (resp) {
-            console.log(resp);
+            // console.log(resp);
             if (1 === resp.data.code) {
                 var goodsList = resp.data.data.scenethemelist;
                 if (goodsList.length > 0) {
@@ -131,62 +133,17 @@ index.controller('mallCtrl',
         });
     }
 
-    // 选择排序方式
-    $scope.setSort = function (type) {
-        if ($scope.type && $scope.type === type) {
-            return;
-        }
-        $scope.type = type;
-        $scope.goodsList = [];
-        $scope.page = 1;
-        $scope.loaded = false;
-        $scope.loading = false;
-        getGoods();
-    };
+    
     
     $scope.getGoods = getGoods;
 
-    // 进入清洁洗韵目录详情
-    $scope.toMenuDetail = function (menu) {
-        $location.path('menu_detail/' + menu.id).search({name: menu.name});
-    };
-
-    // 进入品牌专区详情
+    // 进入专题精选
     $scope.brandDetail = function (brand) {
-        console.log(brand);
-        $location.path('brand_detail/' + brand.id).search({name: brand.name});
+        $location.path('themeDetail/' + brand.id);
     };
 
-    // 限时抢购更多
-    $scope.moreFlashSale = function () {
-        $location.path('flash_sale_list');
-    };
 
-    // 点赞商品
-    $scope.praise = function (goods, e) {
-        e.stopPropagation();
-        var url = goods.iskeep ? '/user/unkeepgoods.json' : '/user/keepgoods.json';
-        $http.post(url, {goodsid: goods.id}, postCfg)
-        .success(function (data) {
-            if (-1 === data.code) {
-                $location.path('login').search({});
-            }
-            else if (1 === data.code) {
-                // $scope.goods.iskeep = index === 1 ? true : false;
-                if (!goods.iskeep) {
-                    goods.praisenum++;
-                    goods.iskeep = true;
-                }
-                else {
-                    goods.praisenum--;
-                    goods.iskeep = false;
-                }
-            }
-        })
-        .error(function (data) {
-            // alert('数据请求失败，请稍后再试！');
-        });
-    };
+    
     $scope.navigate = function (index) {
         var user;
         switch (index) {
@@ -194,23 +151,54 @@ index.controller('mallCtrl',
                 $location.path('/');
                 break;
             case 2:
-                $location.path('stylist');
+                $location.path('classification');
                 break;
             case 3:
                 $location.path('cart');
                 break;
             case 4:
-                if (sessionStorage.user) {
-                    user = JSON.parse(sessionStorage.user);
-                    if (user.nickname === '') {
-                        alert('请填写您的昵称!');
-                        $location.path('complete_info').search({type: 'modify'});
-                        return;
-                    }
-                }
                 $location.path('my');
                 // $window.location.href = '/webapp/src/xiaoyue/home.html';
                 break;
         }
     };
+
+    var timer = $interval(countTime,1000); 
+    function countTime () {  
+        //获取当前时间  
+        var date = new Date();  
+        var now = date.getTime();  
+        //设置截止时间  
+        var endDate = new Date("2018-2-28 00:12:00");  
+        var end = endDate.getTime();  
+        //时间差  
+        var leftTime = end-now;  
+        //定义变量 d,h,m,s保存倒计时的时间
+        if (leftTime>=0) {  
+            $scope.dd = checkTime(Math.floor(leftTime/1000/60/60/24));  
+            $scope.hh = checkTime(Math.floor(leftTime/1000/60/60%24));  
+            $scope.mm = checkTime(Math.floor(leftTime/1000/60%60));  
+            $scope.ss = checkTime(Math.floor(leftTime/1000%60));                    
+        }else{
+            $scope.dd = '00';
+            $scope.hh = '00';
+            $scope.mm = '00';
+            $scope.ss = '00';
+            $interval.cancel(timer);
+        }
+        //将倒计时赋值到div中   
+        //递归每秒调用countTime方法，显示动态时间效果  
+
+    }
+    function checkTime(i){ //将0-9的数字前面加上0，例1变为01 
+      if(i<10) 
+      { 
+        i = "0" + i; 
+      } 
+      return i; 
+    } 
+    $scope.$on('$destroy',function(){  
+       $interval.cancel(timer);  
+    });
+    
 }]);

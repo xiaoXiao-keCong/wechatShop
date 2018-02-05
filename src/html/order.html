@@ -1,0 +1,283 @@
+<!-- 订单 -->
+<div class="parent-container">
+	<div class="title-bar">
+	    <span class="title-bar-left">
+	        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+	    </span>
+		<span>
+			<span >我的订单</span>
+		</span>
+		<!-- <span class="title-bar-right">
+		    <span class="glyphicon glyphicon-refresh refresh-icon" ng-click="refresh()"></span>
+	    </span> -->
+	</div>
+	<div id="order-contant">
+		<div class="fixed-container">
+            <div class="swiper-container flash-sale-content cartList">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide item" ng-click="changeTab(1)" ng-class="{active: activeTab == 1}">
+                        <span>全部</span>
+                    </li>
+                    <li class="swiper-slide item" ng-click="changeTab(2)" ng-class="{active: activeTab == 2}">
+                        <span>待付款</span>
+                    </li>
+                    <li class="swiper-slide item" ng-click="changeTab(3)" ng-class="{active: activeTab == 3}">
+                        <span>待发货</span>
+                    </li>
+                    <li class="swiper-slide item" ng-click="changeTab(4)" ng-class="{active: activeTab == 4}">
+                        <span>待收货</span>
+                    </li>
+                    <li class="swiper-slide item" ng-click="changeTab(5)" ng-class="{active: activeTab == 5}">
+                        <span>售后</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content tab-bordered">
+            <!-- 全部订单 -->
+            <div class="tab-panel" ng-show="activeTab == 1">
+                <div ng-if="!noAllContainer" class="paddingTop20">
+                    <div class="order-item-container" ng-repeat="goods in allOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 0"><img src="../../assets/images/order_state_5.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 1"><img src="../../assets/images/order_state_4.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 2"><img src="../../assets/images/order_state_3.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 3"><img src="../../assets/images/order_state_6.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 4"><img src="../../assets/images/order_state_7.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 5"><img src="../../assets/images/order_state_1.png" alt=""></span>
+                        <span class="order-btn" ng-if="goods.stateflag == 0">
+                            <div class="common-btn">去付款</div>
+                            <div class="common-btn" ng-click="cancelOrder($event,goods)">取消订单</div>
+                        </span>
+                        <span class="order-btn" ng-if="goods.stateflag == 1">
+                            <div class="common-btn" ng-click="returnGoods($event,goods)">申请退款</div>
+                        </span>
+                        <span class="order-btn" ng-if="goods.stateflag == 2">
+                            <div class="common-btn" ng-click="receipt($event,goods)">确认收货</div>
+                        </span>
+                        <span class="order-btn" ng-if="goods.stateflag == 3">
+                            
+                        </span>
+                        <span class="order-btn" ng-if="goods.stateflag == 4">
+                            <div class="common-btn" ng-click="deleteOrder($event,goods)">删除订单</div>
+                        </span>
+                        <span class="order-btn" ng-if="goods.stateflag == 5">
+                            <div class="common-btn" ng-click="deleteOrder($event,goods)">删除订单</div>
+                        </span>
+                    </div>
+                    <div class="showMore" ng-click="getAllOrder()">展示更多</div>
+                </div>
+                <div class="nothing-order bg-white" ng-if="noAllContainer">
+                    <img src="../../assets/images/no_order.jpg" alt="" class="shownPic">
+                    <div class="addAddressPic" data-toggle="modal" data-target="#myModal">联系客服</div>
+                </div>
+            </div>
+
+            <!-- 待支付订单 -->
+            <div class="tab-panel" ng-show="activeTab == 2">
+                <div ng-if="!noDzfContainer" class="paddingTop20">
+                    <div class="order-item-container" ng-repeat="goods in dzfOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon"><img src="../../assets/images/order_state_5.png" alt=""></span>
+                        <span class="order-btn">
+                            <div class="common-btn">去付款</div>
+                            <div class="common-btn" ng-click="cancelOrder($event,goods)">取消订单</div>
+                        </span>
+                    </div>
+                    <div class="showMore" ng-click="getDzfOrder()">展示更多</div>
+                </div>
+                <div class="nothing-order bg-white" ng-if="noDzfContainer">
+                    <img src="../../assets/images/no_order.jpg" alt="" class="shownPic">
+                    <div class="addAddressPic" data-toggle="modal" data-target="#myModal">联系客服</div>
+                </div>
+            </div>
+
+            <!-- 待发货订单 -->
+            <div class="tab-panel" ng-show="activeTab == 3">
+                <div ng-if="!noDfhContainer" class="paddingTop20">
+                    <div class="order-item-container" ng-repeat="goods in dfhOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon"><img src="../../assets/images/order_state_4.png" alt=""></span>
+                        <span class="order-btn">
+                            <div class="common-btn" ng-click="returnGoods($event,goods)">申请退款</div>
+                        </span>
+                    </div>
+                    <div class="showMore" ng-click="getDfhOrder()">展示更多</div>
+                </div>
+                <div class="nothing-order bg-white" ng-if="noDfhContainer">
+                    <img src="../../assets/images/no_order.jpg" alt="" class="shownPic">
+                    <div class="addAddressPic" data-toggle="modal" data-target="#myModal">联系客服</div>
+                </div>
+            </div>
+
+            <!-- 待收货 -->
+            <div class="tab-panel" ng-show="activeTab == 4">
+                <div ng-if="!noDshContainer" class="paddingTop20">
+                    <div class="order-item-container" ng-repeat="goods in dshOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon"><img src="../../assets/images/order_state_3.png" alt=""></span>
+                        <span class="order-btn">
+                            <div class="common-btn" ng-click="receipt($event,goods)">确认收货</div>
+                        </span>
+                    </div>
+                    <div class="showMore" ng-click="getDshOrder()">展示更多</div>
+                </div>
+                <div class="nothing-order bg-white" ng-if="noDshContainer">
+                    <img src="../../assets/images/no_order.jpg" alt="" class="shownPic">
+                    <div class="addAddressPic" data-toggle="modal" data-target="#myModal">联系客服</div>
+                </div>
+            </div>
+
+            <!-- 售后订单 -->
+            <div class="tab-panel" ng-show="activeTab == 5">
+                <div ng-if="!noQualityContainer" class="paddingTop20">
+                <!-- 待退款订单 -->
+                    <div class="order-item-container" ng-repeat="goods in dtkOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon"><img src="../../assets/images/order_state_6.png" alt=""></span>
+                    </div>
+                <!-- 已退款订单 -->
+                    <div class="order-item-container" ng-repeat="goods in ytkOrderList" ng-click="goOrderDetail(goods)">
+                        <div class="order-item-title">
+                            <span>订单编号：<span ng-bind="goods.id"></span></span>
+                            <span ng-bind="goods.state"></span>
+                        </div>
+                        <div class="order-info">
+                            <div class="goods-info">
+                                <span class="left">
+                                    <img ng-src="{{goods.imgurl}}" class="goods-icon">
+                                </span>
+                                <span class="right">
+                                    <span class="goodsinfo">
+                                        <span class="name" ng-bind="goods.goodsname"></span>
+                                        <span class="number">￥<span ng-bind="goods.actualprice"></span></span>
+                                    </span>
+                                    <span class="size">
+                                        <span ng-bind="goods.remark"></span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="order-state-icon"><img src="../../assets/images/order_state_7.png" alt=""></span>
+                        <span class="order-btn">
+                            <div class="common-btn" ng-click="deleteOrder($event,goods)">删除订单</div>
+                        </span>
+                    </div>
+                    <div class="showMore" ng-click="getQualityListOrder()">展示更多</div>
+                </div>
+                <div class="nothing-order bg-white" ng-if="noQualityContainer">
+                    <img src="../../assets/images/no_order.jpg" alt="" class="shownPic">
+                    <div class="addAddressPic" data-toggle="modal" data-target="#myModal">联系客服</div>
+                </div>
+            </div>
+
+
+        </div>
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="new-modal-dialog">
+        <div class="new-modal-title">
+            联系客服
+        </div>
+        <div class="new-modal-body">
+            详情请致电：<a href="tel:85611588">85611588</a>
+        </div>
+    </div><!-- /.modal -->
+</div>

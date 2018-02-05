@@ -1,31 +1,37 @@
 <div class="parent-container">
-	<div id="mall-search">
-		<div class="search-title-bar">
-			<span class="search-box">
-				<img src="../../assets/images/search_1.png" alt="搜索图标" class="common-icon">
-				<form ng-submit="search()">
-					<input type="search" placeholder="请输入关键字" ng-model="word">
-				</form>
-				
-			</span>
-			<span class="cancel-btn" ng-click="tback()">取消</span>
-		</div>
-		<!-- 热门商品 -->
-		<div class="item-container" ng-if="goodsList.length > 0">
-			<div class="type-name">商品</div>
-			<div class="item newgood" ng-repeat="goods in goodsList" ng-click="toGoodsDetail(goods)">
-				<img ng-src="{{goods.img}}" class="goods-pic">
-				<div class="info">
-					
-					<span class="middle">
-						<span ng-bind="goods.name" class="name"></span>
-						<span class="price">
-						￥<span ng-bind="goods.realprice"></span>
-					</span>
-					</span>
-				</div>
-			</div>
-		</div>
+	<div class="search-title-bar">
+		<span class="search-box">
+			<img src="../../assets/images/search_1.png" alt="搜索图标" class="common-icon">
+			<form ng-submit="search()">
+				<input type="search" placeholder="请输入关键字" ng-model="keyword">
+			</form>
+			
+		</span>
+		<span class="cancel-btn" back>取消</span>
 	</div>
-	<div ng-if="hasNoResult" class="text-center"><div class="nothingDiv"><img src="../../assets/images/box.png" alt=""></div><span class="nothingText">抱歉！没有找到您想要的结果</span></div>
+	<div id="collection-container">
+        <!-- 商品列表 -->
+        <div ng-if="!nothing">
+            <div class="goods-container">
+                <span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
+                    <span class="goods-img-cont">
+                        <img ng-src="{{item.imgurl}}" class="goods-img">
+                        <span class="praise-search" ng-click="praise(item, $event)">
+                            <span ng-if="!item.keep" name="praise-icon"><img src="../../assets/images/unkeep.png" alt=""></span>
+                            <span ng-if="item.keep" name="praise-icon"><img src="../../assets/images/keep.png" alt=""></span>
+                        </span>
+                        <span class="salestate" ng-bind="item.salestate"></span>
+                    </span>
+                    <span class="goods-name" ng-bind="item.name"></span>
+                    <span class="goods-info">
+                        <span class="realprice">￥<span ng-bind="item.realprice"></span></span>
+                        <span class="originalprice">￥<span ng-bind="item.originalprice"></span></span>
+                    </span>
+                </span>
+            </div>
+        </div>
+        <div class="nothing-container bg-white" ng-if="nothing">
+            <img src="../../assets/images/nothing.jpg" alt="">
+        </div>
+    </div>
 </div>

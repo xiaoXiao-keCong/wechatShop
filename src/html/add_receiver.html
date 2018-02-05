@@ -1,0 +1,34 @@
+<div class="parent-container">
+    <div id="add-receiver-container">
+        <div class="title-bar">
+            <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+            <span>新建地址</span>
+            <span class="title-bar-right" ng-click="save()">保存</span>
+        </div>
+        <div class="item-contaner">
+            <div class="item">
+                <span class="titlename">收件人</span>
+                <input type="text" name="name" ng-model="name" class="address-input">
+            </div>
+            <div class="item">
+                <span class="titlename">联系电话</span>
+                <input type="text" name="phone" ng-model="phone" class="address-input">
+            </div>
+            <div class="item">
+                <span class="titlename">所在区域</span>
+                <input id="demo1" type="text" class="city" name="city" ng-model="city" readonly class="address-input">
+                <input id="value1" type="hidden" value="20,234,504"/>
+                <!-- <img src="../../assets/images/arrow_grey.png" class="arrow-right"> -->
+            </div>
+            <div class="item border-bottom-none">
+                <span class="titlename">详细地址</span>
+                <input type="text" name="address" ng-model="address" class="address-input">
+            </div>
+        </div>
+    </div>
+    <div class="defaultAddress">
+        <img src="../../assets/images/defaultAdd.png" alt="" ng-click="setDefault(0)" ng-if="defaultAddress">
+        <img src="../../assets/images/undefaultAdd.png" alt="" ng-click="setDefault(1)" ng-if="!defaultAddress">
+        <span class="defaultaddtext">设为默认地址</span>
+    </div>
+</div>

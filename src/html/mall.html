@@ -1,91 +1,78 @@
 <div id="mall-container">
-	<div class="title-bar">
-	    <span class="title-bar-left">
-	        <span class="title-bar-left" data-toggle="modal" data-target="#myModal"><img src="../../assets/images/kefu.png"></span>
-	    </span>
-	    <span>ARTISAN HOUSE</span>
-	    <span class="title-bar-right">
-	        <img src="../../assets/images/search.png" alt="搜索" id="search" ng-click="searchGoods()" class="cart-icon">
-	        
-	    </span>
-	</div>
 	<div advertise class="swiper-container advertise">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" ng-repeat="item in adList" on-finish-render-filters>
-				<img ng-src="{{item.imgurl}}" ng-click="jump(item.jumpurl)">
+				<img ng-src="{{item.imgurl}}" ng-click="jump(item)">
 			</div>
 		</div>
-		<div class="swiper-pagination"></div>
+		<!-- <div class="swiper-pagination"></div> -->
+		<div class="search-showbox" ng-click="searchGoods()">
+			<div class="showbox-cont">
+				<span>巴卡拉-BACCARAT</span>
+				<img src="../../assets/images/home_search.png" alt="" class="home-search">
+			</div>
+		</div>
 	</div>
-	<!-- <div class="top-nav">
-		<span ng-repeat="menu in menuList">
-			<img ng-src="{{menu.imgurl}}" ng-click="toMenuDetail(menu)">
-		</span>
-	</div> -->
 	<div class="item-container">
-		<!-- <div class="title">
-			<span class="cn">限时抢购</span>
-			<span class="en">FLASH SALE</span>
-			<span class="time-tips" ng-bind="flashTips">
-				<span>每日</span>
-				<span class="time" ng-bind="limitStartTime"></span>
-				<span>开始-</span>
-				<span class="time" ng-bind="limitEndTime"></span>
-				<span>截止</span>
-			</span>
-		</div> -->
-		<div class="swiper-container flash-sale-content" flashsale>
-			<div class="swiper-wrapper">
-				<div class="swiper-slide item" ng-repeat="item in flashSaleList" 
-				on-flash-sale-render-finished ng-click="toGoodsDetail(item, true)">
-					<img ng-src="{{item.imgurl}}">
-					<!-- <span ng-bind="item.name" class="name"></span>
-					<span class="bottom-info">
-						<span class="highlight">￥<span ng-bind="item.realprice"></span></span>
-						<del>￥<span ng-bind="item.originalprice"></span></del>
-					</span> -->
+		<div class="tg-box">
+			<div class="tg-left">
+				<img src="../../assets/images/tgth.png" alt="" class="title-icon">
+				<span>团购特惠</span>
+			</div>
+			<div class="tg-right">
+				<span>参团截止时间：</span>
+				<div ng-bind="hh"></div>
+				<span>：</span>
+				<div ng-bind="mm"></div>
+				<span>：</span>
+				<div ng-bind="ss"></div>
+			</div>
+		</div>
+		<div class="tg-cont">
+			<div class="tg-main">
+				<div class="tg-item" ng-repeat="item in flashSaleList" ng-click="toGoodsDetail(item)">
+					<img ng-src="{{item.imgurl}}" class="tg-img">
+					<div class="tg-name color-333" ng-bind="item.name"></div>
+					<div class="tg-price">
+						<span class="line-throught">原价：￥<span ng-bind="item.originalprice"></span></span>
+						<span class="color-333">￥<span ng-bind="item.realprice"></span></span>
+					</div>
+					<div class="tg-pnum">
+						<img src="../../assets/images/gywm.png" alt="">
+						<span>100人团</span>
+					</div>
+				</div>
+				<div class="tg-more" ng-click="totgDetail()">
+					<span class="mr-10">《</span>
+					<span>查<br />看<br />更<br />多</span>
 				</div>
 			</div>
 		</div>
-		<div class="remark">
-			<span ng-bind="remark"></span>
-		</div>
 	</div>
 	<div class="item-container1">
 		<div class="title">
-			<span class="cn">专题精选</span>
-			<span class="en"></span>
+			<img src="../../assets/images/zqjx.png" alt="" class="title-icon">
+			<span class="cn">专区精选</span>
 		</div>
 		<div class="brand-content">
-			<span class="item" ng-repeat="brand in brandList track by $index" ng-click="brandDetail(brand)">
+			<div ng-repeat="brand in brandList track by $index" ng-click="brandDetail(brand)" class="brand-box">
 				<img ng-src="{{brand.imgurl}}">
-				<span class="brandInfo">
-					<span ng-bind="brand.name" class="brand-n"></span>
-					<span ng-bind="brand.info" class="brand-i"></span>
-				</span>
-			</span>
+				<div class="rotate-box"></div>
+			</div>
 		</div>
 	</div>
 	<div class="item-container1">
 		<div class="title">
-			<span class="cn">场景主题</span>
-			<span class="en"></span>
+			<span class="cn">全新品牌</span>
+			<img src="../../assets/images/qxpp.png" alt="" class="title-icon">
 		</div>
 	</div>
 	<div infinite-scroll="getGoods()" infinite-scroll-disabled="loading" infinite-scroll-distance="0">
 		<div class="goods-container">
-			<span class="item" ng-repeat="item in goodsList" ng-click="toGoodsDetail(item)">
-				<span><img ng-src="{{item.imgurl}}" class="goods-img"></span>
-				<!-- <span class="goods-name" ng-bind="item.name"></span>
-				<span class="goods-info">
-					<span>￥<span ng-bind="item.realprice"></span></span>
-					<span class="praise" ng-click="praise(item, $event)">
-						<span class="glyphicon glyphicon-heart-empty" ng-if="!item.iskeep" name="praise-icon"></span>
-						<span class="glyphicon glyphicon-heart highlight" ng-if="item.iskeep" name="praise-icon"></span>
-						<span ng-bind="item.praisenum" name="praise-num"></span>
-					</span>
-				</span> -->
-			</span>
+			<div class="item" ng-repeat="item in goodsList" ng-click="toThemeDetail(item)">
+				<div><img ng-src="{{item.imgurl}}" class="goods-img"></div>
+				<div class="goods-name" ng-bind="item.theme.name"></div>
+			</div>
 		</div>
 		<div ng-hide="loaded" class="load">
 			<img src="../../assets/images/loading2.gif" class="common-icon">
@@ -119,15 +106,4 @@
         </span>
         <span class="text">我的</span>   
     </span>
-</div>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="new-modal-dialog">
-		<div class="new-modal-title">
-			联系客服
-		</div>
-		<div class="new-modal-body">
-			详情请致电：<a href="tel:85611588">85611588</a>
-		</div>
-	</div><!-- /.modal -->
 </div>

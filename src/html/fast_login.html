@@ -1,0 +1,40 @@
+<div class="title-bar">
+    <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+    <span>绑定手机</span>
+</div>
+<div id="fast-login-container">
+<div class="form-group">
+        <span class="icon">
+            <img src="../../assets/images/phone.png" alt="手机号" class="phone-icon">
+        </span>
+        <span class="text-container">
+            <input type="text" placeholder="请输入您的手机号" class="input-text" name="phone-num" maxlength="11" ng-model="phone">
+        </span>
+
+    </div>
+    <div class="form-group margin-top-28 border-bottom-none code-container">
+        <div class="code">
+            <span class="icon">
+                <img src="../../assets/images/code.png" alt="验证码" class="code-icon">
+            </span>
+            <span class="text-container">
+                <input type="text" placeholder="请输验证码" class="input-text" ng-model="code" maxlength="4">
+            </span>
+        </div>
+        <div ng-class="{'get-code-btn':true,'unuseful':sending}" ng-click="getCode()" ng-bind="sendCodeText"></div>
+    </div>
+    <div id="confirm-login-btn" class="btn-common" ng-click="confirmLogin()">
+        确认绑定
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="new-modal-dialog">
+        <div class="new-modal-title">
+            温馨提示
+        </div>
+        <div class="new-modal-body">
+            <span ng-bind="modalText"></span>
+        </div>
+    </div><!-- /.modal -->
+</div>

@@ -1,100 +1,75 @@
 <div class="parent-container">
-    <!-- <div class="title-bar">
-    	<span>我的</span>
-    </div> -->
     <div id="my-container">
-        <!-- <div class="user-info" ng-if="!isLogin">
-            <img src="../../assets/images/head-none.png" class="head-img">
-            <div class="login">
-                <a href="/webapp/build/html/login">登录</a>  /  
-                <a href="/webapp/build/html/login">注册</a>
-            </div>
-            <div class="bottom-info">
-                <div class="item">
-                    <img src="../../assets/images/wdye.png" class="common-icon">
-                    <div>
-                        余额：--
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="../../assets/images/wdyb.png">
-                    <div>
-                        悦币：--
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="user-info margin-bottom-20">
-            <img ng-src="{{user.imgurl}}" class="head-img head-img-border">
-            <span  class="account-text">舟可</span>
+            <img ng-src="{{user.avatar}}" class="head-img head-img-border">
+            <span  class="account-text"><span ng-bind="user.nickname"></span></span>
         </div>
-        <a href="/webapp/build/html/order">
-            <div class="nav-item nav-item-order">
-                <div class="left-content">
-                    <span class="item-name my-order">我的订单</span>
-                </div>
-                <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
+        <div class="nav-item nav-item-order" ng-click="toOrder(1)">
+            <img src="../../assets/images/wddd.png" class="mbox-icon mbox-icon-top">
+            <div class="left-content">
+                <span class="item-name">我的订单</span>
             </div>
-        </a>
+            <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
+        </div>
         <div class="order-nav margin-bottom-20">
-            <span class="item">
+            <span class="item" ng-click="toOrder(2)">
                 <span class="item-img">
-                    <span class="tsNum">5</span>
+                    <span class="tsNum" ng-if="dzforder" ng-bind="dzfOrderLength"></span>
                     <img src="../../assets/images/daifukuan.png">
                 </span>      
                 <span class="text highlight">待付款</span>
             </span>
-            <span class="item">
+            <span class="item" ng-click="toOrder(4)">
                 <span class="item-img">
-                    <span class="tsNum">9+</span>
+                    <span class="tsNum" ng-if="dshorder" ng-bind="dshOrderLength"></span>
                     <img src="../../assets/images/daishouhuo.png">
                 </span>
                 <span class="text">待收货</span>
             </span>
-            <span class="item">
+            <span class="item" ng-click="toOrder(1)">
                 <span>
                     <img src="../../assets/images/yiwancheng.png">
                 </span>
-                <span class="text">已完成</span>
+                <span class="text">全部</span>
             </span>
-            <span class="item">
+            <span class="item" ng-click="toOrder(5)">
                 <span>
                     <img src="../../assets/images/shouhou.png">
                 </span>
                 <span class="text">售后</span>   
             </span>
         </div>
-        <a href="/webapp/build/html/coin_mall">
+        <a href="/wechatshop/build/html/collection">
             <div class="nav-item">
+                <img src="../../assets/images/wdsc.png" class="mbox-icon">
                 <div class="left-content">
-                    <span class="h-icon"></span>
                     <span class="item-name">我的收藏</span>
                 </div>
                 <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="/webapp/build/html/coupon">
+        <a href="/wechatshop/build/html/address">
             <div class="nav-item">
+                <img src="../../assets/images/dzgl.png" class="mbox-icon">
                 <div class="left-content">
-                    <span class="h-icon"></span>
                     <span class="item-name">地址管理</span>
                 </div>
                 <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="/webapp/build/html/collection">
+        <a href="/wechatshop/build/html/helpcenter">
             <div class="nav-item">
+                <img src="../../assets/images/bzzx.png" class="mbox-icon">
                 <div class="left-content">
-                    <span class="h-icon"></span>
                     <span class="item-name">帮助中心</span>
                 </div>
                 <img src="../../assets/images/arrow_grey.png" class="arrow-icon">
             </div>
         </a>
-        <a href="/webapp/build/html/collection">
+        <a href="/wechatshop/build/html/aboutus">
             <div class="nav-item">
+                <img src="../../assets/images/gywm.png" class="mbox-icon">
                 <div class="left-content">
-                    <span class="h-icon"></span>
                     <span class="item-name">关于我们</span>
                 </div>
                 <img src="../../assets/images/arrow_grey.png" class="arrow-icon">

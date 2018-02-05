@@ -1,0 +1,31 @@
+<div class="parent-container">
+    <div class="title-bar">
+        <span class="title-bar-left" back><img src="../../assets/images/back.png"></span>
+        <span>地址管理</span>
+    </div>
+    <div id="address-container">
+        <div ng-if="!nothing" class="marginTop20">
+            <div class="addr-item" ng-repeat="addr in addrList" ng-click="backToOrder(addr)">
+                <span class="name" ng-bind="addr.name"></span>
+                <span class="phone" ng-bind="addr.telephone"></span>
+                <span class="default-site-tips" ng-if="addr.defaultflag == 1">默认</span>
+                <span class="address">
+                    <span ng-bind="addr.city+addr.address"></span>
+                </span>
+                <span class="edit" ng-click="toEditAddr($event,addr)">
+                    <img src="../../assets/images/edit.png" alt="编辑">
+                </span>
+                <span class="deletAddress" ng-click="deletAdd(addr.id)"><img src="../../assets/images/pic_delete.jpg" alt=""></span>
+            </div>
+            <div class="addBtn-contaner">
+                <div id="add-addr" ng-click="addAddress()">
+                    新建地址
+                </div>
+            </div>
+        </div>
+        <div class="nothing-address bg-white" ng-if="nothing">
+            <img src="../../assets/images/address.jpg" alt="" class="shownPic">
+            <div class="addAddressPic" ng-click="addAddress()">添加地址</div>
+        </div>
+    </div>
+</div>

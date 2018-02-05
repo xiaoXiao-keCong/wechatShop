@@ -1,0 +1,91 @@
+<!-- 购物车 -->
+<div class="parent-container">
+<div id="cart-container">
+<!-- <div class="title-bar">
+    <span class="title-bar-left" ng-click="tback()"><img src="../../assets/images/back.png"></span>
+    <span>购物车</span>
+    <span class="title-bar-right"><a href="javascript:void(0)" class="delete" ng-click="deleteCart()">删除</a></span>
+</div> -->
+<div ng-if="!noContant">
+    <div class="cart-title">
+        <span ng-bind="cartInfo.imgurl"></span>
+    </div>
+    <div class="goods">
+        <div class="item-container" ng-repeat="goods in cartList">
+            <span class="selected-pic">
+                <img src="../../assets/images/pay_unselected.png" ng-show="!goods.selected" ng-click="selectGoods(goods)">
+                <img src="../../assets/images/pay_selected.png" ng-show="goods.selected" ng-click="selectGoods(goods)">
+            </span>
+            <span class="item-img" ng-click="toGoodsDetail(goods)">
+                <img ng-src="{{goods.imgurl}}">
+            </span>
+            <span class="item-info" ng-click="toGoodsDetail(goods)">
+                <span class="name" ng-bind="goods.name"></span>
+                <!-- <span class="attribute"><span ng-bind="goods.color" class="color"></span><span ng-bind="goods.size"></span></span> -->
+                <span class="real-price">￥<span ng-bind="goods.price"></span></span>
+            </span>
+            <span class="delete">
+                <img src="../../assets/images/close.png" ng-click="deleteGoods(goods)">
+            </span>
+            <span class="change-num">
+                <span ng-click="increaseNum(goods)">
+                    <img src="../../assets/images/icon_arrow_up.png" class="add-pic">
+                </span>
+                <span class="num" ng-bind="goods.num"></span>
+                <span>
+                    <img src="../../assets/images/icon_arrow_down.png" class="reduce-pic" ng-if="goods.num == 1">
+                    <img src="../../assets/images/icon_arrow_down_selected.png" class="reduce-pic" ng-if="goods.num != 1" ng-click="decreaseNum(goods)">
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="bottom-panel">
+        <span class="left-panel">
+            <span class="select-pic">
+                <img src="../../assets/images/pay_unselected.png" alt="全选" ng-show="!isSelectAll" ng-click="selectAll()">
+                <img src="../../assets/images/pay_selected.png" alt="全选" ng-show="isSelectAll" ng-click="selectAll()">
+            </span>
+            <span>全选 (<span ng-bind="selectedNum"></span>)</span>
+        </span>
+        <span class="middle-panel">
+            <span class="count-num">￥ <span ng-bind="getTotalPrice()"></span></span>
+        </span>
+        <span class="right-panel" ng-click="calculate()">
+            下 单
+        </span>
+    </div>
+</div>
+<div ng-if="noContant" class="no-content">
+    <div class="cart-title">
+        <span ng-bind="cartInfo.imgurl"></span>
+    </div>
+    <img src="../../assets/images/pic_gouwucheweikong.jpg" alt="">
+</div>
+<div class="bottom-nav">
+    <span class="item" ng-click="navigate(1)">
+        <span>
+            <img src="../../assets/images/shouye.png">
+        </span>      
+        <span class="text highlight">首页</span>
+    </span>
+    <span class="item" ng-click="navigate(2)">
+        <span>
+            <img src="../../assets/images/fenlei.png">
+        </span>
+        <span class="text">分类</span>
+    </span>
+    <span class="item" ng-click="navigate(3)">
+        <span>
+            <img src="../../assets/images/gouwuche_h.png">
+        </span>
+        <span class="text">购物车</span>
+    </span>
+    <span class="item" ng-click="navigate(4)">
+        <span>
+            <img src="../../assets/images/me.png">
+        </span>
+        <span class="text">我的</span>   
+    </span>
+</div>
+</div>
+</div>
