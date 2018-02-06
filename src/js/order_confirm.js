@@ -25,6 +25,7 @@ index.controller('orderConfirmCtrl',
 			$scope.site = JSON.parse(sessionStorage.getItem('site'));
 		}
 		else {
+			var loading = weui.loading('加载中');
 			// 将地址设置为默认地址
 		    $http.post('/user/myaddress.json', postCfg)
 		    .then(function (resp) {
@@ -43,6 +44,7 @@ index.controller('orderConfirmCtrl',
 		    			}
 		    		}
 		    	}
+		    	loading.hide();
 		    });
 		}
 	}
@@ -73,6 +75,7 @@ index.controller('orderConfirmCtrl',
 	// 获取可用的优惠券
 	function getCoupon() {
 		if (!$rootScope.selectedCoupon) {
+			var loading = weui.loading('加载中');
 			var goodsIdArr = [];
 			for (var i = 0; i < $scope.goodsArr.length; i++) {
 				goodsIdArr.push($scope.goodsArr[i].id);
@@ -90,6 +93,7 @@ index.controller('orderConfirmCtrl',
 						$scope.couponInfo = '有' + data.data.couponlist.length + '张优惠券可用';
 					}
 				}
+				loading.hide();
 			})
 			.error(function (data) {
 				// console.log(data);
@@ -140,14 +144,22 @@ index.controller('orderConfirmCtrl',
 		switch ($scope.type) {
 			case 'address':
 				if (!$scope.site || !$scope.site.id) {
-					alert('请选择收货地址！');
+					// alert('请选择收货地址！');
+					weui.alert('请选择收货地址！', function () {
+				    }, {
+				        title: '温馨提示'
+				    });
 					return;
 				}
 				addressId = $scope.site.id;
 			    break;
 			case 'store':
 			    if (!$scope.selectedStore || !$scope.selectedStore.id) {
-			    	alert('请选择自取门店！');
+			    	// alert('请选择自取门店！');
+			    	weui.alert('请选择自取门店！', function () {
+				    }, {
+				        title: '温馨提示'
+				    });
 			    	return;
 			    }
 			    addressId = $scope.selectedStore.id;
@@ -197,19 +209,31 @@ index.controller('orderConfirmCtrl',
 						       function(res) {
 						           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 						               // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-						               alert('支付成功');
+						               // alert('支付成功');
+						               weui.toast('支付成功!', {
+					                        duration: 1500,
+					                        className: "bears"
+					                    });
 						               $rootScope.activeTab = 3;
 						               $location.path('order');
 						           }
 						           else {
-						               alert('支付失败' + res.err_msg);
+						               // alert('支付失败' + res.err_msg);
+						               weui.alert('支付失败，请稍后重试', function () {
+									    }, {
+									        title: '温馨提示'
+									    });
 						           }
 						       }
 						   );
 						}
 					}
 					else if (0 === resp.code) {
-						alert(resp.reason);
+						// alert(resp.reason);
+						weui.alert(resp.reason, function () {
+					    }, {
+					        title: '温馨提示'
+					    });
 					}
 				})
 				.error(function (resp) {

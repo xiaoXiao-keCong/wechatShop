@@ -55,11 +55,19 @@ index.controller('returnGoodsCtrl',
         $http.post('/order/orderrefund.json', data, postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
-                alert('退货申请提交成功，我们将尽快为您处理该申请！');
+                // alert('退货申请提交成功，我们将尽快为您处理该申请！');
+                weui.alert('退货申请提交成功，我们将尽快为您处理该申请！', function () {
+                }, {
+                    title: '温馨提示'
+                });
                 $location.path('order');
             }
         }, function (resp) {
-            alert(resp);
+            // alert(resp);
+            weui.alert(resp, function () {
+            }, {
+                title: '温馨提示'
+            });
         });
     };
 }]);

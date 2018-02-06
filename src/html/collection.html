@@ -24,7 +24,7 @@
                     </span>
                 </span>
             </div>
-            <div class="showMore" ng-click="getGoods()">展示更多</div>
+            <div class="showMore" ng-click="getGoods()" ng-if="!loaded">展示更多</div>
             <!-- <div ng-hide="loaded" class="load">
                 <img src="../../assets/images/loading2.gif" class="common-icon">
                 正在加载...

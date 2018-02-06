@@ -15,6 +15,7 @@ index.controller('mallSearchCtrl',
 			alert('请输入搜索关键字！');
 			return;
 		}
+		var loading = weui.loading('加载中');
 		$scope.goodsList = [];
 		var data = {
 			wd: $scope.keyword,
@@ -37,6 +38,7 @@ index.controller('mallSearchCtrl',
 		        }
 		        
 			}
+			loading.hide();
 		})
 		.error(function (data) {
 			// alert('数据请求失败，请稍后再试！');
@@ -48,6 +50,7 @@ index.controller('mallSearchCtrl',
     // 点赞商品
     $scope.praise = function (goods, e) {
         e.stopPropagation();
+        var loading = weui.loading('提交中');
         var url = goods.keep ? '/user/unkeepgoods.json' : '/user/keepgoods.json';
         $http.post(url, {goodsid: goods.id}, postCfg)
         .success(function (data) {
@@ -63,6 +66,7 @@ index.controller('mallSearchCtrl',
                     goods.keep = false;
                 }
             }
+            loading.hide();
         })
         .error(function (data) {
             // alert('数据请求失败，请稍后再试！');

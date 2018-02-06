@@ -92,6 +92,10 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
 			templateUrl: '../html/returnGoods.html',
 			controller: 'returnGoodsCtrl'
 		})
+		.when('/buyvip', {
+			templateUrl: '../html/buyvip.html',
+			controller: 'buyvipCtrl'
+		})
 		.otherwise({
 			redirectTo: '/nonExistent'
 		});

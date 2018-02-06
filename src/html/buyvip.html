@@ -1,0 +1,15 @@
+<div class="parent-container">
+    <div id="vip-container">
+        <div class="vip-header">
+            <span class="back" back>放弃</span>
+            <span>确认订单</span>
+        </div>
+        <div class="vip-cell">
+            <span>订单编号：<span ng-bind="order.id"></span></span>
+        </div>
+        <div class="vip-cell">
+            <span>支付金额：<span class="vip-price">￥<span ng-bind="order.price"></span></span></span>
+        </div>
+        <div class="buyvip-btn" ng-click="gobuy()">立即支付</div>
+    </div>   
+</div>

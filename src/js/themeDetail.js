@@ -5,6 +5,7 @@ index.controller('themeDetailCtrl',
 	var themeId = parseInt($routeParams.id);
 	$scope.goodsList=[];
 	(function init() {
+        var loading = weui.loading('加载中');
 		// 获取主题信息
 		$http.post('/theme/getbaseinfo.json', {themeid: themeId}, postCfg)
 		.then(function (resp) {
@@ -30,6 +31,7 @@ index.controller('themeDetailCtrl',
                     }
                 }
 			}
+            loading.hide();
 		}, function (resp) {
 			// alert('数据请求失败，请稍后再试！');
 		});
@@ -37,6 +39,7 @@ index.controller('themeDetailCtrl',
 	// 点赞商品
     $scope.praise = function (goods, e) {
         e.stopPropagation();
+        var loading = weui.loading('提交中');
         var url = goods.keep ? '/user/unkeepgoods.json' : '/user/keepgoods.json';
         $http.post(url, {goodsid: goods.id}, postCfg)
         .success(function (data) {
@@ -52,6 +55,7 @@ index.controller('themeDetailCtrl',
                     goods.keep = false;
                 }
             }
+            loading.hide();
         })
         .error(function (data) {
             // alert('数据请求失败，请稍后再试！');

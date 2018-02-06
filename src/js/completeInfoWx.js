@@ -5,7 +5,11 @@ index.controller('completeInfoWxCtrl',
 	$scope.complete = function () {
 		var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
 		if (!phoneRe.test($scope.phone)) {
-            alert('手机号无效！');
+            // alert('手机号无效！');
+            weui.alert('手机号无效！', function () {
+		    }, {
+		        title: '温馨提示'
+		    });
             return;
         }
 		var data = {
@@ -22,7 +26,11 @@ index.controller('completeInfoWxCtrl',
 			}
 			if (1 === resp.data.code) {
 				sessionStorage.setItem('user', JSON.stringify(resp.data.data));
-				alert('信息提交成功!');
+				// alert('信息提交成功!');
+				weui.toast('信息提交成功!', {
+                    duration: 1500,
+                    className: "bears"
+                });
 				$location.path('/').replace();
 			}
 		}, function (resp) {

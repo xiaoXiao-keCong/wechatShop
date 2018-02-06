@@ -27,17 +27,18 @@ index.controller('mallCtrl',
     });
 
     (function init() {
+        var loading = weui.loading('加载中');
         // 获取商城广告
         $http.post('/home/homead.json', postCfg)
         .then(function (resp) {
-            // console.log(resp);
+            console.log(resp);
             if (1 === resp.data.code) {
                 var adList = resp.data.data.homeadlist;
                 for (var i = 0, j = adList.length; i < j; i++) {
                     adList[i].imgurl = picBasePath + adList[i].imgurl;
                 }
                 $scope.adList = adList;
-
+                loading.hide();
             }
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
@@ -52,6 +53,8 @@ index.controller('mallCtrl',
                     flashSaleList[i].imgurl = picBasePath + flashSaleList[i].imgurl;
                 }
                 $scope.flashSaleList = flashSaleList;
+                $scope.timedown = resp.data.data.timedown;
+                loading.hide();
             }
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
@@ -59,13 +62,14 @@ index.controller('mallCtrl',
         // 专题精选
         $http.post('/home/specialtheme.json', postCfg)
         .then(function (resp) {
-            console.log(resp);
+            // console.log(resp);
             if (1 === resp.data.code) {
                 var brandList = resp.data.data.specialthemelist;
                 for (var i = 0, j = brandList.length; i < j; i++) {
                     brandList[i].imgurl = picBasePath + brandList[i].imgurl;
                 }
                 $scope.brandList = brandList;
+                loading.hide();
             }
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
@@ -108,6 +112,7 @@ index.controller('mallCtrl',
             return;
         }
         $scope.loading = true;
+        var loading = weui.loading('加载中');
         var data = {
             page: $scope.page
         };
@@ -128,6 +133,7 @@ index.controller('mallCtrl',
                     $scope.loaded = true;
                 }
             }
+            loading.hide();
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
         });
@@ -163,13 +169,14 @@ index.controller('mallCtrl',
         }
     };
 
-    var timer = $interval(countTime,1000); 
+     
+    var timer = $interval(countTime,1000);
     function countTime () {  
         //获取当前时间  
         var date = new Date();  
         var now = date.getTime();  
         //设置截止时间  
-        var endDate = new Date("2018-2-28 00:12:00");  
+        var endDate = new Date($scope.timedown); 
         var end = endDate.getTime();  
         //时间差  
         var leftTime = end-now;  

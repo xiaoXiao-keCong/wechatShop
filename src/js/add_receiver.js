@@ -30,6 +30,7 @@ index.controller('addReceiverCtrl',
 	init();
 
 	$scope.save = function () {
+		var loading = weui.loading('提交中');
 		if($scope.defaultAddress){
 			$scope.defaultflag=1;
 		}else{
@@ -50,6 +51,7 @@ index.controller('addReceiverCtrl',
 		}
 		$http.post(postUrl, data, postCfg)
 		.then(function (resp) {
+			loading.hide();
 			if (-1 === resp.data.code) {
 				// 用户未登录
 				$rootScope.preUrl = $location.url();
@@ -57,10 +59,16 @@ index.controller('addReceiverCtrl',
 			}
 			else if (1 === resp.data.code) {
 				if($scope.id){
-					alert('修改地址成功！');
+					weui.toast('修改地址成功！', {
+                        duration: 1500,
+                        className: "bears"
+                    });
 					$window.history.back();
 				}else{
-					alert('添加地址成功！');
+					weui.toast('添加地址成功！', {
+                        duration: 1500,
+                        className: "bears"
+                    });
 					$window.history.back();
 				}
 			}

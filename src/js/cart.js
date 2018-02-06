@@ -3,6 +3,7 @@ index.controller('cartCtrl',
 	function ($scope, $http, $location, $rootScope, $q, $window) {
 	$scope.selectedNum=0;
 	$scope.noContant = false;
+	var loading = weui.loading('加载中');
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
 		// console.log(resp.data);
@@ -41,6 +42,7 @@ index.controller('cartCtrl',
 			$scope.cartInfo = data.data.info;
 			$scope.noContant = true;
 		}
+		loading.hide();
 	}, function (resp) {
 		// alert('数据请求失败，请稍后再试！');
 	});
@@ -51,6 +53,7 @@ index.controller('cartCtrl',
     };
 	// 增加商品购物车数量
 	$scope.increaseNum = function (goods) {
+		var loading = weui.loading('提交中');
 		var index = $scope.cartList.indexOf(goods),
 		    data = {
 			'id': [parseInt(goods.id)],
@@ -65,6 +68,7 @@ index.controller('cartCtrl',
 				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
 				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
 			}
+			loading.hide();
 		}, function (resp) {
 			// alert('数据请求失败，请稍后再试！');
 		});
@@ -74,6 +78,7 @@ index.controller('cartCtrl',
 		if (1 === goods.num) {
 			return;
 		}
+		var loading = weui.loading('提交中');
 		var index = $scope.cartList.indexOf(goods);
 		    data = {
 			'id': [parseInt(goods.id)],
@@ -88,6 +93,7 @@ index.controller('cartCtrl',
 				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
 				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
 			}
+			loading.hide();
 		}, function (resp) {
 			// alert('数据请求失败，请稍后再试！');
 		});
@@ -159,7 +165,10 @@ index.controller('cartCtrl',
 			}
 		}
 		if (0 === flag) {
-			alert('请先选择商品!');
+			weui.alert('请先选择商品!', function () {
+		    }, {
+		        title: '温馨提示'
+		    });
 			return;
 		}
 		$rootScope.goodsArr = goodsArr;
@@ -175,13 +184,15 @@ index.controller('cartCtrl',
 		var data = {
 			'id': [item.id]
 		};
-		var confirm = $window.confirm('确认删除此项商品吗？');
-		if (confirm) {
-			$http.post('/user/deletecart.json', data, postCfg)
+		weui.confirm('确认删除此项商品吗？', function () {
+        	$http.post('/user/deletecart.json', data, postCfg)
 			.success(function (data) {
 				if (1 === data.code) {
 					// 删除成功
-					alert('删除成功');
+					weui.toast('删除成功!', {
+                        duration: 1500,
+                        className: "bears"
+                    });
 					for (var i = 0; i < $scope.cartList.length; i++) {
 						if ($scope.cartList[i].id == item.id) {
 							$scope.cartList.splice(i, 1);
@@ -199,7 +210,11 @@ index.controller('cartCtrl',
 			.error(function (data) {
 				// alert('数据请求失败，请稍后再试！');
 			});
-		}
+	    }, function () {
+	        // console.log('no')
+	    }, {
+	        title: '温馨提示'
+	    });
 	};
 	// // 删除购物车商品
 	// $scope.deleteCart = function () {

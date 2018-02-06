@@ -58,12 +58,12 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon" ng-if="goods.stateflag == 0"><img src="../../assets/images/order_state_5.png" alt=""></span>
+                        <!-- <span class="order-state-icon" ng-if="goods.stateflag == 0"><img src="../../assets/images/order_state_5.png" alt=""></span>
                         <span class="order-state-icon" ng-if="goods.stateflag == 1"><img src="../../assets/images/order_state_4.png" alt=""></span>
                         <span class="order-state-icon" ng-if="goods.stateflag == 2"><img src="../../assets/images/order_state_3.png" alt=""></span>
                         <span class="order-state-icon" ng-if="goods.stateflag == 3"><img src="../../assets/images/order_state_6.png" alt=""></span>
                         <span class="order-state-icon" ng-if="goods.stateflag == 4"><img src="../../assets/images/order_state_7.png" alt=""></span>
-                        <span class="order-state-icon" ng-if="goods.stateflag == 5"><img src="../../assets/images/order_state_1.png" alt=""></span>
+                        <span class="order-state-icon" ng-if="goods.stateflag == 5"><img src="../../assets/images/order_state_1.png" alt=""></span> -->
                         <span class="order-btn" ng-if="goods.stateflag == 0">
                             <div class="common-btn">去付款</div>
                             <div class="common-btn" ng-click="cancelOrder($event,goods)">取消订单</div>
@@ -116,7 +116,7 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon"><img src="../../assets/images/order_state_5.png" alt=""></span>
+                        <!-- <span class="order-state-icon"><img src="../../assets/images/order_state_5.png" alt=""></span> -->
                         <span class="order-btn">
                             <div class="common-btn">去付款</div>
                             <div class="common-btn" ng-click="cancelOrder($event,goods)">取消订单</div>
@@ -154,7 +154,7 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon"><img src="../../assets/images/order_state_4.png" alt=""></span>
+                        <!-- <span class="order-state-icon"><img src="../../assets/images/order_state_4.png" alt=""></span> -->
                         <span class="order-btn">
                             <div class="common-btn" ng-click="returnGoods($event,goods)">申请退款</div>
                         </span>
@@ -191,7 +191,7 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon"><img src="../../assets/images/order_state_3.png" alt=""></span>
+                        <!-- <span class="order-state-icon"><img src="../../assets/images/order_state_3.png" alt=""></span> -->
                         <span class="order-btn">
                             <div class="common-btn" ng-click="receipt($event,goods)">确认收货</div>
                         </span>
@@ -229,7 +229,7 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon"><img src="../../assets/images/order_state_6.png" alt=""></span>
+                        <!-- <span class="order-state-icon"><img src="../../assets/images/order_state_6.png" alt=""></span> -->
                     </div>
                 <!-- 已退款订单 -->
                     <div class="order-item-container" ng-repeat="goods in ytkOrderList" ng-click="goOrderDetail(goods)">
@@ -253,7 +253,7 @@
                                 </span>
                             </div>
                         </div>
-                        <span class="order-state-icon"><img src="../../assets/images/order_state_7.png" alt=""></span>
+                        <!-- <span class="order-state-icon"><img src="../../assets/images/order_state_7.png" alt=""></span> -->
                         <span class="order-btn">
                             <div class="common-btn" ng-click="deleteOrder($event,goods)">删除订单</div>
                         </span>

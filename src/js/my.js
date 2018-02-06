@@ -4,6 +4,7 @@ index.controller('myCtrl',
 	$scope.dshorder=false;
 	(function init() {
 		// 请求用户信息
+		var loading = weui.loading('加载中');
 		$http.post('/user/mine.json', postCfg)
 		.success(function (resp) {
 			// console.log(resp);
@@ -25,6 +26,7 @@ index.controller('myCtrl',
 				$scope.user = user;
                 sessionStorage.setItem('user', JSON.stringify(user));
 			}
+			loading.hide();
 		})
 		.error(function (resp) {
 			// alert('数据请求失败，请稍后再试！');
@@ -44,7 +46,11 @@ index.controller('myCtrl',
 		var user = JSON.parse(sessionStorage.user);
 		if (user.nickname === '') {
 			// 跳转到完善信息
-			alert('请填写您的昵称!');
+			// alert('请填写您的昵称!');
+			weui.alert('请填写您的昵称!', function () {
+		    }, {
+		        title: '温馨提示'
+		    });
 			$location.path('complete_info').search({type: 'modify'});
 			return;
 		}

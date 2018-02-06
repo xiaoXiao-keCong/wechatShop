@@ -4,9 +4,11 @@ index.controller('addressCtrl',
     $scope.nothing=false;
     $scope.addrList=[];
     function init() {
+        var loading = weui.loading('加载中');
         // 获取用户收货地址
         $http.post('/user/myaddress.json', postCfg)
             .success(function (data) {
+                loading.hide();
                 // console.log(data);
                 if (-1 === data.code) {
                     $rootScope.preUrl = $location.url();

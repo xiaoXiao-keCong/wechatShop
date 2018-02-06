@@ -72,18 +72,25 @@ index.controller('orderCtrl',
     $scope.noAllContainer = false;
     $scope.allOrderList = [];
     function getAllOrder(){
+        var loading = weui.loading('加载中');
         var alldata = {
             page: $scope.allpage,
             flag: -1
         };
         $http.post('/order/orderlist.json',alldata, postCfg)
         .then(function (resp) {
-            console.log(resp);
+            loading.hide();
+            // console.log(resp);
             if (1 === resp.data.code) {
                 if(resp.data.data.orderlist.length <= 0){
                     if($scope.allpage <=1){
                         $scope.noAllContainer=true;
                         return;
+                    }else{
+                        weui.toast('暂无更多!', {
+                            duration: 1500,
+                            className: "bears"
+                        });
                     }
                 }else{
                     for(i=0;i<resp.data.data.orderlist.length;i++){
@@ -95,6 +102,7 @@ index.controller('orderCtrl',
                     $scope.allpage += 1;
                 }
             }
+            loading.hide();
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
         });
@@ -108,17 +116,24 @@ index.controller('orderCtrl',
     $scope.noDzfContainer=false;
     $scope.dzfOrderList=[];
     function getDzfOrder(){
+        var loading = weui.loading('加载中');
         var dzfdata = {
             page: $scope.dzfpage,
             flag: 0
         };
         $http.post('/order/orderlist.json',dzfdata, postCfg)
         .then(function (resp) {
+            loading.hide();
             if (1 === resp.data.code) {
                 if(resp.data.data.orderlist.length <= 0){
                     if($scope.dzfpage <=1){
                         $scope.noDzfContainer=true;
                         return;
+                    }else{
+                        weui.toast('暂无更多!', {
+                            duration: 1500,
+                            className: "bears"
+                        });
                     }
                 }else{
                     for(i=0;i<resp.data.data.orderlist.length;i++){
@@ -144,6 +159,7 @@ index.controller('orderCtrl',
     $scope.noDfhContainer=false;
     $scope.dfhOrderList=[];
     function getDfhOrder(){
+        var loading = weui.loading('加载中');
         // console.log('待发货');
         var dfhdata = {
             page: $scope.dfhpage,
@@ -151,11 +167,17 @@ index.controller('orderCtrl',
         };
         $http.post('/order/orderlist.json',dfhdata, postCfg)
         .then(function (resp) {
+            loading.hide();
             if (1 === resp.data.code) {
                 if(resp.data.data.orderlist.length <= 0){
                     if($scope.dfhpage <=1){
                         $scope.noDfhContainer=true;
                         return;
+                    }else{
+                        weui.toast('暂无更多!', {
+                            duration: 1500,
+                            className: "bears"
+                        });
                     }
                 }else{
                     for(i=0;i<resp.data.data.orderlist.length;i++){
@@ -181,6 +203,7 @@ index.controller('orderCtrl',
     $scope.noDshContainer=false;
     $scope.dshOrderList=[];
     function getDshOrder(){
+        var loading = weui.loading('加载中');
         // console.log('待收货');
         var dshdata = {
             page: $scope.dshpage,
@@ -188,11 +211,17 @@ index.controller('orderCtrl',
         };
         $http.post('/order/orderlist.json',dshdata, postCfg)
         .then(function (resp) {
+            loading.hide();
             if (1 === resp.data.code) {
                 if(resp.data.data.orderlist.length <= 0){
                     if($scope.dshpage <=1){
                         $scope.noDshContainer=true;
                         return;
+                    }else{
+                        weui.toast('暂无更多!', {
+                            duration: 1500,
+                            className: "bears"
+                        });
                     }
                 }else{
                     for(i=0;i<resp.data.data.orderlist.length;i++){
@@ -219,6 +248,7 @@ index.controller('orderCtrl',
     $scope.dtkOrderList=[];
     $scope.noQualityContainer=false;
     function getDtkOrder(){
+        var loading = weui.loading('加载中');
         // console.log('待退款');
         var dtkdata = {
             page: $scope.dtkpage,
@@ -226,6 +256,7 @@ index.controller('orderCtrl',
         };
         $http.post('/order/orderlist.json',dtkdata, postCfg)
         .then(function (resp) {
+            loading.hide();
             if (1 === resp.data.code) {
                 for(i=0;i<resp.data.data.orderlist.length;i++){
                     resp.data.data.orderlist[i].imgurl = picBasePath + resp.data.data.orderlist[i].imgurl;
@@ -253,6 +284,7 @@ index.controller('orderCtrl',
     $scope.ytkpage = 1; //已退款
     $scope.ytkOrderList=[];
     function getYtkOrder(){
+        var loading = weui.loading('加载中');
         // console.log('已退款');
         var ytkdata = {
             page: $scope.ytkpage,
@@ -260,6 +292,7 @@ index.controller('orderCtrl',
         };
         $http.post('/order/orderlist.json',ytkdata, postCfg)
         .then(function (resp) {
+            loading.hide();
             if (1 === resp.data.code) {
                 for(i=0;i<resp.data.data.orderlist.length;i++){
                     resp.data.data.orderlist[i].imgurl = picBasePath + resp.data.data.orderlist[i].imgurl;
@@ -297,13 +330,15 @@ index.controller('orderCtrl',
             'page':order.page,
             'flag':order.flag
         };
-        var confirm = $window.confirm('确认删除此订单吗？');
-        if (confirm) {
+        weui.confirm('确认删除此订单吗？', function () {
             $http.post('/order/orderdelete.json', data, postCfg)
             .success(function (data) {
                 if (1 === data.code) {
                     // 删除成功
-                    alert('删除成功！');
+                    weui.toast('删除成功!', {
+                        duration: 1500,
+                        className: "bears"
+                    });
                     var stateflag=order.stateflag;
                     if(stateflag == 4){
                         for (var i = 0; i < $scope.ytkOrderList.length; i++) {
@@ -337,7 +372,11 @@ index.controller('orderCtrl',
             .error(function (data) {
                 // alert('数据请求失败，请稍后再试！');
             });
-        }
+        }, function () {
+            // console.log('no')
+        }, {
+            title: '温馨提示'
+        });
     };
     // 取消订单
     $scope.cancelOrder = function (e,order){
@@ -347,13 +386,15 @@ index.controller('orderCtrl',
             'page':order.page,
             'flag':order.flag
         };
-        var confirm = $window.confirm('确认取消此订单吗？');
-        if (confirm) {
+        weui.confirm('确认取消此订单吗？', function () {
             $http.post('/order/ordercancel.json', data, postCfg)
             .success(function (data) {
                 if (1 === data.code) {
                     // 取消成功
-                    alert('取消成功！');
+                    weui.toast('取消成功!', {
+                        duration: 1500,
+                        className: "bears"
+                    });
                     for (var i = 0; i < $scope.dzfOrderList.length; i++) {
                         if ($scope.dzfOrderList[i].id == order.id) {
                             $scope.dzfOrderList.splice(i, 1);
@@ -371,7 +412,11 @@ index.controller('orderCtrl',
             .error(function (data) {
                 // alert('数据请求失败，请稍后再试！');
             });
-        }
+        }, function () {
+            // console.log('no')
+        }, {
+            title: '温馨提示'
+        });
     };
 
     // 确认收货
@@ -382,13 +427,15 @@ index.controller('orderCtrl',
             'page':order.page,
             'flag':order.flag
         };
-        var confirm = $window.confirm('确认收货前请仔细检查商品是否存在问题,是否继续？');
-        if (confirm) {
+        weui.confirm('确认收货前请仔细检查商品是否存在问题,是否继续？', function () {
             $http.post('/order/confirmreceipt.json', data, postCfg)
             .success(function (data) {
                 if (1 === data.code) {
                     // 取消成功
-                    alert('确认收货成功！');
+                    weui.toast('收货成功!', {
+                        duration: 1500,
+                        className: "bears"
+                    });
                     for (var i = 0; i < $scope.dshOrderList.length; i++) {
                         if ($scope.dshOrderList[i].id == order.id) {
                             $scope.dshOrderList.splice(i, 1);
@@ -406,7 +453,11 @@ index.controller('orderCtrl',
             .error(function (data) {
                 // alert('数据请求失败，请稍后再试！');
             });
-        }
+        }, function () {
+            // console.log('no')
+        }, {
+            title: '温馨提示'
+        });
     };
     // 跳转订单详情
     $scope.goOrderDetail = function (order){

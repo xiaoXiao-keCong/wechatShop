@@ -6,6 +6,7 @@ index.controller('aboutusCtrl',
 	var data = {
 		'flag': 6
 	};
+	var loading = weui.loading('加载中');
 	$http.post('/home/baseinfolist.json', data, postCfg)
 	.then(function (resp) {
 		if (1 === resp.data.code) {
@@ -16,6 +17,7 @@ index.controller('aboutusCtrl',
 			}
 			$scope.baseinfoList = baseinfoList;
 		}
+		loading.hide();
 	}, function (resp) {
 		// alert('数据请求失败，请稍后再试！');
 	});

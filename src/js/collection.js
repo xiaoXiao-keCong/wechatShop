@@ -11,6 +11,7 @@ index.controller('collectionCtrl',
             return;
         }
         $scope.loading = true;
+        var loading = weui.loading('加载中');
         var data = {
             page: $scope.page
         };
@@ -28,11 +29,16 @@ index.controller('collectionCtrl',
                 }
                 else {
                     $scope.loaded = true;
+                    weui.toast('暂无更多', {
+                        duration: 1500,
+                        className: "bears"
+                    });
                 }
                 if($scope.goodsList.length === 0){
                     $scope.nothing=true;
                 }
             }
+            loading.hide();
         }, function (resp) {
             // alert('数据请求失败，请稍后再试！');
         });
@@ -42,6 +48,7 @@ index.controller('collectionCtrl',
     // 点赞商品
     $scope.unkeep = function (goods, e) {
         e.stopPropagation();
+        var loading = weui.loading('提交中');
         $http.post('/user/unkeepgoods.json', {goodsid: goods.id}, postCfg)
         .success(function (data) {
             if (1 === data.code) {
@@ -54,6 +61,7 @@ index.controller('collectionCtrl',
                     }
                 }
             }
+            loading.hide();
         })
         .error(function (data) {
             // alert('数据请求失败，请稍后再试！');

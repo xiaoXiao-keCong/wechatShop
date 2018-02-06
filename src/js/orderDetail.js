@@ -29,13 +29,16 @@ index.controller('orderDetailCtrl',
             'page':$scope.order.page,
             'flag':$scope.order.flag
         };
-        var confirm = $window.confirm('确认取消此订单吗？');
-        if (confirm) {
-            $http.post('/order/ordercancel.json', data, postCfg)
+        weui.confirm('确认取消此订单吗？', function () {
+          $http.post('/order/ordercancel.json', data, postCfg)
             .success(function (data) {
                 if (1 === data.code) {
                     // 取消成功
-                    alert('取消成功！');
+                    // alert('取消成功！');
+                    weui.toast('取消成功！', {
+                        duration: 1500,
+                        className: "bears"
+                    });
                     $window.history.back();
                 }
                 else if (0 === data.code) {
@@ -46,10 +49,15 @@ index.controller('orderDetailCtrl',
             .error(function (data) {
                 // alert('数据请求失败，请稍后再试！');
             });
-        }
+        }, function () {
+            // console.log('no')
+        }, {
+            title: '温馨提示'
+        });
     };
     // 付款
     $scope.orderConfirm = function (){
+         var loading = weui.loading('加载中');
         var predata = {
             type: 'wz',
             orderid: $scope.order.id
@@ -73,19 +81,34 @@ index.controller('orderDetailCtrl',
                        function(res) {
                            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                                // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-                               alert('支付成功');
+                               // alert('支付成功');
+                               weui.toast('支付成功!', {
+                                  duration: 1500,
+                                  className: "bears"
+                              });
+                               loading.hide();
                                $rootScope.activeTab = 3;
                                $location.path('order');
                            }
                            else {
-                               alert('支付失败' + res.err_msg);
+                               // alert('支付失败' + res.err_msg);
+                               weui.alert('支付失败', function () {
+                                }, {
+                                    title: '温馨提示'
+                                });
+                               loading.hide();
                            }
                        }
                    );
                 }
             }
             else if (0 === resp.code) {
-                alert(resp.reason);
+                // alert(resp.reason);
+                weui.alert(resp.reason, function () {
+                }, {
+                    title: '温馨提示'
+                });
+                loading.hide();
             }
         })
         .error(function (resp) {

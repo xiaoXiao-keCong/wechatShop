@@ -4,7 +4,8 @@
         <!-- 商品列表 -->
         <div class="goods-container ">
             <img ng-src="{{topimg}}" alt="" class="vip-pic">
-            <div class="ktvip-btn">立即开通会员</div>
+            <div class="ktvip-btn" ng-if="user.vipflag == 0" ng-click="buyvip()">立即开通会员</div>
+            <div class="ktvip-btn" ng-if="user.vipflag == 1">会员到期时间：<span ng-bind="user.vipendtime"></span></div>
             <div class="title">
                 <img src="../../assets/images/zqjx.png" alt="" class="title-icon">
                 <span class="cn">会员专享</span>

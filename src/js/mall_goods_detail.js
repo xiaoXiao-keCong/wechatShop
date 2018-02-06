@@ -20,6 +20,7 @@ index.controller('mallGoodsDetailCtrl',
         $scope.flashSaleDeferred.resolve('succeed');
     });
 	(function init() {
+		var loading = weui.loading('加载中');
 		// 获取商品详情
 		$http.post('/goods/getsimpleinfo.json', {goodsid: goodsId}, postCfg)
 		.then(function (resp) {
@@ -33,6 +34,7 @@ index.controller('mallGoodsDetailCtrl',
 				$scope.goodsImg = goods.imgarray;
 				$scope.goods = goods;
 			}
+			loading.hide();
 		}, function (resp) {
 			// alert('数据请求失败，请稍后再试！');
 		});
@@ -59,6 +61,7 @@ index.controller('mallGoodsDetailCtrl',
 				}
 				$scope.sizeList=sizelist;
 			}
+			loading.hide();
 		})
 		.error(function (data) {
 			// alert('数据请求失败，请稍后再试！');
@@ -76,6 +79,7 @@ index.controller('mallGoodsDetailCtrl',
                 }
                 $scope.collocationList = collocationlist;
 			}
+			loading.hide();
 		})
 		.error(function (data) {
 			// alert('数据请求失败，请稍后再试！');
@@ -93,6 +97,7 @@ index.controller('mallGoodsDetailCtrl',
                 }
                 $scope.similarList = similarlist;
 			}
+			loading.hide();
 		})
 		.error(function (data) {
 			// alert('数据请求失败，请稍后再试！');
