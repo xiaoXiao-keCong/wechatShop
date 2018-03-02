@@ -14,14 +14,14 @@
                         <span ng-if="!item.keep" name="praise-icon"><img src="../../assets/images/unkeep.png" alt=""></span>
                         <span ng-if="item.keep" name="praise-icon"><img src="../../assets/images/keep.png" alt=""></span>
                     </span>
-                    <span class="salestate" ng-bind="item.salestate" ng-if="item.salestateflag == 1"></span>
+                    <!-- <span class="salestate" ng-bind="item.salestate" ng-if="item.salestateflag == 1"></span>
                     <span class="salestate salestate-xj" ng-bind="item.salestate" ng-if="item.salestateflag == 0"></span>
-                    <span class="salestate salestate-sq" ng-bind="item.salestate" ng-if="item.salestateflag == 2"></span>
+                    <span class="salestate salestate-sq" ng-bind="item.salestate" ng-if="item.salestateflag == 2"></span> -->
                 </span>
                 <span class="goods-name" ng-bind="item.name"></span>
                 <span class="goods-info">
                     <span class="realprice">￥<span ng-bind="item.realprice"></span></span>
-                    <span class="originalprice">￥<span ng-bind="item.originalprice"></span></span>
+                    <span class="originalprice" ng-if="themeId == 1">￥<span ng-bind="item.originalprice"></span></span>
                 </span>
             </span>
         </div>

@@ -20,7 +20,7 @@
 	</div>
 	<div class="goodsPrice">
 		<span class="goodRealPrice">￥<span ng-bind="goods.realprice"></span></span>
-		<span class="goodOriginalPrice">￥<span ng-bind="goods.originalprice"></span></span>
+		<span class="goodOriginalPrice" ng-if="goods.type >= 1">￥<span ng-bind="goods.originalprice"></span></span>
 	</div>
 
 	<!-- 商品颜色 -->
@@ -60,7 +60,7 @@
     </div> -->
 
     <!-- 搭配推荐模块 -->
-    <div class="collocation-contaner marginTop20">
+    <!-- <div class="collocation-contaner marginTop20">
     	<div class="collocation-title">搭 配 推 荐</div>
     	<div class="swiper-container flash-sale-content" flashsale>
 			<div class="swiper-wrapper">
@@ -70,6 +70,11 @@
 				</div>
 			</div>
 		</div>
+    </div> -->
+    <!-- 细节详情模块 -->
+    <div class="detailimgurl-contaner marginTop20">
+        <div class="detailimgurl-title">细 节 详 情</div>
+        <img ng-src="{{detailimgurl}}" class="detailimgurl">
     </div>
     <!-- 相似推荐模块 -->
     <div class="collocation-contaner marginTop20">

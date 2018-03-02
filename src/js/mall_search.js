@@ -23,6 +23,8 @@ index.controller('mallSearchCtrl',
 		};
 		$http.post('/home/search.json', data, postCfg)
 		.success(function (data) {
+			console.log(data);
+			loading.hide();
 			if (1 === data.code) {
 				var goodsList = data.data.goodslist;
 		        if (0 === goodsList.length) {
@@ -38,9 +40,9 @@ index.controller('mallSearchCtrl',
 		        }
 		        
 			}
-			loading.hide();
 		})
 		.error(function (data) {
+			loading.hide();
 			// alert('数据请求失败，请稍后再试！');
 		});
 		kwds=newkwds;

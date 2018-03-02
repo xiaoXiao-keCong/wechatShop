@@ -17,7 +17,7 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
         }
     	$http.post('/user/unl/sendlogin.json', {telephone: $scope.phone}, postCfg)
     	.then(function (resp) {
-            console.log(resp);
+            // console.log(resp);
     		if (1 === resp.data.code) {
                 $scope.sending = true;
                 var leftTime = 60;
@@ -31,7 +31,12 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                         $interval.cancel(timer);
                     }
                 }, 1000);
-    		}
+    		}else{
+                weui.alert(resp.data.reason, function () {
+                }, {
+                    title: '温馨提示'
+                });
+            }
     	}, function (resp) {
     		// console.log(resp);
     	});
@@ -61,10 +66,15 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                 $timeout(function () {
                     $window.history.back();
                 });
+                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             }
-            else if (0 === resp.data.code) {
-                alert(resp.data.reason);
+            else{
+                weui.alert(resp.data.reason, function () {
+                }, {
+                    title: '温馨提示'
+                });
             }
+            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
     	}, function (resp) {
             // alert('数据请求失败，请稍后再试！');
     	});

@@ -24,14 +24,16 @@ index.controller('mallGoodsDetailCtrl',
 		// 获取商品详情
 		$http.post('/goods/getsimpleinfo.json', {goodsid: goodsId}, postCfg)
 		.then(function (resp) {
-			// console.log(resp);
+			console.log(resp);
 			if (1 === resp.data.code) {
 				var goods = resp.data.data;
 				for (var i = 0, j = goods.imgarray.length; i < j; i++) {
 					goods.imgarray[i].imgurl = picBasePath + goods.imgarray[i].imgurl;
 				}
 				goods.imgurl=picBasePath + goods.imgurl; 
+				goods.detailimgurl=picBasePath + goods.detailimgurl; 
 				$scope.goodsImg = goods.imgarray;
+				$scope.detailimgurl = goods.detailimgurl;
 				$scope.goods = goods;
 			}
 			loading.hide();
@@ -157,7 +159,8 @@ index.controller('mallGoodsDetailCtrl',
 	$scope.addToCart = function () {
 		if (!sessionStorage.user) {
 			// 未登录，跳转到登录页面，将当前页面url存储到rootScope中
-			$location.path('fast_login').search({});
+			// $location.path('fast_login').search({});
+			window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 			return;
 		}
 		var user = JSON.parse(sessionStorage.user);
@@ -199,7 +202,8 @@ index.controller('mallGoodsDetailCtrl',
 		// 判断用户是否登录
 		if (!sessionStorage.user) {
 			// 用户未登录，跳转到登录页面
-			$location.path('fast_login').search({});
+			// $location.path('fast_login').search({});
+			window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		}
 		else {
 			var user = JSON.parse(sessionStorage.user);

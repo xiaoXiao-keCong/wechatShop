@@ -29,10 +29,12 @@ index.controller('collectionCtrl',
                 }
                 else {
                     $scope.loaded = true;
-                    weui.toast('暂无更多', {
-                        duration: 1500,
-                        className: "bears"
-                    });
+                    if($scope.page >= 2){
+                        weui.toast('暂无更多', {
+                            duration: 1500,
+                            className: "bears"
+                        });
+                    }
                 }
                 if($scope.goodsList.length === 0){
                     $scope.nothing=true;

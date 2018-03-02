@@ -9,7 +9,7 @@ index.controller('classificationCtrl',
         $http.post('/vip/home.json', postCfg)
         .then(function (resp) {
             if (1 === resp.data.code) {
-                // console.log(resp);
+                console.log(resp);
                 $scope.topimg = picBasePath + resp.data.data.topimg;
                 var goodsList = resp.data.data.goodslist;
                 if (goodsList.length > 0) {

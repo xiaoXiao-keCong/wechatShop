@@ -41,7 +41,7 @@
 						</span>
 						<span class="price">
 							<span class="realprice">￥<span ng-bind="goods.realprice"></span></span>
-							<span class="originalprice">￥<span ng-bind="goods.originalprice"></span></span>
+							<span class="originalprice" ng-if="goods.type >= 1">￥<span ng-bind="goods.originalprice"></span></span>
 						</span>
 					</span>
 				</div>

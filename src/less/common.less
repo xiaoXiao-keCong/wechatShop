@@ -43,6 +43,10 @@ input {
     width:100%;
     z-index:1000;
     border-bottom: 0.013333rem solid #e9e9e9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 2.0rem;
     .down-icon {
       display: inline-block;
       img {
@@ -294,6 +298,7 @@ input {
   min-height: 100%;
   width: 100%;
   position: absolute;
+  overflow-x: hidden;
 }
 .bg-black {
   background-color: #000000;
@@ -482,14 +487,16 @@ input {
   font-size: 0.48rem;
 }
 .weui-icon_toast.weui-loading {
-    width: 0.666667rem !important;
-    height: 0.666667rem !important;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
 }
 .weui-toast{
   top:5.733333rem !important;
 }
 .weui-dialog{
-  max-width:6.666667rem !important;
+  // max-width:500px !important;
+  max-width: 800px!important;
+  width: 60% !important;
 }
 .weui-dialog__title{
   font-size:0.346667rem !important;
@@ -505,4 +512,13 @@ input {
 }
 .weui-dialog__btn_primary {
     color: #0bb20c !important;
+}
+.weui-icon_toast.weui-icon-success-no-circle:before {
+    font-size: 0.933333rem !important;
+}
+.new-modal-title{
+  color:#903939 !important;
+}
+.weui-dialog__bd {
+    min-height: 1.2rem !important;
 }

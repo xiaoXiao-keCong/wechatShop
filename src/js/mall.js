@@ -31,7 +31,7 @@ index.controller('mallCtrl',
         // 获取商城广告
         $http.post('/home/homead.json', postCfg)
         .then(function (resp) {
-            console.log(resp);
+            // console.log(resp);
             if (1 === resp.data.code) {
                 var adList = resp.data.data.homeadlist;
                 for (var i = 0, j = adList.length; i < j; i++) {

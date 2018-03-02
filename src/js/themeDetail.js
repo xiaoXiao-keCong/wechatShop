@@ -3,13 +3,14 @@ index.controller('themeDetailCtrl',
 	function ($scope, $http, $routeParams, $window, $location, $rootScope, $q) {
 
 	var themeId = parseInt($routeParams.id);
+    $scope.themeId = themeId;
 	$scope.goodsList=[];
 	(function init() {
         var loading = weui.loading('加载中');
 		// 获取主题信息
 		$http.post('/theme/getbaseinfo.json', {themeid: themeId}, postCfg)
 		.then(function (resp) {
-			console.log(resp);
+			// console.log(resp);
 			if (1 === resp.data.code) {
 				var theme = resp.data.data;
 				theme.imgurl = picBasePath + theme.imgurl;
@@ -22,7 +23,7 @@ index.controller('themeDetailCtrl',
 		$http.post('/theme/getgoods.json', {themeid: themeId}, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
-				console.log(resp);
+				// console.log(resp);
 				var goodsList = resp.data.data.goodslist;
                 if (goodsList.length > 0) {
                     for (var i = 0, j = goodsList.length; i < j; i++) {

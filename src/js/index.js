@@ -110,8 +110,8 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
     if (code) {
         // 通过code获取access_token等信息
         var data = {
-            appid: 'wx6a71c9758aa42537',
-            secret: '04a307f13f2ab8ffac45c02538cedce7',
+            appid: 'wxef3e1498e754b61d',
+            secret: '5e21b13a8d5e9b071b9bef2ad65e1883',//这类步骤应该放在后台来完成
             code: code,
             grant_type: 'authorization_code'
         };
@@ -157,14 +157,16 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
                 alert('授权信息获取失败');
             }
         });
+    }else{
+    	// window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
     }
 	
-	if (navigator.geolocation) {
-    	navigator.geolocation.getCurrentPosition(showPosition);
-    }
-    else {
-    	alert('当前浏览器不支持navigator.geolacation');
-    }
+	// if (navigator.geolocation) {
+ //    	navigator.geolocation.getCurrentPosition(showPosition);
+ //    }
+ //    else {
+ //    	alert('当前浏览器不支持navigator.geolacation');
+ //    }
 })();
 
 function showPosition(position) {

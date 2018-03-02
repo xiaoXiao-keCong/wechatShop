@@ -10,7 +10,8 @@ index.controller('cartCtrl',
 		var data = resp.data;
 		if (-1 === data.code) {
 			// 用户未登录
-			$location.path('fast_login');
+			// $location.path('fast_login');
+			window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		}
 		else if (1 === data.code && 0 < data.data.cartlist.length) {
 			var cartList = data.data.cartlist;
