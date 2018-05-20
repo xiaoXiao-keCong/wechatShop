@@ -1,9 +1,11 @@
 index.controller('orderConfirmCtrl',
 	['$scope', '$http', '$location', '$routeParams', '$rootScope', '$timeout',
 	function ($scope, $http, $location, $routeParams, $rootScope, $timeout) {
-
+	$scope.user = JSON.parse(sessionStorage.getItem('user'));
 	$scope.goodsArr = $rootScope.goodsArr;
+	console.log($scope.goodsArr);
     $scope.numArr = $rootScope.numArr;
+    console.log($scope.numArr);
     $scope.colorArr = $rootScope.colorArr;
     $scope.sizeArr = $rootScope.sizeArr;
     var cartFlag = $rootScope.cartFlag;
@@ -52,9 +54,20 @@ index.controller('orderConfirmCtrl',
 	// 计算总价
 	function getTotalPrice() {
 		var totalPrice = 0;
-		for (var i = 0; i < $scope.goodsArr.length; i++) {
-			totalPrice += $scope.goodsArr[i].realprice * $scope.numArr[i];
+		for (var j = 0; j < $scope.goodsArr.length; j++) {
+			if($scope.goodsArr.type == 1){
+				totalPrice += $scope.goodsArr[j].realprice * $scope.numArr[j];
+			}else{
+				if($scope.user.vipflag==1){//是会员
+					totalPrice += $scope.goodsArr[j].vipprice * $scope.numArr[j];
+				}else{
+					totalPrice += $scope.goodsArr[j].originalprice * $scope.numArr[j];
+
+				}
+			}
+			
 		}
+		
 		$scope.totalPrice = totalPrice;
 	}
 

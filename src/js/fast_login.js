@@ -63,10 +63,10 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                 //     $location.path('complete_info').search({type: 'modify'}).replace();
                 //     return;
                 // }
-                $timeout(function () {
-                    $window.history.back();
-                });
-                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+                // $timeout(function () {
+                //     $window.history.back();
+                // });
+                window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx04e1c964b92e771e&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
             }
             else{
                 weui.alert(resp.data.reason, function () {
@@ -74,7 +74,7 @@ index.controller('fastLoginCtrl', ['$scope', '$http', '$window', '$location', '$
                     title: '温馨提示'
                 });
             }
-            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx04e1c964b92e771e&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
     	}, function (resp) {
             // alert('数据请求失败，请稍后再试！');
     	});

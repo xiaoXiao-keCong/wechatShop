@@ -4,7 +4,7 @@ index.controller('collectionCtrl',
     $scope.page = 1;
     $scope.goodsList=[];
     $scope.nothing=false;
-
+    $scope.user = JSON.parse(sessionStorage.getItem('user'));
     // 获取商品列表
     function getGoods() {
         if ($scope.loading) {

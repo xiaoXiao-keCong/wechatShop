@@ -18,9 +18,13 @@
                         <span class="salestate salestate-sq" ng-bind="item.salestate" ng-if="item.salestateflag == 2"></span> -->
                     </span>
                     <span class="goods-name" ng-bind="item.name"></span>
-                    <span class="goods-info">
-                        <span class="realprice">￥<span ng-bind="item.realprice"></span></span>
-                        <span class="originalprice" ng-if="item.type >= 1">￥<span ng-bind="item.originalprice"></span></span>
+                    <span class="goods-info" ng-if="item.type == 1">
+                        <span class="realprice">团购价：<span ng-bind="item.realprice"></span></span>
+                        <span class="originalprice">原价：<span ng-bind="item.originalprice"></span></span>
+                    </span>
+                    <span class="goods-info" ng-if="item.type != 1">
+                        <span class="realprice">会员价：<span ng-bind="item.vipprice"></span></span>
+                        <span class="originalprice">原价：<span ng-bind="item.realprice"></span></span>
                     </span>
                 </span>
             </div>

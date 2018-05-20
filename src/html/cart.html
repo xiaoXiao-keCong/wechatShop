@@ -22,7 +22,12 @@
             <span class="item-info" ng-click="toGoodsDetail(goods)">
                 <span class="name" ng-bind="goods.name"></span>
                 <!-- <span class="attribute"><span ng-bind="goods.color" class="color"></span><span ng-bind="goods.size"></span></span> -->
-                <span class="real-price">￥<span ng-bind="goods.price"></span></span>
+                <span class="real-price" ng-if="goods.type == 1">团购价:<span ng-bind="goods.realprice"></span></span>
+                <span ng-if="goods.type != 1">
+                    <span class="real-price" ng-if="user.vipflag == 1">会员价:<span ng-bind="goods.vipprice"></span></span>
+                    <span class="real-price" ng-if="user.vipflag != 1">原价:<span ng-bind="goods.originalprice"></span></span>
+                </span>
+                
             </span>
             <span class="delete">
                 <img src="../../assets/images/close.png" ng-click="deleteGoods(goods)">

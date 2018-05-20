@@ -23,7 +23,7 @@ index.controller('themeDetailCtrl',
 		$http.post('/theme/getgoods.json', {themeid: themeId}, postCfg)
 		.then(function (resp) {
 			if (1 === resp.data.code) {
-				// console.log(resp);
+				console.log(resp);
 				var goodsList = resp.data.data.goodslist;
                 if (goodsList.length > 0) {
                     for (var i = 0, j = goodsList.length; i < j; i++) {

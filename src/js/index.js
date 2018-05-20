@@ -5,7 +5,7 @@ var transFn = function(data) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transFn
         },
-        picBasePath = 'http://photo.yueyishujia.com:8115';
+        picBasePath = 'http://photo.bjxiaoyuekeji.com:8115';
 var index = angular.module('index',
 	['ngRoute', 'mobile-angular-ui', 'mobile-angular-ui.gestures', 'ngFileUpload', 'infinite-scroll']);
 index.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
@@ -110,8 +110,10 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
     if (code) {
         // 通过code获取access_token等信息
         var data = {
-            appid: 'wxef3e1498e754b61d',
-            secret: '5e21b13a8d5e9b071b9bef2ad65e1883',//这类步骤应该放在后台来完成
+            // appid: 'wxef3e1498e754b61d',
+            // secret: '5e21b13a8d5e9b071b9bef2ad65e1883',//这类步骤应该放在后台来完成
+            appid: 'wx04e1c964b92e771e',
+            secret: 'b869bccc91746507dde20cde42132027',//这类步骤应该放在后台来完成
             code: code,
             grant_type: 'authorization_code'
         };
@@ -122,6 +124,7 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
             async: false,
             success: function (resp) {
                 resp = JSON.parse(resp);
+                console.log(resp);
                 if (resp.errcode) {
                   alert(resp.errmsg);
                 }
@@ -138,16 +141,21 @@ index.config(['$routeProvider','$locationProvider', function ($routeProvider,$lo
 			            data: tldata,
 			            async: false,
 			            success: function (resp) {
+			            	console.log(resp);
 			                if (1 === resp.code) {
 								sessionStorage.setItem('login', '1');
 	                      		sessionStorage.setItem('user', JSON.stringify(resp.data));
 							}else if(2 === resp.code){
 								sessionStorage.setItem('login', '1');
 	                      		sessionStorage.setItem('user', JSON.stringify(resp.data));
+	                      		setTimeout(function(){
+	                      			
 								window.location.href = 'fast_login';
+	                      		});
 							}
 			            },
 			            error: function (resp) {
+			            	console.log(resp);
 			                alert(resp);
 			            }
 			        });

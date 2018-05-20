@@ -12,6 +12,7 @@ index.controller('mallGoodsDetailCtrl',
 	var goodsId = parseInt($routeParams.id);
 	$scope.deferred = $q.defer();
 	$scope.flashSaleDeferred = $q.defer();
+	$scope.shareInfor=[];
 
 	$scope.$on('ngRepeatFinished', function () {
         $scope.deferred.resolve('succeed');
@@ -104,6 +105,74 @@ index.controller('mallGoodsDetailCtrl',
 		.error(function (data) {
 			// alert('数据请求失败，请稍后再试！');
 		});
+		//获取分享信息
+		$http.post('/user/unl/share.json', {id: goodsId}, postCfg)
+		.success(function (data) {
+			if (1 === data.code) {
+				console.log(data);
+				$scope.shareInfor=data.data;
+				var wxdata={
+					'url':$window.location.href.split('#')[0]  
+				};
+				$http.post('/user/unl/wzinfo.json',wxdata, postCfg)
+				.then(function (resp) {
+					console.log(resp);
+					if (1 === resp.data.code) {
+						wx.config({
+						    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+						    appId: resp.data.data.appid, // 必填，公众号的唯一标识
+						    timestamp: resp.data.data.timestamp, // 必填，生成签名的时间戳
+						    nonceStr: resp.data.data.noncestr, // 必填，生成签名的随机串
+						    signature: resp.data.data.signature,// 必填，签名，见附录1
+						    jsApiList: [
+						    	'checkJsApi',
+								'onMenuShareAppMessage',
+								'onMenuShareTimeline'
+						    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+						});
+						wx.ready(function () {
+						//分享给朋友
+						wx.onMenuShareAppMessage({
+							title: $scope.shareInfor.topic, // 分享标题
+							desc: $scope.shareInfor.info, // 分享描述
+							link: $scope.shareInfor.jumpurl, // 分享链接
+							imgUrl: picBasePath+$scope.shareInfor.imgurl, // 分享图标
+							type: 'link', // 分享类型,music、video或link，不填默认为link
+							dataUrl: "", // 如果type是music或video，则要提供数据链接，默认为空
+							success: function () {
+							// 用户确认分享后执行的回调函数
+							//$.diyAlert("分享成功！");
+							},
+							cancel: function () {
+							// 用户取消分享后执行的回调函数
+							//alert("用户取消分享！");
+							}
+						});
+						//分享到朋友圈
+						wx.onMenuShareTimeline({
+							title: $scope.shareInfor.topic, // 分享标题
+							desc: $scope.shareInfor.info, // 分享描述
+							link: $scope.shareInfor.jumpurl, // 分享链接
+							imgUrl: picBasePath+$scope.shareInfor.imgurl, // 分享图标
+							success: function () {
+							// 用户确认分享后执行的回调函数
+							//$.diyAlert("分享到朋友圈成功！");
+							},
+							cancel: function () {
+							// 用户取消分享后执行的回调函数
+							}
+							});
+						});
+					}
+				}, function (resp) {
+			        // alert('数据请求失败，请稍后再试！');
+				});
+			}
+		})
+		.error(function (data) {
+			// alert('数据请求失败，请稍后再试！');
+		});
+		
 	})();
 	// 选择颜色
 	$scope.selectColor = function (color){

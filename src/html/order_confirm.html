@@ -36,12 +36,16 @@
 							<span class="name" ng-bind="goods.name"></span>
 							<span class="number">x<span ng-bind="goods.buyNum"></span></span>
 						</span>
-						<span class="size">
+						<!-- <span class="size">
 							<span ng-bind="goods.color"></span> <span ng-bind="goods.size"></span>
+						</span> -->
+						<span class="price" ng-if="goods.type != 1">
+							<span class="realprice">会员价：<span ng-bind="goods.vipprice"></span></span>
+							<span class="originalprice">原价：<span ng-bind="goods.realprice"></span></span>
 						</span>
-						<span class="price">
-							<span class="realprice">￥<span ng-bind="goods.realprice"></span></span>
-							<span class="originalprice" ng-if="goods.type >= 1">￥<span ng-bind="goods.originalprice"></span></span>
+						<span class="price" ng-if="goods.type == 1">
+							<span class="realprice">团购价：<span ng-bind="goods.realprice"></span></span>
+							<span class="originalprice">原价：<span ng-bind="goods.originalprice"></span></span>
 						</span>
 					</span>
 				</div>
@@ -51,7 +55,7 @@
 					<span>商品合计</span>
 					<span class="total-container">￥<span ng-bind="totalPrice"></span></span>
 				</div>
-				<div class="freight">
+				<!-- <div class="freight">
 					<span class="freight-title">运费</span>
 					<div class="freight-item" ng-repeat="item in freight">
 						<span class="freight-info" ng-click="changeExpresscost(item)">
@@ -61,7 +65,7 @@
 						</span>
 						<span class="freight-price">￥<span ng-bind="item.price"></span></span>
 					</div>
-				</div>
+				</div> -->
 				<div class="message-container">
 					<span class="title">买家留言：</span>
 					<span class="message">
@@ -81,7 +85,7 @@
 		<div class="operation">
 			<span class="left">
 				<span>实付：</span>
-				<span class="highlight">￥<span ng-bind="totalPrice"></span> (不含运费)</span>
+				<span class="highlight">￥<span ng-bind="totalPrice"></span></span>
 			</span>
 			<span class="right" ng-click="orderConfirm()">去付款</span>
 		</div>

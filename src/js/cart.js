@@ -3,22 +3,35 @@ index.controller('cartCtrl',
 	function ($scope, $http, $location, $rootScope, $q, $window) {
 	$scope.selectedNum=0;
 	$scope.noContant = false;
+	$scope.user = JSON.parse(sessionStorage.getItem('user'));
 	var loading = weui.loading('加载中');
 	var cartPromise = $http.post('/user/mycart.json', postCfg);
 	cartPromise.then(function (resp) {
-		// console.log(resp.data);
+		console.log(resp.data);
 		var data = resp.data;
 		if (-1 === data.code) {
 			// 用户未登录
 			// $location.path('fast_login');
-			window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+			// window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxef3e1498e754b61d&redirect_uri=http:%2F%2Fkssapit.bjxiaoyuekeji.com%2Fwechatshop%2Fbuild%2Fhtml%2F&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 		}
 		else if (1 === data.code && 0 < data.data.cartlist.length) {
 			var cartList = data.data.cartlist;
 			$scope.cartInfo = data.data.info;
 			for (var i =0, j  = cartList.length; i < j; i++) {
 				cartList[i].imgurl = picBasePath + cartList[i].imgurl;
-				cartList[i].count = addNum(cartList[i].price, cartList[i].num);
+				if(cartList[i].type==1){
+					cartList[i].count = addNum(cartList[i].realprice, cartList[i].num);
+					// console.log(cartList[i].count);
+				}else{
+					if($scope.user.vipflag == 1){
+						cartList[i].count = addNum(cartList[i].vipprice, cartList[i].num);
+
+					}else{
+						cartList[i].count = addNum(cartList[i].originalprice, cartList[i].num);
+
+					}
+				} 
+				// cartList[i].count = addNum(cartList[i].price, cartList[i].num);
 				cartList[i].selected = false;
 			}
 			$scope.cartList = cartList;
@@ -62,12 +75,24 @@ index.controller('cartCtrl',
 		};
 		$http.post('/user/changecart.json', data, postCfg)
 		.then(function (resp) {
-			// console.log(resp);
+			console.log(resp);
 			if (1 === resp.data.code) {
 				var cartList = resp.data.data.cartlist;
 				$scope.cartList[index].num = cartList[index].num;
 				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
-				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
+				// $scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
+				if($scope.cartList[index].type==1){
+					$scope.cartList[index].count = addNum(cartList[index].realprice, cartList[index].num);
+					// console.log(cartList[i].count);
+				}else{
+					if($scope.user.vipflag == 1){
+						$scope.cartList[index].count = addNum(cartList[index].vipprice, cartList[index].num);
+
+					}else{
+						$scope.cartList[index].count = addNum(cartList[index].originalprice, cartList[index].num);
+
+					}
+				} 
 			}
 			loading.hide();
 		}, function (resp) {
@@ -92,7 +117,19 @@ index.controller('cartCtrl',
 				var cartList = resp.data.data.cartlist;
 				$scope.cartList[index].num = cartList[index].num;
 				// $scope.cartList[index].count = cartList[index].price * cartList[index].num;
-				$scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
+				// $scope.cartList[index].count = addNum(cartList[index].price, cartList[index].num);
+				if($scope.cartList[index].type==1){
+					$scope.cartList[index].count = addNum(cartList[index].realprice, cartList[index].num);
+					// console.log(cartList[i].count);
+				}else{
+					if($scope.user.vipflag == 1){
+						$scope.cartList[index].count = addNum(cartList[index].vipprice, cartList[index].num);
+
+					}else{
+						$scope.cartList[index].count = addNum(cartList[index].originalprice, cartList[index].num);
+
+					}
+				}
 			}
 			loading.hide();
 		}, function (resp) {
@@ -155,8 +192,8 @@ index.controller('cartCtrl',
 		for (var i = 0; i < $scope.cartList.length; i++) {
 			if ($scope.cartList[i].selected) {
 				$scope.cartList[i].buyNum = $scope.cartList[i].num;
-				$scope.cartList[i].price = $scope.cartList[i].price;
-				$scope.cartList[i].realprice = $scope.cartList[i].price;
+				// $scope.cartList[i].price = $scope.cartList[i].price;
+				// $scope.cartList[i].realprice = $scope.cartList[i].price;
 				$scope.cartList[i].id=$scope.cartList[i].goodsid;
 				goodsArr.push($scope.cartList[i]);
 				numArr.push($scope.cartList[i].num);

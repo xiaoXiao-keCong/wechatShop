@@ -18,10 +18,14 @@
 		</div>
 		<div class="swiper-pagination"></div>
 	</div>
-	<div class="goodsPrice">
-		<span class="goodRealPrice">￥<span ng-bind="goods.realprice"></span></span>
-		<span class="goodOriginalPrice" ng-if="goods.type >= 1">￥<span ng-bind="goods.originalprice"></span></span>
+	<div class="goodsPrice" ng-if="goods.type == 1">
+		<span class="goodRealPrice">团购价：<span ng-bind="goods.realprice"></span></span>
+		<span class="goodOriginalPrice">原价：<span ng-bind="goods.originalprice"></span></span>
 	</div>
+    <div class="goodsPrice" ng-if="goods.type != 1">
+        <span class="goodRealPrice">会员价：<span ng-bind="goods.vipprice"></span></span>
+        <span class="goodOriginalPrice">原价：<span ng-bind="goods.realprice"></span></span>
+    </div>
 
 	<!-- 商品颜色 -->
 	<!-- <div class="goods-attribute marginTop20">
@@ -77,7 +81,7 @@
         <img ng-src="{{detailimgurl}}" class="detailimgurl">
     </div>
     <!-- 相似推荐模块 -->
-    <div class="collocation-contaner marginTop20">
+    <!-- <div class="collocation-contaner marginTop20">
     	<div class="collocation-title">相 似 推 荐</div>
     	<div class="swiper-container flash-sale-content" flashsale>
 			<div class="swiper-wrapper">
@@ -87,12 +91,12 @@
 				</div>
 			</div>
 		</div>
-    </div>
+    </div> -->
     <!-- 底部购买相关 -->
     <div class="buy-container">
-        <div class="item" data-toggle="modal" data-target="#myModal"><img src="../../assets/images/kefu.png" alt=""></div>
+        <!-- <div class="item" data-toggle="modal" data-target="#myModal"><img src="../../assets/images/kefu.png" alt=""></div>
         <div class="item heightLine"></div>
-        <div class="item" ng-click="toCart()"><img src="../../assets/images/shoppingcart.png" alt=""></div>
+        <div class="item" ng-click="toCart()"><img src="../../assets/images/shoppingcart.png" alt=""></div> -->
         <div class="item goBuy" ng-click="confirmBuy()" ng-if="inventory != 0">立即购买</div>
         <div class="item goBuy goBuyUnable" ng-if="inventory == 0">立即购买</div>
         <div class="item joinCart" ng-click="addToCart()" ng-if="inventory != 0">加入购物车</div>

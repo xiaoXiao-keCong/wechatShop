@@ -17,7 +17,8 @@ index.controller('mallCtrl',
     $scope.hh = '00';  
     $scope.mm = '00';  
     $scope.ss = '00';
-
+    $scope.timedown = '2018-06-01 00:00:00';
+    
 
     $scope.$on('ngRepeatFinished', function () {
         $scope.deferred.resolve('succeed');
@@ -46,7 +47,7 @@ index.controller('mallCtrl',
         // 团购特惠
         $http.post('/home/groupbuygoods.json', postCfg)
         .then(function (resp) {
-            // console.log(resp);
+            console.log(resp);
             if (1 === resp.data.code) {
                 var flashSaleList = resp.data.data.goodslist;
                 for (var i = 0, j = flashSaleList.length; i < j; i++) {
@@ -54,6 +55,7 @@ index.controller('mallCtrl',
                 }
                 $scope.flashSaleList = flashSaleList;
                 $scope.timedown = resp.data.data.timedown;
+                // $scope.times();
                 loading.hide();
             }
         }, function (resp) {
@@ -168,15 +170,14 @@ index.controller('mallCtrl',
                 break;
         }
     };
-
-     
     var timer = $interval(countTime,1000);
     function countTime () {  
         //获取当前时间  
         var date = new Date();  
         var now = date.getTime();  
         //设置截止时间  
-        var endDate = new Date($scope.timedown); 
+        var endtime=$scope.timedown.replace(/-/g,'/');
+        var endDate = new Date(endtime); 
         var end = endDate.getTime();  
         //时间差  
         var leftTime = end-now;  

@@ -7,7 +7,7 @@ index.controller('myCtrl',
 		var loading = weui.loading('加载中');
 		$http.post('/user/mine.json', postCfg)
 		.success(function (resp) {
-			// console.log(resp);
+			console.log(resp);
 			if (-1 === resp.code) {
 				// 用户未登录
 				$scope.isLogin = false;
@@ -23,6 +23,7 @@ index.controller('myCtrl',
 				if(user.nickname === ''){
 					user.nickname = '暂无昵称';
 				}
+				user.backgroundimg = picBasePath + user.backgroundimg;
 				$scope.user = user;
                 sessionStorage.setItem('user', JSON.stringify(user));
 			}

@@ -80,7 +80,7 @@ index.controller('orderCtrl',
         $http.post('/order/orderlist.json',alldata, postCfg)
         .then(function (resp) {
             loading.hide();
-            // console.log(resp);
+            console.log(resp);
             if (1 === resp.data.code) {
                 if(resp.data.data.orderlist.length <= 0){
                     if($scope.allpage <=1){

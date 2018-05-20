@@ -8,7 +8,7 @@ index.controller('orderDetailCtrl',
         goodslist[i].imgurl=picBasePath + goodslist[i].imgurl;
     }
     $scope.goodslist=goodslist;
-
+    console.log($scope.goodslist);
     // 计算剩余支付时间
     $scope.remainingTime='';
     // console.log($scope.order);
